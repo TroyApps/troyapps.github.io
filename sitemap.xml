@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://troyapps.app/</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://troyapps.app/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://troyapps.app/en/"/>
+  </url>
+  <url>
+    <loc>https://troyapps.app/en/</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://troyapps.app/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://troyapps.app/en/"/>
+  </url>
+  <url>
+    <loc>https://troyapps.app/morse-flash/</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://troyapps.app/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://troyapps.app/en/morse-flash/"/>
+  </url>
+  <url>
+    <loc>https://troyapps.app/en/morse-flash/</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://troyapps.app/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://troyapps.app/en/morse-flash/"/>
+  </url>
+  <url>
+    <loc>https://troyapps.app/morse-flash-policy/</loc>
+  </url>
+</urlset>
