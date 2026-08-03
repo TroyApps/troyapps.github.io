@@ -36,19 +36,17 @@
   }
 
   function drawTrail(t) {
+    /* Piksel bloklar: keskin kareler, Minecraft/arcade havası */
     var x = t.x;
     ctx.fillStyle = t.cyan
-      ? "rgba(46,230,255," + t.alpha + ")"
-      : "rgba(47,125,255," + t.alpha + ")";
+      ? "rgba(0,255,156," + t.alpha + ")"
+      : "rgba(255,62,242," + t.alpha * 0.8 + ")";
     for (var i = 0; i < t.pattern.length; i++) {
       var isDash = t.pattern[i];
-      var w = isDash ? t.size * 7 : t.size * 1.6;
-      var h = t.size;
-      ctx.beginPath();
-      if (ctx.roundRect) ctx.roundRect(x, t.y, w, h, h / 2);
-      else ctx.rect(x, t.y, w, h);
-      ctx.fill();
-      x += w + t.size * 4;
+      var s = Math.ceil(t.size) + 1;
+      var w = isDash ? s * 4 : s;
+      ctx.fillRect(Math.round(x), Math.round(t.y), w, s);
+      x += w + s * 3;
     }
     t.w = x - t.x;
   }
