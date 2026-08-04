@@ -25,15 +25,16 @@
   el.innerHTML =
     '<div class="m-bubble" hidden></div>' +
     '<div class="m-tongue" hidden></div>' +
+    '<div class="m-scale">' +
     '<svg class="m-body" viewBox="0 0 32 24" width="64" height="48">' +
       '<g class="m-blob">' +
-        '<rect x="6" y="6" width="20" height="14" fill="#00ff9c"/>' +
-        '<rect x="4" y="8" width="2" height="10" fill="#00ff9c"/>' +
-        '<rect x="26" y="8" width="2" height="10" fill="#00ff9c"/>' +
-        '<rect x="8" y="4" width="16" height="2" fill="#00ff9c"/>' +
-        '<rect x="6" y="6" width="20" height="2" fill="#7dffcd"/>' +
-        '<rect x="8" y="20" width="4" height="2" fill="#00b86f"/>' +
-        '<rect x="20" y="20" width="4" height="2" fill="#00b86f"/>' +
+        '<rect class="m-skin" x="6" y="6" width="20" height="14"/>' +
+        '<rect class="m-skin" x="4" y="8" width="2" height="10"/>' +
+        '<rect class="m-skin" x="26" y="8" width="2" height="10"/>' +
+        '<rect class="m-skin" x="8" y="4" width="16" height="2"/>' +
+        '<rect class="m-skin-hi" x="6" y="6" width="20" height="2"/>' +
+        '<rect class="m-skin-dk" x="8" y="20" width="4" height="2"/>' +
+        '<rect class="m-skin-dk" x="20" y="20" width="4" height="2"/>' +
         '<g class="m-eye-open">' +
           '<rect x="11" y="9" width="4" height="5" fill="#04120b"/>' +
           '<rect x="19" y="9" width="4" height="5" fill="#04120b"/>' +
@@ -46,7 +47,8 @@
         '</g>' +
         '<rect class="m-mouth" x="14" y="16" width="6" height="1.6" fill="#04120b"/>' +
       '</g>' +
-    '</svg>';
+    '</svg>' +
+    '</div>';
   document.body.appendChild(el);
 
   var bubble = el.querySelector(".m-bubble");
@@ -93,9 +95,9 @@
   }
 
   function setFat() {
-    var s = Math.min(1 + belly.length * 0.18, 1.7);
-    blob.style.transform = "scale(" + s + ", " + (0.9 + s * 0.1) + ")";
-    blob.style.transformOrigin = "50% 100%";
+    /* her yemekte gözle görülür şişme: 1 → 1.22 → 1.44 → 1.66 → 1.88 */
+    var s = Math.min(1 + belly.length * 0.22, 1.9);
+    el.style.setProperty("--bitscale", s);
   }
 
   /* ---------- Hareket ---------- */
@@ -256,12 +258,87 @@
     el.style.left = px(x);
   });
 
+  /* ---------- Bukalemun modu: altındaki panelin rengini al ---------- */
+
+  var lastColorKey = "";
+
+  function parseRgb(str) {
+    var m = /rgba?\(\s*(\d+)[,\s]+(\d+)[,\s]+(\d+)(?:[,\s/]+([\d.]+))?/.exec(str || "");
+    if (!m) return null;
+    return { r: +m[1], g: +m[2], b: +m[3], a: m[4] === undefined ? 1 : +m[4] };
+  }
+
+  function boost(c) {
+    /* rengi canlandır: HSL'de doygunluğu ve parlaklığı yükselt */
+    var r = c.r / 255, g = c.g / 255, b = c.b / 255;
+    var max = Math.max(r, g, b), min = Math.min(r, g, b);
+    var l = (max + min) / 2, h = 0, s = 0, d = max - min;
+    if (d) {
+      s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+      if (max === r) h = ((g - b) / d + (g < b ? 6 : 0)) / 6;
+      else if (max === g) h = ((b - r) / d + 2) / 6;
+      else h = ((r - g) / d + 4) / 6;
+    }
+    s = Math.max(s, 0.85); l = 0.56;
+    function f(p, q, t) {
+      if (t < 0) t += 1; if (t > 1) t -= 1;
+      if (t < 1 / 6) return p + (q - p) * 6 * t;
+      if (t < 1 / 2) return q;
+      if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
+      return p;
+    }
+    var q = l < 0.5 ? l * (1 + s) : l + s - l * s, p = 2 * l - q;
+    return {
+      r: Math.round(f(p, q, h + 1 / 3) * 255),
+      g: Math.round(f(p, q, h) * 255),
+      b: Math.round(f(p, q, h - 1 / 3) * 255)
+    };
+  }
+
+  function shade(c, k) {
+    return "rgb(" + Math.min(255, Math.round(c.r * k)) + "," + Math.min(255, Math.round(c.g * k)) + "," + Math.min(255, Math.round(c.b * k)) + ")";
+  }
+
+  function sampleZoneColor() {
+    if (!document.elementsFromPoint) return null;
+    var cx = x + W / 2;
+    var ys = [window.innerHeight - 34, window.innerHeight - 110, window.innerHeight - 190];
+    for (var yi = 0; yi < ys.length; yi++) {
+      var els = document.elementsFromPoint(cx, ys[yi]);
+      for (var i = 0; i < els.length; i++) {
+        if (el.contains(els[i])) continue;
+        var t = els[i].closest && els[i].closest(
+          ".app-card, .card, .morse-demo, .gallery-grid figure, .btn, .ticker, .phone, .morse-input, .app-icon-badge, .site-footer");
+        if (!t) continue;
+        var c = parseRgb(getComputedStyle(t).borderColor || getComputedStyle(t).borderTopColor);
+        if (c && c.a > 0.05 && c.r + c.g + c.b > 40) return c;
+      }
+    }
+    return null;
+  }
+
+  function chameleon() {
+    var c = sampleZoneColor();
+    if (!c) return;
+    var key = c.r + "," + c.g + "," + c.b;
+    if (key === lastColorKey) return;
+    lastColorKey = key;
+    var v = boost(c);
+    el.style.setProperty("--bitc", "rgb(" + v.r + "," + v.g + "," + v.b + ")");
+    el.style.setProperty("--bitc-hi", shade(v, 1.35));
+    el.style.setProperty("--bitc-dk", shade(v, 0.62));
+  }
+
+  setInterval(chameleon, 350);
+
   /* test/debug kancası */
   window.__bit = {
     eat: function () { var c = edibleCards(); if (c.length) return eatCard(pick(c)); },
     spit: spitAll,
     belly: function () { return belly.length; },
-    stats: function () { return stats; }
+    stats: function () { return stats; },
+    walk: function (tx) { return walkTo(tx, 6); },
+    color: function () { return el.style.getPropertyValue("--bitc"); }
   };
 
   setTimeout(function () {
