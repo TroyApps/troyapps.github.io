@@ -959,6 +959,90 @@ a.app-card:hover::after { left: 140%; }
   #cursor-glow { display: none; }
 }
 
+/* ---------- Maskot: Bit ---------- */
+
+#mascot {
+  position: fixed;
+  bottom: 10px;
+  left: 200px;
+  z-index: 95;
+  width: 64px;
+  height: 48px;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.6));
+}
+#mascot svg { display: block; image-rendering: pixelated; }
+#mascot .m-blob { transition: transform 0.4s ease; }
+#mascot.m-flip svg { transform: scaleX(-1); }
+
+#mascot.m-walk svg { animation: mascotWalk 0.35s steps(2) infinite; }
+@keyframes mascotWalk {
+  0%, 100% { transform: translateY(0) scaleX(var(--mflip, 1)); }
+  50% { transform: translateY(-3px) scaleX(var(--mflip, 1)); }
+}
+#mascot.m-flip { --mflip: -1; }
+#mascot.m-flip.m-walk svg { animation: mascotWalkFlip 0.35s steps(2) infinite; }
+@keyframes mascotWalkFlip {
+  0%, 100% { transform: translateY(0) scaleX(-1); }
+  50% { transform: translateY(-3px) scaleX(-1); }
+}
+
+#mascot.m-chew svg { animation: mascotChew 0.3s steps(2) 3; }
+@keyframes mascotChew { 50% { transform: scaleY(0.85); } }
+
+#mascot.m-spit svg { animation: mascotSpit 0.18s steps(2) 4; }
+@keyframes mascotSpit { 50% { transform: translateX(-3px) scaleY(1.12); } }
+
+#mascot.m-lie svg { transform: rotate(88deg) translateY(8px); transition: transform 0.5s ease; }
+#mascot.m-lie.m-flip svg { transform: rotate(-88deg) translateY(8px) scaleX(-1); }
+
+#mascot .m-tongue {
+  position: absolute;
+  left: 32px;
+  bottom: 18px;
+  height: 4px;
+  background: var(--magenta);
+  transform-origin: left center;
+  box-shadow: 0 0 10px var(--glow-magenta);
+}
+
+#mascot .m-bubble {
+  position: absolute;
+  bottom: 56px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 8px 12px;
+  border: 2px solid var(--line);
+  background: #05070e;
+  font-family: var(--term);
+  font-size: 1.05rem;
+  letter-spacing: 0.05em;
+  color: var(--green);
+  white-space: nowrap;
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.6);
+}
+#mascot .m-bubble::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -4px;
+  border: 5px solid transparent;
+  border-top-color: var(--line);
+}
+
+@media (max-width: 640px) {
+  #mascot { width: 48px; height: 36px; }
+  #mascot svg { width: 48px; height: 36px; }
+  #mascot .m-bubble { font-size: 0.95rem; bottom: 44px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #mascot { display: none; }
+}
+
 /* ---------- 404 ---------- */
 
 .page-404 {
