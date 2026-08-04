@@ -53,10 +53,18 @@
 
   function frame() {
     ctx.clearRect(0, 0, W, H);
+    var bursting = performance.now() < burstUntil;
     for (var i = 0; i < trails.length; i++) {
       var t = trails[i];
-      t.x += t.speed;
+      var baseAlpha = t.alpha;
+      if (bursting && t.burstSpeed) {
+        t.x += t.burstSpeed;
+        t.alpha = t.burstAlpha || t.alpha;
+      } else {
+        t.x += t.speed;
+      }
       drawTrail(t);
+      t.alpha = baseAlpha;
       if (t.x > W + 40) {
         trails[i] = makeTrail(false);
         trails[i].y = Math.random() * H;
@@ -68,6 +76,16 @@
   resize();
   var count = Math.max(10, Math.min(22, Math.floor(W / 80)));
   for (var i = 0; i < count; i++) trails.push(makeTrail(true));
+
+  /* PRESS START patlaması: akışlar kısa süre hızlanıp parlar */
+  var burstUntil = 0;
+  window.__signalBurst = function () {
+    burstUntil = performance.now() + 1600;
+    for (var i = 0; i < trails.length; i++) {
+      trails[i].burstSpeed = trails[i].speed * (5 + Math.random() * 4);
+      trails[i].burstAlpha = Math.min(0.5, trails[i].alpha * 3.2);
+    }
+  };
 
   window.addEventListener("resize", function () { resize(); });
 

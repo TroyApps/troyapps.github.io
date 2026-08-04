@@ -33,8 +33,9 @@
   }
 
   /* Başlık decode efekti: harfler Morse sembollerinden çözülür */
-  var decodeEls = document.querySelectorAll(".decode");
-  decodeEls.forEach(function (el) {
+  var SYMS = ["•", "—", "•", "—", "·"];
+
+  function buildDecode(el) {
     var text = el.getAttribute("data-text") || el.textContent;
     el.setAttribute("aria-label", text);
     el.textContent = "";
@@ -56,20 +57,24 @@
       inner.appendChild(w);
       if (wi < arr.length - 1) inner.appendChild(document.createTextNode(" "));
     });
+    el.__spans = spans;
+  }
 
-    if (reduceMotion) return;
-
-    var SYMS = ["•", "—", "•", "—", "·"];
-    spans.forEach(function (s, i) {
-      var finalCh = s.textContent;
+  function runDecode(el) {
+    if (reduceMotion || !el.__spans) return;
+    el.__spans.forEach(function (s, i) {
+      if (s.__iv) clearInterval(s.__iv);
+      var finalCh = s.getAttribute("data-final") || s.textContent;
+      s.setAttribute("data-final", finalCh);
       var ticks = 0;
       var maxTicks = 3 + Math.floor(i * 0.9);
       s.textContent = SYMS[i % SYMS.length];
       s.classList.add("raw");
-      var iv = setInterval(function () {
+      s.__iv = setInterval(function () {
         ticks++;
         if (ticks >= maxTicks) {
-          clearInterval(iv);
+          clearInterval(s.__iv);
+          s.__iv = null;
           s.textContent = finalCh;
           s.classList.remove("raw");
         } else {
@@ -77,7 +82,80 @@
         }
       }, 70);
     });
+  }
+
+  document.querySelectorAll(".decode").forEach(function (el) {
+    buildDecode(el);
+    runDecode(el);
   });
+
+  /* PRESS START: sinyal patlaması + başlığı yeniden çöz */
+  var pressStart = document.querySelector(".press-start");
+  if (pressStart) {
+    pressStart.addEventListener("click", function () {
+      var h1 = document.querySelector("h1.decode");
+      if (h1) runDecode(h1);
+      if (!reduceMotion) {
+        document.body.classList.add("burst");
+        if (window.__signalBurst) window.__signalBurst();
+        setTimeout(function () { document.body.classList.remove("burst"); }, 1800);
+      }
+    });
+  }
+
+  /* ??? kartı easter egg: şifre çözme denemesi -> ERİŞİM REDDEDİLDİ */
+  var eggCard = document.querySelector(".app-card.future");
+  if (eggCard) {
+    var eggTitle = eggCard.querySelector("h3");
+    var eggBusy = false;
+    eggCard.setAttribute("role", "button");
+    eggCard.setAttribute("tabindex", "0");
+    if (eggCard.getAttribute("data-egg-hint")) {
+      eggCard.setAttribute("aria-label", eggCard.getAttribute("data-egg-hint"));
+    }
+
+    function tryDecrypt() {
+      if (eggBusy || !eggTitle) return;
+      eggBusy = true;
+      var original = "???";
+      var denied = eggCard.getAttribute("data-egg-fail") || "ERİŞİM REDDEDİLDİ";
+      eggCard.classList.add("denied");
+
+      if (reduceMotion) {
+        eggTitle.textContent = denied;
+        setTimeout(function () {
+          eggTitle.textContent = original;
+          eggCard.classList.remove("denied");
+          eggBusy = false;
+        }, 1600);
+        return;
+      }
+
+      var ticks = 0;
+      var iv = setInterval(function () {
+        ticks++;
+        var scramble = "";
+        for (var i = 0; i < denied.length; i++) {
+          scramble += SYMS[(Math.random() * SYMS.length) | 0];
+        }
+        eggTitle.textContent = scramble;
+        if (ticks >= 12) {
+          clearInterval(iv);
+          eggTitle.textContent = denied;
+          setTimeout(function () {
+            eggTitle.textContent = original;
+            eggCard.classList.remove("denied");
+            eggBusy = false;
+          }, 1800);
+        }
+      }, 80);
+    }
+
+    eggCard.addEventListener("click", tryDecrypt);
+    eggCard.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); tryDecrypt(); }
+    });
+  }
 
   /* Kaydırınca beliren bölümler */
   var revealEls = document.querySelectorAll(".reveal");
