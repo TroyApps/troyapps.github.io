@@ -24,7 +24,9 @@
     hit:   ["ayy!", "of!", "hile bu", "canım yandı"],
     melee: ["POW!", "BAM!", "PAT!", "KÜT!", "GÜM!", "ŞAK!"],
     truce: ["tamam tamam", "ayırdılar bizi", "başkan kızdı", "barıştık say", "bu iş burada bitmez"],
-    tired: ["yeter be", "nefesim kesildi", "beraberlik", "bi mola"]
+    tired: ["yeter be", "nefesim kesildi", "beraberlik", "bi mola"],
+    chase: ["hey, sayfa kaçıyor!", "bekle bizi!", "dur nereye?!", "koş koş koş", "bırak kavgayı, yetiş!"],
+    resume: ["nerede kalmıştık?", "hah, evet — kavga!", "geldik, devam", "sen bana vuruyordun"]
   } : {
     idle:  ["...", "any signal?", "beep boop", "nice weather", "so bored", "quiet here"],
     lost:  ["where are you?", "where'd he go?", "did you run off?", "lost him again", "hiding again huh"],
@@ -34,7 +36,9 @@
     hit:   ["ouch!", "oof!", "that's cheating", "that hurt"],
     melee: ["POW!", "BAM!", "WHAM!", "THWACK!", "BOOM!", "SMACK!"],
     truce: ["okay okay", "they pulled us apart", "the boss is mad", "call it a truce", "this isn't over"],
-    tired: ["enough already", "out of breath", "it's a draw", "need a break"]
+    tired: ["enough already", "out of breath", "it's a draw", "need a break"],
+    chase: ["hey, the page is running!", "wait for us!", "where are you going?!", "run run run", "forget the fight, catch up!"],
+    resume: ["where were we?", "right — the fight!", "ok, back to it", "you were hitting me"]
   };
 
   /* SVG elemanlarinda .hidden IDL ozelligi yok; attribute uzerinden gizle */
@@ -402,6 +406,72 @@
     if (m !== "shoot" && m !== "melee") setAngry(false);
   }
 
+  /* ---------- Sayfayi kovalama ---------- */
+
+  /* Yaratiklar sayfaya yapisiktir: sayfa kayinca onlar da kayar. Ekrandan
+     cikarlarsa her seyi birakip geri kosar, sonra kaldiklari yerden devam
+     ederler. LOST, en fazla ne kadar geride kalabileceklerini sinirlar. */
+  function lostLimit() { return clamp(window.innerHeight * 0.22, 120, 260); }
+  var LOST = lostLimit();
+  var lastScrollY = window.scrollY || window.pageYOffset || 0;
+  var scrollSettle = 0;
+  var chaseSave = null;
+  var lastChaseSay = -9999;
+  var time0 = 0;
+
+  function offscreen() {
+    var b = bounds();
+    return PAIR.some(function (f) { return f.y < b.y0 - 12 || f.y > b.y1 + 12; });
+  }
+
+  function startChase() {
+    if (mode === "chase") return;
+    chaseSave = { mode: mode, modeT: modeT, modeLen: modeLen };
+    clearShots();
+    setAngry(false);
+    mode = "chase";
+    modeT = 0;
+    modeLen = 7000;
+    if (time0 - lastChaseSay > 4000) {
+      lastChaseSay = time0;
+      say(A, pick(SAY.chase), 1700);
+      say(B, pick(SAY.chase.filter(function (t) { return t !== A.bubble.textContent; })), 1700);
+    }
+  }
+
+  function endChase() {
+    var s = chaseSave;
+    chaseSave = null;
+    if (!s || s.mode === "chase") { setMode("wander", rand(11000, 17000)); return; }
+    mode = s.mode;
+    modeT = s.modeT;
+    modeLen = s.modeLen;
+    if (mode === "shoot" || mode === "melee") {
+      setAngry(true);
+      PAIR.forEach(function (f) { f.nextShot = rand(300, 900); });
+    }
+    if (time0 - lastChaseSay > 1200) {
+      say(A, pick(SAY.resume), 1600);
+      say(B, pick(SAY.resume.filter(function (t) { return t !== A.bubble.textContent; })), 1600);
+    }
+  }
+
+  window.addEventListener("scroll", function () {
+    var y = window.scrollY || window.pageYOffset || 0;
+    var dy = y - lastScrollY;
+    lastScrollY = y;
+    if (!dy) return;
+    var b = bounds();
+    LOST = lostLimit();
+    PAIR.forEach(function (f) {
+      f.y = clamp(f.y - dy, b.y0 - LOST, b.y1 + LOST);
+      f.ty -= dy;
+    });
+    shots.forEach(function (s2) { s2.y -= dy; });
+    scrollSettle = 220;
+    if (mode !== "chase" && offscreen()) startChase();
+  }, { passive: true });
+
   function separate() {
     if (mode === "truce") { PAIR.forEach(function (f) { say(f, pick(SAY.truce), 1800); }); return; }
     var b = bounds();
@@ -444,14 +514,19 @@
 
   function integrate(f, dt) {
     var b = bounds();
-    /* kavga menünün arkasında geçmesin: dövüşürken tavan biraz aşağıda */
-    var top = (mode === "shoot" || mode === "melee") ? Math.max(b.y0, 118) : b.y0;
     f.x += f.vx * dt / 60;
     f.y += f.vy * dt / 60;
     f.vx *= 0.92;
     f.vy *= 0.92;
     if (f.x < b.x0) { f.x = b.x0; f.vx = Math.abs(f.vx) * 0.5; }
     if (f.x > b.x1) { f.x = b.x1; f.vx = -Math.abs(f.vx) * 0.5; }
+    if (mode === "chase") {
+      /* sayfaya yetismeye calisirken ekranin disinda kalabilirler */
+      f.y = clamp(f.y, b.y0 - LOST, b.y1 + LOST);
+      return;
+    }
+    /* kavga menünün arkasında geçmesin: dövüşürken tavan biraz aşağıda */
+    var top = (mode === "shoot" || mode === "melee") ? Math.max(b.y0, 118) : b.y0;
     if (f.y < top) { f.y = top; f.vy = Math.abs(f.vy) * 0.5; }
     if (f.y > b.y1) { f.y = b.y1; f.vy = -Math.abs(f.vy) * 0.5; }
   }
@@ -482,12 +557,25 @@
     var dt = last ? Math.min((time - last) / 16.67, 3) : 1;
     last = time;
     var ms = dt * 16.67;
+    time0 = time;
     modeT += ms;
+    if (scrollSettle > 0) scrollSettle -= ms;
 
     var d = dist(A, B);
     var diag = Math.hypot(window.innerWidth, window.innerHeight);
 
-    if (mode === "wander") {
+    if (mode === "chase") {
+      /* her seyi birak, sayfaya yetis */
+      var bc = bounds();
+      PAIR.forEach(function (f) {
+        f.tx = clamp(f.x, bc.x0, bc.x1);
+        f.ty = clamp(f.y, bc.y0 + 50, bc.y1 - 50);
+        steer(f, 2600, 0.30);
+        if (Math.abs(f.vx) > 12) f.face = f.vx > 0 ? 1 : -1;
+      });
+      if ((!offscreen() && scrollSettle <= 0) || modeT > modeLen) endChase();
+
+    } else if (mode === "wander") {
       PAIR.forEach(function (f) {
         f.retarget -= ms;
         if (f.retarget <= 0 || Math.hypot(f.tx - f.x, f.ty - f.y) < 26) {
@@ -614,6 +702,8 @@
   });
 
   window.addEventListener("resize", function () {
+    LOST = lostLimit();
+    lastScrollY = window.scrollY || window.pageYOffset || 0;
     var b = bounds();
     PAIR.forEach(function (f) {
       f.x = clamp(f.x, b.x0, b.x1);
@@ -634,7 +724,9 @@
     hits: function () { return { a: A.el.style.pointerEvents, b: B.el.style.pointerEvents }; },
     heal: healAll,
     separate: separate,
-    pos: function () { return { a: [A.x | 0, A.y | 0], b: [B.x | 0, B.y | 0], d: dist(A, B) | 0 }; }
+    pos: function () { return { a: [A.x | 0, A.y | 0], b: [B.x | 0, B.y | 0], d: dist(A, B) | 0 }; },
+    saved: function () { return chaseSave && chaseSave.mode; },
+    onscreen: function () { return !offscreen(); }
   };
 
   requestAnimationFrame(tick);
