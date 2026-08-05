@@ -37,6 +37,12 @@
     tired: ["enough already", "out of breath", "it's a draw", "need a break"]
   };
 
+  /* SVG elemanlarinda .hidden IDL ozelligi yok; attribute uzerinden gizle */
+  function show(el, on) {
+    if (on) el.removeAttribute("hidden");
+    else el.setAttribute("hidden", "");
+  }
+
   function pick(a) { return a[(Math.random() * a.length) | 0]; }
   function rand(a, b) { return a + Math.random() * (b - a); }
   function clamp(v, a, b) { return v < a ? a : v > b ? b : v; }
@@ -157,26 +163,26 @@
 
   function say(f, text, ms) {
     f.bubble.textContent = text;
-    f.bubble.hidden = false;
+    show(f.bubble, true);
     clearTimeout(f.sayT);
-    f.sayT = setTimeout(function () { f.bubble.hidden = true; }, ms || 2100);
+    f.sayT = setTimeout(function () { show(f.bubble, false); }, ms || 2100);
   }
 
   function setAngry(on) {
     PAIR.forEach(function (f) {
-      f.brow.hidden = !on;
+      show(f.brow, !!on);
       f.el.classList.toggle("d-mad", !!on);
     });
   }
 
   function flinch(f) {
     f.hurt = 520;
-    f.eyes.hidden = true;
-    f.eyesX.hidden = false;
+    show(f.eyes, false);
+    show(f.eyesX, true);
     f.el.classList.add("d-hit");
     setTimeout(function () {
-      f.eyes.hidden = false;
-      f.eyesX.hidden = true;
+      show(f.eyes, true);
+      show(f.eyesX, false);
       f.el.classList.remove("d-hit");
     }, 520);
   }
@@ -416,11 +422,11 @@
     right.ty = clamp(right.y + rand(-90, 90), b.y0, b.y1);
 
     PAIR.forEach(function (f) {
-      f.stars.hidden = false;
+      show(f.stars, true);
       f.el.classList.add("d-dizzy");
       say(f, pick(SAY.truce), 2400);
       setTimeout(function () {
-        f.stars.hidden = true;
+        show(f.stars, false);
         f.el.classList.remove("d-dizzy");
       }, 2200);
     });
