@@ -476,6 +476,46 @@ section { position: relative; padding: 90px 0; }
 
 .hero-inner { width: 100%; position: relative; }
 
+.hero-layout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(20px, 4vw, 56px);
+}
+.hero-layout .hero-inner {
+  width: auto;
+  max-width: 640px;
+  text-align: center;
+}
+.hero-layout .hero-inner .lead { margin-left: auto; margin-right: auto; }
+.hero-layout .hero-inner .hero-cta { justify-content: center; }
+
+.ad-slot {
+  flex: 0 0 300px;
+  height: 480px;
+  border: 1px dashed rgba(143, 156, 148, 0.35);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: rgba(143, 156, 148, 0.55);
+  background: rgba(255, 255, 255, 0.015);
+}
+.ad-slot-tag {
+  font-family: var(--pixel);
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.ad-slot-dim {
+  font-family: var(--term);
+  font-size: 0.85rem;
+  color: rgba(143, 156, 148, 0.4);
+}
+@media (max-width: 1400px) { .ad-slot { display: none; } }
+
 .hero .kicker {
   font-family: var(--term);
   font-size: 1.3rem;
