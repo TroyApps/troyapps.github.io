@@ -1233,7 +1233,14 @@ a.app-card:hover::after { left: 140%; }
 
 /* --- Ekran sarsıntısı --- */
 
-html.duel-shaking body { animation: duelShake 0.3s cubic-bezier(0.36, 0.07, 0.19, 0.97); }
+/* DIKKAT: sarsintiyi asla body/html uzerinde yapma. Bir ata elemana transform
+   verilince position:fixed cocuklar (bu arada #duel) viewport yerine o atanin
+   icine sabitlenir; sayfa kaydirilmisken yaratiklar sayfanin en tepesine
+   isinlanir. Bu yuzden yalnizca sabit konumlu olmayan bolumleri sarsiyoruz. */
+html.duel-shaking .site-header,
+html.duel-shaking .page-rails,
+html.duel-shaking .site-footer,
+html.duel-shaking #duel { animation: duelShake 0.3s cubic-bezier(0.36, 0.07, 0.19, 0.97); }
 @keyframes duelShake {
   0%, 100% { transform: translate3d(0, 0, 0); }
   15% { transform: translate3d(calc(var(--duel-shake, 4px) * -1), 1px, 0); }
