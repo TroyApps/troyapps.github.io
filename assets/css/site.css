@@ -1008,97 +1008,245 @@ a.app-card:hover::after { left: 140%; }
   #cursor-glow { display: none; }
 }
 
-/* ---------- Maskot: Bit ---------- */
+/* ---------- Düello: Bit (yeşil) vs Bug (pembe) ---------- */
 
-#mascot {
+#duel {
   position: fixed;
-  bottom: 10px;
-  left: 200px;
-  z-index: 95;
-  width: 64px;
-  height: 48px;
+  inset: 0;
+  z-index: 120;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+#duel-cracks {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: visible;
+}
+
+#duel-fx {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* --- Yaratıklar --- */
+
+.duel-fighter {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 60px;
+  height: 45px;
+  pointer-events: auto;
   cursor: pointer;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
-  filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.6));
-}
-#mascot svg { display: block; image-rendering: pixelated; }
-#mascot .m-scale {
-  transform: scale(var(--bitscale, 1));
-  transform-origin: 50% 100%;
-  transition: transform 0.45s cubic-bezier(0.3, 1.5, 0.5, 1);
-}
-#mascot .m-skin { fill: var(--bitc, #00ff9c); transition: fill 0.5s ease; }
-#mascot .m-skin-hi { fill: var(--bitc-hi, #7dffcd); transition: fill 0.5s ease; }
-#mascot .m-skin-dk { fill: var(--bitc-dk, #00b86f); transition: fill 0.5s ease; }
-#mascot .m-bubble { color: var(--bitc, var(--green)); }
-#mascot.m-flip svg { transform: scaleX(-1); }
-
-#mascot.m-walk svg { animation: mascotWalk 0.35s steps(2) infinite; }
-@keyframes mascotWalk {
-  0%, 100% { transform: translateY(0) scaleX(var(--mflip, 1)); }
-  50% { transform: translateY(-3px) scaleX(var(--mflip, 1)); }
-}
-#mascot.m-flip { --mflip: -1; }
-#mascot.m-flip.m-walk svg { animation: mascotWalkFlip 0.35s steps(2) infinite; }
-@keyframes mascotWalkFlip {
-  0%, 100% { transform: translateY(0) scaleX(-1); }
-  50% { transform: translateY(-3px) scaleX(-1); }
+  will-change: transform;
+  filter: drop-shadow(0 5px 9px rgba(0, 0, 0, 0.55));
 }
 
-#mascot.m-chew svg { animation: mascotChew 0.3s steps(2) 3; }
-@keyframes mascotChew { 50% { transform: scaleY(0.85); } }
+.duel-fighter .d-body {
+  display: block;
+  image-rendering: pixelated;
+  transform-origin: 50% 50%;
+  transform: scaleX(var(--dflip, 1));
+}
 
-#mascot.m-spit svg { animation: mascotSpit 0.18s steps(2) 4; }
-@keyframes mascotSpit { 50% { transform: translateX(-3px) scaleY(1.12); } }
+.duel-green { --dc: #00ff9c; --dc-hi: #7dffcd; --dc-dk: #00b86f; --dc-glow: rgba(0, 255, 156, 0.55); }
+.duel-pink  { --dc: #ff3ef2; --dc-hi: #ffa3f8; --dc-dk: #b41fa8; --dc-glow: rgba(255, 62, 242, 0.5); }
 
-#mascot.m-lie svg { transform: rotate(88deg) translateY(8px); transition: transform 0.5s ease; }
-#mascot.m-lie.m-flip svg { transform: rotate(-88deg) translateY(8px) scaleX(-1); }
+.duel-fighter .d-skin { fill: var(--dc); }
+.duel-fighter .d-hi { fill: var(--dc-hi); }
+.duel-fighter .d-dk { fill: var(--dc-dk); }
+.duel-fighter .d-eyes rect,
+.duel-fighter .d-eyes-x rect,
+.duel-fighter .d-brow rect,
+.duel-fighter .d-mouth { fill: #04120b; }
+.duel-fighter .d-gleam { fill: #eaffff; }
 
-#mascot .m-tongue {
+.duel-fighter.d-move .d-blob { animation: duelStep 0.32s steps(2) infinite; }
+@keyframes duelStep {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-1.4px); }
+}
+
+.duel-fighter.d-mad { filter: drop-shadow(0 0 8px var(--dc-glow)) drop-shadow(0 5px 9px rgba(0, 0, 0, 0.55)); }
+.duel-fighter.d-mad .d-mouth { transform: translateY(1px) scaleX(1.25); transform-origin: 17px 17px; }
+
+.duel-fighter.d-hit .d-body { animation: duelHit 0.16s steps(2) 3; }
+@keyframes duelHit {
+  0%, 100% { transform: scaleX(var(--dflip, 1)); }
+  50% { transform: translate(3px, -2px) scaleY(0.86) scaleX(var(--dflip, 1)); }
+}
+
+.duel-fighter.d-recoil .d-body { animation: duelRecoil 0.18s ease-out; }
+@keyframes duelRecoil {
+  0%, 100% { transform: scaleX(var(--dflip, 1)); }
+  40% { transform: translateX(calc(var(--dflip, 1) * -4px)) scaleX(var(--dflip, 1)); }
+}
+
+.duel-fighter.d-dizzy .d-blob { animation: duelWobble 0.5s ease-in-out infinite; }
+@keyframes duelWobble {
+  0%, 100% { transform: rotate(-7deg); }
+  50% { transform: rotate(7deg); }
+}
+
+.duel-fighter .d-stars {
   position: absolute;
-  left: 32px;
-  bottom: 18px;
-  height: 4px;
-  background: var(--magenta);
-  transform-origin: left center;
-  box-shadow: 0 0 10px var(--glow-magenta);
+  left: 50%;
+  top: -16px;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 6px;
+  font-size: 0.8rem;
+  color: var(--amber);
+  text-shadow: 0 0 8px rgba(255, 217, 61, 0.8);
+}
+.duel-fighter .d-stars i { font-style: normal; animation: duelStar 0.9s linear infinite; }
+.duel-fighter .d-stars i:nth-child(2) { animation-delay: 0.3s; }
+.duel-fighter .d-stars i:nth-child(3) { animation-delay: 0.6s; }
+@keyframes duelStar {
+  0%, 100% { opacity: 0.25; transform: translateY(0) scale(0.85); }
+  50% { opacity: 1; transform: translateY(-4px) scale(1.15); }
 }
 
-#mascot .m-bubble {
+.duel-fighter .d-bubble {
   position: absolute;
-  bottom: 56px;
+  bottom: 52px;
   left: 50%;
   transform: translateX(-50%);
-  padding: 8px 12px;
-  border: 2px solid var(--line);
+  padding: 6px 10px;
+  border: 2px solid var(--dc);
   background: #05070e;
   font-family: var(--term);
-  font-size: 1.05rem;
-  letter-spacing: 0.05em;
-  color: var(--green);
+  font-size: 1rem;
+  line-height: 1.1;
+  letter-spacing: 0.04em;
+  color: var(--dc);
   white-space: nowrap;
-  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.6);
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.6);
 }
-#mascot .m-bubble::after {
+.duel-fighter .d-bubble::after {
   content: "";
   position: absolute;
   top: 100%;
   left: 50%;
   margin-left: -4px;
   border: 5px solid transparent;
-  border-top-color: var(--line);
+  border-top-color: var(--dc);
+}
+.duel-fighter.d-say-below .d-bubble { bottom: auto; top: 52px; }
+.duel-fighter.d-say-below .d-bubble::after {
+  top: auto;
+  bottom: 100%;
+  border-top-color: transparent;
+  border-bottom-color: var(--dc);
+}
+
+/* --- Mermiler --- */
+
+.d-shot {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 10px;
+  height: 4px;
+  border-radius: 1px;
+  will-change: transform;
+}
+.d-shot-green { background: #00ff9c; box-shadow: 0 0 8px 1px var(--glow-green), -8px 0 10px -4px rgba(0, 255, 156, 0.7); }
+.d-shot-pink { background: #ff3ef2; box-shadow: 0 0 8px 1px var(--glow-magenta), -8px 0 10px -4px rgba(255, 62, 242, 0.7); }
+
+/* --- Kıvılcım / patlama / yazı --- */
+
+.d-spark {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  margin: -2px 0 0 -2px;
+  animation: duelSpark 0.6s ease-out forwards;
+}
+@keyframes duelSpark {
+  from { transform: translate(0, 0) scale(1); opacity: 1; }
+  to { transform: translate(var(--dx), var(--dy)) scale(0.2); opacity: 0; }
+}
+
+.d-flash {
+  position: absolute;
+  width: 90px;
+  height: 90px;
+  margin: -45px 0 0 -45px;
+  border-radius: 50%;
+  animation: duelFlash 0.4s ease-out forwards;
+}
+@keyframes duelFlash {
+  from { transform: scale(0.3); opacity: 0.95; }
+  to { transform: scale(1.5); opacity: 0; }
+}
+
+.d-burst {
+  position: absolute;
+  transform: translate(-50%, -50%) rotate(var(--rot, 0deg));
+  font-family: var(--pixel);
+  font-size: 0.85rem;
+  color: var(--amber);
+  text-shadow: 3px 3px 0 #000, 0 0 14px rgba(255, 217, 61, 0.65);
+  animation: duelBurst 0.85s cubic-bezier(0.2, 1.6, 0.4, 1) forwards;
+  white-space: nowrap;
+}
+.d-burst-big { font-size: 1.5rem; color: #fff; text-shadow: 4px 4px 0 #000, 0 0 24px rgba(255, 255, 255, 0.8); }
+@keyframes duelBurst {
+  0% { transform: translate(-50%, -50%) rotate(var(--rot, 0deg)) scale(0.3); opacity: 0; }
+  25% { transform: translate(-50%, -50%) rotate(var(--rot, 0deg)) scale(1.15); opacity: 1; }
+  70% { opacity: 1; }
+  100% { transform: translate(-50%, -110%) rotate(var(--rot, 0deg)) scale(1); opacity: 0; }
+}
+
+/* --- Ekran çatlağı --- */
+
+.d-crack { opacity: 1; transition: opacity 0.85s ease; }
+.d-crack-out { opacity: 0; }
+.d-crack-line {
+  fill: none;
+  stroke: var(--cc, #dffff2);
+  stroke-width: 2;
+  stroke-linecap: square;
+  stroke-linejoin: miter;
+  filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.55));
+  animation: duelCrackDraw 0.16s linear forwards;
+}
+.d-crack-thin { stroke-width: 1.2; opacity: 0.75; }
+@keyframes duelCrackDraw { to { stroke-dashoffset: 0; } }
+.d-crack-hub {
+  fill: var(--cc, #dffff2);
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.7));
+}
+
+/* --- Ekran sarsıntısı --- */
+
+html.duel-shaking body { animation: duelShake 0.3s cubic-bezier(0.36, 0.07, 0.19, 0.97); }
+@keyframes duelShake {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  15% { transform: translate3d(calc(var(--duel-shake, 4px) * -1), 1px, 0); }
+  30% { transform: translate3d(var(--duel-shake, 4px), -2px, 0); }
+  45% { transform: translate3d(calc(var(--duel-shake, 4px) * -0.7), 2px, 0); }
+  60% { transform: translate3d(calc(var(--duel-shake, 4px) * 0.7), -1px, 0); }
+  80% { transform: translate3d(calc(var(--duel-shake, 4px) * -0.35), 0, 0); }
 }
 
 @media (max-width: 640px) {
-  #mascot { width: 48px; height: 36px; }
-  #mascot svg { width: 48px; height: 36px; }
-  #mascot .m-bubble { font-size: 0.95rem; bottom: 44px; }
+  .duel-fighter { width: 46px; height: 35px; }
+  .duel-fighter .d-bubble { font-size: 0.9rem; bottom: 40px; padding: 5px 8px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  #mascot { display: none; }
+  #duel { display: none; }
 }
+
 
 /* ---------- 404 ---------- */
 
