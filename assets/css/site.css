@@ -1269,3 +1269,114 @@ html.duel-shaking #duel { animation: duelShake 0.3s cubic-bezier(0.36, 0.07, 0.1
   text-align: center;
   padding: 80px 0;
 }
+
+/* ---------- Maskot öneri menüsü ---------- */
+
+/* #duel aria-hidden olduğu için menü onun DIŞINDA, doğrudan body'de durur;
+   aria-hidden bir atadan miras alınır ve içeriden geri açılamaz. */
+#duel-menu {
+  position: fixed;
+  z-index: 130;
+  width: min(232px, calc(100vw - 24px));
+  font-family: var(--body);
+  --dm: var(--green);
+  --dm-glow: var(--glow-green);
+}
+#duel-menu[hidden] { display: none; }
+#duel-menu.dm-pink { --dm: var(--magenta); --dm-glow: var(--glow-magenta); }
+
+.dm-card {
+  position: relative;
+  background: #0b0b16;
+  border: 2px solid var(--dm);
+  box-shadow: 0 0 0 2px #0b0b16, 0 0 18px var(--dm-glow), 6px 6px 0 rgba(0, 0, 0, 0.55);
+  padding: 10px 10px 8px;
+  animation: dmPop 0.16s steps(3) both;
+}
+.dm-card::after {
+  /* konuşma balonu kuyruğu */
+  content: "";
+  position: absolute;
+  left: var(--dm-tail, 26px);
+  width: 10px;
+  height: 10px;
+  background: #0b0b16;
+  border: 2px solid var(--dm);
+}
+#duel-menu.dm-above .dm-card::after {
+  bottom: -7px;
+  border-top: 0;
+  border-left: 0;
+  transform: rotate(45deg);
+}
+#duel-menu.dm-below .dm-card::after {
+  top: -7px;
+  border-bottom: 0;
+  border-right: 0;
+  transform: rotate(45deg);
+}
+
+@keyframes dmPop {
+  from { opacity: 0; transform: translateY(6px) scale(0.9); }
+  to   { opacity: 1; transform: none; }
+}
+
+.dm-q {
+  font-family: var(--pixel);
+  font-size: 9px;
+  line-height: 1.5;
+  color: var(--dm);
+  text-shadow: 0 0 8px var(--dm-glow);
+  margin: 0 0 8px;
+  letter-spacing: 0.04em;
+}
+
+.dm-list { display: grid; gap: 4px; }
+
+.dm-item {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 8px;
+  border: 1px solid var(--line-dim);
+  background: rgba(255, 255, 255, 0.02);
+  color: var(--ink);
+  font-size: 0.82rem;
+  text-decoration: none;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.12s, border-color 0.12s, transform 0.12s;
+}
+.dm-item .dm-n {
+  font-family: var(--pixel);
+  font-size: 8px;
+  color: var(--dm);
+  opacity: 0.85;
+}
+.dm-item:hover,
+.dm-item:focus-visible {
+  background: color-mix(in srgb, var(--dm) 16%, transparent);
+  border-color: var(--dm);
+  transform: translateX(2px);
+  outline: none;
+}
+.dm-item:focus-visible { box-shadow: 0 0 0 2px var(--dm); }
+
+.dm-close {
+  margin-top: 7px;
+  width: 100%;
+  padding: 5px;
+  border: 1px dashed var(--line-dim);
+  background: none;
+  color: var(--muted);
+  font-family: var(--term);
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+.dm-close:hover,
+.dm-close:focus-visible { color: var(--ink); border-color: var(--dm); outline: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .dm-card { animation: none; }
+  .dm-item { transition: none; }
+}
