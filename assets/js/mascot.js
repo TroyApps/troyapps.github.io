@@ -1,351 +1,635 @@
-/* TroyApps — mascot.js : "Bit" — sitede yaşayan piksel yaratık.
-   Gezer, sıkılır, kartları yer, uzanır; tıklayınca geri kusar ve özür diler.
-   Kütüphanesiz. prefers-reduced-motion açıksa hiç doğmaz. */
+/* TroyApps — mascot.js : "Bit" (yeşil) vs "Bug" (pembe) — maskot düellosu
+   İki piksel yaratık sayfanın her yerinde özgürce gezer. Birbirlerinden
+   uzaklaşınca merak edip birbirlerini arar, bulunca önce uzaktan ateş eder
+   (ıskalayan atışlar ekranı çatlatır), sonra göğüs göğüse kavgaya tutuşur.
+   Herhangi birine tıklayınca ayrılırlar, sersemler ve ateşkes ilan edilir.
+   Kütüphanesiz. prefers-reduced-motion açıksa hiç doğmazlar. */
 (function () {
   "use strict";
 
-  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (reduceMotion) return;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  if (document.getElementById("duel")) return;
 
-  var TR = document.documentElement.lang === "tr";
-  var SAY = {
-    sorry: TR ? ["pardon... geri verdim :(", "özür dilerim başkan", "bi daha yemem söz"]
-              : ["sorry... gave them back :(", "my bad, boss", "won't eat them again, promise"],
-    idle: TR ? ["...", "sinyal var mı?", "sıkıldım", "beep boop", "ışık güzelmiş"]
-             : ["...", "any signal?", "so bored", "beep boop", "nice light here"],
-    yum: TR ? ["nom nom", "mmm piksel", "lezizmiş"] : ["nom nom", "mmm pixels", "tasty"],
-    zzz: "z z z"
+  var TR = document.documentElement.lang !== "en";
+  var SMALL = window.innerWidth < 640;
+
+  /* ---------- Sözlük ---------- */
+
+  var SAY = TR ? {
+    idle:  ["...", "sinyal var mı?", "beep boop", "hava güzelmiş", "sıkıldım", "burası boş"],
+    lost:  ["neredesin ulan?", "hani nerede bu?", "kaçtın mı sen?", "kayboldu galiba", "yine mi saklandın"],
+    found: ["buldum seni!", "işte buradasın!", "gel bakalım", "yakaladım", "kaçış yok"],
+    shoot: ["al bakalım!", "pew pew", "eğil!", "sıkı dur", "bu senin için"],
+    miss:  ["ıskaladın!", "ekranı vurdun salak", "yandaki cama gitti", "nişancıya bak"],
+    hit:   ["ayy!", "of!", "hile bu", "canım yandı"],
+    melee: ["POW!", "BAM!", "PAT!", "KÜT!", "GÜM!", "ŞAK!"],
+    truce: ["tamam tamam", "ayırdılar bizi", "başkan kızdı", "barıştık say", "bu iş burada bitmez"],
+    tired: ["yeter be", "nefesim kesildi", "beraberlik", "bi mola"]
+  } : {
+    idle:  ["...", "any signal?", "beep boop", "nice weather", "so bored", "quiet here"],
+    lost:  ["where are you?", "where'd he go?", "did you run off?", "lost him again", "hiding again huh"],
+    found: ["found you!", "there you are!", "come here", "gotcha", "no escape"],
+    shoot: ["take this!", "pew pew", "duck!", "hold still", "this one's for you"],
+    miss:  ["you missed!", "you hit the screen!", "nice shot, genius", "look at this marksman"],
+    hit:   ["ouch!", "oof!", "that's cheating", "that hurt"],
+    melee: ["POW!", "BAM!", "WHAM!", "THWACK!", "BOOM!", "SMACK!"],
+    truce: ["okay okay", "they pulled us apart", "the boss is mad", "call it a truce", "this isn't over"],
+    tired: ["enough already", "out of breath", "it's a draw", "need a break"]
   };
 
-  /* ---------- DOM ---------- */
-
-  var el = document.createElement("div");
-  el.id = "mascot";
-  el.setAttribute("aria-hidden", "true");
-  el.innerHTML =
-    '<div class="m-bubble" hidden></div>' +
-    '<div class="m-tongue" hidden></div>' +
-    '<div class="m-scale">' +
-    '<svg class="m-body" viewBox="0 0 32 24" width="64" height="48">' +
-      '<g class="m-blob">' +
-        '<rect class="m-skin" x="6" y="6" width="20" height="14"/>' +
-        '<rect class="m-skin" x="4" y="8" width="2" height="10"/>' +
-        '<rect class="m-skin" x="26" y="8" width="2" height="10"/>' +
-        '<rect class="m-skin" x="8" y="4" width="16" height="2"/>' +
-        '<rect class="m-skin-hi" x="6" y="6" width="20" height="2"/>' +
-        '<rect class="m-skin-dk" x="8" y="20" width="4" height="2"/>' +
-        '<rect class="m-skin-dk" x="20" y="20" width="4" height="2"/>' +
-        '<g class="m-eye-open">' +
-          '<rect x="11" y="9" width="4" height="5" fill="#04120b"/>' +
-          '<rect x="19" y="9" width="4" height="5" fill="#04120b"/>' +
-          '<rect x="12" y="10" width="2" height="2" fill="#eaffff"/>' +
-          '<rect x="20" y="10" width="2" height="2" fill="#eaffff"/>' +
-        '</g>' +
-        '<g class="m-eye-closed" style="display:none">' +
-          '<rect x="11" y="12" width="4" height="1.6" fill="#04120b"/>' +
-          '<rect x="19" y="12" width="4" height="1.6" fill="#04120b"/>' +
-        '</g>' +
-        '<rect class="m-mouth" x="14" y="16" width="6" height="1.6" fill="#04120b"/>' +
-      '</g>' +
-    '</svg>' +
-    '</div>';
-  document.body.appendChild(el);
-
-  var bubble = el.querySelector(".m-bubble");
-  var tongue = el.querySelector(".m-tongue");
-  var eyesOpen = el.querySelector(".m-eye-open");
-  var eyesClosed = el.querySelector(".m-eye-closed");
-  var mouth = el.querySelector(".m-mouth");
-  var blob = el.querySelector(".m-blob");
-
-  var W = 64;
-  var x = Math.min(window.innerWidth * 0.3, 300);
-  var dir = 1;
-  var belly = [];      /* yenen kartlar: {card, tag} */
-  var interrupted = false;
-  var sleeping = false;
-
-  el.style.left = x + "px";
-
-  function px(v) { return v + "px"; }
+  function pick(a) { return a[(Math.random() * a.length) | 0]; }
   function rand(a, b) { return a + Math.random() * (b - a); }
-  function pick(arr) { return arr[(Math.random() * arr.length) | 0]; }
-  function delay(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
+  function clamp(v, a, b) { return v < a ? a : v > b ? b : v; }
 
-  function sleep(ms) {
-    return new Promise(function (r) {
-      var t0 = performance.now();
-      setTimeout(function tick() {
-        if (interrupted || performance.now() - t0 >= ms) return r();
-        setTimeout(tick, 80);
-      }, 0);
-    });
+  /* ---------- Sahne ---------- */
+
+  var root = document.createElement("div");
+  root.id = "duel";
+  root.setAttribute("aria-hidden", "true");
+  root.innerHTML =
+    '<svg id="duel-cracks" xmlns="http://www.w3.org/2000/svg"></svg>' +
+    '<div id="duel-fx"></div>';
+  document.body.appendChild(root);
+
+  var cracksSvg = root.querySelector("#duel-cracks");
+  var fx = root.querySelector("#duel-fx");
+
+  var W = SMALL ? 46 : 60;
+  var H = W * 0.75;
+
+  function sprite() {
+    return '<svg class="d-body" viewBox="0 0 32 24" width="' + W + '" height="' + H + '">' +
+      '<g class="d-blob">' +
+        '<rect class="d-skin" x="6" y="6" width="20" height="14"/>' +
+        '<rect class="d-skin" x="4" y="8" width="2" height="10"/>' +
+        '<rect class="d-skin" x="26" y="8" width="2" height="10"/>' +
+        '<rect class="d-skin" x="8" y="4" width="16" height="2"/>' +
+        '<rect class="d-hi" x="6" y="6" width="20" height="2"/>' +
+        '<rect class="d-dk" x="8" y="20" width="4" height="2"/>' +
+        '<rect class="d-dk" x="20" y="20" width="4" height="2"/>' +
+        '<g class="d-eyes">' +
+          '<rect x="11" y="9" width="4" height="5"/>' +
+          '<rect x="19" y="9" width="4" height="5"/>' +
+          '<rect class="d-gleam" x="12" y="10" width="2" height="2"/>' +
+          '<rect class="d-gleam" x="20" y="10" width="2" height="2"/>' +
+        '</g>' +
+        '<g class="d-eyes-x" hidden>' +
+          '<rect x="11" y="9" width="4" height="1.6" transform="rotate(38 13 11)"/>' +
+          '<rect x="11" y="9" width="4" height="1.6" transform="rotate(-38 13 11)"/>' +
+          '<rect x="19" y="9" width="4" height="1.6" transform="rotate(38 21 11)"/>' +
+          '<rect x="19" y="9" width="4" height="1.6" transform="rotate(-38 21 11)"/>' +
+        '</g>' +
+        '<g class="d-brow" hidden>' +
+          '<rect x="10" y="7" width="6" height="1.8" transform="rotate(14 13 8)"/>' +
+          '<rect x="18" y="7" width="6" height="1.8" transform="rotate(-14 21 8)"/>' +
+        '</g>' +
+        '<rect class="d-mouth" x="14" y="16" width="6" height="1.6"/>' +
+      '</g>' +
+    '</svg>';
   }
 
-  function say(text, ms) {
-    bubble.textContent = text;
-    bubble.hidden = false;
-    clearTimeout(say.t);
-    say.t = setTimeout(function () { bubble.hidden = true; }, ms || 2200);
+  function makeFighter(id, name) {
+    var el = document.createElement("div");
+    el.className = "duel-fighter duel-" + id;
+    el.innerHTML =
+      '<div class="d-bubble" hidden></div>' +
+      '<div class="d-stars" hidden><i>✦</i><i>✦</i><i>✦</i></div>' +
+      sprite();
+    root.appendChild(el);
+
+    var f = {
+      id: id, name: name, el: el,
+      bubble: el.querySelector(".d-bubble"),
+      body: el.querySelector(".d-body"),
+      eyes: el.querySelector(".d-eyes"),
+      eyesX: el.querySelector(".d-eyes-x"),
+      brow: el.querySelector(".d-brow"),
+      mouth: el.querySelector(".d-mouth"),
+      stars: el.querySelector(".d-stars"),
+      x: 0, y: 0, vx: 0, vy: 0, tx: 0, ty: 0,
+      face: 1, bob: rand(0, 6.28), retarget: 0, hurt: 0, sayT: 0, nextShot: 0
+    };
+    el.addEventListener("click", function (e) { e.preventDefault(); separate(); });
+    return f;
   }
 
-  function setEyes(open) {
-    eyesOpen.style.display = open ? "" : "none";
-    eyesClosed.style.display = open ? "none" : "";
-  }
+  var A = makeFighter("green", "Bit");
+  var B = makeFighter("pink", "Bug");
+  var PAIR = [A, B];
 
-  function setFat() {
-    /* her yemekte gözle görülür şişme: 1 → 1.22 → 1.44 → 1.66 → 1.88 */
-    var s = Math.min(1 + belly.length * 0.22, 1.9);
-    el.style.setProperty("--bitscale", s);
-  }
+  /* ---------- Alan ---------- */
 
-  /* ---------- Hareket ---------- */
+  /* Menü şeridinin üstüne de çıkabilirler; oradayken tıklamayı engellememek
+     için (bkz. render) fare olaylarını kapatıyoruz. */
+  var HEADER_BAND = 78;
 
-  var walkToken = 0;
-
-  function walkTo(targetX, speed) {
-    var myToken = ++walkToken; /* yeni yürüyüş eskisini iptal eder */
-    return new Promise(function (resolve) {
-      targetX = Math.max(8, Math.min(window.innerWidth - W - 8, targetX));
-      dir = targetX > x ? 1 : -1;
-      el.classList.add("m-walk");
-      el.classList.toggle("m-flip", dir < 0);
-      (function step() {
-        if (interrupted || myToken !== walkToken) { el.classList.remove("m-walk"); return resolve(); }
-        var d = targetX - x;
-        if (Math.abs(d) < 5) { el.classList.remove("m-walk"); return resolve(); }
-        x += Math.sign(d) * (speed || 2.2);
-        el.style.left = px(x);
-        setTimeout(step, 24);
-      })();
-    });
-  }
-
-  /* ---------- Kart yeme ---------- */
-
-  function edibleCards() {
-    var all = document.querySelectorAll(".app-card, .card");
-    var out = [];
-    all.forEach(function (c) {
-      if (c.dataset.eaten) return;
-      var r = c.getBoundingClientRect();
-      if (r.top > 40 && r.bottom < window.innerHeight - 90 && r.width > 0) out.push({ c: c, r: r });
-    });
-    return out;
-  }
-
-  async function eatCard(item) {
-    var card = item.c;
-    var r = card.getBoundingClientRect();
-    await walkTo(r.left + r.width / 2 - W / 2, 3);
-    if (interrupted) return;
-
-    /* dil uzat */
-    var mx = x + W / 2;
-    var my = window.innerHeight - 40;
-    var cx = r.left + r.width / 2;
-    var cy = r.top + r.height / 2;
-    var len = Math.hypot(cx - mx, cy - my);
-    var ang = Math.atan2(cy - my, cx - mx) * 180 / Math.PI;
-    tongue.style.width = px(len);
-    tongue.style.transform = "rotate(" + ang + "deg)";
-    tongue.hidden = false;
-    mouth.setAttribute("height", "5");
-
-    /* kartı ağza çek */
-    card.style.transition = "transform 0.55s ease-in, opacity 0.55s ease-in";
-    card.style.transformOrigin = "center";
-    card.style.transform = "translate(" + (mx - cx) + "px," + (my - cy) + "px) scale(0.05) rotate(20deg)";
-    card.style.opacity = "0";
-    await sleep(580);
-
-    card.style.visibility = "hidden";
-    card.dataset.eaten = "1";
-    belly.push(card);
-    tongue.hidden = true;
-    mouth.setAttribute("height", "1.6");
-    setFat();
-    say(pick(SAY.yum), 1500);
-    el.classList.add("m-chew");
-    await sleep(900);
-    el.classList.remove("m-chew");
-  }
-
-  /* ---------- Geri kusma (tıklayınca) ---------- */
-
-  function spitAll() {
-    if (!belly.length) { say(pick(SAY.idle), 1600); return; }
-    interrupted = true;
-    sleeping = false;
-    el.classList.remove("m-lie", "m-walk");
-    setEyes(true);
-    el.classList.add("m-spit");
-    mouth.setAttribute("height", "6");
-
-    belly.forEach(function (card, i) {
-      setTimeout(function () {
-        card.style.transition = "none";
-        card.style.visibility = "";
-        card.style.opacity = "0";
-        void card.offsetWidth;
-        card.style.transition = "transform 0.5s cubic-bezier(.2,1.6,.4,1), opacity 0.4s ease";
-        card.style.transform = "";
-        card.style.opacity = "";
-        delete card.dataset.eaten;
-      }, 120 * i);
-    });
-    belly = [];
-
-    setTimeout(function () {
-      el.classList.remove("m-spit");
-      mouth.setAttribute("height", "1.6");
-      setFat();
-      say(pick(SAY.sorry), 2600);
-      setTimeout(function () { interrupted = false; }, 400);
-    }, 700);
-  }
-
-  el.addEventListener("click", spitAll);
-
-  /* ---------- Yaşam döngüsü ---------- */
-
-  var stats = { wander: 0, idle: 0, eatTry: 0, eatOk: 0, lie: 0, loops: 0 };
-
-  async function live() {
-    for (;;) {
-      stats.loops++;
-      if (interrupted) { await delay(400); continue; }
-      var roll = Math.random();
-
-      if (roll < 0.3 && belly.length < 4) {
-        /* canı sıkıldı: kart ye */
-        stats.eatTry++;
-        var cards = edibleCards();
-        if (cards.length) { stats.eatOk++; await eatCard(pick(cards)); }
-        else await sleep(700);
-      } else if (roll < 0.62) {
-        /* gezin (kısa mesafe, yüksek tempo) */
-        stats.wander++;
-        await walkTo(x + rand(-300, 300), rand(3, 4.5));
-        await sleep(rand(400, 1000));
-      } else if (roll < 0.82) {
-        /* dur, göz kırp, saçmala */
-        stats.idle++;
-        setEyes(false); await sleep(160); setEyes(true);
-        if (Math.random() < 0.5) say(pick(SAY.idle), 1800);
-        await sleep(rand(800, 1800));
-      } else {
-        stats.lie++;
-        /* olduğu yerde kenara uzan, zzz */
-        await walkTo(x + rand(-120, 120), 3);
-        if (interrupted) continue;
-        sleeping = true;
-        el.classList.add("m-lie");
-        setEyes(false);
-        say(SAY.zzz, 3500);
-        await sleep(rand(3500, 5500));
-        el.classList.remove("m-lie");
-        setEyes(true);
-        sleeping = false;
-      }
-      await sleep(rand(300, 900));
-    }
-  }
-
-  window.addEventListener("resize", function () {
-    x = Math.min(x, window.innerWidth - W - 8);
-    el.style.left = px(x);
-  });
-
-  /* ---------- Bukalemun modu: altındaki panelin rengini al ---------- */
-
-  var lastColorKey = "";
-
-  function parseRgb(str) {
-    var m = /rgba?\(\s*(\d+)[,\s]+(\d+)[,\s]+(\d+)(?:[,\s/]+([\d.]+))?/.exec(str || "");
-    if (!m) return null;
-    return { r: +m[1], g: +m[2], b: +m[3], a: m[4] === undefined ? 1 : +m[4] };
-  }
-
-  function boost(c) {
-    /* rengi canlandır: HSL'de doygunluğu ve parlaklığı yükselt */
-    var r = c.r / 255, g = c.g / 255, b = c.b / 255;
-    var max = Math.max(r, g, b), min = Math.min(r, g, b);
-    var l = (max + min) / 2, h = 0, s = 0, d = max - min;
-    if (d) {
-      s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
-      if (max === r) h = ((g - b) / d + (g < b ? 6 : 0)) / 6;
-      else if (max === g) h = ((b - r) / d + 2) / 6;
-      else h = ((r - g) / d + 4) / 6;
-    }
-    s = Math.max(s, 0.85); l = 0.56;
-    function f(p, q, t) {
-      if (t < 0) t += 1; if (t > 1) t -= 1;
-      if (t < 1 / 6) return p + (q - p) * 6 * t;
-      if (t < 1 / 2) return q;
-      if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
-      return p;
-    }
-    var q = l < 0.5 ? l * (1 + s) : l + s - l * s, p = 2 * l - q;
+  function bounds() {
     return {
-      r: Math.round(f(p, q, h + 1 / 3) * 255),
-      g: Math.round(f(p, q, h) * 255),
-      b: Math.round(f(p, q, h - 1 / 3) * 255)
+      x0: W * 0.6,
+      x1: window.innerWidth - W * 0.6,
+      y0: 34,
+      y1: window.innerHeight - H * 0.7 - 10
     };
   }
 
-  function shade(c, k) {
-    return "rgb(" + Math.min(255, Math.round(c.r * k)) + "," + Math.min(255, Math.round(c.g * k)) + "," + Math.min(255, Math.round(c.b * k)) + ")";
+  (function place() {
+    var b = bounds();
+    A.x = b.x0 + (b.x1 - b.x0) * 0.24; A.y = b.y0 + (b.y1 - b.y0) * 0.62;
+    B.x = b.x0 + (b.x1 - b.x0) * 0.76; B.y = b.y0 + (b.y1 - b.y0) * 0.3;
+    A.tx = A.x; A.ty = A.y; B.tx = B.x; B.ty = B.y;
+  })();
+
+  function dist(p, q) { return Math.hypot(q.x - p.x, q.y - p.y); }
+
+  function wanderTarget(f) {
+    var b = bounds();
+    if (Math.random() < 0.45) {
+      /* bazen ekranın bambaşka bir köşesine kafayı takarlar */
+      f.tx = rand(b.x0, b.x1);
+      f.ty = rand(b.y0, b.y1);
+    } else {
+      f.tx = clamp(f.x + rand(-440, 440), b.x0, b.x1);
+      f.ty = clamp(f.y + rand(-320, 320), b.y0, b.y1);
+    }
   }
 
-  function sampleZoneColor() {
-    if (!document.elementsFromPoint) return null;
-    var cx = x + W / 2;
-    var ys = [window.innerHeight - 34, window.innerHeight - 110, window.innerHeight - 190];
-    for (var yi = 0; yi < ys.length; yi++) {
-      var els = document.elementsFromPoint(cx, ys[yi]);
-      for (var i = 0; i < els.length; i++) {
-        if (el.contains(els[i])) continue;
-        var t = els[i].closest && els[i].closest(
-          ".app-card, .card, .morse-demo, .gallery-grid figure, .btn, .ticker, .phone, .morse-input, .app-icon-badge, .site-footer");
-        if (!t) continue;
-        var c = parseRgb(getComputedStyle(t).borderColor || getComputedStyle(t).borderTopColor);
-        if (c && c.a > 0.05 && c.r + c.g + c.b > 40) return c;
+  /* ---------- Konuşma ---------- */
+
+  function say(f, text, ms) {
+    f.bubble.textContent = text;
+    f.bubble.hidden = false;
+    clearTimeout(f.sayT);
+    f.sayT = setTimeout(function () { f.bubble.hidden = true; }, ms || 2100);
+  }
+
+  function setAngry(on) {
+    PAIR.forEach(function (f) {
+      f.brow.hidden = !on;
+      f.el.classList.toggle("d-mad", !!on);
+    });
+  }
+
+  function flinch(f) {
+    f.hurt = 520;
+    f.eyes.hidden = true;
+    f.eyesX.hidden = false;
+    f.el.classList.add("d-hit");
+    setTimeout(function () {
+      f.eyes.hidden = false;
+      f.eyesX.hidden = true;
+      f.el.classList.remove("d-hit");
+    }, 520);
+  }
+
+  /* ---------- Efektler ---------- */
+
+  function burst(x, y, text, cls) {
+    var d = document.createElement("div");
+    d.className = "d-burst " + (cls || "");
+    d.textContent = text;
+    d.style.left = x + "px";
+    d.style.top = y + "px";
+    d.style.setProperty("--rot", rand(-18, 18) + "deg");
+    fx.appendChild(d);
+    setTimeout(function () { d.remove(); }, 900);
+  }
+
+  function sparks(x, y, color, n) {
+    for (var i = 0; i < (n || 7); i++) {
+      var s = document.createElement("i");
+      s.className = "d-spark";
+      var a = rand(0, 6.283), r = rand(18, 62);
+      s.style.left = x + "px";
+      s.style.top = y + "px";
+      s.style.background = color;
+      s.style.setProperty("--dx", Math.cos(a) * r + "px");
+      s.style.setProperty("--dy", Math.sin(a) * r + "px");
+      fx.appendChild(s);
+      /* jshint -W083 */
+      (function (node) { setTimeout(function () { node.remove(); }, 620); })(s);
+    }
+  }
+
+  function flash(x, y, color) {
+    var d = document.createElement("div");
+    d.className = "d-flash";
+    d.style.left = x + "px";
+    d.style.top = y + "px";
+    d.style.background = "radial-gradient(circle, " + color + ", transparent 70%)";
+    fx.appendChild(d);
+    setTimeout(function () { d.remove(); }, 420);
+  }
+
+  var shakeT = 0;
+  function shake(power) {
+    document.documentElement.style.setProperty("--duel-shake", (power || 4) + "px");
+    document.documentElement.classList.remove("duel-shaking");
+    void document.documentElement.offsetWidth;
+    document.documentElement.classList.add("duel-shaking");
+    clearTimeout(shakeT);
+    shakeT = setTimeout(function () {
+      document.documentElement.classList.remove("duel-shaking");
+    }, power > 6 ? 460 : 300);
+  }
+
+  /* ---------- Ekran çatlağı ---------- */
+
+  var cracks = [];
+
+  function crack(x, y, size, color) {
+    var b = bounds();
+    x = clamp(x, 18, window.innerWidth - 18);
+    y = clamp(y, 18, window.innerHeight - 18);
+    size = size || rand(60, 120);
+
+    var NS = "http://www.w3.org/2000/svg";
+    var g = document.createElementNS(NS, "g");
+    g.setAttribute("class", "d-crack");
+    g.style.setProperty("--cc", color || "#dffff2");
+
+    var arms = 5 + ((Math.random() * 4) | 0);
+    var base = rand(0, 6.283);
+    var total = 0;
+
+    for (var i = 0; i < arms; i++) {
+      var ang = base + (i / arms) * 6.283 + rand(-0.28, 0.28);
+      var len = size * rand(0.45, 1.15);
+      var px = x, py = y, pts = [x + "," + y];
+      var segs = 2 + ((Math.random() * 3) | 0);
+      for (var s = 0; s < segs; s++) {
+        ang += rand(-0.42, 0.42);
+        var step = len / segs;
+        px += Math.cos(ang) * step;
+        py += Math.sin(ang) * step;
+        pts.push(Math.round(px) + "," + Math.round(py));
+      }
+      var line = document.createElementNS(NS, "polyline");
+      line.setAttribute("points", pts.join(" "));
+      line.setAttribute("class", "d-crack-line");
+      var L = len * 1.25;
+      line.style.strokeDasharray = L;
+      line.style.strokeDashoffset = L;
+      line.style.animationDelay = (i * 14) + "ms";
+      g.appendChild(line);
+      total += 1;
+
+      /* dallanma */
+      if (Math.random() < 0.55) {
+        var bx = x + Math.cos(ang) * len * 0.5;
+        var by = y + Math.sin(ang) * len * 0.5;
+        var ba = ang + (Math.random() < 0.5 ? 0.9 : -0.9);
+        var bl = len * rand(0.2, 0.45);
+        var br = document.createElementNS(NS, "polyline");
+        br.setAttribute("points", Math.round(bx) + "," + Math.round(by) + " " +
+          Math.round(bx + Math.cos(ba) * bl) + "," + Math.round(by + Math.sin(ba) * bl));
+        br.setAttribute("class", "d-crack-line d-crack-thin");
+        br.style.strokeDasharray = bl;
+        br.style.strokeDashoffset = bl;
+        br.style.animationDelay = (60 + i * 14) + "ms";
+        g.appendChild(br);
       }
     }
-    return null;
+
+    /* çarpma göbeği */
+    var hub = document.createElementNS(NS, "circle");
+    hub.setAttribute("cx", x); hub.setAttribute("cy", y);
+    hub.setAttribute("r", 3.5);
+    hub.setAttribute("class", "d-crack-hub");
+    g.appendChild(hub);
+
+    cracksSvg.appendChild(g);
+    flash(x, y, color || "rgba(223,255,242,.85)");
+
+    var rec = { g: g, t: setTimeout(function () { fade(rec); }, rand(9000, 14000)) };
+    cracks.push(rec);
+    while (cracks.length > 7) fade(cracks[0]);
+    return rec;
   }
 
-  function chameleon() {
-    var c = sampleZoneColor();
-    if (!c) return;
-    var key = c.r + "," + c.g + "," + c.b;
-    if (key === lastColorKey) return;
-    lastColorKey = key;
-    var v = boost(c);
-    el.style.setProperty("--bitc", "rgb(" + v.r + "," + v.g + "," + v.b + ")");
-    el.style.setProperty("--bitc-hi", shade(v, 1.35));
-    el.style.setProperty("--bitc-dk", shade(v, 0.62));
+  function fade(rec) {
+    var i = cracks.indexOf(rec);
+    if (i < 0) return;
+    cracks.splice(i, 1);
+    clearTimeout(rec.t);
+    rec.g.classList.add("d-crack-out");
+    setTimeout(function () { rec.g.remove(); }, 900);
   }
 
-  setInterval(chameleon, 350);
+  function healAll() { cracks.slice().forEach(fade); }
+
+  /* ---------- Mermiler ---------- */
+
+  var shots = [];
+
+  function fire(from, to, willHit) {
+    var sx = from.x + from.face * (W * 0.42);
+    var sy = from.y - 2;
+    var ang = Math.atan2(to.y - sy, to.x - sx);
+    var reach = Math.hypot(to.x - sx, to.y - sy);
+    if (!willHit) {
+      ang += rand(0.13, 0.30) * (Math.random() < 0.5 ? -1 : 1);
+      reach += rand(120, 340);
+    }
+
+    var el = document.createElement("i");
+    el.className = "d-shot d-shot-" + from.id;
+    fx.appendChild(el);
+
+    shots.push({
+      el: el, x: sx, y: sy, ang: ang, sp: SMALL ? 9 : 12,
+      left: reach, hit: willHit, from: from, to: to
+    });
+
+    /* namlu alevi */
+    flash(sx, sy, from.id === "green" ? "rgba(0,255,156,.7)" : "rgba(255,62,242,.7)");
+    from.el.classList.add("d-recoil");
+    setTimeout(function () { from.el.classList.remove("d-recoil"); }, 180);
+  }
+
+  function stepShots(dt) {
+    for (var i = shots.length - 1; i >= 0; i--) {
+      var s = shots[i];
+      var d = s.sp * dt;
+      s.x += Math.cos(s.ang) * d;
+      s.y += Math.sin(s.ang) * d;
+      s.left -= d;
+      s.el.style.transform = "translate3d(" + (s.x - 4) + "px," + (s.y - 2) + "px,0) rotate(" + (s.ang * 57.3) + "deg)";
+
+      var out = s.x < -30 || s.x > window.innerWidth + 30 || s.y < -30 || s.y > window.innerHeight + 30;
+
+      if (s.hit && s.left <= 0) {
+        var col = s.from.id === "green" ? "#00ff9c" : "#ff3ef2";
+        sparks(s.to.x, s.to.y, col, 9);
+        flinch(s.to);
+        s.to.vx += Math.cos(s.ang) * 260;
+        s.to.vy += Math.sin(s.ang) * 160 - 60;
+        if (Math.random() < 0.6) say(s.to, pick(SAY.hit), 1200);
+        shake(4);
+        s.el.remove(); shots.splice(i, 1);
+      } else if (!s.hit && (s.left <= 0 || out)) {
+        crack(s.x, s.y, rand(55, 110), s.from.id === "green" ? "#b6ffe2" : "#ffc8fb");
+        shake(5);
+        if (Math.random() < 0.5) say(s.to, pick(SAY.miss), 1500);
+        s.el.remove(); shots.splice(i, 1);
+      }
+    }
+  }
+
+  function clearShots() {
+    shots.forEach(function (s) { s.el.remove(); });
+    shots.length = 0;
+  }
+
+  /* ---------- Durum makinesi ---------- */
+
+  var mode = "wander";
+  var modeT = 0;
+  var modeLen = rand(11000, 17000);
+  var farT = 0;
+  var meleeT = 0;
+  var paused = false;
+
+  function setMode(m, len) {
+    mode = m;
+    modeT = 0;
+    modeLen = len;
+    if (m !== "shoot" && m !== "melee") setAngry(false);
+  }
+
+  function separate() {
+    if (mode === "truce") { PAIR.forEach(function (f) { say(f, pick(SAY.truce), 1800); }); return; }
+    var b = bounds();
+    clearShots();
+    setAngry(false);
+    healAll();
+    shake(7);
+
+    var mid = (A.x + B.x) / 2;
+    var left = A.x <= B.x ? A : B;
+    var right = left === A ? B : A;
+
+    left.vx = -900; left.vy = -260;
+    right.vx = 900; right.vy = -260;
+    left.tx = clamp(mid - rand(320, 520), b.x0, b.x1);
+    right.tx = clamp(mid + rand(320, 520), b.x0, b.x1);
+    left.ty = clamp(left.y + rand(-90, 90), b.y0, b.y1);
+    right.ty = clamp(right.y + rand(-90, 90), b.y0, b.y1);
+
+    PAIR.forEach(function (f) {
+      f.stars.hidden = false;
+      f.el.classList.add("d-dizzy");
+      say(f, pick(SAY.truce), 2400);
+      setTimeout(function () {
+        f.stars.hidden = true;
+        f.el.classList.remove("d-dizzy");
+      }, 2200);
+    });
+
+    setMode("truce", rand(15000, 22000));
+  }
+
+  function steer(f, speed, agility) {
+    var dx = f.tx - f.x, dy = f.ty - f.y;
+    var d = Math.hypot(dx, dy) || 1;
+    var k = agility || 0.055;
+    f.vx += (dx / d * speed - f.vx) * k;
+    f.vy += (dy / d * speed - f.vy) * k;
+  }
+
+  function integrate(f, dt) {
+    var b = bounds();
+    /* kavga menünün arkasında geçmesin: dövüşürken tavan biraz aşağıda */
+    var top = (mode === "shoot" || mode === "melee") ? Math.max(b.y0, 118) : b.y0;
+    f.x += f.vx * dt / 60;
+    f.y += f.vy * dt / 60;
+    f.vx *= 0.92;
+    f.vy *= 0.92;
+    if (f.x < b.x0) { f.x = b.x0; f.vx = Math.abs(f.vx) * 0.5; }
+    if (f.x > b.x1) { f.x = b.x1; f.vx = -Math.abs(f.vx) * 0.5; }
+    if (f.y < top) { f.y = top; f.vy = Math.abs(f.vy) * 0.5; }
+    if (f.y > b.y1) { f.y = b.y1; f.vy = -Math.abs(f.vy) * 0.5; }
+  }
+
+  function render(f, time) {
+    var bobY = Math.sin(time * 0.006 + f.bob) * 3.2;
+    f.el.style.transform = "translate3d(" + (f.x - W / 2) + "px," + (f.y - H / 2 + bobY) + "px,0)";
+    if (f.lastFace !== f.face) {
+      f.lastFace = f.face;
+      f.el.style.setProperty("--dflip", f.face);
+    }
+    f.el.classList.toggle("d-move", Math.hypot(f.vx, f.vy) > 40);
+    /* tepedeyken balonu altına al, ekranın dışında kalmasın */
+    f.el.classList.toggle("d-say-below", f.y < 116);
+    /* menünün üstündeyken tıklamaları alta geçir */
+    var overNav = f.y < HEADER_BAND;
+    if (f.overNav !== overNav) {
+      f.overNav = overNav;
+      f.el.style.pointerEvents = overNav ? "none" : "auto";
+    }
+  }
+
+  var last = 0;
+
+  function tick(time) {
+    requestAnimationFrame(tick);
+    if (paused) { last = time; return; }
+    var dt = last ? Math.min((time - last) / 16.67, 3) : 1;
+    last = time;
+    var ms = dt * 16.67;
+    modeT += ms;
+
+    var d = dist(A, B);
+    var diag = Math.hypot(window.innerWidth, window.innerHeight);
+
+    if (mode === "wander") {
+      PAIR.forEach(function (f) {
+        f.retarget -= ms;
+        if (f.retarget <= 0 || Math.hypot(f.tx - f.x, f.ty - f.y) < 26) {
+          wanderTarget(f);
+          f.retarget = rand(2400, 4600);
+          if (Math.random() < 0.28) say(f, pick(SAY.idle), 1800);
+        }
+        steer(f, rand(230, 330), 0.05);
+        if (Math.abs(f.vx) > 12) f.face = f.vx > 0 ? 1 : -1;
+      });
+      /* uzaklaştılarsa merak etmeye başla */
+      if (d > diag * 0.46) farT += ms; else farT = Math.max(0, farT - ms * 0.6);
+      if (farT > 3200 || modeT > modeLen) {
+        farT = 0;
+        say(A, pick(SAY.lost), 1900);
+        setTimeout(function () { if (mode === "seek") say(B, pick(SAY.lost), 1900); }, 900);
+        setMode("seek", 11000);
+      }
+
+    } else if (mode === "seek") {
+      PAIR.forEach(function (f) {
+        var o = f === A ? B : A;
+        f.tx = o.x; f.ty = o.y;
+        steer(f, 430, 0.09);
+        f.face = o.x > f.x ? 1 : -1;
+      });
+      if (d < (SMALL ? 210 : 330)) {
+        say(A, pick(SAY.found), 1600);
+        setTimeout(function () { if (mode === "shoot") say(B, pick(SAY.found), 1600); }, 700);
+        setAngry(true);
+        PAIR.forEach(function (f) { f.nextShot = rand(500, 1100); f.vx *= -0.4; f.vy *= -0.4; });
+        setMode("shoot", rand(5200, 7200));
+      } else if (modeT > modeLen) {
+        setMode("wander", rand(10000, 15000));
+      }
+
+    } else if (mode === "shoot") {
+      PAIR.forEach(function (f) {
+        var o = f === A ? B : A;
+        f.face = o.x > f.x ? 1 : -1;
+        /* mesafeyi koru, hafif sağa sola kaçın */
+        f.retarget -= ms;
+        if (f.retarget <= 0) {
+          var b = bounds();
+          var want = SMALL ? 190 : 300;
+          var ux = (f.x - o.x) / (d || 1), uy = (f.y - o.y) / (d || 1);
+          f.tx = clamp(o.x + ux * want + rand(-40, 40), b.x0, b.x1);
+          f.ty = clamp(o.y + uy * want + rand(-70, 70), b.y0, b.y1);
+          f.retarget = rand(500, 1100);
+        }
+        steer(f, 210, 0.06);
+
+        f.nextShot -= ms;
+        if (f.nextShot <= 0 && f.hurt <= 0) {
+          f.nextShot = rand(650, 1250);
+          fire(f, o, Math.random() < 0.55);
+          if (Math.random() < 0.4) say(f, pick(SAY.shoot), 1200);
+        }
+        if (f.hurt > 0) f.hurt -= ms;
+      });
+      if (modeT > modeLen) {
+        clearShots();
+        meleeT = 0;
+        setMode("melee", rand(3200, 4600));
+      }
+
+    } else if (mode === "melee") {
+      var cx = (A.x + B.x) / 2, cy = (A.y + B.y) / 2;
+      PAIR.forEach(function (f) {
+        var o = f === A ? B : A;
+        f.face = o.x > f.x ? 1 : -1;
+        f.tx = o.x; f.ty = o.y;
+        steer(f, 620, 0.16);
+      });
+      meleeT -= ms;
+      if (d < 110 && meleeT <= 0) {
+        meleeT = rand(180, 340);
+        burst(cx + rand(-46, 46), cy + rand(-52, 22), pick(SAY.melee));
+        sparks(cx, cy, Math.random() < 0.5 ? "#00ff9c" : "#ff3ef2", 6);
+        var kick = rand(120, 300);
+        A.vx += (A.x - B.x) / (d || 1) * kick; A.vy += rand(-160, -40);
+        B.vx += (B.x - A.x) / (d || 1) * kick; B.vy += rand(-160, -40);
+        shake(4);
+      }
+      if (modeT > modeLen) {
+        /* final darbe: ekran çatlar */
+        crack(cx + rand(-40, 40), cy + rand(-40, 40), rand(120, 190), "#ffffff");
+        burst(cx, cy - 40, TR ? "GÜÜÜM!" : "KABOOM!", "d-burst-big");
+        shake(9);
+        A.vx = -700; B.vx = 700; A.vy = -220; B.vy = -220;
+        PAIR.forEach(function (f) { say(f, pick(SAY.tired), 2200); });
+        setMode("rest", rand(4500, 7000));
+      }
+
+    } else if (mode === "rest" || mode === "truce") {
+      PAIR.forEach(function (f) {
+        f.retarget -= ms;
+        if (f.retarget <= 0) {
+          wanderTarget(f);
+          f.retarget = rand(2000, 4000);
+          if (Math.random() < 0.22) say(f, pick(mode === "truce" ? SAY.truce : SAY.idle), 1800);
+        }
+        /* ateşkeste birbirlerinden uzak dursunlar */
+        if (mode === "truce" && d < 260) {
+          var o = f === A ? B : A;
+          f.vx += (f.x - o.x) / (d || 1) * 22;
+          f.vy += (f.y - o.y) / (d || 1) * 22;
+        }
+        steer(f, 150, 0.04);
+        if (Math.abs(f.vx) > 12) f.face = f.vx > 0 ? 1 : -1;
+      });
+      if (modeT > modeLen) setMode("wander", rand(11000, 17000));
+    }
+
+    PAIR.forEach(function (f) { integrate(f, dt); render(f, time); });
+    stepShots(dt);
+  }
+
+  /* ---------- Bağlantılar ---------- */
+
+  document.addEventListener("visibilitychange", function () {
+    paused = document.hidden;
+    if (!paused) last = 0;
+  });
+
+  window.addEventListener("resize", function () {
+    var b = bounds();
+    PAIR.forEach(function (f) {
+      f.x = clamp(f.x, b.x0, b.x1);
+      f.y = clamp(f.y, b.y0, b.y1);
+      f.tx = clamp(f.tx, b.x0, b.x1);
+      f.ty = clamp(f.ty, b.y0, b.y1);
+    });
+    healAll();
+  });
 
   /* test/debug kancası */
-  window.__bit = {
-    eat: function () { var c = edibleCards(); if (c.length) return eatCard(pick(c)); },
-    spit: spitAll,
-    belly: function () { return belly.length; },
-    stats: function () { return stats; },
-    walk: function (tx) { return walkTo(tx, 6); },
-    color: function () { return el.style.getPropertyValue("--bitc"); }
+  window.__duel = {
+    mode: function () { return mode; },
+    go: function (m, len) { setMode(m, len || 6000); return m; },
+    fight: function () { setMode("seek", 11000); },
+    crack: function (x, y) { return crack(x || innerWidth / 2, y || innerHeight / 2, 140, "#fff"); },
+    warp: function (who, x, y) { var f = who === "b" ? B : A; f.x = x; f.y = y; f.tx = x; f.ty = y; f.vx = f.vy = 0; },
+    hits: function () { return { a: A.el.style.pointerEvents, b: B.el.style.pointerEvents }; },
+    heal: healAll,
+    separate: separate,
+    pos: function () { return { a: [A.x | 0, A.y | 0], b: [B.x | 0, B.y | 0], d: dist(A, B) | 0 }; }
   };
 
-  setTimeout(function () {
-    live().catch(function (e) {
-      /* yaşam döngüsü bir hatayla ölürse yaratık uyur, sayfa etkilenmez */
-      el.classList.add("m-lie");
-      if (window.console && console.warn) console.warn("mascot uyudu:", e);
-    });
-  }, 2500);
+  requestAnimationFrame(tick);
 })();
