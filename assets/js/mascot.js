@@ -26,7 +26,9 @@
     truce: ["tamam tamam", "ayırdılar bizi", "başkan kızdı", "barıştık say", "bu iş burada bitmez"],
     tired: ["yeter be", "nefesim kesildi", "beraberlik", "bi mola"],
     chase: ["hey, sayfa kaçıyor!", "bekle bizi!", "dur nereye?!", "koş koş koş", "bırak kavgayı, yetiş!"],
-    resume: ["nerede kalmıştık?", "hah, evet — kavga!", "geldik, devam", "sen bana vuruyordun"]
+    resume: ["nerede kalmıştık?", "hah, evet — kavga!", "geldik, devam", "sen bana vuruyordun"],
+    ask:   ["Ne arıyorsun?", "Bir şey mi lazım?", "Nereye gidelim?", "Yardım edeyim mi?"],
+    bye:   ["hadi bakalım", "iyi gezmeler", "tamamdır", "buradayız, çağır yeter"]
   } : {
     idle:  ["...", "any signal?", "beep boop", "nice weather", "so bored", "quiet here"],
     lost:  ["where are you?", "where'd he go?", "did you run off?", "lost him again", "hiding again huh"],
@@ -38,7 +40,9 @@
     truce: ["okay okay", "they pulled us apart", "the boss is mad", "call it a truce", "this isn't over"],
     tired: ["enough already", "out of breath", "it's a draw", "need a break"],
     chase: ["hey, the page is running!", "wait for us!", "where are you going?!", "run run run", "forget the fight, catch up!"],
-    resume: ["where were we?", "right — the fight!", "ok, back to it", "you were hitting me"]
+    resume: ["where were we?", "right — the fight!", "ok, back to it", "you were hitting me"],
+    ask:   ["What are you after?", "Need something?", "Where to?", "Want a hand?"],
+    bye:   ["off you go", "enjoy", "sure thing", "we're here, just holler"]
   };
 
   /* SVG elemanlarinda .hidden IDL ozelligi yok; attribute uzerinden gizle */
@@ -117,9 +121,24 @@
       mouth: el.querySelector(".d-mouth"),
       stars: el.querySelector(".d-stars"),
       x: 0, y: 0, vx: 0, vy: 0, tx: 0, ty: 0,
-      face: 1, bob: rand(0, 6.28), retarget: 0, hurt: 0, sayT: 0, nextShot: 0
+      face: 1, bob: rand(0, 6.28), retarget: 0, hurt: 0, sayT: 0, nextShot: 0,
+      pinned: false
     };
-    el.addEventListener("click", function (e) { e.preventDefault(); separate(); });
+    /* menuyu kapatan "disariya tiklama" dinleyicisi yaratigi disari saymasin */
+    el.addEventListener("pointerdown", function (e) { e.stopPropagation(); });
+    el.addEventListener("click", function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      if (menuOpen) {
+        var same = menuFor === f;
+        closeMenu(true);
+        if (!same) openMenu(f);          /* obur yaratiga gecis */
+        return;
+      }
+      if (mode === "truce") { openMenu(f); return; }   /* zaten ayrılmışlar */
+      separate();
+      setTimeout(function () { if (!menuOpen) openMenu(f); }, 780);
+    });
     return f;
   }
 
@@ -406,6 +425,131 @@
     if (m !== "shoot" && m !== "melee") setAngry(false);
   }
 
+  /* ---------- Oneri menusu ---------- */
+
+  /* Menu, #duel'in DISINDA dogrudan body'ye eklenir: #duel aria-hidden oldugu
+     icin icine konan baglantilar ekran okuyuculara hic gorunmezdi ve
+     aria-hidden bir atadan miras alinip iceriden geri acilamaz. */
+
+  var menuEl = null;
+  var menuOpen = false;
+  var menuFor = null;
+  var menuT = 0;
+
+  function navItems() {
+    var out = [];
+    var links = document.querySelectorAll(".nav-links a");
+    for (var i = 0; i < links.length; i++) {
+      var a = links[i];
+      if (a.classList.contains("lang-switch")) continue;
+      var href = a.getAttribute("href");
+      if (!href) continue;
+      var numEl = a.querySelector(".n");
+      var num = numEl ? numEl.textContent.trim() : "";
+      var label = a.textContent.replace(num, "").trim();
+      if (label) out.push({ href: href, label: label, num: num });
+    }
+    return out;
+  }
+
+  function buildMenu() {
+    var items = navItems();
+    if (!items.length) return null;
+
+    var el = document.createElement("div");
+    el.id = "duel-menu";
+    el.hidden = true;
+    el.setAttribute("role", "dialog");
+    el.setAttribute("aria-label", TR ? "Hızlı gezinme" : "Quick navigation");
+
+    var card = document.createElement("div");
+    card.className = "dm-card";
+
+    var q = document.createElement("p");
+    q.className = "dm-q";
+    card.appendChild(q);
+
+    var list = document.createElement("div");
+    list.className = "dm-list";
+    items.forEach(function (it) {
+      var a = document.createElement("a");
+      a.className = "dm-item";
+      a.href = it.href;
+      if (it.num) {
+        var n = document.createElement("span");
+        n.className = "dm-n";
+        n.textContent = it.num;
+        a.appendChild(n);
+      }
+      a.appendChild(document.createTextNode(it.label));
+      a.addEventListener("click", function () { closeMenu(false); });
+      list.appendChild(a);
+    });
+    card.appendChild(list);
+
+    var close = document.createElement("button");
+    close.type = "button";
+    close.className = "dm-close";
+    close.textContent = TR ? "boş ver, kavgaya dön" : "never mind, back to the fight";
+    close.addEventListener("click", function () { closeMenu(true); });
+    card.appendChild(close);
+
+    el.appendChild(card);
+    document.body.appendChild(el);
+    return el;
+  }
+
+  function placeMenu(f) {
+    var m = menuEl;
+    var mw = m.offsetWidth;
+    var mh = m.offsetHeight;
+    var above = f.y - H * 0.6 - mh - 12 > 8;
+    var left = clamp(f.x - mw * 0.3, 8, Math.max(8, window.innerWidth - mw - 8));
+    var top = above ? f.y - H * 0.6 - mh - 12 : f.y + H * 0.6 + 12;
+    top = clamp(top, 8, Math.max(8, window.innerHeight - mh - 8));
+    m.style.left = Math.round(left) + "px";
+    m.style.top = Math.round(top) + "px";
+    m.classList.toggle("dm-above", above);
+    m.classList.toggle("dm-below", !above);
+    m.style.setProperty("--dm-tail", Math.round(clamp(f.x - left - 5, 12, mw - 24)) + "px");
+  }
+
+  function openMenu(f) {
+    if (!menuEl) menuEl = buildMenu();
+    if (!menuEl || menuOpen) return;
+    menuOpen = true;
+    menuFor = f;
+    menuT = 0;
+    f.pinned = true;
+    clearTimeout(f.sayT);
+    show(f.bubble, false);
+    menuEl.classList.toggle("dm-pink", f.id === "pink");
+    menuEl.querySelector(".dm-q").textContent = pick(SAY.ask);
+    menuEl.hidden = false;
+    placeMenu(f);
+    var first = menuEl.querySelector(".dm-item");
+    if (first) first.focus({ preventScroll: true });
+  }
+
+  function closeMenu(quiet) {
+    if (!menuOpen) return;
+    menuOpen = false;
+    menuEl.hidden = true;
+    var f = menuFor;
+    menuFor = null;
+    if (f) {
+      f.pinned = false;
+      if (!quiet) say(f, pick(SAY.bye), 1700);
+    }
+  }
+
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && menuOpen) closeMenu(true);
+  });
+  document.addEventListener("pointerdown", function (e) {
+    if (menuOpen && menuEl && !menuEl.contains(e.target)) closeMenu(true);
+  });
+
   /* ---------- Sayfayi kovalama ---------- */
 
   /* Yaratiklar sayfaya yapisiktir: sayfa kayinca onlar da kayar. Ekrandan
@@ -469,6 +613,7 @@
     });
     shots.forEach(function (s2) { s2.y -= dy; });
     scrollSettle = 220;
+    if (menuOpen) closeMenu(true);
     if (mode !== "chase" && offscreen()) startChase();
   }, { passive: true });
 
@@ -505,6 +650,7 @@
   }
 
   function steer(f, speed, agility) {
+    if (f.pinned) { f.vx *= 0.6; f.vy *= 0.6; return; }
     var dx = f.tx - f.x, dy = f.ty - f.y;
     var d = Math.hypot(dx, dy) || 1;
     var k = agility || 0.055;
@@ -560,6 +706,7 @@
     time0 = time;
     modeT += ms;
     if (scrollSettle > 0) scrollSettle -= ms;
+    if (menuOpen) { menuT += ms; if (menuT > 11000) closeMenu(false); }
 
     var d = dist(A, B);
     var diag = Math.hypot(window.innerWidth, window.innerHeight);
