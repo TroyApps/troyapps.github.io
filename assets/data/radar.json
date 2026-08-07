@@ -1,0 +1,546 @@
+{
+ "generatedAt": "2026-08-07T10:48:16.224Z",
+ "day": "2026-08-07",
+ "repos": [
+  {
+   "full": "cloudflare/computer",
+   "name": "computer",
+   "owner": "cloudflare",
+   "avatar": "https://avatars.githubusercontent.com/u/314135?v=4",
+   "url": "https://github.com/cloudflare/computer",
+   "homepage": "",
+   "desc": "Give your agent a computer 👾",
+   "language": "TypeScript",
+   "stars": 5186,
+   "starsToday": 2802,
+   "forks": 264,
+   "topics": [],
+   "license": "MIT",
+   "pushedAt": "2026-08-07T10:48:08Z",
+   "install": null
+  },
+  {
+   "full": "mattpocock/skills",
+   "name": "skills",
+   "owner": "mattpocock",
+   "avatar": "https://avatars.githubusercontent.com/u/28293365?v=4",
+   "url": "https://github.com/mattpocock/skills",
+   "homepage": "",
+   "desc": "Skills for Real Engineers. Straight from my .agents directory.",
+   "language": "Shell",
+   "stars": 208016,
+   "starsToday": 1873,
+   "forks": 17957,
+   "topics": [],
+   "license": "MIT",
+   "pushedAt": "2026-08-06T19:49:51Z",
+   "install": "npx skills@latest"
+  },
+  {
+   "full": "firecrawl/pdf-inspector",
+   "name": "pdf-inspector",
+   "owner": "firecrawl",
+   "avatar": "https://avatars.githubusercontent.com/u/135057108?v=4",
+   "url": "https://github.com/firecrawl/pdf-inspector",
+   "homepage": "https://firecrawl.github.io/pdf-inspector/",
+   "desc": "Fast Rust library for PDF inspection, classification, and text extraction. Intelligently detects scanned vs text-based PDFs to enable smart routing decisions.",
+   "language": "Rust",
+   "stars": 12852,
+   "starsToday": 1190,
+   "forks": 862,
+   "topics": [
+    "markdown",
+    "nodejs",
+    "ocr-routing",
+    "pdf",
+    "pdf-classification",
+    "pdf-extraction"
+   ],
+   "license": "MIT",
+   "pushedAt": "2026-08-06T23:24:20Z",
+   "install": "npm install @firecrawl/pdf-inspector"
+  },
+  {
+   "full": "TencentCloud/TencentDB-Agent-Memory",
+   "name": "TencentDB-Agent-Memory",
+   "owner": "TencentCloud",
+   "avatar": "https://avatars.githubusercontent.com/u/20101770?v=4",
+   "url": "https://github.com/TencentCloud/TencentDB-Agent-Memory",
+   "homepage": "",
+   "desc": "TencentDB Agent Memory is a team-level memory hub for AI Agents — turning conversations, docs, and code into four reusable memory assets (Chat Memory, Skill, LLM-Wiki, Code-Graph) that are governed, shared, and equipped…",
+   "language": "TypeScript",
+   "stars": 17132,
+   "starsToday": 1057,
+   "forks": 1535,
+   "topics": [
+    "agent",
+    "ai-agent",
+    "embedding",
+    "llm",
+    "local-first",
+    "long-term-memory"
+   ],
+   "license": "",
+   "pushedAt": "2026-08-06T12:07:09Z",
+   "install": null
+  },
+  {
+   "full": "esengine/DeepSeek-Reasonix",
+   "name": "DeepSeek-Reasonix",
+   "owner": "esengine",
+   "avatar": "https://avatars.githubusercontent.com/u/18465053?v=4",
+   "url": "https://github.com/esengine/DeepSeek-Reasonix",
+   "homepage": "http://reasonix.io/",
+   "desc": "DeepSeek-native AI coding agent for your terminal. Engineered around prefix-cache stability — leave it running.",
+   "language": "Go",
+   "stars": 32763,
+   "starsToday": 888,
+   "forks": 2114,
+   "topics": [
+    "agent",
+    "agent-framework",
+    "ai-agent",
+    "ai-coding",
+    "cli",
+    "coding-agent"
+   ],
+   "license": "MIT",
+   "pushedAt": "2026-08-07T10:12:17Z",
+   "install": "npm i -g reasonix"
+  },
+  {
+   "full": "obra/superpowers",
+   "name": "superpowers",
+   "owner": "obra",
+   "avatar": "https://avatars.githubusercontent.com/u/45416?v=4",
+   "url": "https://github.com/obra/superpowers",
+   "homepage": "",
+   "desc": "An agentic skills framework & software development methodology that works.",
+   "language": "Shell",
+   "stars": 268437,
+   "starsToday": 858,
+   "forks": 23983,
+   "topics": [
+    "ai",
+    "brainstorming",
+    "coding",
+    "obra",
+    "sdlc",
+    "skills"
+   ],
+   "license": "MIT",
+   "pushedAt": "2026-08-07T05:20:58Z",
+   "install": null
+  },
+  {
+   "full": "huangruiteng/loopx",
+   "name": "loopx",
+   "owner": "huangruiteng",
+   "avatar": "https://avatars.githubusercontent.com/u/14976749?v=4",
+   "url": "https://github.com/huangruiteng/loopx",
+   "homepage": "https://my.feishu.cn/wiki/CaL5wMk9ui17ngkWzeUcMlAYnZg",
+   "desc": "Lightweight loop engineering state kernel for long-running AI agent teams. Agent-loop agnostic across Codex, Claude Code, and other coding agents, with durable goals, quota-aware auto-wake, executable todos, evidence…",
+   "language": "Python",
+   "stars": 3195,
+   "starsToday": 847,
+   "forks": 240,
+   "topics": [
+    "agent-control-plane",
+    "agent-ops",
+    "ai-agents",
+    "codex",
+    "long-running-agents",
+    "loop-engineering"
+   ],
+   "license": "MIT",
+   "pushedAt": "2026-08-07T10:01:06Z",
+   "install": "curl -fsSL https://raw.githubusercontent.com/huangruiteng/loopx/main/scripts/install-from"
+  },
+  {
+   "full": "addyosmani/agent-skills",
+   "name": "agent-skills",
+   "owner": "addyosmani",
+   "avatar": "https://avatars.githubusercontent.com/u/110953?v=4",
+   "url": "https://github.com/addyosmani/agent-skills",
+   "homepage": "https://skills.addy.ie",
+   "desc": "Production-grade engineering skills for AI coding agents.",
+   "language": "JavaScript",
+   "stars": 83387,
+   "starsToday": 593,
+   "forks": 8924,
+   "topics": [
+    "agent-skills",
+    "antigravity",
+    "claude-code",
+    "codex",
+    "cursor",
+    "skills"
+   ],
+   "license": "MIT",
+   "pushedAt": "2026-08-06T22:45:51Z",
+   "install": "npx skills"
+  }
+ ],
+ "news": [
+  {
+   "title": "How HSP GRUPPE builds AI capabilities for tax advisory",
+   "link": "https://openai.com/index/hsp-gruppe",
+   "source": "OpenAI",
+   "blurb": "Discover how HSP GRUPPE uses ChatGPT Enterprise to boost productivity, improve work quality, and create more capacity for tax advisory and client service.",
+   "ts": 1786093200000,
+   "weight": 3
+  },
+  {
+   "title": "WeatherNext: AI model achieves breakthrough in forecasting cyclones",
+   "link": "https://deepmind.google/blog/weathernext-ai-model-achieves-breakthrough-in-forecasting-cyclones/",
+   "source": "Google DeepMind",
+   "blurb": "",
+   "ts": 1786028775000,
+   "weight": 3
+  },
+  {
+   "title": "Improving GPT‑5.6 Sol in ChatGPT—and expanding access to GPT-5.6 Luna for free users",
+   "link": "https://openai.com/index/improving-gpt-5-6-sol-in-chatgpt",
+   "source": "OpenAI",
+   "blurb": "ChatGPT introduces improved GPT-5.6 Sol with better accuracy and consistency, plus expanded access for free users and unlimited everyday chats with GPT-5.6 Luna.",
+   "ts": 1786010400000,
+   "weight": 3
+  },
+  {
+   "title": "Working with the American Psychological Association on youth mental health and AI",
+   "link": "https://openai.com/index/openai-and-apa-partner-to-advance-responsible-ai",
+   "source": "OpenAI",
+   "blurb": "OpenAI and the American Psychological Association advance evidence-based guidance, resources, and safeguards for responsible AI use and youth mental health.",
+   "ts": 1785996000000,
+   "weight": 3
+  },
+  {
+   "title": "Baseten on Hugging Face Inference Providers 🔥",
+   "link": "https://huggingface.co/blog/baseten",
+   "source": "Hugging Face",
+   "blurb": "",
+   "ts": 1785974400000,
+   "weight": 3
+  },
+  {
+   "title": "From asking to doing: How the world is putting ChatGPT to work",
+   "link": "https://openai.com/index/how-the-world-is-putting-chatgpt-to-work",
+   "source": "OpenAI",
+   "blurb": "New OpenAI Signals data shows how people use ChatGPT worldwide, with country-level insights on adoption, usage trends, and evolving behavior.",
+   "ts": 1785974400000,
+   "weight": 3
+  },
+  {
+   "title": "OpenAI’s new AI smart speaker will reportedly sell for between $300 and $400",
+   "link": "https://techcrunch.com/2026/08/06/openais-new-ai-smart-speaker-will-reportedly-sell-for-between-300-and-400/",
+   "source": "TechCrunch",
+   "blurb": "Additional details about OpenAI's mysterious new AI device make it sound like a pricey smart speaker.",
+   "ts": 1786056233000,
+   "weight": 2
+  },
+  {
+   "title": "Jony Ive’s first OpenAI gadget is reportedly a hockey puck-sized smart speaker",
+   "link": "https://www.theverge.com/ai-artificial-intelligence/976431/openai-chatgpt-battery-smart-speaker-rumor",
+   "source": "The Verge",
+   "blurb": "The AI device OpenAI is developing with former Apple designer Jony Ive is \"essentially a smart speaker without a display\" that's battery-powered, doughnut-shaped and roughly the size of a hockey puck, according to Bloomberg reporter Mark Gurman. The device, expected to launch in 2027 for a price over $300, reportedly…",
+   "ts": 1786049739000,
+   "weight": 2
+  },
+  {
+   "title": "Suno hopes to go legit with watermarks for AI-generated music",
+   "link": "https://arstechnica.com/ai/2026/08/suno-hopes-to-go-legit-with-watermarks-for-ai-generated-music/",
+   "source": "Ars Technica",
+   "blurb": "Suno plans watermarks and download limits to stop \"large-scale abuse.\"",
+   "ts": 1786047456000,
+   "weight": 2
+  },
+  {
+   "title": "Anthropic will design its own hardware to power Claude",
+   "link": "https://arstechnica.com/ai/2026/08/anthropic-confirms-plans-to-build-an-in-house-silicon-team/",
+   "source": "Ars Technica",
+   "blurb": "Anthropic and OpenAI are racing to scale up while reducing dependence on Nvidia.",
+   "ts": 1786046624000,
+   "weight": 2
+  }
+ ],
+ "repoSummaries": [
+  {
+   "tr": {
+    "what": "Give your agent a computer 👾",
+    "how": "Kurulum adımları için depodaki README'ye bakın.",
+    "who": ""
+   },
+   "en": {
+    "what": "Give your agent a computer 👾",
+    "how": "See the repository README for setup steps.",
+    "who": ""
+   }
+  },
+  {
+   "tr": {
+    "what": "Skills for Real Engineers. Straight from my .agents directory.",
+    "how": "",
+    "who": ""
+   },
+   "en": {
+    "what": "Skills for Real Engineers. Straight from my .agents directory.",
+    "how": "",
+    "who": ""
+   }
+  },
+  {
+   "tr": {
+    "what": "Fast Rust library for PDF inspection, classification, and text extraction. Intelligently detects scanned vs text-based PDFs to enable smart routing decisions.",
+    "how": "",
+    "who": "İlgi alanı: markdown, nodejs, ocr-routing."
+   },
+   "en": {
+    "what": "Fast Rust library for PDF inspection, classification, and text extraction. Intelligently detects scanned vs text-based PDFs to enable smart routing decisions.",
+    "how": "",
+    "who": "Topics: markdown, nodejs, ocr-routing."
+   }
+  },
+  {
+   "tr": {
+    "what": "TencentDB Agent Memory is a team-level memory hub for AI Agents — turning conversations, docs, and code into four reusable memory assets (Chat Memory, Skill, LLM-Wiki, Code-Graph) that are governed, shared, and equipped…",
+    "how": "Kurulum adımları için depodaki README'ye bakın.",
+    "who": "İlgi alanı: agent, ai-agent, embedding."
+   },
+   "en": {
+    "what": "TencentDB Agent Memory is a team-level memory hub for AI Agents — turning conversations, docs, and code into four reusable memory assets (Chat Memory, Skill, LLM-Wiki, Code-Graph) that are governed, shared, and equipped…",
+    "how": "See the repository README for setup steps.",
+    "who": "Topics: agent, ai-agent, embedding."
+   }
+  },
+  {
+   "tr": {
+    "what": "DeepSeek-native AI coding agent for your terminal. Engineered around prefix-cache stability — leave it running.",
+    "how": "",
+    "who": "İlgi alanı: agent, agent-framework, ai-agent."
+   },
+   "en": {
+    "what": "DeepSeek-native AI coding agent for your terminal. Engineered around prefix-cache stability — leave it running.",
+    "how": "",
+    "who": "Topics: agent, agent-framework, ai-agent."
+   }
+  },
+  {
+   "tr": {
+    "what": "An agentic skills framework & software development methodology that works.",
+    "how": "Kurulum adımları için depodaki README'ye bakın.",
+    "who": "İlgi alanı: ai, brainstorming, coding."
+   },
+   "en": {
+    "what": "An agentic skills framework & software development methodology that works.",
+    "how": "See the repository README for setup steps.",
+    "who": "Topics: ai, brainstorming, coding."
+   }
+  },
+  {
+   "tr": {
+    "what": "Lightweight loop engineering state kernel for long-running AI agent teams. Agent-loop agnostic across Codex, Claude Code, and other coding agents, with durable goals, quota-aware auto-wake, executable todos, evidence…",
+    "how": "",
+    "who": "İlgi alanı: agent-control-plane, agent-ops, ai-agents."
+   },
+   "en": {
+    "what": "Lightweight loop engineering state kernel for long-running AI agent teams. Agent-loop agnostic across Codex, Claude Code, and other coding agents, with durable goals, quota-aware auto-wake, executable todos, evidence…",
+    "how": "",
+    "who": "Topics: agent-control-plane, agent-ops, ai-agents."
+   }
+  },
+  {
+   "tr": {
+    "what": "Production-grade engineering skills for AI coding agents.",
+    "how": "",
+    "who": "İlgi alanı: agent-skills, antigravity, claude-code."
+   },
+   "en": {
+    "what": "Production-grade engineering skills for AI coding agents.",
+    "how": "",
+    "who": "Topics: agent-skills, antigravity, claude-code."
+   }
+  }
+ ],
+ "newsSummaries": [
+  {
+   "tr": {
+    "title": "How HSP GRUPPE builds AI capabilities for tax advisory",
+    "summary": "Discover how HSP GRUPPE uses ChatGPT Enterprise to boost productivity, improve work quality, and create more capacity for tax advisory and client service."
+   },
+   "en": {
+    "title": "How HSP GRUPPE builds AI capabilities for tax advisory",
+    "summary": "Discover how HSP GRUPPE uses ChatGPT Enterprise to boost productivity, improve work quality, and create more capacity for tax advisory and client service."
+   }
+  },
+  {
+   "tr": {
+    "title": "WeatherNext: AI model achieves breakthrough in forecasting cyclones",
+    "summary": ""
+   },
+   "en": {
+    "title": "WeatherNext: AI model achieves breakthrough in forecasting cyclones",
+    "summary": ""
+   }
+  },
+  {
+   "tr": {
+    "title": "Improving GPT‑5.6 Sol in ChatGPT—and expanding access to GPT-5.6 Luna for free users",
+    "summary": "ChatGPT introduces improved GPT-5.6 Sol with better accuracy and consistency, plus expanded access for free users and unlimited everyday chats with GPT-5.6 Luna."
+   },
+   "en": {
+    "title": "Improving GPT‑5.6 Sol in ChatGPT—and expanding access to GPT-5.6 Luna for free users",
+    "summary": "ChatGPT introduces improved GPT-5.6 Sol with better accuracy and consistency, plus expanded access for free users and unlimited everyday chats with GPT-5.6 Luna."
+   }
+  },
+  {
+   "tr": {
+    "title": "Working with the American Psychological Association on youth mental health and AI",
+    "summary": "OpenAI and the American Psychological Association advance evidence-based guidance, resources, and safeguards for responsible AI use and youth mental health."
+   },
+   "en": {
+    "title": "Working with the American Psychological Association on youth mental health and AI",
+    "summary": "OpenAI and the American Psychological Association advance evidence-based guidance, resources, and safeguards for responsible AI use and youth mental health."
+   }
+  },
+  {
+   "tr": {
+    "title": "Baseten on Hugging Face Inference Providers 🔥",
+    "summary": ""
+   },
+   "en": {
+    "title": "Baseten on Hugging Face Inference Providers 🔥",
+    "summary": ""
+   }
+  },
+  {
+   "tr": {
+    "title": "From asking to doing: How the world is putting ChatGPT to work",
+    "summary": "New OpenAI Signals data shows how people use ChatGPT worldwide, with country-level insights on adoption, usage trends, and evolving behavior."
+   },
+   "en": {
+    "title": "From asking to doing: How the world is putting ChatGPT to work",
+    "summary": "New OpenAI Signals data shows how people use ChatGPT worldwide, with country-level insights on adoption, usage trends, and evolving behavior."
+   }
+  },
+  {
+   "tr": {
+    "title": "OpenAI’s new AI smart speaker will reportedly sell for between $300 and $400",
+    "summary": "Additional details about OpenAI's mysterious new AI device make it sound like a pricey smart speaker."
+   },
+   "en": {
+    "title": "OpenAI’s new AI smart speaker will reportedly sell for between $300 and $400",
+    "summary": "Additional details about OpenAI's mysterious new AI device make it sound like a pricey smart speaker."
+   }
+  },
+  {
+   "tr": {
+    "title": "Jony Ive’s first OpenAI gadget is reportedly a hockey puck-sized smart speaker",
+    "summary": "The AI device OpenAI is developing with former Apple designer Jony Ive is \"essentially a smart speaker without a display\" that's battery-powered, doughnut-shaped and roughly the size of a hockey…"
+   },
+   "en": {
+    "title": "Jony Ive’s first OpenAI gadget is reportedly a hockey puck-sized smart speaker",
+    "summary": "The AI device OpenAI is developing with former Apple designer Jony Ive is \"essentially a smart speaker without a display\" that's battery-powered, doughnut-shaped and roughly the size of a hockey…"
+   }
+  },
+  {
+   "tr": {
+    "title": "Suno hopes to go legit with watermarks for AI-generated music",
+    "summary": "Suno plans watermarks and download limits to stop \"large-scale abuse.\""
+   },
+   "en": {
+    "title": "Suno hopes to go legit with watermarks for AI-generated music",
+    "summary": "Suno plans watermarks and download limits to stop \"large-scale abuse.\""
+   }
+  },
+  {
+   "tr": {
+    "title": "Anthropic will design its own hardware to power Claude",
+    "summary": "Anthropic and OpenAI are racing to scale up while reducing dependence on Nvidia."
+   },
+   "en": {
+    "title": "Anthropic will design its own hardware to power Claude",
+    "summary": "Anthropic and OpenAI are racing to scale up while reducing dependence on Nvidia."
+   }
+  }
+ ],
+ "health": {
+  "feeds": [
+   {
+    "name": "Hugging Face",
+    "ok": true,
+    "count": 835
+   },
+   {
+    "name": "NVIDIA",
+    "ok": true,
+    "count": 18
+   },
+   {
+    "name": "Google DeepMind",
+    "ok": true,
+    "count": 100
+   },
+   {
+    "name": "TechCrunch",
+    "ok": true,
+    "count": 20
+   },
+   {
+    "name": "The Verge",
+    "ok": true,
+    "count": 10
+   },
+   {
+    "name": "MIT Tech Review",
+    "ok": true,
+    "count": 10
+   },
+   {
+    "name": "Google AI",
+    "ok": true,
+    "count": 20
+   },
+   {
+    "name": "VentureBeat",
+    "ok": true,
+    "count": 7
+   },
+   {
+    "name": "OpenAI",
+    "ok": true,
+    "count": 1114
+   },
+   {
+    "name": "Ars Technica",
+    "ok": true,
+    "count": 20
+   },
+   {
+    "name": "Simon Willison",
+    "ok": true,
+    "count": 30
+   },
+   {
+    "name": "Microsoft AI",
+    "ok": false,
+    "count": 0
+   },
+   {
+    "name": "Meta AI",
+    "ok": false,
+    "count": 0
+   },
+   {
+    "name": "Hacker News",
+    "ok": true,
+    "count": 20
+   }
+  ],
+  "repoSource": "trending",
+  "summarizer": "mekanik",
+  "counts": {
+   "repos": 8,
+   "news": 10
+  }
+ }
+}
