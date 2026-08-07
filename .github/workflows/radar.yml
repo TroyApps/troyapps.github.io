@@ -1,0 +1,78 @@
+name: Radar
+
+# Her sabah GitHub'da one cikan depolari ve yapay zeka haberlerini tarar,
+# sayfalari gunceller ve commit'ler.
+#
+# Saat basi secilmedi bilerek: zamanlanmis isler tepe saatlerde gecikiyor.
+# 05:13 UTC = Turkiye saatiyle 08:13 civari.
+on:
+  schedule:
+    - cron: "13 5 * * *"
+  workflow_dispatch:          # sabirsizlandiginda elle calistir
+    inputs:
+      dry:
+        description: "Sadece dene, dosyalari yazma"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+# Ayni anda iki tarama calismasin.
+concurrency:
+  group: radar
+  cancel-in-progress: false
+
+jobs:
+  sweep:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Taramayi calistir
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          # Model degistirmek istersen depo ayarlarindan bu degiskeni ekle.
+          RADAR_MODEL: ${{ vars.RADAR_MODEL }}
+          RADAR_MODEL_GROQ: ${{ vars.RADAR_MODEL_GROQ }}
+        run: node scripts/radar.mjs ${{ inputs.dry && '--dry' || '' }}
+
+      - name: Degisiklikleri commit'le
+        if: ${{ !inputs.dry }}
+        run: |
+          if [ -z "$(git status --porcelain)" ]; then
+            echo "Degisiklik yok, commit atlaniyor."
+            exit 0
+          fi
+          git config user.name  "troyapps-radar[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Radar: $(date -u '+%Y-%m-%d') taramasi"
+          # Bu arada baska bir commit girdiyse uzerine bindirme, tepesine al.
+          git pull --rebase --autostash origin "${GITHUB_REF_NAME}" || true
+          git push origin HEAD:"${GITHUB_REF_NAME}"
+
+      - name: Ozet
+        if: always()
+        run: |
+          echo "### Radar" >> $GITHUB_STEP_SUMMARY
+          if [ -f assets/data/radar.json ]; then
+            node -e "
+              const d = require('./assets/data/radar.json');
+              const dead = (d.health.feeds || []).filter(f => !f.ok).map(f => f.name);
+              console.log('- Depo: ' + d.health.counts.repos + ' (' + d.health.repoSource + ')');
+              console.log('- Haber: ' + d.health.counts.news);
+              console.log('- Ozetleyici: ' + d.health.summarizer);
+              console.log(dead.length ? '- Cevap vermeyen kaynaklar: ' + dead.join(', ') : '- Tum kaynaklar calisti');
+            " >> $GITHUB_STEP_SUMMARY
+          else
+            echo "- Veri dosyasi olusmadi." >> $GITHUB_STEP_SUMMARY
+          fi
