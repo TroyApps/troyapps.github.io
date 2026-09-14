@@ -51,3 +51,70 @@
 }
 @media (max-width:820px) { .theme-command .language-menu { order:2; margin-inline-start:auto; }.theme-command .command-nav { order:3; } }
 @media (prefers-reduced-motion:reduce) { .theme-command .command-button { transition:none; }.theme-command .command-button:hover { transform:none; } }
+
+/* ---------- Kenar reklam raylari (her yanda 2 yuva, toplam 4) ----------
+   v2/v3 duzen dosyalari eski raylari display:none ile gizliyor; burada
+   body.theme-command secicisiyle (daha yuksek ozgunluk) genis ekranlarda
+   geri aciyoruz. Raylar position:fixed oldugu icin yeni tasarimin akisina
+   dokunmaz; icerige yer acmak icin ayni kirilimda .page-rails'e yan bosluk
+   veriyoruz. 1760px altinda raylar tamamen gizli, tasarim birebir ayni. */
+
+@media (min-width: 1760px) {
+  body.theme-command .page-rails { padding-inline: 332px; }
+
+  body.theme-command .ad-rail {
+    display: flex;
+    position: fixed;
+    top: 92px;
+    z-index: 40;
+    width: 300px;
+  }
+  body.theme-command .ad-rail-left { left: 16px; }
+  body.theme-command .ad-rail-right { right: 16px; }
+
+  body.theme-command .ad-rail-sticky {
+    position: static;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    width: 100%;
+    height: auto;
+    padding: 0;
+    border: 0;
+    background: none;
+  }
+
+  body.theme-command .ad-slot {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    height: 250px;
+    border: 1px dashed rgba(240, 68, 60, 0.35);
+    border-radius: 10px;
+    background:
+      linear-gradient(rgba(240, 68, 60, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(240, 68, 60, 0.04) 1px, transparent 1px),
+      #100a0a;
+    background-size: 24px 24px, 24px 24px, auto;
+  }
+
+  body.theme-command .ad-slot .ad-slot-tag {
+    color: #9a8f8c;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  body.theme-command .ad-slot .ad-slot-dim {
+    color: #5f5755;
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+  }
+}
+
+/* Kisa ekranlarda (dikey yer yoksa) alttaki yuvalari gizle, tasma olmasin */
+@media (min-width: 1760px) and (max-height: 720px) {
+  body.theme-command .ad-slot:nth-child(2) { display: none; }
+}
