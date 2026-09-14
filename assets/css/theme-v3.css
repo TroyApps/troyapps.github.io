@@ -60,7 +60,7 @@
    veriyoruz. 1760px altinda raylar tamamen gizli, tasarim birebir ayni. */
 
 @media (min-width: 1760px) {
-  body.theme-command .page-rails { padding-inline: 332px; }
+  body.theme-command .page-rails { padding-inline: 288px; }
 
   body.theme-command .ad-rail {
     display: flex;
