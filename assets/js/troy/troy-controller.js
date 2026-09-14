@@ -504,7 +504,25 @@ if (stage) {
     resetIdleTimer();
   });
   document.addEventListener("pointerdown", resetIdleTimer, { passive: true });
+  /* Sayfa kapanirken/yenilenirken Chrome (GPU) 3D tuvalin son karesini
+     birakip beyaz bir katman cizebiliyor. Tuvali navigasyon basladigi
+     anda gizliyoruz: beyaz kare yerine hicbir sey gorunmez, yeni sayfada
+     3D hazir olunca Troy geri gelir. */
+  const canvas = stage.querySelector("[data-troy-canvas]");
+  function hideCanvasForUnload() {
+    if (!canvas) return;
+    canvas.style.visibility = "hidden";
+    canvas.style.opacity = "0";
+  }
+  function restoreCanvasAfterShow() {
+    if (!canvas) return;
+    canvas.style.visibility = "";
+    canvas.style.opacity = "";
+  }
+  window.addEventListener("beforeunload", hideCanvasForUnload);
+  window.addEventListener("pageshow", restoreCanvasAfterShow);
   window.addEventListener("pagehide", () => {
+    hideCanvasForUnload();
     clearIdleTimer();
     clearDialogueTimers();
     clearScatteredTimers();
