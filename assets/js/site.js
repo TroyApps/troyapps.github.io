@@ -194,7 +194,6 @@
   if (!rails.length) return;
 
   var slug = location.pathname.replace(/^\/+|\/+$/g, "").replace(/\//g, "-") || "home";
-  var GAP = 14;
 
   /* Sayfadaki mevcut etiket metnini koru (TR/EN/AR... hangisiyse) */
   var firstTag = document.querySelector(".ad-slot .ad-slot-tag");
@@ -220,40 +219,22 @@
     return d;
   }
 
-  function plan(height) {
-    /* Hedef duzen: ustte bir 300x600, altta bir 300x600 (üst/alt çizgiye yaslı).
-       Ekran yetmezse alttakiler kuculur: 600+250'ler, o da olmazsa tek 600. */
-    if (height >= 600 + GAP + 600) return [600, 600];
-    var left = height;
-    var out = [];
-    if (left >= 600) { out.push(600); left -= 600 + GAP; }
-    while (left >= 250) { out.push(250); left -= 250 + GAP; }
-    if (!out.length) out.push(250);
-    return out;
-  }
+  /* Sabit duzen: her rayda ust uste iki 300x600.
+     Sayfanin ustune yerlesir, kaydirinca icerikle birlikte akar. */
+  var HEIGHTS = [600, 600];
 
   function fill() {
-    if (window.innerWidth < 1760) return;
     rails.forEach(function (rail) {
-      var h = rail.clientHeight;
-      if (!h) return;
-      var heights = plan(h);
-      var key = heights.join(",");
-      if (rail.getAttribute("data-ad-plan") === key) return;
-      rail.setAttribute("data-ad-plan", key);
+      if (rail.getAttribute("data-ad-plan")) return;
+      rail.setAttribute("data-ad-plan", HEIGHTS.join(","));
       rail.classList.add("ad-rail-filled");
       var side = sideOf(rail);
       rail.textContent = "";
-      heights.forEach(function (hh, i) {
+      HEIGHTS.forEach(function (hh, i) {
         rail.appendChild(makeSlot(hh, slug + "-" + side + "-" + (i + 1)));
       });
     });
   }
 
-  var t;
-  window.addEventListener("resize", function () {
-    clearTimeout(t);
-    t = setTimeout(fill, 200);
-  });
   fill();
 })();
