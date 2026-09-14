@@ -183,3 +183,74 @@
     }
   }
 })();
+
+/* --- Reklam raylari ---------------------------------------------------
+   Genis ekranlarda (>=1760px) sag ve sol raya, ekran yuksekligine gore
+   sigabildigi kadar yuva dizer. Ustte 300x600 (uzun), alti 300x250.
+   Her yuvanin kimligi sayfaya ozel: "<sayfa>-<taraf>-<sira>".
+   Boylece her sayfaya ve her yuvaya ayri reklam baglanabilir. */
+(function () {
+  var rails = document.querySelectorAll(".ad-rail .ad-rail-sticky");
+  if (!rails.length) return;
+
+  var slug = location.pathname.replace(/^\/+|\/+$/g, "").replace(/\//g, "-") || "home";
+  var GAP = 14;
+
+  /* Sayfadaki mevcut etiket metnini koru (TR/EN/AR... hangisiyse) */
+  var firstTag = document.querySelector(".ad-slot .ad-slot-tag");
+  var tagText = firstTag ? firstTag.textContent : "Reklam Alanı";
+
+  function sideOf(rail) {
+    var aside = rail.closest(".ad-rail");
+    return aside && aside.classList.contains("ad-rail-right") ? "right" : "left";
+  }
+
+  function makeSlot(h, id) {
+    var d = document.createElement("div");
+    d.className = "ad-slot" + (h === 600 ? " ad-slot--tall" : "");
+    d.setAttribute("data-ad-slot", id);
+    var tag = document.createElement("span");
+    tag.className = "ad-slot-tag";
+    tag.textContent = tagText;
+    var dim = document.createElement("span");
+    dim.className = "ad-slot-dim";
+    dim.textContent = "300 × " + h;
+    d.appendChild(tag);
+    d.appendChild(dim);
+    return d;
+  }
+
+  function plan(height) {
+    var left = height;
+    var out = [];
+    if (left >= 600) { out.push(600); left -= 600 + GAP; }
+    while (left >= 250) { out.push(250); left -= 250 + GAP; }
+    if (!out.length) out.push(250);
+    return out;
+  }
+
+  function fill() {
+    if (window.innerWidth < 1760) return;
+    rails.forEach(function (rail) {
+      var h = rail.clientHeight;
+      if (!h) return;
+      var heights = plan(h);
+      var key = heights.join(",");
+      if (rail.getAttribute("data-ad-plan") === key) return;
+      rail.setAttribute("data-ad-plan", key);
+      rail.classList.add("ad-rail-filled");
+      var side = sideOf(rail);
+      rail.textContent = "";
+      heights.forEach(function (hh, i) {
+        rail.appendChild(makeSlot(hh, slug + "-" + side + "-" + (i + 1)));
+      });
+    });
+  }
+
+  var t;
+  window.addEventListener("resize", function () {
+    clearTimeout(t);
+    t = setTimeout(fill, 200);
+  });
+  fill();
+})();
