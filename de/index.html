@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TroyApps — Praktische mobile Werkzeuge</title>
+  <meta name="description" content="TroyApps ist eine unabhängige Entwicklermarke für praktische und zugängliche mobile Werkzeuge im digitalen Alltag. Erste App: Morse Flash.">
+  <link rel="canonical" href="https://troyapps.app/de/">
+  <link rel="alternate" hreflang="tr" href="https://troyapps.app/">
+  <link rel="alternate" hreflang="en" href="https://troyapps.app/en/">
+  <link rel="alternate" hreflang="es-419" href="https://troyapps.app/es/">
+  <link rel="alternate" hreflang="pt-BR" href="https://troyapps.app/pt-br/">
+  <link rel="alternate" hreflang="hi" href="https://troyapps.app/hi/">
+  <link rel="alternate" hreflang="id" href="https://troyapps.app/id/">
+  <link rel="alternate" hreflang="ar" href="https://troyapps.app/ar/">
+  <link rel="alternate" hreflang="de" href="https://troyapps.app/de/">
+  <link rel="alternate" hreflang="fr" href="https://troyapps.app/fr/">
+  <link rel="alternate" hreflang="it" href="https://troyapps.app/it/">
+  <link rel="alternate" hreflang="x-default" href="https://troyapps.app/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="TroyApps">
+  <meta property="og:title" content="TroyApps — Praktische mobile Werkzeuge">
+  <meta property="og:description" content="Praktische, schnelle mobile Werkzeuge für den Alltag.">
+  <meta property="og:url" content="https://troyapps.app/de/">
+  <meta property="og:image" content="https://troyapps.app/assets/img/og-home.png">
+  <meta property="og:locale" content="de_DE">
+  <meta property="og:locale:alternate" content="tr_TR">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:locale:alternate" content="es_MX">
+  <meta property="og:locale:alternate" content="pt_BR">
+  <meta property="og:locale:alternate" content="hi_IN">
+  <meta property="og:locale:alternate" content="id_ID">
+  <meta property="og:locale:alternate" content="ar_SA">
+  <meta property="og:locale:alternate" content="fr_FR">
+  <meta property="og:locale:alternate" content="it_IT">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#0a0a12">
+  <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/assets/img/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+  <link rel="preload" href="/assets/fonts/press-start-2p-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/vt323-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/assets/css/site.css">
+  <link rel="stylesheet" href="/assets/css/theme-v3.css?v=20260913-header4">
+  <link rel="stylesheet" href="/assets/css/home-v2.css?v=20260912-drop7">
+  <link rel="stylesheet" href="/assets/css/home-v3.css?v=20260914-ticker-loop1">
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "/assets/vendor/three-0.185.1/three.module.min.js",
+        "three/addons/": "/assets/vendor/three-0.185.1/addons/"
+      }
+    }
+  </script>
+  <link rel="modulepreload" href="/assets/js/troy/troy-three.js?v=20260914-lookdown1">
+</head>
+<body class="home-v2 home-v3 theme-command">
+  <canvas id="bg-signal" aria-hidden="true"></canvas>
+  <div id="stage-glow" aria-hidden="true"></div>
+  <div id="cursor-glow" aria-hidden="true"></div>
+
+  <a class="skip-link" href="#content">Zum Inhalt springen</a>
+
+  <header class="site-header command-header">
+    <div class="wrap nav-bar">
+      <a class="brand command-brand" href="/de/" aria-label="TroyApps-Startseite">
+        <svg width="26" height="26" viewBox="0 0 64 64" aria-hidden="true">
+          <rect width="64" height="64" rx="4" fill="#0c1812"/>
+          <rect x="1.5" y="1.5" width="61" height="61" rx="3" fill="none" stroke="#1c4a36" stroke-width="3"/>
+          <rect x="13" y="15" width="38" height="9" fill="#00ff9c"/>
+          <rect x="27" y="24" width="10" height="27" fill="#00ff9c"/>
+          <rect x="44" y="24" width="8" height="8" fill="#ff3ef2"/>
+          <rect x="13" y="46" width="10" height="5" fill="#1d5f44"/>
+        </svg>
+        TroyApps
+      </a>
+
+      <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Menü öffnen oder schließen">
+        <span class="bars"></span>
+      </button>
+
+      <nav class="nav-menu command-nav" id="nav-menu" aria-label="Hauptmenü">
+        <ul class="nav-links">
+          <li><a href="/de/" aria-current="page">Startseite</a></li>
+          <li><a href="#apps">Apps</a></li>
+          <li><a href="#contact">Kontakt</a></li>
+        </ul>
+      </nav>
+      <details class="language-menu"><summary aria-label="Sprache wählen"><img class="language-flag" src="/assets/img/flags/de.svg" width="20" height="14" alt="" aria-hidden="true"><span>DE</span><span aria-hidden="true">⌄</span></summary><div class="language-options"><a href="/" lang="tr" hreflang="tr"><img class="language-flag" src="/assets/img/flags/tr.svg" width="20" height="14" alt="" aria-hidden="true"><span>Türkçe</span></a><a href="/en/" lang="en" hreflang="en"><img class="language-flag" src="/assets/img/flags/us.svg" width="20" height="14" alt="" aria-hidden="true"><span>English</span></a><a href="/es/" lang="es-419" hreflang="es-419"><img class="language-flag" src="/assets/img/flags/mx.svg" width="20" height="14" alt="" aria-hidden="true"><span>Español</span></a><a href="/pt-br/" lang="pt-BR" hreflang="pt-BR"><img class="language-flag" src="/assets/img/flags/br.svg" width="20" height="14" alt="" aria-hidden="true"><span>Português (Brasil)</span></a><a href="/hi/" lang="hi" hreflang="hi"><img class="language-flag" src="/assets/img/flags/in.svg" width="20" height="14" alt="" aria-hidden="true"><span>हिन्दी</span></a><a href="/id/" lang="id" hreflang="id"><img class="language-flag" src="/assets/img/flags/id.svg" width="20" height="14" alt="" aria-hidden="true"><span>Bahasa Indonesia</span></a><a href="/ar/" lang="ar" hreflang="ar"><img class="language-flag" src="/assets/img/flags/sa.svg" width="20" height="14" alt="" aria-hidden="true"><span>العربية</span></a><a href="/de/" lang="de" hreflang="de" aria-current="page"><img class="language-flag" src="/assets/img/flags/de.svg" width="20" height="14" alt="" aria-hidden="true"><span>Deutsch</span></a><a href="/fr/" lang="fr" hreflang="fr"><img class="language-flag" src="/assets/img/flags/fr.svg" width="20" height="14" alt="" aria-hidden="true"><span>Français</span></a><a href="/it/" lang="it" hreflang="it"><img class="language-flag" src="/assets/img/flags/it.svg" width="20" height="14" alt="" aria-hidden="true"><span>Italiano</span></a></div></details>
+    </div>
+  </header>
+
+  <div class="page-rails">
+    <aside class="ad-rail ad-rail-left" aria-hidden="true">
+      <div class="ad-rail-sticky">
+        <span class="ad-slot-tag">Werbefläche</span>
+        <span class="ad-slot-dim">300 × 600</span>
+      </div>
+    </aside>
+    <main id="content">
+    <!-- Hero -->
+    <section class="hero command-hero" aria-labelledby="hero-title">
+      <div class="wrap command-hero__grid">
+        <div class="hero-copy command-hero__copy">
+          <p class="system-status"><span aria-hidden="true"></span>TroyApps-System online</p>
+          <h1 id="hero-title" class="command-wordmark" data-wordmark="TROYAPPS" aria-label="TROYAPPS"><svg class="command-wordmark__graphic" viewBox="0 0 1000 200" aria-hidden="true" focusable="false"><text class="command-wordmark__text command-wordmark__edge" x="8" y="166" textLength="984" lengthAdjust="spacingAndGlyphs">TROYAPPS</text><text class="command-wordmark__text command-wordmark__fill" x="8" y="166" textLength="984" lengthAdjust="spacingAndGlyphs"><tspan class="command-wordmark__light">TROY</tspan><tspan class="command-wordmark__red">APPS</tspan></text></svg></h1>
+          <p class="lead">Wir vereinfachen Alltagswerkzeuge mit mobilen Lösungen, die <b>praktisch, schnell</b> und <b>für alle zugänglich</b> sind.</p>
+          <div class="hero-actions">
+            <a class="command-button command-button--primary" href="#apps"><span aria-hidden="true">▦</span><span>App-Inventar</span></a>
+            <a class="command-button" href="https://play.google.com/store/apps/developer?id=Troy+Apps" target="_blank" rel="noopener"><span aria-hidden="true">▶</span><span>Google Play</span></a>
+          </div>
+          <p class="hero-proof"><span>Unabhängiger Entwickler</span><span>Entwickelt in Türkiye</span></p>
+        </div>
+
+        <div class="command-hero__troy"><div class="troy-stage" id="troy-stage" data-troy-state="idle" data-troy-tool="poke" data-troy-dialogue-state="hidden" data-troy-renderer="loading" data-troy-model="/assets/models/troy/troy.glb">
+          <div class="troy-aura" aria-hidden="true"></div>
+          <img class="troy-poster" data-troy-poster src="/assets/img/troy/troy-hero.webp" alt="" width="768" height="1152" fetchpriority="high">
+          <canvas class="troy-canvas" data-troy-canvas aria-hidden="true"></canvas>
+          <button class="troy-target" type="button" data-troy-target aria-label="Troy anstupsen"></button>
+          <button class="troy-pixel-target" type="button" data-troy-pixel-target aria-label="Troys Pixel wieder zusammensetzen" hidden></button>
+          <div class="troy-effects" data-troy-effect aria-hidden="true">
+            <span class="troy-whip-arc"></span>
+            <span class="troy-impact"></span>
+          </div>
+          <div class="troy-pixel-orbit" data-troy-pixels aria-hidden="true"></div>
+          <div class="troy-intro" role="status" aria-live="polite" aria-atomic="true">
+            <strong>Ich bin Troy.</strong>
+            <span data-troy-dialogue>Früher sorgte ich für Verwirrung. Jetzt mache ich Dinge einfacher.</span>
+          </div>
+          <span class="troy-badge">TROY · WIDERWILLIGER ASSISTENT</span>
+          <div class="troy-controls troy-tools" role="group" aria-label="Troy-Steuerung">
+            <button class="troy-tool" type="button" data-troy-tool-option="poke" aria-pressed="true"><span aria-hidden="true">•</span> Anstupsen</button>
+            <button class="troy-tool" type="button" data-troy-tool-option="bazooka" aria-pressed="false"><span class="troy-tool__icon" aria-hidden="true"><img src="/assets/img/troy/controls/bazooka.webp" width="72" height="55" alt=""></span><span>Bazooka</span></button>
+            <button class="troy-tool" type="button" data-troy-tool-option="whip" aria-pressed="false"><span class="troy-tool__icon" aria-hidden="true"><img src="/assets/img/troy/controls/whip.webp" width="72" height="55" alt=""></span><span>Peitsche</span></button>
+            <button class="troy-tool troy-command-trigger" type="button" data-troy-command-trigger aria-expanded="false" aria-controls="troy-command-panel"><span aria-hidden="true">›_</span> Befehl</button>
+          </div>
+          <div class="troy-command-panel" id="troy-command-panel" data-troy-command-panel hidden aria-label="Troy-Befehle">
+            <a href="#apps" data-troy-command="apps">Apps anzeigen</a>
+            <a href="/en/radar/" data-troy-command="radar">Zu Radar</a>
+            <a href="#about" data-troy-command="about">Wer sind wir?</a>
+            <a href="#contact" data-troy-command="contact">Kontakt öffnen</a>
+          </div>
+          <noscript>
+            <nav class="troy-command-fallback" aria-label="Troy-Befehle ohne JavaScript">
+              <a href="#apps">Apps anzeigen</a>
+              <a href="/en/radar/">Zu Radar</a>
+              <a href="#about">Wer sind wir?</a>
+              <a href="#contact">Kontakt öffnen</a>
+            </nav>
+          </noscript>
+        </div></div>
+      </div>
+    </section>
+
+    <section class="signal-ticker" aria-label="Systemstatus"><p class="sr-only">Neue Werkzeuge werden geladen. Troy Community demnächst.</p><div class="signal-ticker__track" aria-hidden="true"><div class="signal-ticker__group"><span>NEUE WERKZEUGE LADEN</span><span>⌁</span><span>TROY COMMUNITY · DEMNÄCHST</span></div><div class="signal-ticker__group"><span>NEUE WERKZEUGE LADEN</span><span>⌁</span><span>TROY COMMUNITY · DEMNÄCHST</span></div></div></section>
+
+    <!-- Inventar -->
+    <section id="apps" class="home-command-grid command-panel inventory-panel" aria-labelledby="apps-title">
+      <div class="wrap">
+        <span class="mono-label"><span class="idx">Quest 01</span>Inventar</span>
+        <h2 id="apps-title">Das App-<span class="grad-text">Inventar</span></h2>
+        <div class="inventory-dock" role="tablist" aria-label="Apps" data-inventory-dock><button class="inventory-app-tile" type="button" role="tab" aria-selected="true" tabindex="0" data-inventory-tab data-app-id="morse-flash" data-app-title="Morse Flash" data-app-copy="Text in Morsecode umwandeln, mit Licht senden und sichtbare Signale lesen." data-app-href="/de/morse-flash/" data-app-link-label="Details ansehen" data-app-status="Android · Verfügbar"><span class="inventory-app-tile__icon"><img src="/assets/img/morse-flash-icon-96.png" width="54" height="54" alt=""></span><span class="inventory-app-tile__name">Morse Flash</span><small>Android</small></button><button class="inventory-app-tile inventory-app-tile--future" type="button" role="tab" aria-selected="false" aria-label="Neue App demnächst" tabindex="-1" data-inventory-tab data-app-id="future" data-app-title="Neues Werkzeug" data-app-copy="Das nächste Werkzeug im TroyApps-Inventar wird vorbereitet." data-app-href="#" data-app-link-label="Demnächst" data-app-status="In Entwicklung" disabled><span class="inventory-placeholder" aria-hidden="true">+</span><span class="inventory-app-tile__name">Demnächst</span><small>Neues Werkzeug</small></button></div><article class="inventory-detail" data-inventory-detail aria-live="polite"><div class="inventory-detail__status"><span aria-hidden="true"></span><p data-inventory-status>Android · Verfügbar</p></div><h3 data-inventory-title>Morse Flash</h3><p data-inventory-copy>Text in Morsecode umwandeln, mit Licht senden und sichtbare Signale lesen.</p><a class="command-button" data-inventory-link href="/de/morse-flash/">Details ansehen</a></article>
+      </div>
+    </section>
+
+    <!-- Radar teaser -->
+    <section class="radar-teaser command-panel radar-summary" aria-labelledby="radar-teaser-h">
+      <div class="wrap">
+        <span class="mono-label"><span class="idx">03</span>RADAR</span>
+        <h2 id="radar-teaser-h">JEDEN MORGEN GESCANNT</h2>
+        <p class="section-head-p muted">Radar findet, was an diesem Tag auf GitHub durchstartet, erklärt den Nutzen und sammelt KI-Schlagzeilen. Niemand schreibt es von Hand.</p>
+      <!-- RADARBOX:START -->
+
+        <div class="radar-box">
+          <div class="radar-box-head">
+            <span class="rb-live">● LIVE</span>
+            <span class="rb-date">14 September 2026</span>
+          </div>
+          <p class="rb-lede">Trending on GitHub today</p>
+          <ul class="rb-list">
+            <li>
+              <a href="/en/radar/">
+                <span class="rb-name">bilawalsidhu/gods-eye-view</span>
+                <span class="rb-what">A spy satellite simulator in your browser, except the data is real. Live open source spatial intelligence on a photorealistic 3D globe.</span>
+              </a>
+            </li>
+            <li>
+              <a href="/en/radar/">
+                <span class="rb-name">debpalash/VoiceStudio</span>
+                <span class="rb-what">VoiceStudio is the open-source, fully-local ElevenLabs alternative — voice cloning, voice design, video dubbing, dictation, transcription &amp; audiobook creation in 646 languages.</span>
+              </a>
+            </li>
+            <li>
+              <a href="/en/radar/">
+                <span class="rb-name">JustVugg/colibri</span>
+                <span class="rb-what">Run frontier MoE models on hardware you already own — pure C, zero deps, experts streamed from disk. Tiny engine, immense model. 🐦</span>
+              </a>
+            </li></ul>
+          <p class="rb-lede rb-lede-2">AI headlines</p><ul class="rb-news"><li><a href="/en/radar/#news"><span class="rb-src">OpenAI</span>Perplexity trusts GPT-6 Astra with end-to-end systems</a></li><li><a href="/en/radar/#news"><span class="rb-src">The Verge</span>Trump and Mike Johnson think the AI industry is overreacting</a></li></ul>
+          <a class="btn btn-ghost rb-all" href="/en/radar/">SEE ALL ▸</a>
+        </div>
+      <!-- RADARBOX:END -->
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="command-panel about-summary" aria-labelledby="about-title">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <span class="mono-label"><span class="idx">Quest 02</span>Wer wir sind</span>
+          <h2 id="about-title">Indie-Modus: <span class="grad-text">aktiv</span></h2>
+          <p>TroyApps ist eine unabhängige Entwicklermarke für praktische und zugängliche Werkzeuge im digitalen Alltag.</p>
+        </div>
+        <div class="card-grid">
+          <div class="card reveal">
+            <span class="code" aria-hidden="true">•—</span>
+            <span class="icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 12h6M4 6h10M4 18h4"/></svg>
+            </span>
+            <h3>Einfach</h3>
+            <p>Keine überladenen Menüs – öffnen und loslegen.</p>
+          </div>
+          <div class="card reveal">
+            <span class="code" aria-hidden="true">—••</span>
+            <span class="icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h6l-1 8 9-12h-6z"/></svg>
+            </span>
+            <h3>Schnell</h3>
+            <p>Öffnet sofort und läuft ohne Verzögerung.</p>
+          </div>
+          <div class="card reveal">
+            <span class="code" aria-hidden="true">•—•</span>
+            <span class="icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+            </span>
+            <h3>Zugänglich</h3>
+            <p>So gestaltet, dass es jeder einfach nutzen kann.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    </main>
+    <aside class="ad-rail ad-rail-right" aria-hidden="true">
+      <div class="ad-rail-sticky">
+        <span class="ad-slot-tag">Werbefläche</span>
+        <span class="ad-slot-dim">300 × 600</span>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer command-footer" id="contact">
+    <nav class="footer-platforms" aria-label="TroyApps-Plattformen">
+      <a data-platform="google-play" href="https://play.google.com/store/apps/developer?id=Troy+Apps" target="_blank" rel="noopener" aria-label="TroyApps bei Google Play öffnen" title="Google Play"><img src="/assets/img/social/google-play.svg" alt="" aria-hidden="true"></a>
+      <a data-platform="youtube" href="https://www.youtube.com/channel/UC2PncaDQ9wSXYqY5IaffuJw" target="_blank" rel="noopener" aria-label="TroyApps-YouTube-Kanal öffnen" title="YouTube"><img src="/assets/img/social/youtube.svg" alt="" aria-hidden="true"></a>
+      <a data-platform="instagram" href="https://www.instagram.com/troyappsofficial/" target="_blank" rel="noopener" aria-label="TroyApps auf Instagram öffnen" title="Instagram"><img src="/assets/img/social/instagram.svg" alt="" aria-hidden="true"></a>
+      <a data-platform="tiktok" href="https://www.tiktok.com/@troyappsofficial" target="_blank" rel="noopener" aria-label="TroyApps auf TikTok öffnen" title="TikTok"><img src="/assets/img/social/tiktok.svg" alt="" aria-hidden="true"></a>
+      <a data-platform="facebook" href="https://www.facebook.com/troyappsofficial" target="_blank" rel="noopener" aria-label="TroyApps auf Facebook öffnen" title="Facebook"><img src="/assets/img/social/facebook.svg" alt="" aria-hidden="true"></a>
+    </nav>
+    <div class="wrap">
+      <p class="footer-word" aria-hidden="true">TroyApps</p>
+      <div class="footer-grid">
+        <div>
+          <a class="brand" href="/de/">TroyApps</a>
+          <p class="muted" style="margin-top:14px; max-width:300px;">Ein unabhängiges Softwarestudio für mobile Werkzeuge, die den Alltag vereinfachen.</p>
+        </div>
+        <div>
+          <h3>Kontakt</h3>
+          <ul>
+            <li><a href="mailto:info@troyapps.app">info@troyapps.app</a></li>
+            <li><a href="mailto:support@troyapps.app">support@troyapps.app</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Links</h3>
+          <ul>
+            <li><a href="/morse-flash-policy/">Datenschutzerklärung</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 TroyApps · Alle Rechte vorbehalten</span>
+        <span>••• troyapps.app ——— SPIEL GESPEICHERT •••</span>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/assets/js/bg.js?v=20260910-pixel1"></script>
+  <script src="/assets/js/site.js" defer></script>
+  <script src="/assets/js/tilt.js" defer></script>
+  <script type="module" src="/assets/js/troy/troy-controller.js?v=20260914-lookdown1"></script>
+  <script type="module" src="/assets/js/home-v3.js?v=20260910-inventory1"></script>
+</body>
+</html>

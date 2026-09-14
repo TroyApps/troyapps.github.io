@@ -26,17 +26,18 @@
   <link rel="preload" href="/assets/fonts/press-start-2p-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/vt323-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/assets/css/site.css">
+  <link rel="stylesheet" href="/assets/css/theme-v3.css?v=20260913-header4"><link rel="stylesheet" href="/assets/css/radar-v3.css?v=20260912-radar2">
 </head>
-<body>
+<body class="radar-v3 theme-command">
   <canvas id="bg-signal" aria-hidden="true"></canvas>
   <div id="stage-glow" aria-hidden="true"></div>
   <div id="cursor-glow" aria-hidden="true"></div>
 
   <a class="skip-link" href="#icerik">İçeriğe geç</a>
 
-  <header class="site-header">
+  <header class="site-header command-header">
     <div class="wrap nav-bar">
-      <a class="brand" href="/" aria-label="TroyApps ana sayfa">
+      <a class="brand command-brand" href="/" aria-label="TroyApps ana sayfa">
         <svg width="26" height="26" viewBox="0 0 64 64" aria-hidden="true">
           <rect width="64" height="64" rx="4" fill="#0c1812"/>
           <rect x="1.5" y="1.5" width="61" height="61" rx="3" fill="none" stroke="#1c4a36" stroke-width="3"/>
@@ -52,16 +53,14 @@
         <span class="bars"></span>
       </button>
 
-      <nav class="nav-menu" id="nav-menu" aria-label="Ana menü">
+      <nav class="nav-menu command-nav" id="nav-menu" aria-label="Ana menü">
         <ul class="nav-links">
-          <li><a href="/#uygulamalar"><span class="n">01</span>Envanter</a></li>
-          <li><a href="/morse-flash/"><span class="n">02</span>Morse Flash</a></li>
-          <li><a href="/radar/" aria-current="page"><span class="n">03</span>Radar</a></li>
-          <li><a href="/#hakkimizda"><span class="n">04</span>Biz Kimiz</a></li>
-          <li><a href="/#iletisim"><span class="n">05</span>İletişim</a></li>
-          <li class="lang-item"><a class="lang-switch" href="/en/radar/" lang="en" hreflang="en" aria-label="Switch to English">EN</a></li>
+          <li><a href="/">Anasayfa</a></li>
+          <li><a href="/#uygulamalar" aria-current="page">Uygulamalar</a></li>
+          <li><a href="/#iletisim">İletişim</a></li>
         </ul>
       </nav>
+      <details class="language-menu"><summary aria-label="Dil seç"><img class="language-flag" src="/assets/img/flags/tr.svg" width="20" height="14" alt="" aria-hidden="true"><span>TR</span><span aria-hidden="true">⌄</span></summary><div class="language-options"><a href="/radar/" lang="tr" hreflang="tr" aria-current="page"><img class="language-flag" src="/assets/img/flags/tr.svg" width="20" height="14" alt="" aria-hidden="true"><span>Türkçe</span></a><a href="/en/radar/" lang="en" hreflang="en"><img class="language-flag" src="/assets/img/flags/us.svg" width="20" height="14" alt="" aria-hidden="true"><span>English</span></a><a href="/en/radar/" lang="es-419" hreflang="es-419"><img class="language-flag" src="/assets/img/flags/mx.svg" width="20" height="14" alt="" aria-hidden="true"><span>Español</span></a><a href="/en/radar/" lang="pt-BR" hreflang="pt-BR"><img class="language-flag" src="/assets/img/flags/br.svg" width="20" height="14" alt="" aria-hidden="true"><span>Português (Brasil)</span></a><a href="/en/radar/" lang="hi" hreflang="hi"><img class="language-flag" src="/assets/img/flags/in.svg" width="20" height="14" alt="" aria-hidden="true"><span>हिन्दी</span></a><a href="/en/radar/" lang="id" hreflang="id"><img class="language-flag" src="/assets/img/flags/id.svg" width="20" height="14" alt="" aria-hidden="true"><span>Bahasa Indonesia</span></a><a href="/en/radar/" lang="ar" hreflang="ar"><img class="language-flag" src="/assets/img/flags/sa.svg" width="20" height="14" alt="" aria-hidden="true"><span>العربية</span></a><a href="/en/radar/" lang="de" hreflang="de"><img class="language-flag" src="/assets/img/flags/de.svg" width="20" height="14" alt="" aria-hidden="true"><span>Deutsch</span></a><a href="/en/radar/" lang="fr" hreflang="fr"><img class="language-flag" src="/assets/img/flags/fr.svg" width="20" height="14" alt="" aria-hidden="true"><span>Français</span></a><a href="/en/radar/" lang="it" hreflang="it"><img class="language-flag" src="/assets/img/flags/it.svg" width="20" height="14" alt="" aria-hidden="true"><span>Italiano</span></a></div></details>
     </div>
   </header>
 
@@ -74,7 +73,7 @@
     </aside>
 
     <main id="icerik">
-      <section class="radar-hero" aria-labelledby="radar-baslik">
+      <section class="radar-command-hero" aria-labelledby="radar-baslik">
         <div class="wrap">
           <p class="kicker">Tarama tamamlandı</p>
           <h1 id="radar-baslik">RADAR</h1>
@@ -105,14 +104,14 @@
                 <span class="rd-lang">JavaScript</span>
                 <span class="rd-stars">★ 33k</span>
                 <span class="rd-hot" title="bugün kazandığı yıldız">▲ 2.7k</span>
-                
+
               </p>
             </div>
             <img class="rd-avatar" src="https://avatars.githubusercontent.com/u/106619546?v=4&amp;s=96" alt="" width="40" height="40" loading="lazy" decoding="async" onerror="this.remove()">
           </div>
           <p class="rd-what">A spy satellite simulator in your browser, except the data is real. Live open source spatial intelligence on a photorealistic 3D globe.</p>
           <p class="rd-how">Kurulum adımları için depodaki README&#39;ye bakın.</p>
-          
+
           <p class="rd-who"><span>kime lazım</span> İlgi alanı: 3d-globe, cesium, flight-tracking.</p>
           <ul class="rd-topics"><li>3d-globe</li><li>cesium</li><li>flight-tracking</li><li>geospatial</li></ul>
         </article>
@@ -132,7 +131,7 @@
             <img class="rd-avatar" src="https://avatars.githubusercontent.com/u/4178343?v=4&amp;s=96" alt="" width="40" height="40" loading="lazy" decoding="async" onerror="this.remove()">
           </div>
           <p class="rd-what">VoiceStudio is the open-source, fully-local ElevenLabs alternative — voice cloning, voice design, video dubbing, dictation, transcription &amp; audiobook creation in 646 languages.</p>
-          
+
           <div class="rd-cmd"><span class="rd-cmd-label">kurulum</span><code>npx skills</code></div>
           <p class="rd-who"><span>kime lazım</span> İlgi alanı: ai, audiobook, cuda.</p>
           <ul class="rd-topics"><li>ai</li><li>audiobook</li><li>cuda</li><li>dubbing</li></ul>
@@ -153,10 +152,10 @@
             <img class="rd-avatar" src="https://avatars.githubusercontent.com/u/13022503?v=4&amp;s=96" alt="" width="40" height="40" loading="lazy" decoding="async" onerror="this.remove()">
           </div>
           <p class="rd-what">Run frontier MoE models on hardware you already own — pure C, zero deps, experts streamed from disk. Tiny engine, immense model. 🐦</p>
-          
+
           <div class="rd-cmd"><span class="rd-cmd-label">kurulum</span><code>pip install -e</code></div>
-          
-          
+
+
         </article>
         <article class="rd-card rd-repo" style="--rd-accent:#ffd93d">
           <div class="rd-rank">04</div>
@@ -175,7 +174,7 @@
           </div>
           <p class="rd-what">Extracted system prompts from Anthropic - Claude Fable 5.1, Opus 5, Claude Design, Claude Code. OpenAI - ChatGPT GPT-6-Astra, Codex. Google - Gemini 3.8 Flash, 3.1 Pro, Antigravity. xAI - Grok, Grok Bot, Cursor, Kimi…</p>
           <p class="rd-how">Kurulum adımları için depodaki README&#39;ye bakın.</p>
-          
+
           <p class="rd-who"><span>kime lazım</span> İlgi alanı: ai, ai-agents, ai-prompts.</p>
           <ul class="rd-topics"><li>ai</li><li>ai-agents</li><li>ai-prompts</li><li>anthropic</li></ul>
         </article>
@@ -195,7 +194,7 @@
             <img class="rd-avatar" src="https://avatars.githubusercontent.com/u/39194251?v=4&amp;s=96" alt="" width="40" height="40" loading="lazy" decoding="async" onerror="this.remove()">
           </div>
           <p class="rd-what">Fully autonomous AI Agents system capable of performing complex penetration testing tasks</p>
-          
+
           <div class="rd-cmd"><span class="rd-cmd-label">kurulum</span><code>npx swagger-typescript-api</code></div>
           <p class="rd-who"><span>kime lazım</span> İlgi alanı: ai-agents, ai-security-tool, anthropic.</p>
           <ul class="rd-topics"><li>ai-agents</li><li>ai-security-tool</li><li>anthropic</li><li>autonomous-agents</li></ul>
@@ -216,7 +215,7 @@
             <img class="rd-avatar" src="https://avatars.githubusercontent.com/u/58658417?v=4&amp;s=96" alt="" width="40" height="40" loading="lazy" decoding="async" onerror="this.remove()">
           </div>
           <p class="rd-what">Download Udemy and Hotmart courses, YouTube videos, music and books — 1,800+ sites, no terminal. Free open-source desktop app for Windows, macOS and Linux, with a built-in course player, PDF/EPUB reader and music…</p>
-          
+
           <div class="rd-cmd"><span class="rd-cmd-label">kurulum</span><code>npm install pnpm</code></div>
           <p class="rd-who"><span>kime lazım</span> İlgi alanı: bilibili-downloader, course-downloader, download-manager.</p>
           <ul class="rd-topics"><li>bilibili-downloader</li><li>course-downloader</li><li>download-manager</li><li>downloader</li></ul>
@@ -238,7 +237,7 @@
           </div>
           <p class="rd-what">claude-red is a curated library of offensive security skills designed for the Claude skills system. Each skill is a structured SKILL.md file that primes Claude with expert-level methodology for a specific attack surface…</p>
           <p class="rd-how">Kurulum adımları için depodaki README&#39;ye bakın.</p>
-          
+
           <p class="rd-who"><span>kime lazım</span> İlgi alanı: claude-ai, claude-pt, claude-skills.</p>
           <ul class="rd-topics"><li>claude-ai</li><li>claude-pt</li><li>claude-skills</li><li>redteam</li></ul>
         </article>
@@ -258,7 +257,7 @@
             <img class="rd-avatar" src="https://avatars.githubusercontent.com/u/136257670?v=4&amp;s=96" alt="" width="40" height="40" loading="lazy" decoding="async" onerror="this.remove()">
           </div>
           <p class="rd-what">YuE2: frontier music generation with symbolic planning, zero-shot covers, and agentic music editing.</p>
-          
+
           <div class="rd-cmd"><span class="rd-cmd-label">kurulum</span><code>pip install --upgrade</code></div>
           <p class="rd-who"><span>kime lazım</span> İlgi alanı: ai, audio-generation, deep-learning.</p>
           <ul class="rd-topics"><li>ai</li><li>audio-generation</li><li>deep-learning</li><li>foundation-models</li></ul>
@@ -270,22 +269,22 @@
         <p class="rd-lede">Son 48 saatin öne çıkan başlıkları. Başlığa tıklayınca haberin kendi sayfasına gidersin.</p>
         <div class="rd-list">
         <article class="rd-card rd-news" style="--rd-accent:#3ea8ff">
-          <div class="rd-src"><svg class="rd-sigil" viewBox="0 0 5 5" width="34" height="34" aria-hidden="true" shape-rendering="crispEdges"><g fill="#3ea8ff"><rect x="0" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="1" y="0" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="2" y="1" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="1" y="3" width="1" height="1"/><rect x="3" y="3" width="1" height="1"/><rect x="0" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="1" y="4" width="1" height="1"/><rect x="3" y="4" width="1" height="1"/><rect x="2" y="4" width="1" height="1"/></g></svg><span>OpenAI</span><time datetime="2026-09-14T00:00:00.000Z">11 saat önce</time></div>
+          <div class="rd-src"><svg class="rd-sigil" viewBox="0 0 5 5" width="34" height="34" aria-hidden="true" shape-rendering="crispEdges"><g fill="#3ea8ff"><rect x="0" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="1" y="0" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="2" y="1" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="1" y="3" width="1" height="1"/><rect x="3" y="3" width="1" height="1"/><rect x="0" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="1" y="4" width="1" height="1"/><rect x="3" y="4" width="1" height="1"/><rect x="2" y="4" width="1" height="1"/></g></svg><span>OpenAI</span><time datetime="2026-09-14T00:00:00.000Z">18 saat önce</time></div>
           <h3><a href="https://openai.com/index/perplexity-improving-accuracy-with-astra" rel="noopener nofollow" target="_blank">Perplexity trusts GPT-6 Astra with end-to-end systems</a></h3>
           <p>Perplexity uses Astra to write communications, change software, and monitor production systems, and checks in much less frequently than with earlier models.</p>
         </article>
         <article class="rd-card rd-news" style="--rd-accent:#ff3ef2">
-          <div class="rd-src"><svg class="rd-sigil" viewBox="0 0 5 5" width="34" height="34" aria-hidden="true" shape-rendering="crispEdges"><g fill="#ff3ef2"><rect x="0" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="2" y="0" width="1" height="1"/><rect x="2" y="1" width="1" height="1"/><rect x="0" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="0" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="2" y="3" width="1" height="1"/><rect x="0" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="2" y="4" width="1" height="1"/></g></svg><span>The Verge</span><time datetime="2026-09-13T19:41:48.000Z">15 saat önce</time></div>
+          <div class="rd-src"><svg class="rd-sigil" viewBox="0 0 5 5" width="34" height="34" aria-hidden="true" shape-rendering="crispEdges"><g fill="#ff3ef2"><rect x="0" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="2" y="0" width="1" height="1"/><rect x="2" y="1" width="1" height="1"/><rect x="0" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="0" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="2" y="3" width="1" height="1"/><rect x="0" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="2" y="4" width="1" height="1"/></g></svg><span>The Verge</span><time datetime="2026-09-13T19:41:48.000Z">22 saat önce</time></div>
           <h3><a href="https://www.theverge.com/ai-artificial-intelligence/994441/trump-mike-johnson-ai-industry-overreacting" rel="noopener nofollow" target="_blank">Trump and Mike Johnson think the AI industry is overreacting</a></h3>
           <p>Yesterday, Anthropic CEO Dario Amodei published a lengthy open letter saying it was time to &quot;pace the frontier&quot; and slow down AI development. OpenAI&#39;s Sam Altman and Elon Musk both agreed, publicly…</p>
         </article>
         <article class="rd-card rd-news" style="--rd-accent:#00ff9c">
-          <div class="rd-src"><svg class="rd-sigil" viewBox="0 0 5 5" width="34" height="34" aria-hidden="true" shape-rendering="crispEdges"><g fill="#00ff9c"><rect x="2" y="0" width="1" height="1"/><rect x="2" y="1" width="1" height="1"/><rect x="0" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="1" y="2" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="0" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="2" y="3" width="1" height="1"/><rect x="0" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="1" y="4" width="1" height="1"/><rect x="3" y="4" width="1" height="1"/></g></svg><span>TechCrunch</span><time datetime="2026-09-13T19:40:15.000Z">15 saat önce</time></div>
+          <div class="rd-src"><svg class="rd-sigil" viewBox="0 0 5 5" width="34" height="34" aria-hidden="true" shape-rendering="crispEdges"><g fill="#00ff9c"><rect x="2" y="0" width="1" height="1"/><rect x="2" y="1" width="1" height="1"/><rect x="0" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="1" y="2" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="0" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="2" y="3" width="1" height="1"/><rect x="0" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="1" y="4" width="1" height="1"/><rect x="3" y="4" width="1" height="1"/></g></svg><span>TechCrunch</span><time datetime="2026-09-13T19:40:15.000Z">22 saat önce</time></div>
           <h3><a href="https://techcrunch.com/2026/09/13/whats-behind-the-ai-industrys-latest-warnings-of-doom/" rel="noopener nofollow" target="_blank">What’s behind the AI industry’s latest warnings of doom?</a></h3>
           <p>On Equity, we discussed the AI industry&#39;s latest debate about whether it poses an existential threat to humanity.</p>
         </article>
         <article class="rd-card rd-news" style="--rd-accent:#00ff9c">
-          <div class="rd-src"><svg class="rd-sigil" viewBox="0 0 5 5" width="34" height="34" aria-hidden="true" shape-rendering="crispEdges"><g fill="#00ff9c"><rect x="2" y="0" width="1" height="1"/><rect x="2" y="1" width="1" height="1"/><rect x="0" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="1" y="2" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="0" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="2" y="3" width="1" height="1"/><rect x="0" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="1" y="4" width="1" height="1"/><rect x="3" y="4" width="1" height="1"/></g></svg><span>TechCrunch</span><time datetime="2026-09-13T16:30:00.000Z">18 saat önce</time></div>
+          <div class="rd-src"><svg class="rd-sigil" viewBox="0 0 5 5" width="34" height="34" aria-hidden="true" shape-rendering="crispEdges"><g fill="#00ff9c"><rect x="2" y="0" width="1" height="1"/><rect x="2" y="1" width="1" height="1"/><rect x="0" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="1" y="2" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="0" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="2" y="3" width="1" height="1"/><rect x="0" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="1" y="4" width="1" height="1"/><rect x="3" y="4" width="1" height="1"/></g></svg><span>TechCrunch</span><time datetime="2026-09-13T16:30:00.000Z">1 gün önce</time></div>
           <h3><a href="https://techcrunch.com/2026/09/13/obama-urges-democrats-to-have-a-clear-plan-for-ai-safeguards/" rel="noopener nofollow" target="_blank">Obama urges Democrats to have a ‘clear plan’ for AI safeguards</a></h3>
           <p>Obama recently said that Democrats need to make artificial intelligence one of their “central agendas” and “have a very clear plan” to address concerns around the technology’s economic impact and…</p>
         </article>
@@ -338,7 +337,14 @@
     </aside>
   </div>
 
-  <footer class="site-footer" id="iletisim">
+  <footer class="site-footer command-footer" id="iletisim">
+    <nav class="footer-platforms" aria-label="TroyApps platformları">
+      <a data-platform="google-play" href="https://play.google.com/store/apps/developer?id=Troy+Apps" target="_blank" rel="noopener" aria-label="TroyApps Google Play sayfasını aç" title="Google Play"><img src="/assets/img/social/google-play.svg" alt="" aria-hidden="true"></a>
+      <a data-platform="youtube" href="https://www.youtube.com/channel/UC2PncaDQ9wSXYqY5IaffuJw" target="_blank" rel="noopener" aria-label="TroyApps YouTube kanalını aç" title="YouTube"><img src="/assets/img/social/youtube.svg" alt="" aria-hidden="true"></a>
+      <a data-platform="instagram" href="https://www.instagram.com/troyappsofficial/" target="_blank" rel="noopener" aria-label="TroyApps Instagram hesabını aç" title="Instagram"><img src="/assets/img/social/instagram.svg" alt="" aria-hidden="true"></a>
+      <a data-platform="tiktok" href="https://www.tiktok.com/@troyappsofficial" target="_blank" rel="noopener" aria-label="TroyApps TikTok hesabını aç" title="TikTok"><img src="/assets/img/social/tiktok.svg" alt="" aria-hidden="true"></a>
+      <a data-platform="facebook" href="https://www.facebook.com/troyappsofficial" target="_blank" rel="noopener" aria-label="TroyApps Facebook sayfasını aç" title="Facebook"><img src="/assets/img/social/facebook.svg" alt="" aria-hidden="true"></a>
+    </nav>
     <div class="wrap">
       <p class="footer-word" aria-hidden="true">TroyApps</p>
       <div class="footer-grid">
@@ -367,9 +373,7 @@
     </div>
   </footer>
 
-  <script src="/assets/js/bg.js" defer></script>
+  <script type="module" src="/assets/js/bg.js?v=20260912-radar3"></script>
   <script src="/assets/js/site.js" defer></script>
-  <script src="/assets/js/tilt.js" defer></script>
-  <script src="/assets/js/mascot.js" defer></script>
 </body>
 </html>

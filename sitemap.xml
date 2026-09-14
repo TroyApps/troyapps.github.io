@@ -5,21 +5,281 @@
     <loc>https://troyapps.app/</loc>
     <xhtml:link rel="alternate" hreflang="tr" href="https://troyapps.app/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://troyapps.app/en/"/>
+    <xhtml:link rel="alternate" hreflang="es-419" href="https://troyapps.app/es/"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://troyapps.app/pt-br/"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://troyapps.app/hi/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://troyapps.app/id/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://troyapps.app/ar/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://troyapps.app/de/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://troyapps.app/fr/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://troyapps.app/it/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://troyapps.app/"/>
   </url>
   <url>
     <loc>https://troyapps.app/en/</loc>
     <xhtml:link rel="alternate" hreflang="tr" href="https://troyapps.app/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://troyapps.app/en/"/>
+    <xhtml:link rel="alternate" hreflang="es-419" href="https://troyapps.app/es/"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://troyapps.app/pt-br/"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://troyapps.app/hi/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://troyapps.app/id/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://troyapps.app/ar/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://troyapps.app/de/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://troyapps.app/fr/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://troyapps.app/it/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://troyapps.app/"/>
+  </url>
+  <url>
+    <loc>https://troyapps.app/es/</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://troyapps.app/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://troyapps.app/en/"/>
+    <xhtml:link rel="alternate" hreflang="es-419" href="https://troyapps.app/es/"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://troyapps.app/pt-br/"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://troyapps.app/hi/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://troyapps.app/id/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://troyapps.app/ar/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://troyapps.app/de/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://troyapps.app/fr/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://troyapps.app/it/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://troyapps.app/"/>
+  </url>
+  <url>
+    <loc>https://troyapps.app/pt-br/</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://troyapps.app/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://troyapps.app/en/"/>
+    <xhtml:link rel="alternate" hreflang="es-419" href="https://troyapps.app/es/"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://troyapps.app/pt-br/"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://troyapps.app/hi/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://troyapps.app/id/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://troyapps.app/ar/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://troyapps.app/de/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://troyapps.app/fr/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://troyapps.app/it/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://troyapps.app/"/>
+  </url>
+  <url>
+    <loc>https://troyapps.app/hi/</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://troyapps.app/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://troyapps.app/en/"/>
+    <xhtml:link rel="alternate" hreflang="es-419" href="https://troyapps.app/es/"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://troyapps.app/pt-br/"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://troyapps.app/hi/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://troyapps.app/id/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://troyapps.app/ar/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://troyapps.app/de/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://troyapps.app/fr/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://troyapps.app/it/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://troyapps.app/"/>
+  </url>
+  <url>
+    <loc>https://troyapps.app/id/</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://troyapps.app/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://troyapps.app/en/"/>
+    <xhtml:link rel="alternate" hreflang="es-419" href="https://troyapps.app/es/"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://troyapps.app/pt-br/"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://troyapps.app/hi/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://troyapps.app/id/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://troyapps.app/ar/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://troyapps.app/de/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://troyapps.app/fr/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://troyapps.app/it/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://troyapps.app/"/>
+  </url>
+  <url>
+    <loc>https://troyapps.app/ar/</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://troyapps.app/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://troyapps.app/en/"/>
+    <xhtml:link rel="alternate" hreflang="es-419" href="https://troyapps.app/es/"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://troyapps.app/pt-br/"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://troyapps.app/hi/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://troyapps.app/id/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://troyapps.app/ar/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://troyapps.app/de/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://troyapps.app/fr/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://troyapps.app/it/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://troyapps.app/"/>
+  </url>
+  <url>
+    <loc>https://troyapps.app/de/</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://troyapps.app/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://troyapps.app/en/"/>
+    <xhtml:link rel="alternate" hreflang="es-419" href="https://troyapps.app/es/"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://troyapps.app/pt-br/"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://troyapps.app/hi/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://troyapps.app/id/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://troyapps.app/ar/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://troyapps.app/de/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://troyapps.app/fr/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://troyapps.app/it/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://troyapps.app/"/>
+  </url>
+  <url>
+    <loc>https://troyapps.app/fr/</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://troyapps.app/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://troyapps.app/en/"/>
+    <xhtml:link rel="alternate" hreflang="es-419" href="https://troyapps.app/es/"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://troyapps.app/pt-br/"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://troyapps.app/hi/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://troyapps.app/id/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://troyapps.app/ar/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://troyapps.app/de/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://troyapps.app/fr/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://troyapps.app/it/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://troyapps.app/"/>
+  </url>
+  <url>
+    <loc>https://troyapps.app/it/</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://troyapps.app/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://troyapps.app/en/"/>
+    <xhtml:link rel="alternate" hreflang="es-419" href="https://troyapps.app/es/"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://troyapps.app/pt-br/"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://troyapps.app/hi/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://troyapps.app/id/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://troyapps.app/ar/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://troyapps.app/de/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://troyapps.app/fr/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://troyapps.app/it/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://troyapps.app/"/>
   </url>
   <url>
     <loc>https://troyapps.app/morse-flash/</loc>
     <xhtml:link rel="alternate" hreflang="tr" href="https://troyapps.app/morse-flash/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://troyapps.app/en/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="es-419" href="https://troyapps.app/es/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://troyapps.app/pt-br/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://troyapps.app/hi/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://troyapps.app/id/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://troyapps.app/ar/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://troyapps.app/de/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://troyapps.app/fr/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://troyapps.app/it/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://troyapps.app/morse-flash/"/>
   </url>
   <url>
     <loc>https://troyapps.app/en/morse-flash/</loc>
     <xhtml:link rel="alternate" hreflang="tr" href="https://troyapps.app/morse-flash/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://troyapps.app/en/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="es-419" href="https://troyapps.app/es/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://troyapps.app/pt-br/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://troyapps.app/hi/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://troyapps.app/id/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://troyapps.app/ar/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://troyapps.app/de/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://troyapps.app/fr/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://troyapps.app/it/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://troyapps.app/morse-flash/"/>
+  </url>
+  <url>
+    <loc>https://troyapps.app/es/morse-flash/</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://troyapps.app/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://troyapps.app/en/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="es-419" href="https://troyapps.app/es/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://troyapps.app/pt-br/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://troyapps.app/hi/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://troyapps.app/id/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://troyapps.app/ar/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://troyapps.app/de/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://troyapps.app/fr/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://troyapps.app/it/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://troyapps.app/morse-flash/"/>
+  </url>
+  <url>
+    <loc>https://troyapps.app/pt-br/morse-flash/</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://troyapps.app/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://troyapps.app/en/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="es-419" href="https://troyapps.app/es/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://troyapps.app/pt-br/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://troyapps.app/hi/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://troyapps.app/id/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://troyapps.app/ar/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://troyapps.app/de/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://troyapps.app/fr/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://troyapps.app/it/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://troyapps.app/morse-flash/"/>
+  </url>
+  <url>
+    <loc>https://troyapps.app/hi/morse-flash/</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://troyapps.app/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://troyapps.app/en/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="es-419" href="https://troyapps.app/es/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://troyapps.app/pt-br/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://troyapps.app/hi/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://troyapps.app/id/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://troyapps.app/ar/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://troyapps.app/de/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://troyapps.app/fr/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://troyapps.app/it/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://troyapps.app/morse-flash/"/>
+  </url>
+  <url>
+    <loc>https://troyapps.app/id/morse-flash/</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://troyapps.app/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://troyapps.app/en/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="es-419" href="https://troyapps.app/es/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://troyapps.app/pt-br/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://troyapps.app/hi/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://troyapps.app/id/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://troyapps.app/ar/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://troyapps.app/de/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://troyapps.app/fr/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://troyapps.app/it/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://troyapps.app/morse-flash/"/>
+  </url>
+  <url>
+    <loc>https://troyapps.app/ar/morse-flash/</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://troyapps.app/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://troyapps.app/en/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="es-419" href="https://troyapps.app/es/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://troyapps.app/pt-br/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://troyapps.app/hi/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://troyapps.app/id/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://troyapps.app/ar/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://troyapps.app/de/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://troyapps.app/fr/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://troyapps.app/it/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://troyapps.app/morse-flash/"/>
+  </url>
+  <url>
+    <loc>https://troyapps.app/de/morse-flash/</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://troyapps.app/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://troyapps.app/en/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="es-419" href="https://troyapps.app/es/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://troyapps.app/pt-br/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://troyapps.app/hi/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://troyapps.app/id/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://troyapps.app/ar/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://troyapps.app/de/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://troyapps.app/fr/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://troyapps.app/it/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://troyapps.app/morse-flash/"/>
+  </url>
+  <url>
+    <loc>https://troyapps.app/fr/morse-flash/</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://troyapps.app/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://troyapps.app/en/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="es-419" href="https://troyapps.app/es/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://troyapps.app/pt-br/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://troyapps.app/hi/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://troyapps.app/id/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://troyapps.app/ar/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://troyapps.app/de/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://troyapps.app/fr/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://troyapps.app/it/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://troyapps.app/morse-flash/"/>
+  </url>
+  <url>
+    <loc>https://troyapps.app/it/morse-flash/</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://troyapps.app/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://troyapps.app/en/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="es-419" href="https://troyapps.app/es/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://troyapps.app/pt-br/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://troyapps.app/hi/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://troyapps.app/id/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://troyapps.app/ar/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://troyapps.app/de/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://troyapps.app/fr/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://troyapps.app/it/morse-flash/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://troyapps.app/morse-flash/"/>
   </url>
   <url>
     <loc>https://troyapps.app/radar/</loc>
@@ -28,6 +288,7 @@
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="tr" href="https://troyapps.app/radar/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://troyapps.app/en/radar/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://troyapps.app/radar/"/>
   </url>
   <url>
     <loc>https://troyapps.app/en/radar/</loc>
@@ -36,6 +297,7 @@
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="tr" href="https://troyapps.app/radar/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://troyapps.app/en/radar/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://troyapps.app/radar/"/>
   </url>
   <url>
     <loc>https://troyapps.app/morse-flash-policy/</loc>

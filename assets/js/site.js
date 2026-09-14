@@ -32,6 +32,14 @@
     });
   }
 
+  function bindLanguageMenus(root) {
+    var menus = root.querySelectorAll(".language-menu");
+    if (!menus.length) return;
+    root.addEventListener("click", function (event) { menus.forEach(function (menu) { if (!menu.contains(event.target)) menu.removeAttribute("open"); }); });
+    root.addEventListener("keydown", function (event) { if (event.key !== "Escape") return; menus.forEach(function (menu) { if (!menu.open) return; menu.removeAttribute("open"); var summary = menu.querySelector("summary"); if (summary) summary.focus(); }); });
+  }
+  bindLanguageMenus(document);
+
   /* Başlık decode efekti: harfler Morse sembollerinden çözülür */
   var SYMS = ["•", "—", "•", "—", "·"];
 

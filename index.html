@@ -9,6 +9,14 @@
   <link rel="canonical" href="https://troyapps.app/">
   <link rel="alternate" hreflang="tr" href="https://troyapps.app/">
   <link rel="alternate" hreflang="en" href="https://troyapps.app/en/">
+  <link rel="alternate" hreflang="es-419" href="https://troyapps.app/es/">
+  <link rel="alternate" hreflang="pt-BR" href="https://troyapps.app/pt-br/">
+  <link rel="alternate" hreflang="hi" href="https://troyapps.app/hi/">
+  <link rel="alternate" hreflang="id" href="https://troyapps.app/id/">
+  <link rel="alternate" hreflang="ar" href="https://troyapps.app/ar/">
+  <link rel="alternate" hreflang="de" href="https://troyapps.app/de/">
+  <link rel="alternate" hreflang="fr" href="https://troyapps.app/fr/">
+  <link rel="alternate" hreflang="it" href="https://troyapps.app/it/">
   <link rel="alternate" hreflang="x-default" href="https://troyapps.app/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="TroyApps">
@@ -18,6 +26,14 @@
   <meta property="og:image" content="https://troyapps.app/assets/img/og-home.png">
   <meta property="og:locale" content="tr_TR">
   <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:locale:alternate" content="es_MX">
+  <meta property="og:locale:alternate" content="pt_BR">
+  <meta property="og:locale:alternate" content="hi_IN">
+  <meta property="og:locale:alternate" content="id_ID">
+  <meta property="og:locale:alternate" content="ar_SA">
+  <meta property="og:locale:alternate" content="de_DE">
+  <meta property="og:locale:alternate" content="fr_FR">
+  <meta property="og:locale:alternate" content="it_IT">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="theme-color" content="#0a0a12">
   <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
@@ -26,17 +42,29 @@
   <link rel="preload" href="/assets/fonts/press-start-2p-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/vt323-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/assets/css/site.css">
+  <link rel="stylesheet" href="/assets/css/theme-v3.css?v=20260913-header4">
+  <link rel="stylesheet" href="/assets/css/home-v2.css?v=20260912-drop7">
+  <link rel="stylesheet" href="/assets/css/home-v3.css?v=20260914-ticker-loop1">
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "/assets/vendor/three-0.185.1/three.module.min.js",
+        "three/addons/": "/assets/vendor/three-0.185.1/addons/"
+      }
+    }
+  </script>
+  <link rel="modulepreload" href="/assets/js/troy/troy-three.js?v=20260914-lookdown1">
 </head>
-<body>
+<body class="home-v2 home-v3 theme-command">
   <canvas id="bg-signal" aria-hidden="true"></canvas>
   <div id="stage-glow" aria-hidden="true"></div>
   <div id="cursor-glow" aria-hidden="true"></div>
 
   <a class="skip-link" href="#icerik">İçeriğe geç</a>
 
-  <header class="site-header">
+  <header class="site-header command-header">
     <div class="wrap nav-bar">
-      <a class="brand" href="/" aria-label="TroyApps ana sayfa">
+      <a class="brand command-brand" href="/" aria-label="TroyApps ana sayfa">
         <svg width="26" height="26" viewBox="0 0 64 64" aria-hidden="true">
           <rect width="64" height="64" rx="4" fill="#0c1812"/>
           <rect x="1.5" y="1.5" width="61" height="61" rx="3" fill="none" stroke="#1c4a36" stroke-width="3"/>
@@ -48,20 +76,18 @@
         TroyApps
       </a>
 
-      <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Menüyü aç/kapat">
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu" aria-label="Menüyü aç/kapat">
         <span class="bars"></span>
       </button>
 
-      <nav class="nav-menu" id="nav-menu" aria-label="Ana menü">
+      <nav class="nav-menu command-nav" id="nav-menu" aria-label="Ana menü">
         <ul class="nav-links">
-          <li><a href="#uygulamalar"><span class="n">01</span>Envanter</a></li>
-          <li><a href="/morse-flash/"><span class="n">02</span>Morse Flash</a></li>
-          <li><a href="/radar/"><span class="n">03</span>Radar</a></li>
-          <li><a href="#hakkimizda"><span class="n">04</span>Biz Kimiz</a></li>
-          <li><a href="#iletisim"><span class="n">05</span>İletişim</a></li>
-          <li class="lang-item"><a class="lang-switch" href="/en/" lang="en" hreflang="en" aria-label="Switch to English">EN</a></li>
+          <li><a href="/" aria-current="page">Anasayfa</a></li>
+          <li><a href="#uygulamalar">Uygulamalar</a></li>
+          <li><a href="#iletisim">İletişim</a></li>
         </ul>
       </nav>
+      <details class="language-menu"><summary aria-label="Dil seç"><img class="language-flag" src="/assets/img/flags/tr.svg" width="20" height="14" alt="" aria-hidden="true"><span>TR</span><span aria-hidden="true">⌄</span></summary><div class="language-options"><a href="/" lang="tr" hreflang="tr" aria-current="page"><img class="language-flag" src="/assets/img/flags/tr.svg" width="20" height="14" alt="" aria-hidden="true"><span>Türkçe</span></a><a href="/en/" lang="en" hreflang="en"><img class="language-flag" src="/assets/img/flags/us.svg" width="20" height="14" alt="" aria-hidden="true"><span>English</span></a><a href="/es/" lang="es-419" hreflang="es-419"><img class="language-flag" src="/assets/img/flags/mx.svg" width="20" height="14" alt="" aria-hidden="true"><span>Español</span></a><a href="/pt-br/" lang="pt-BR" hreflang="pt-BR"><img class="language-flag" src="/assets/img/flags/br.svg" width="20" height="14" alt="" aria-hidden="true"><span>Português (Brasil)</span></a><a href="/hi/" lang="hi" hreflang="hi"><img class="language-flag" src="/assets/img/flags/in.svg" width="20" height="14" alt="" aria-hidden="true"><span>हिन्दी</span></a><a href="/id/" lang="id" hreflang="id"><img class="language-flag" src="/assets/img/flags/id.svg" width="20" height="14" alt="" aria-hidden="true"><span>Bahasa Indonesia</span></a><a href="/ar/" lang="ar" hreflang="ar"><img class="language-flag" src="/assets/img/flags/sa.svg" width="20" height="14" alt="" aria-hidden="true"><span>العربية</span></a><a href="/de/" lang="de" hreflang="de"><img class="language-flag" src="/assets/img/flags/de.svg" width="20" height="14" alt="" aria-hidden="true"><span>Deutsch</span></a><a href="/fr/" lang="fr" hreflang="fr"><img class="language-flag" src="/assets/img/flags/fr.svg" width="20" height="14" alt="" aria-hidden="true"><span>Français</span></a><a href="/it/" lang="it" hreflang="it"><img class="language-flag" src="/assets/img/flags/it.svg" width="20" height="14" alt="" aria-hidden="true"><span>Italiano</span></a></div></details>
     </div>
   </header>
 
@@ -74,62 +100,72 @@
     </aside>
     <main id="icerik">
     <!-- Açılış -->
-    <section class="hero" aria-labelledby="hero-baslik">
-      <div class="wrap hero-inner">
-        <p class="kicker">Sinyal istasyonuna bağlandın</p>
-        <h1 id="hero-baslik" class="decode" data-text="TROYAPPS">TROYAPPS</h1>
-        <p class="lead">Günlük hayatın araçlarını kolaylaştırıyoruz: kullanışlı, hızlı ve herkese açık mobil araçlar.</p>
-        <div class="hero-cta">
-          <a class="btn btn-primary" href="#uygulamalar">Uygulama Envanteri</a>
-          <a class="btn btn-ghost" href="#hakkimizda">Biz Kimiz?</a>
+    <section class="hero command-hero" aria-labelledby="hero-baslik">
+      <div class="wrap command-hero__grid">
+        <div class="hero-copy command-hero__copy">
+          <p class="system-status"><span aria-hidden="true"></span>TroyApps sistemi çevrimiçi</p>
+          <h1 id="hero-baslik" class="command-wordmark" data-wordmark="TROYAPPS" aria-label="TROYAPPS"><svg class="command-wordmark__graphic" viewBox="0 0 1000 200" aria-hidden="true" focusable="false"><text class="command-wordmark__text command-wordmark__edge" x="8" y="166" textLength="984" lengthAdjust="spacingAndGlyphs">TROYAPPS</text><text class="command-wordmark__text command-wordmark__fill" x="8" y="166" textLength="984" lengthAdjust="spacingAndGlyphs"><tspan class="command-wordmark__light">TROY</tspan><tspan class="command-wordmark__red">APPS</tspan></text></svg></h1>
+          <p class="lead">Günlük hayatın araçlarını kolaylaştırıyoruz: <b>kullanışlı, hızlı</b> ve <b>herkese açık</b> mobil çözümler.</p>
+          <div class="hero-actions">
+            <a class="command-button command-button--primary" href="#uygulamalar"><span aria-hidden="true">▦</span><span>Uygulama Envanteri</span></a>
+            <a class="command-button" href="https://play.google.com/store/apps/developer?id=Troy+Apps" target="_blank" rel="noopener"><span aria-hidden="true">▶</span><span>Google Play</span></a>
+          </div>
+          <p class="hero-proof"><span>Bağımsız geliştirici</span><span>Türkiye'den dünyaya</span></p>
         </div>
-        <button class="press-start" type="button" aria-label="Sinyal patlaması başlat">▶ Press Start</button>
+
+        <div class="command-hero__troy"><div class="troy-stage" id="troy-stage" data-troy-state="idle" data-troy-tool="poke" data-troy-dialogue-state="hidden" data-troy-renderer="loading" data-troy-model="/assets/models/troy/troy.glb">
+          <div class="troy-aura" aria-hidden="true"></div>
+          <img class="troy-poster" data-troy-poster src="/assets/img/troy/troy-hero.webp" alt="" width="768" height="1152" fetchpriority="high">
+          <canvas class="troy-canvas" data-troy-canvas aria-hidden="true"></canvas>
+          <button class="troy-target" type="button" data-troy-target aria-label="Troy'u dürt"></button>
+          <button class="troy-pixel-target" type="button" data-troy-pixel-target aria-label="Troy'un piksellerini yeniden birleştir" hidden></button>
+          <div class="troy-effects" data-troy-effect aria-hidden="true">
+            <span class="troy-whip-arc"></span>
+            <span class="troy-impact"></span>
+          </div>
+          <div class="troy-pixel-orbit" data-troy-pixels aria-hidden="true"></div>
+          <div class="troy-intro" role="status" aria-live="polite" aria-atomic="true">
+            <strong>Ben Troy.</strong>
+            <span data-troy-dialogue>Eskiden akıl karıştırırdım. Şimdi işleri kolaylaştırıyorum.</span>
+          </div>
+          <span class="troy-badge">TROY · HİZMETKÂR ASİSTAN</span>
+          <div class="troy-controls troy-tools" role="group" aria-label="Troy kontrolleri">
+            <button class="troy-tool" type="button" data-troy-tool-option="poke" aria-pressed="true"><span aria-hidden="true">•</span> Dürt</button>
+            <button class="troy-tool" type="button" data-troy-tool-option="bazooka" aria-pressed="false"><span class="troy-tool__icon" aria-hidden="true"><img src="/assets/img/troy/controls/bazooka.webp" width="72" height="55" alt=""></span><span>Bazuka</span></button>
+            <button class="troy-tool" type="button" data-troy-tool-option="whip" aria-pressed="false"><span class="troy-tool__icon" aria-hidden="true"><img src="/assets/img/troy/controls/whip.webp" width="72" height="55" alt=""></span><span>Kırbaç</span></button>
+            <button class="troy-tool troy-command-trigger" type="button" data-troy-command-trigger aria-expanded="false" aria-controls="troy-command-panel"><span aria-hidden="true">›_</span> Komut Ver</button>
+          </div>
+          <div class="troy-command-panel" id="troy-command-panel" data-troy-command-panel hidden aria-label="Troy komutları">
+            <a href="#uygulamalar" data-troy-command="apps">Uygulamaları göster</a>
+            <a href="/radar/" data-troy-command="radar">Radar'a götür</a>
+            <a href="#hakkimizda" data-troy-command="about">Biz kimiz?</a>
+            <a href="#iletisim" data-troy-command="contact">İletişimi aç</a>
+          </div>
+          <noscript>
+            <nav class="troy-command-fallback" aria-label="Troy komutları — JavaScript olmadan">
+              <a href="#uygulamalar">Uygulamaları göster</a>
+              <a href="/radar/">Radar'a götür</a>
+              <a href="#hakkimizda">Biz kimiz?</a>
+              <a href="#iletisim">İletişimi aç</a>
+            </nav>
+          </noscript>
+        </div></div>
       </div>
     </section>
 
-    <div class="ticker" aria-hidden="true">
-      <div class="ticker-track">
-        <span>★ <b>TROYAPPS</b> ★ ••• ——— ••• ★ SİNYAL AKIŞI AKTİF ★ —•— ★ YENİ ARAÇLAR YÜKLENİYOR ★ •—•• ——— •—• ★ ŞİFRE BEKLENİYOR ★</span>
-        <span>★ <b>TROYAPPS</b> ★ ••• ——— ••• ★ SİNYAL AKIŞI AKTİF ★ —•— ★ YENİ ARAÇLAR YÜKLENİYOR ★ •—•• ——— •—• ★ ŞİFRE BEKLENİYOR ★</span>
-      </div>
-    </div>
+    <section class="signal-ticker" aria-label="Sistem durumu"><p class="sr-only">Yeni araçlar yükleniyor. Troy Community yakında.</p><div class="signal-ticker__track" aria-hidden="true"><div class="signal-ticker__group"><span>YENİ ARAÇLAR YÜKLENİYOR</span><span>⌁</span><span>TROY COMMUNITY · YAKINDA</span></div><div class="signal-ticker__group"><span>YENİ ARAÇLAR YÜKLENİYOR</span><span>⌁</span><span>TROY COMMUNITY · YAKINDA</span></div></div></section>
 
     <!-- Envanter -->
-    <section id="uygulamalar" aria-labelledby="uygulamalar-baslik">
+    <section id="uygulamalar" class="home-command-grid command-panel inventory-panel" aria-labelledby="uygulamalar-baslik">
       <div class="wrap">
-        <div class="section-head reveal">
-          <span class="mono-label"><span class="idx">Görev 01</span>Envanter</span>
-          <h2 id="uygulamalar-baslik">Uygulama <span class="grad-text">envanteri</span></h2>
-          <p>Her eşya tek bir işi iyi yapar. Doldurmaya yeni başladık.</p>
-        </div>
-
-        <div class="apps-grid">
-          <a class="app-card reveal" href="/morse-flash/">
-            <span class="tag" aria-hidden="true">EŞYA·01</span>
-            <span class="app-icon-badge" aria-hidden="true">
-              <img src="/assets/img/morse-flash-icon-96.png" alt="" width="96" height="96" loading="lazy">
-            </span>
-            <h3>Morse Flash</h3>
-            <p>Fener, SOS, Ritim Flaşı, Morse Kodu — tek uygulamada. Işığı koda dönüştür.</p>
-            <span class="go">Kartı aç ▶</span>
-          </a>
-
-          <div class="app-card future reveal" data-egg-fail="ERİŞİM REDDEDİLDİ" data-egg-hint="Gizli kart: şifreyi çözmeyi dene">
-            <span class="tag" aria-hidden="true">???</span>
-            <span class="app-icon-badge" aria-hidden="true">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
-                <circle cx="5" cy="12" r="1.4" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.4" fill="currentColor" stroke="none"/><circle cx="19" cy="12" r="1.4" fill="currentColor" stroke="none"/>
-              </svg>
-            </span>
-            <h3>???</h3>
-            <p>Yeni dijital araçlar üzerinde çalışıyoruz. Şifre henüz çözülmedi.</p>
-          </div>
-        </div>
+        <span class="mono-label"><span class="idx">Görev 01</span>Envanter</span>
+        <h2 id="uygulamalar-baslik">Uygulama <span class="grad-text">envanteri</span></h2>
+        <div class="inventory-dock" role="tablist" aria-label="Uygulamalar" data-inventory-dock><button class="inventory-app-tile" type="button" role="tab" aria-selected="true" tabindex="0" data-inventory-tab data-app-id="morse-flash" data-app-title="Morse Flash" data-app-copy="Metni Morse koduna çevir, ışıkla gönder ve görünen sinyalleri oku." data-app-href="/morse-flash/" data-app-link-label="Detayları Gör" data-app-status="Android · Yayında"><span class="inventory-app-tile__icon"><img src="/assets/img/morse-flash-icon-96.png" width="54" height="54" alt=""></span><span class="inventory-app-tile__name">Morse Flash</span><small>Android</small></button><button class="inventory-app-tile inventory-app-tile--future" type="button" role="tab" aria-selected="false" aria-label="Yakında yeni uygulama" tabindex="-1" data-inventory-tab data-app-id="future" data-app-title="Yeni araç" data-app-copy="TroyApps envanterine eklenecek sıradaki araç hazırlanıyor." data-app-href="#" data-app-link-label="Yakında" data-app-status="Geliştiriliyor" disabled><span class="inventory-placeholder" aria-hidden="true">+</span><span class="inventory-app-tile__name">Yakında</span><small>Yeni araç</small></button></div><article class="inventory-detail" data-inventory-detail aria-live="polite"><div class="inventory-detail__status"><span aria-hidden="true"></span><p data-inventory-status>Android · Yayında</p></div><h3 data-inventory-title>Morse Flash</h3><p data-inventory-copy>Metni Morse koduna çevir, ışıkla gönder ve görünen sinyalleri oku.</p><a class="command-button" data-inventory-link href="/morse-flash/">Detayları Gör</a></article>
       </div>
     </section>
 
     <!-- Radar özeti -->
-    <section class="radar-teaser" aria-labelledby="radar-teaser-h">
+    <section class="radar-teaser command-panel radar-summary" aria-labelledby="radar-teaser-h">
       <div class="wrap">
         <span class="mono-label"><span class="idx">03</span>RADAR</span>
         <h2 id="radar-teaser-h">HER SABAH TARAR</h2>
@@ -169,7 +205,7 @@
     </section>
 
     <!-- Biz kimiz -->
-    <section id="hakkimizda" aria-labelledby="hakkimizda-baslik">
+    <section id="hakkimizda" class="command-panel about-summary" aria-labelledby="hakkimizda-baslik">
       <div class="wrap">
         <div class="section-head reveal">
           <span class="mono-label"><span class="idx">Görev 02</span>Biz Kimiz</span>
@@ -214,7 +250,14 @@
   </div>
 
   <!-- Alt bilgi -->
-  <footer class="site-footer" id="iletisim">
+  <footer class="site-footer command-footer" id="iletisim">
+    <nav class="footer-platforms" aria-label="TroyApps platformları">
+      <a data-platform="google-play" href="https://play.google.com/store/apps/developer?id=Troy+Apps" target="_blank" rel="noopener" aria-label="TroyApps Google Play sayfasını aç" title="Google Play"><img src="/assets/img/social/google-play.svg" alt="" aria-hidden="true"></a>
+      <a data-platform="youtube" href="https://www.youtube.com/channel/UC2PncaDQ9wSXYqY5IaffuJw" target="_blank" rel="noopener" aria-label="TroyApps YouTube kanalını aç" title="YouTube"><img src="/assets/img/social/youtube.svg" alt="" aria-hidden="true"></a>
+      <a data-platform="instagram" href="https://www.instagram.com/troyappsofficial/" target="_blank" rel="noopener" aria-label="TroyApps Instagram hesabını aç" title="Instagram"><img src="/assets/img/social/instagram.svg" alt="" aria-hidden="true"></a>
+      <a data-platform="tiktok" href="https://www.tiktok.com/@troyappsofficial" target="_blank" rel="noopener" aria-label="TroyApps TikTok hesabını aç" title="TikTok"><img src="/assets/img/social/tiktok.svg" alt="" aria-hidden="true"></a>
+      <a data-platform="facebook" href="https://www.facebook.com/troyappsofficial" target="_blank" rel="noopener" aria-label="TroyApps Facebook sayfasını aç" title="Facebook"><img src="/assets/img/social/facebook.svg" alt="" aria-hidden="true"></a>
+    </nav>
     <div class="wrap">
       <p class="footer-word" aria-hidden="true">TroyApps</p>
       <div class="footer-grid">
@@ -243,9 +286,10 @@
     </div>
   </footer>
 
-  <script src="/assets/js/bg.js" defer></script>
+  <script type="module" src="/assets/js/bg.js?v=20260910-pixel1"></script>
   <script src="/assets/js/site.js" defer></script>
   <script src="/assets/js/tilt.js" defer></script>
-  <script src="/assets/js/mascot.js" defer></script>
+  <script type="module" src="/assets/js/troy/troy-controller.js?v=20260914-lookdown1"></script>
+  <script type="module" src="/assets/js/home-v3.js?v=20260910-inventory1"></script>
 </body>
 </html>

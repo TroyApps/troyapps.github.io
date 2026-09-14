@@ -8,6 +8,14 @@
   <link rel="canonical" href="https://troyapps.app/en/">
   <link rel="alternate" hreflang="tr" href="https://troyapps.app/">
   <link rel="alternate" hreflang="en" href="https://troyapps.app/en/">
+  <link rel="alternate" hreflang="es-419" href="https://troyapps.app/es/">
+  <link rel="alternate" hreflang="pt-BR" href="https://troyapps.app/pt-br/">
+  <link rel="alternate" hreflang="hi" href="https://troyapps.app/hi/">
+  <link rel="alternate" hreflang="id" href="https://troyapps.app/id/">
+  <link rel="alternate" hreflang="ar" href="https://troyapps.app/ar/">
+  <link rel="alternate" hreflang="de" href="https://troyapps.app/de/">
+  <link rel="alternate" hreflang="fr" href="https://troyapps.app/fr/">
+  <link rel="alternate" hreflang="it" href="https://troyapps.app/it/">
   <link rel="alternate" hreflang="x-default" href="https://troyapps.app/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="TroyApps">
@@ -17,6 +25,14 @@
   <meta property="og:image" content="https://troyapps.app/assets/img/og-home.png">
   <meta property="og:locale" content="en_US">
   <meta property="og:locale:alternate" content="tr_TR">
+  <meta property="og:locale:alternate" content="es_MX">
+  <meta property="og:locale:alternate" content="pt_BR">
+  <meta property="og:locale:alternate" content="hi_IN">
+  <meta property="og:locale:alternate" content="id_ID">
+  <meta property="og:locale:alternate" content="ar_SA">
+  <meta property="og:locale:alternate" content="de_DE">
+  <meta property="og:locale:alternate" content="fr_FR">
+  <meta property="og:locale:alternate" content="it_IT">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="theme-color" content="#0a0a12">
   <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
@@ -25,17 +41,29 @@
   <link rel="preload" href="/assets/fonts/press-start-2p-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/vt323-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/assets/css/site.css">
+  <link rel="stylesheet" href="/assets/css/theme-v3.css?v=20260913-header4">
+  <link rel="stylesheet" href="/assets/css/home-v2.css?v=20260912-drop7">
+  <link rel="stylesheet" href="/assets/css/home-v3.css?v=20260914-ticker-loop1">
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "/assets/vendor/three-0.185.1/three.module.min.js",
+        "three/addons/": "/assets/vendor/three-0.185.1/addons/"
+      }
+    }
+  </script>
+  <link rel="modulepreload" href="/assets/js/troy/troy-three.js?v=20260914-lookdown1">
 </head>
-<body>
+<body class="home-v2 home-v3 theme-command">
   <canvas id="bg-signal" aria-hidden="true"></canvas>
   <div id="stage-glow" aria-hidden="true"></div>
   <div id="cursor-glow" aria-hidden="true"></div>
 
   <a class="skip-link" href="#content">Skip to content</a>
 
-  <header class="site-header">
+  <header class="site-header command-header">
     <div class="wrap nav-bar">
-      <a class="brand" href="/en/" aria-label="TroyApps home">
+      <a class="brand command-brand" href="/en/" aria-label="TroyApps home">
         <svg width="26" height="26" viewBox="0 0 64 64" aria-hidden="true">
           <rect width="64" height="64" rx="4" fill="#0c1812"/>
           <rect x="1.5" y="1.5" width="61" height="61" rx="3" fill="none" stroke="#1c4a36" stroke-width="3"/>
@@ -51,16 +79,14 @@
         <span class="bars"></span>
       </button>
 
-      <nav class="nav-menu" id="nav-menu" aria-label="Main menu">
+      <nav class="nav-menu command-nav" id="nav-menu" aria-label="Main menu">
         <ul class="nav-links">
-          <li><a href="#apps"><span class="n">01</span>Inventory</a></li>
-          <li><a href="/en/morse-flash/"><span class="n">02</span>Morse Flash</a></li>
-          <li><a href="/en/radar/"><span class="n">03</span>Radar</a></li>
-          <li><a href="#about"><span class="n">04</span>Who We Are</a></li>
-          <li><a href="#contact"><span class="n">05</span>Contact</a></li>
-          <li class="lang-item"><a class="lang-switch" href="/" lang="tr" hreflang="tr" aria-label="Türkçe'ye geç">TR</a></li>
+          <li><a href="/en/" aria-current="page">Home</a></li>
+          <li><a href="#apps">Apps</a></li>
+          <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
+      <details class="language-menu"><summary aria-label="Choose language"><img class="language-flag" src="/assets/img/flags/us.svg" width="20" height="14" alt="" aria-hidden="true"><span>EN</span><span aria-hidden="true">⌄</span></summary><div class="language-options"><a href="/" lang="tr" hreflang="tr"><img class="language-flag" src="/assets/img/flags/tr.svg" width="20" height="14" alt="" aria-hidden="true"><span>Türkçe</span></a><a href="/en/" lang="en" hreflang="en" aria-current="page"><img class="language-flag" src="/assets/img/flags/us.svg" width="20" height="14" alt="" aria-hidden="true"><span>English</span></a><a href="/es/" lang="es-419" hreflang="es-419"><img class="language-flag" src="/assets/img/flags/mx.svg" width="20" height="14" alt="" aria-hidden="true"><span>Español</span></a><a href="/pt-br/" lang="pt-BR" hreflang="pt-BR"><img class="language-flag" src="/assets/img/flags/br.svg" width="20" height="14" alt="" aria-hidden="true"><span>Português (Brasil)</span></a><a href="/hi/" lang="hi" hreflang="hi"><img class="language-flag" src="/assets/img/flags/in.svg" width="20" height="14" alt="" aria-hidden="true"><span>हिन्दी</span></a><a href="/id/" lang="id" hreflang="id"><img class="language-flag" src="/assets/img/flags/id.svg" width="20" height="14" alt="" aria-hidden="true"><span>Bahasa Indonesia</span></a><a href="/ar/" lang="ar" hreflang="ar"><img class="language-flag" src="/assets/img/flags/sa.svg" width="20" height="14" alt="" aria-hidden="true"><span>العربية</span></a><a href="/de/" lang="de" hreflang="de"><img class="language-flag" src="/assets/img/flags/de.svg" width="20" height="14" alt="" aria-hidden="true"><span>Deutsch</span></a><a href="/fr/" lang="fr" hreflang="fr"><img class="language-flag" src="/assets/img/flags/fr.svg" width="20" height="14" alt="" aria-hidden="true"><span>Français</span></a><a href="/it/" lang="it" hreflang="it"><img class="language-flag" src="/assets/img/flags/it.svg" width="20" height="14" alt="" aria-hidden="true"><span>Italiano</span></a></div></details>
     </div>
   </header>
 
@@ -73,62 +99,72 @@
     </aside>
     <main id="content">
     <!-- Hero -->
-    <section class="hero" aria-labelledby="hero-title">
-      <div class="wrap hero-inner">
-        <p class="kicker">Connected to the signal station</p>
-        <h1 id="hero-title" class="decode" data-text="TROYAPPS">TROYAPPS</h1>
-        <p class="lead">We build tools for everyday life: practical, fast, and open to everyone.</p>
-        <div class="hero-cta">
-          <a class="btn btn-primary" href="#apps">App Inventory</a>
-          <a class="btn btn-ghost" href="#about">Who Are We?</a>
+    <section class="hero command-hero" aria-labelledby="hero-title">
+      <div class="wrap command-hero__grid">
+        <div class="hero-copy command-hero__copy">
+          <p class="system-status"><span aria-hidden="true"></span>TroyApps system online</p>
+          <h1 id="hero-title" class="command-wordmark" data-wordmark="TROYAPPS" aria-label="TROYAPPS"><svg class="command-wordmark__graphic" viewBox="0 0 1000 200" aria-hidden="true" focusable="false"><text class="command-wordmark__text command-wordmark__edge" x="8" y="166" textLength="984" lengthAdjust="spacingAndGlyphs">TROYAPPS</text><text class="command-wordmark__text command-wordmark__fill" x="8" y="166" textLength="984" lengthAdjust="spacingAndGlyphs"><tspan class="command-wordmark__light">TROY</tspan><tspan class="command-wordmark__red">APPS</tspan></text></svg></h1>
+          <p class="lead">We simplify everyday tools with mobile solutions that are <b>practical, fast</b> and <b>open to everyone</b>.</p>
+          <div class="hero-actions">
+            <a class="command-button command-button--primary" href="#apps"><span aria-hidden="true">▦</span><span>App Inventory</span></a>
+            <a class="command-button" href="https://play.google.com/store/apps/developer?id=Troy+Apps" target="_blank" rel="noopener"><span aria-hidden="true">▶</span><span>Google Play</span></a>
+          </div>
+          <p class="hero-proof"><span>Independent developer</span><span>Building from Türkiye</span></p>
         </div>
-        <button class="press-start" type="button" aria-label="Trigger signal burst">▶ Press Start</button>
+
+        <div class="command-hero__troy"><div class="troy-stage" id="troy-stage" data-troy-state="idle" data-troy-tool="poke" data-troy-dialogue-state="hidden" data-troy-renderer="loading" data-troy-model="/assets/models/troy/troy.glb">
+          <div class="troy-aura" aria-hidden="true"></div>
+          <img class="troy-poster" data-troy-poster src="/assets/img/troy/troy-hero.webp" alt="" width="768" height="1152" fetchpriority="high">
+          <canvas class="troy-canvas" data-troy-canvas aria-hidden="true"></canvas>
+          <button class="troy-target" type="button" data-troy-target aria-label="Poke Troy"></button>
+          <button class="troy-pixel-target" type="button" data-troy-pixel-target aria-label="Reassemble Troy's pixels" hidden></button>
+          <div class="troy-effects" data-troy-effect aria-hidden="true">
+            <span class="troy-whip-arc"></span>
+            <span class="troy-impact"></span>
+          </div>
+          <div class="troy-pixel-orbit" data-troy-pixels aria-hidden="true"></div>
+          <div class="troy-intro" role="status" aria-live="polite" aria-atomic="true">
+            <strong>I'm Troy.</strong>
+            <span data-troy-dialogue>I used to cause confusion. Now I make things easier.</span>
+          </div>
+          <span class="troy-badge">TROY · RELUCTANT ASSISTANT</span>
+          <div class="troy-controls troy-tools" role="group" aria-label="Troy controls">
+            <button class="troy-tool" type="button" data-troy-tool-option="poke" aria-pressed="true"><span aria-hidden="true">•</span> Poke</button>
+            <button class="troy-tool" type="button" data-troy-tool-option="bazooka" aria-pressed="false"><span class="troy-tool__icon" aria-hidden="true"><img src="/assets/img/troy/controls/bazooka.webp" width="72" height="55" alt=""></span><span>Bazooka</span></button>
+            <button class="troy-tool" type="button" data-troy-tool-option="whip" aria-pressed="false"><span class="troy-tool__icon" aria-hidden="true"><img src="/assets/img/troy/controls/whip.webp" width="72" height="55" alt=""></span><span>Whip</span></button>
+            <button class="troy-tool troy-command-trigger" type="button" data-troy-command-trigger aria-expanded="false" aria-controls="troy-command-panel"><span aria-hidden="true">›_</span> Command</button>
+          </div>
+          <div class="troy-command-panel" id="troy-command-panel" data-troy-command-panel hidden aria-label="Troy commands">
+            <a href="#apps" data-troy-command="apps">Show the apps</a>
+            <a href="/en/radar/" data-troy-command="radar">Take me to Radar</a>
+            <a href="#about" data-troy-command="about">Who are we?</a>
+            <a href="#contact" data-troy-command="contact">Open contact</a>
+          </div>
+          <noscript>
+            <nav class="troy-command-fallback" aria-label="Troy commands without JavaScript">
+              <a href="#apps">Show the apps</a>
+              <a href="/en/radar/">Take me to Radar</a>
+              <a href="#about">Who are we?</a>
+              <a href="#contact">Open contact</a>
+            </nav>
+          </noscript>
+        </div></div>
       </div>
     </section>
 
-    <div class="ticker" aria-hidden="true">
-      <div class="ticker-track">
-        <span>★ <b>TROYAPPS</b> ★ ••• ——— ••• ★ SIGNAL STREAM ACTIVE ★ —•— ★ NEW TOOLS LOADING ★ •—•• ——— •—• ★ AWAITING CIPHER ★</span>
-        <span>★ <b>TROYAPPS</b> ★ ••• ——— ••• ★ SIGNAL STREAM ACTIVE ★ —•— ★ NEW TOOLS LOADING ★ •—•• ——— •—• ★ AWAITING CIPHER ★</span>
-      </div>
-    </div>
+    <section class="signal-ticker" aria-label="System status"><p class="sr-only">New tools loading. Troy Community coming soon.</p><div class="signal-ticker__track" aria-hidden="true"><div class="signal-ticker__group"><span>NEW TOOLS LOADING</span><span>⌁</span><span>TROY COMMUNITY · COMING SOON</span></div><div class="signal-ticker__group"><span>NEW TOOLS LOADING</span><span>⌁</span><span>TROY COMMUNITY · COMING SOON</span></div></div></section>
 
     <!-- Inventory -->
-    <section id="apps" aria-labelledby="apps-title">
+    <section id="apps" class="home-command-grid command-panel inventory-panel" aria-labelledby="apps-title">
       <div class="wrap">
-        <div class="section-head reveal">
-          <span class="mono-label"><span class="idx">Quest 01</span>Inventory</span>
-          <h2 id="apps-title">The app <span class="grad-text">inventory</span></h2>
-          <p>Every item does one job well. We just started filling it up.</p>
-        </div>
-
-        <div class="apps-grid">
-          <a class="app-card reveal" href="/en/morse-flash/">
-            <span class="tag" aria-hidden="true">ITEM·01</span>
-            <span class="app-icon-badge" aria-hidden="true">
-              <img src="/assets/img/morse-flash-icon-96.png" alt="" width="96" height="96" loading="lazy">
-            </span>
-            <h3>Morse Flash</h3>
-            <p>Flashlight, SOS, Rhythm Flash, Morse Code — in one app. Turn light into code.</p>
-            <span class="go">Open card ▶</span>
-          </a>
-
-          <div class="app-card future reveal" data-egg-fail="ACCESS DENIED" data-egg-hint="Hidden card: try to crack the cipher">
-            <span class="tag" aria-hidden="true">???</span>
-            <span class="app-icon-badge" aria-hidden="true">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
-                <circle cx="5" cy="12" r="1.4" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.4" fill="currentColor" stroke="none"/><circle cx="19" cy="12" r="1.4" fill="currentColor" stroke="none"/>
-              </svg>
-            </span>
-            <h3>???</h3>
-            <p>New digital tools are in development. The cipher isn't cracked yet.</p>
-          </div>
-        </div>
+        <span class="mono-label"><span class="idx">Quest 01</span>Inventory</span>
+        <h2 id="apps-title">The app <span class="grad-text">inventory</span></h2>
+        <div class="inventory-dock" role="tablist" aria-label="Apps" data-inventory-dock><button class="inventory-app-tile" type="button" role="tab" aria-selected="true" tabindex="0" data-inventory-tab data-app-id="morse-flash" data-app-title="Morse Flash" data-app-copy="Turn text into Morse code, send it with light, and read visible signals." data-app-href="/en/morse-flash/" data-app-link-label="View details" data-app-status="Android · Available"><span class="inventory-app-tile__icon"><img src="/assets/img/morse-flash-icon-96.png" width="54" height="54" alt=""></span><span class="inventory-app-tile__name">Morse Flash</span><small>Android</small></button><button class="inventory-app-tile inventory-app-tile--future" type="button" role="tab" aria-selected="false" aria-label="New app coming soon" tabindex="-1" data-inventory-tab data-app-id="future" data-app-title="New tool" data-app-copy="The next TroyApps inventory tool is in preparation." data-app-href="#" data-app-link-label="Coming soon" data-app-status="In development" disabled><span class="inventory-placeholder" aria-hidden="true">+</span><span class="inventory-app-tile__name">Coming soon</span><small>New tool</small></button></div><article class="inventory-detail" data-inventory-detail aria-live="polite"><div class="inventory-detail__status"><span aria-hidden="true"></span><p data-inventory-status>Android · Available</p></div><h3 data-inventory-title>Morse Flash</h3><p data-inventory-copy>Turn text into Morse code, send it with light, and read visible signals.</p><a class="command-button" data-inventory-link href="/en/morse-flash/">View details</a></article>
       </div>
     </section>
 
     <!-- Radar teaser -->
-    <section class="radar-teaser" aria-labelledby="radar-teaser-h">
+    <section class="radar-teaser command-panel radar-summary" aria-labelledby="radar-teaser-h">
       <div class="wrap">
         <span class="mono-label"><span class="idx">03</span>RADAR</span>
         <h2 id="radar-teaser-h">SWEPT EVERY MORNING</h2>
@@ -168,7 +204,7 @@
     </section>
 
     <!-- About -->
-    <section id="about" aria-labelledby="about-title">
+    <section id="about" class="command-panel about-summary" aria-labelledby="about-title">
       <div class="wrap">
         <div class="section-head reveal">
           <span class="mono-label"><span class="idx">Quest 02</span>Who We Are</span>
@@ -213,7 +249,14 @@
   </div>
 
   <!-- Footer -->
-  <footer class="site-footer" id="contact">
+  <footer class="site-footer command-footer" id="contact">
+    <nav class="footer-platforms" aria-label="TroyApps platforms">
+      <a data-platform="google-play" href="https://play.google.com/store/apps/developer?id=Troy+Apps" target="_blank" rel="noopener" aria-label="Open TroyApps on Google Play" title="Google Play"><img src="/assets/img/social/google-play.svg" alt="" aria-hidden="true"></a>
+      <a data-platform="youtube" href="https://www.youtube.com/channel/UC2PncaDQ9wSXYqY5IaffuJw" target="_blank" rel="noopener" aria-label="Open the TroyApps YouTube channel" title="YouTube"><img src="/assets/img/social/youtube.svg" alt="" aria-hidden="true"></a>
+      <a data-platform="instagram" href="https://www.instagram.com/troyappsofficial/" target="_blank" rel="noopener" aria-label="Open TroyApps on Instagram" title="Instagram"><img src="/assets/img/social/instagram.svg" alt="" aria-hidden="true"></a>
+      <a data-platform="tiktok" href="https://www.tiktok.com/@troyappsofficial" target="_blank" rel="noopener" aria-label="Open TroyApps on TikTok" title="TikTok"><img src="/assets/img/social/tiktok.svg" alt="" aria-hidden="true"></a>
+      <a data-platform="facebook" href="https://www.facebook.com/troyappsofficial" target="_blank" rel="noopener" aria-label="Open TroyApps on Facebook" title="Facebook"><img src="/assets/img/social/facebook.svg" alt="" aria-hidden="true"></a>
+    </nav>
     <div class="wrap">
       <p class="footer-word" aria-hidden="true">TroyApps</p>
       <div class="footer-grid">
@@ -242,9 +285,10 @@
     </div>
   </footer>
 
-  <script src="/assets/js/bg.js" defer></script>
+  <script type="module" src="/assets/js/bg.js?v=20260910-pixel1"></script>
   <script src="/assets/js/site.js" defer></script>
   <script src="/assets/js/tilt.js" defer></script>
-  <script src="/assets/js/mascot.js" defer></script>
+  <script type="module" src="/assets/js/troy/troy-controller.js?v=20260914-lookdown1"></script>
+  <script type="module" src="/assets/js/home-v3.js?v=20260910-inventory1"></script>
 </body>
 </html>

@@ -13,6 +13,7 @@ import { log, isoDay } from "./radar-lib.mjs";
 import { collectNews, collectRepos } from "./radar-collect.mjs";
 import { summarizeRepos, summarizeNews, hasModelKey } from "./radar-summarize.mjs";
 import { renderRadar, renderHomeBox } from "./radar-render.mjs";
+import { radarHomeTargets } from "../assets/js/locales.js";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const argv = process.argv.slice(2);
@@ -126,8 +127,9 @@ async function main() {
   /* Sayfa govdeleri */
   await inject("radar/index.html", "page", renderRadar(data, true));
   await inject("en/radar/index.html", "page", renderRadar(data, false));
-  await inject("index.html", "box", renderHomeBox(data, true));
-  await inject("en/index.html", "box", renderHomeBox(data, false));
+  for (const target of radarHomeTargets()) {
+    await inject(target.file, "box", renderHomeBox(data, target.summaryLanguage === "tr"));
+  }
 
   /* Veri: guncel + arsiv. Readme'leri saklamiyoruz, gereksiz yer kaplar. */
   const slim = {

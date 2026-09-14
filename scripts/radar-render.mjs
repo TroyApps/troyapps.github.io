@@ -71,6 +71,10 @@ function since(ts, tr) {
   return tr ? `${days} gün önce` : `${days}d ago`;
 }
 
+function cleanTemplate(html) {
+  return html.replace(/[ \t]+$/gm, "");
+}
+
 /* ---------- Repo karti ---------- */
 
 function repoCard(r, s, i, tr) {
@@ -147,7 +151,7 @@ export function renderRadar(data, tr) {
 
   const empty = (msg) => `<p class="rd-empty">${esc(msg)}</p>`;
 
-  return `
+  return cleanTemplate(`
       <p class="rd-stamp">${tr ? "Son tarama" : "Last sweep"}: <strong>${esc(stamp)}</strong> · ${esc(clock)} UTC</p>
 
       <section class="rd-block" id="${tr ? "repolar" : "repos"}" aria-labelledby="${tr ? "repolar" : "repos"}-h">
@@ -164,7 +168,7 @@ export function renderRadar(data, tr) {
           ? "Son 48 saatin öne çıkan başlıkları. Başlığa tıklayınca haberin kendi sayfasına gidersin."
           : "Notable headlines from the last 48 hours. Clicking a headline takes you to the original article."}</p>
         <div class="rd-list">${news || empty(tr ? "Bugün haber alınamadı." : "No news could be fetched today.")}</div>
-      </section>`;
+      </section>`);
 }
 
 /* ---------- Ana sayfadaki kucuk kutu ---------- */
@@ -187,7 +191,7 @@ export function renderHomeBox(data, tr) {
   }).join("");
 
   const d = new Date(data.generatedAt);
-  return `
+  return cleanTemplate(`
         <div class="radar-box">
           <div class="radar-box-head">
             <span class="rb-live">● ${tr ? "CANLI" : "LIVE"}</span>
@@ -197,5 +201,5 @@ export function renderHomeBox(data, tr) {
           <ul class="rb-list">${items}</ul>
           ${heads ? `<p class="rb-lede rb-lede-2">${tr ? "Yapay zeka gündemi" : "AI headlines"}</p><ul class="rb-news">${heads}</ul>` : ""}
           <a class="btn btn-ghost rb-all" href="${tr ? "/radar/" : "/en/radar/"}">${tr ? "TÜMÜNÜ GÖR" : "SEE ALL"} ▸</a>
-        </div>`;
+        </div>`);
 }
