@@ -221,6 +221,9 @@
   }
 
   function plan(height) {
+    /* Hedef duzen: ustte bir 300x600, altta bir 300x600 (üst/alt çizgiye yaslı).
+       Ekran yetmezse alttakiler kuculur: 600+250'ler, o da olmazsa tek 600. */
+    if (height >= 600 + GAP + 600) return [600, 600];
     var left = height;
     var out = [];
     if (left >= 600) { out.push(600); left -= 600 + GAP; }
