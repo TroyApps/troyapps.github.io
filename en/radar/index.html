@@ -26,17 +26,18 @@
   <link rel="preload" href="/assets/fonts/press-start-2p-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/vt323-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/assets/css/site.css">
+  <link rel="stylesheet" href="/assets/css/theme-v3.css?v=20260913-header4"><link rel="stylesheet" href="/assets/css/radar-v3.css?v=20260912-radar2">
 </head>
-<body>
+<body class="radar-v3 theme-command">
   <canvas id="bg-signal" aria-hidden="true"></canvas>
   <div id="stage-glow" aria-hidden="true"></div>
   <div id="cursor-glow" aria-hidden="true"></div>
 
   <a class="skip-link" href="#content">Skip to content</a>
 
-  <header class="site-header">
+  <header class="site-header command-header">
     <div class="wrap nav-bar">
-      <a class="brand" href="/" aria-label="TroyApps home">
+      <a class="brand command-brand" href="/" aria-label="TroyApps home">
         <svg width="26" height="26" viewBox="0 0 64 64" aria-hidden="true">
           <rect width="64" height="64" rx="4" fill="#0c1812"/>
           <rect x="1.5" y="1.5" width="61" height="61" rx="3" fill="none" stroke="#1c4a36" stroke-width="3"/>
@@ -52,16 +53,14 @@
         <span class="bars"></span>
       </button>
 
-      <nav class="nav-menu" id="nav-menu" aria-label="Main menu">
+      <nav class="nav-menu command-nav" id="nav-menu" aria-label="Main menu">
         <ul class="nav-links">
-          <li><a href="/en/#apps"><span class="n">01</span>Inventory</a></li>
-          <li><a href="/en/morse-flash/"><span class="n">02</span>Morse Flash</a></li>
-          <li><a href="/en/radar/" aria-current="page"><span class="n">03</span>Radar</a></li>
-          <li><a href="/en/#about"><span class="n">04</span>Who We Are</a></li>
-          <li><a href="/en/#contact"><span class="n">05</span>Contact</a></li>
-          <li class="lang-item"><a class="lang-switch" href="/radar/" lang="tr" hreflang="tr" aria-label="Türkçe'ye geç">TR</a></li>
+          <li><a href="/en/">Home</a></li>
+          <li><a href="/en/#apps" aria-current="page">Apps</a></li>
+          <li><a href="/en/#contact">Contact</a></li>
         </ul>
       </nav>
+      <details class="language-menu"><summary aria-label="Choose language"><img class="language-flag" src="/assets/img/flags/us.svg" width="20" height="14" alt="" aria-hidden="true"><span>EN</span><span aria-hidden="true">⌄</span></summary><div class="language-options"><a href="/radar/" lang="tr" hreflang="tr"><img class="language-flag" src="/assets/img/flags/tr.svg" width="20" height="14" alt="" aria-hidden="true"><span>Türkçe</span></a><a href="/en/radar/" lang="en" hreflang="en" aria-current="page"><img class="language-flag" src="/assets/img/flags/us.svg" width="20" height="14" alt="" aria-hidden="true"><span>English</span></a><a href="/en/radar/" lang="es-419" hreflang="es-419"><img class="language-flag" src="/assets/img/flags/mx.svg" width="20" height="14" alt="" aria-hidden="true"><span>Español</span></a><a href="/en/radar/" lang="pt-BR" hreflang="pt-BR"><img class="language-flag" src="/assets/img/flags/br.svg" width="20" height="14" alt="" aria-hidden="true"><span>Português (Brasil)</span></a><a href="/en/radar/" lang="hi" hreflang="hi"><img class="language-flag" src="/assets/img/flags/in.svg" width="20" height="14" alt="" aria-hidden="true"><span>हिन्दी</span></a><a href="/en/radar/" lang="id" hreflang="id"><img class="language-flag" src="/assets/img/flags/id.svg" width="20" height="14" alt="" aria-hidden="true"><span>Bahasa Indonesia</span></a><a href="/en/radar/" lang="ar" hreflang="ar"><img class="language-flag" src="/assets/img/flags/sa.svg" width="20" height="14" alt="" aria-hidden="true"><span>العربية</span></a><a href="/en/radar/" lang="de" hreflang="de"><img class="language-flag" src="/assets/img/flags/de.svg" width="20" height="14" alt="" aria-hidden="true"><span>Deutsch</span></a><a href="/en/radar/" lang="fr" hreflang="fr"><img class="language-flag" src="/assets/img/flags/fr.svg" width="20" height="14" alt="" aria-hidden="true"><span>Français</span></a><a href="/en/radar/" lang="it" hreflang="it"><img class="language-flag" src="/assets/img/flags/it.svg" width="20" height="14" alt="" aria-hidden="true"><span>Italiano</span></a></div></details>
     </div>
   </header>
 
@@ -74,7 +73,7 @@
     </aside>
 
     <main id="content">
-      <section class="radar-hero" aria-labelledby="radar-baslik">
+      <section class="radar-command-hero" aria-labelledby="radar-baslik">
         <div class="wrap">
           <p class="kicker">Sweep complete</p>
           <h1 id="radar-baslik">RADAR</h1>
@@ -89,7 +88,7 @@
       <div class="wrap radar-body">
       <!-- RADAR:START -->
 
-      <p class="rd-stamp">Last sweep: <strong>3 September 2026</strong> · 09:42 UTC</p>
+      <p class="rd-stamp">Last sweep: <strong>13 September 2026</strong> · 12:21 UTC</p>
 
       <section class="rd-block" id="repos" aria-labelledby="repos-h">
         <h2 id="repos-h" class="rd-h">Today's Repos</h2>
@@ -98,170 +97,170 @@
         <article class="rd-card rd-repo" style="--rd-accent:#ffd93d">
           <div class="rd-rank">01</div>
           <div class="rd-head">
-            <svg class="rd-sigil" viewBox="0 0 5 5" width="34" height="34" aria-hidden="true" shape-rendering="crispEdges"><g fill="#ffd93d"><rect x="0" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="2" y="0" width="1" height="1"/><rect x="0" y="1" width="1" height="1"/><rect x="4" y="1" width="1" height="1"/><rect x="2" y="1" width="1" height="1"/><rect x="0" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="0" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="1" y="3" width="1" height="1"/><rect x="3" y="3" width="1" height="1"/><rect x="0" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="1" y="4" width="1" height="1"/><rect x="3" y="4" width="1" height="1"/></g></svg>
+            <svg class="rd-sigil" viewBox="0 0 5 5" width="34" height="34" aria-hidden="true" shape-rendering="crispEdges"><g fill="#ffd93d"><rect x="2" y="0" width="1" height="1"/><rect x="1" y="1" width="1" height="1"/><rect x="3" y="1" width="1" height="1"/><rect x="2" y="1" width="1" height="1"/><rect x="0" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="1" y="3" width="1" height="1"/><rect x="3" y="3" width="1" height="1"/><rect x="2" y="3" width="1" height="1"/><rect x="0" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="1" y="4" width="1" height="1"/><rect x="3" y="4" width="1" height="1"/><rect x="2" y="4" width="1" height="1"/></g></svg>
             <div class="rd-title">
-              <h3><a href="https://github.com/DietrichGebert/ponytail" rel="noopener nofollow" target="_blank">DietrichGebert<span>/</span>ponytail</a></h3>
+              <h3><a href="https://github.com/bilawalsidhu/gods-eye-view" rel="noopener nofollow" target="_blank">bilawalsidhu<span>/</span>gods-eye-view</a></h3>
               <p class="rd-meta">
                 <span class="rd-lang">JavaScript</span>
-                <span class="rd-stars">★ 123k</span>
-                <span class="rd-hot" title="stars gained today">▲ 1.4k</span>
-                <span class="rd-lic">MIT</span>
+                <span class="rd-stars">★ 31k</span>
+                <span class="rd-hot" title="stars gained today">▲ 2.9k</span>
+
               </p>
             </div>
-            <img class="rd-avatar" src="https://avatars.githubusercontent.com/u/137048761?v=4&amp;s=96" alt="" width="40" height="40" loading="lazy" decoding="async" onerror="this.remove()">
+            <img class="rd-avatar" src="https://avatars.githubusercontent.com/u/106619546?v=4&amp;s=96" alt="" width="40" height="40" loading="lazy" decoding="async" onerror="this.remove()">
           </div>
-          <p class="rd-what">Makes your AI agent think like the laziest senior dev in the room. The best code is the code you never wrote.</p>
-          
-          <div class="rd-cmd"><span class="rd-cmd-label">install</span><code>npx promptfoo</code></div>
-          <p class="rd-who"><span>who it's for</span> Topics: agent-skills, ai-agents, claude.</p>
-          <ul class="rd-topics"><li>agent-skills</li><li>ai-agents</li><li>claude</li><li>claude-code</li></ul>
-        </article>
-        <article class="rd-card rd-repo" style="--rd-accent:#9be36b">
-          <div class="rd-rank">02</div>
-          <div class="rd-head">
-            <svg class="rd-sigil" viewBox="0 0 5 5" width="34" height="34" aria-hidden="true" shape-rendering="crispEdges"><g fill="#9be36b"><rect x="0" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="2" y="0" width="1" height="1"/><rect x="0" y="1" width="1" height="1"/><rect x="4" y="1" width="1" height="1"/><rect x="1" y="1" width="1" height="1"/><rect x="3" y="1" width="1" height="1"/><rect x="2" y="1" width="1" height="1"/><rect x="0" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="1" y="2" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="0" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="2" y="3" width="1" height="1"/><rect x="1" y="4" width="1" height="1"/><rect x="3" y="4" width="1" height="1"/></g></svg>
-            <div class="rd-title">
-              <h3><a href="https://github.com/mattpocock/skills" rel="noopener nofollow" target="_blank">mattpocock<span>/</span>skills</a></h3>
-              <p class="rd-meta">
-                <span class="rd-lang">Shell</span>
-                <span class="rd-stars">★ 246k</span>
-                <span class="rd-hot" title="stars gained today">▲ 1.2k</span>
-                <span class="rd-lic">MIT</span>
-              </p>
-            </div>
-            <img class="rd-avatar" src="https://avatars.githubusercontent.com/u/28293365?v=4&amp;s=96" alt="" width="40" height="40" loading="lazy" decoding="async" onerror="this.remove()">
-          </div>
-          <p class="rd-what">Skills for Real Engineers. Straight from my .agents directory.</p>
-          
-          <div class="rd-cmd"><span class="rd-cmd-label">install</span><code>npx skills@latest</code></div>
-          
-          
-        </article>
-        <article class="rd-card rd-repo" style="--rd-accent:#ff8b5e">
-          <div class="rd-rank">03</div>
-          <div class="rd-head">
-            <svg class="rd-sigil" viewBox="0 0 5 5" width="34" height="34" aria-hidden="true" shape-rendering="crispEdges"><g fill="#ff8b5e"><rect x="0" y="1" width="1" height="1"/><rect x="4" y="1" width="1" height="1"/><rect x="0" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="1" y="2" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="1" y="4" width="1" height="1"/><rect x="3" y="4" width="1" height="1"/><rect x="2" y="4" width="1" height="1"/></g></svg>
-            <div class="rd-title">
-              <h3><a href="https://github.com/pacifio/atlas" rel="noopener nofollow" target="_blank">pacifio<span>/</span>atlas</a></h3>
-              <p class="rd-meta">
-                <span class="rd-lang">Rust</span>
-                <span class="rd-stars">★ 3.1k</span>
-                <span class="rd-hot" title="stars gained today">▲ 888</span>
-                <span class="rd-lic">MIT</span>
-              </p>
-            </div>
-            <img class="rd-avatar" src="https://avatars.githubusercontent.com/u/32670628?v=4&amp;s=96" alt="" width="40" height="40" loading="lazy" decoding="async" onerror="this.remove()">
-          </div>
-          <p class="rd-what">Source control for agents. Use multiple coding agents, track their changes and query them in one place</p>
-          
-          <div class="rd-cmd"><span class="rd-cmd-label">install</span><code>bun install bun</code></div>
-          <p class="rd-who"><span>who it's for</span> Topics: ai, ai-coding-assistant, claude-code.</p>
-          <ul class="rd-topics"><li>ai</li><li>ai-coding-assistant</li><li>claude-code</li><li>codex</li></ul>
+          <p class="rd-what">A spy satellite simulator in your browser, except the data is real. Live open source spatial intelligence on a photorealistic 3D globe.</p>
+          <p class="rd-how">See the repository README for setup steps.</p>
+
+          <p class="rd-who"><span>who it's for</span> Topics: 3d-globe, cesium, flight-tracking.</p>
+          <ul class="rd-topics"><li>3d-globe</li><li>cesium</li><li>flight-tracking</li><li>geospatial</li></ul>
         </article>
         <article class="rd-card rd-repo" style="--rd-accent:#4bc0a8">
-          <div class="rd-rank">04</div>
+          <div class="rd-rank">02</div>
           <div class="rd-head">
             <svg class="rd-sigil" viewBox="0 0 5 5" width="34" height="34" aria-hidden="true" shape-rendering="crispEdges"><g fill="#4bc0a8"><rect x="2" y="1" width="1" height="1"/><rect x="0" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="0" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/></g></svg>
             <div class="rd-title">
               <h3><a href="https://github.com/debpalash/VoiceStudio" rel="noopener nofollow" target="_blank">debpalash<span>/</span>VoiceStudio</a></h3>
               <p class="rd-meta">
                 <span class="rd-lang">Python</span>
-                <span class="rd-stars">★ 15k</span>
-                <span class="rd-hot" title="stars gained today">▲ 832</span>
+                <span class="rd-stars">★ 25k</span>
+                <span class="rd-hot" title="stars gained today">▲ 2.5k</span>
                 <span class="rd-lic">AGPL-3.0</span>
               </p>
             </div>
             <img class="rd-avatar" src="https://avatars.githubusercontent.com/u/4178343?v=4&amp;s=96" alt="" width="40" height="40" loading="lazy" decoding="async" onerror="this.remove()">
           </div>
           <p class="rd-what">VoiceStudio is the open-source, fully-local ElevenLabs alternative — voice cloning, voice design, video dubbing, dictation, transcription &amp; audiobook creation in 646 languages.</p>
-          
+
           <div class="rd-cmd"><span class="rd-cmd-label">install</span><code>npx skills</code></div>
           <p class="rd-who"><span>who it's for</span> Topics: ai, audiobook, cuda.</p>
           <ul class="rd-topics"><li>ai</li><li>audiobook</li><li>cuda</li><li>dubbing</li></ul>
         </article>
-        <article class="rd-card rd-repo" style="--rd-accent:#4bc0a8">
-          <div class="rd-rank">05</div>
-          <div class="rd-head">
-            <svg class="rd-sigil" viewBox="0 0 5 5" width="34" height="34" aria-hidden="true" shape-rendering="crispEdges"><g fill="#4bc0a8"><rect x="0" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="1" y="0" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="0" y="1" width="1" height="1"/><rect x="4" y="1" width="1" height="1"/><rect x="1" y="1" width="1" height="1"/><rect x="3" y="1" width="1" height="1"/><rect x="0" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="0" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="2" y="3" width="1" height="1"/></g></svg>
-            <div class="rd-title">
-              <h3><a href="https://github.com/Imbad0202/academic-research-skills" rel="noopener nofollow" target="_blank">Imbad0202<span>/</span>academic-research-skills</a></h3>
-              <p class="rd-meta">
-                <span class="rd-lang">Python</span>
-                <span class="rd-stars">★ 46k</span>
-                <span class="rd-hot" title="stars gained today">▲ 799</span>
-                
-              </p>
-            </div>
-            <img class="rd-avatar" src="https://avatars.githubusercontent.com/u/132531341?v=4&amp;s=96" alt="" width="40" height="40" loading="lazy" decoding="async" onerror="this.remove()">
-          </div>
-          <p class="rd-what">Academic Research Skills for Claude Code: research → write → review → revise → finalize</p>
-          
-          <div class="rd-cmd"><span class="rd-cmd-label">install</span><code>brew install bash</code></div>
-          <p class="rd-who"><span>who it's for</span> Topics: academic-pipeline, academic-writing, ai-research.</p>
-          <ul class="rd-topics"><li>academic-pipeline</li><li>academic-writing</li><li>ai-research</li><li>claude</li></ul>
-        </article>
-        <article class="rd-card rd-repo" style="--rd-accent:#3ea8ff">
-          <div class="rd-rank">06</div>
-          <div class="rd-head">
-            <svg class="rd-sigil" viewBox="0 0 5 5" width="34" height="34" aria-hidden="true" shape-rendering="crispEdges"><g fill="#3ea8ff"><rect x="0" y="1" width="1" height="1"/><rect x="4" y="1" width="1" height="1"/><rect x="1" y="1" width="1" height="1"/><rect x="3" y="1" width="1" height="1"/><rect x="2" y="1" width="1" height="1"/><rect x="0" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="1" y="2" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="0" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="1" y="3" width="1" height="1"/><rect x="3" y="3" width="1" height="1"/><rect x="0" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/></g></svg>
-            <div class="rd-title">
-              <h3><a href="https://github.com/Gitlawb/openclaude" rel="noopener nofollow" target="_blank">Gitlawb<span>/</span>openclaude</a></h3>
-              <p class="rd-meta">
-                <span class="rd-lang">TypeScript</span>
-                <span class="rd-stars">★ 32k</span>
-                <span class="rd-hot" title="stars gained today">▲ 775</span>
-                
-              </p>
-            </div>
-            <img class="rd-avatar" src="https://avatars.githubusercontent.com/u/268502891?v=4&amp;s=96" alt="" width="40" height="40" loading="lazy" decoding="async" onerror="this.remove()">
-          </div>
-          <p class="rd-what">runs anywhere. uses anything</p>
-          
-          <div class="rd-cmd"><span class="rd-cmd-label">install</span><code>npm install -g @gitlawb/openclaude@latest</code></div>
-          <p class="rd-who"><span>who it's for</span> Topics: ai, ai-agent, ai-tools.</p>
-          <ul class="rd-topics"><li>ai</li><li>ai-agent</li><li>ai-tools</li><li>cli</li></ul>
-        </article>
         <article class="rd-card rd-repo" style="--rd-accent:#ff8b5e">
-          <div class="rd-rank">07</div>
+          <div class="rd-rank">03</div>
           <div class="rd-head">
-            <svg class="rd-sigil" viewBox="0 0 5 5" width="34" height="34" aria-hidden="true" shape-rendering="crispEdges"><g fill="#ff8b5e"><rect x="0" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="2" y="0" width="1" height="1"/><rect x="1" y="1" width="1" height="1"/><rect x="3" y="1" width="1" height="1"/><rect x="0" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="1" y="3" width="1" height="1"/><rect x="3" y="3" width="1" height="1"/><rect x="2" y="3" width="1" height="1"/></g></svg>
+            <svg class="rd-sigil" viewBox="0 0 5 5" width="34" height="34" aria-hidden="true" shape-rendering="crispEdges"><g fill="#ff8b5e"><rect x="1" y="0" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="2" y="0" width="1" height="1"/><rect x="0" y="1" width="1" height="1"/><rect x="4" y="1" width="1" height="1"/><rect x="1" y="1" width="1" height="1"/><rect x="3" y="1" width="1" height="1"/><rect x="2" y="1" width="1" height="1"/><rect x="0" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="1" y="2" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="1" y="4" width="1" height="1"/><rect x="3" y="4" width="1" height="1"/></g></svg>
             <div class="rd-title">
-              <h3><a href="https://github.com/firecrawl/pdf-inspector" rel="noopener nofollow" target="_blank">firecrawl<span>/</span>pdf-inspector</a></h3>
+              <h3><a href="https://github.com/tonhowtf/omniget" rel="noopener nofollow" target="_blank">tonhowtf<span>/</span>omniget</a></h3>
               <p class="rd-meta">
                 <span class="rd-lang">Rust</span>
-                <span class="rd-stars">★ 19k</span>
-                <span class="rd-hot" title="stars gained today">▲ 586</span>
+                <span class="rd-stars">★ 11k</span>
+                <span class="rd-hot" title="stars gained today">▲ 839</span>
+                <span class="rd-lic">GPL-3.0</span>
+              </p>
+            </div>
+            <img class="rd-avatar" src="https://avatars.githubusercontent.com/u/58658417?v=4&amp;s=96" alt="" width="40" height="40" loading="lazy" decoding="async" onerror="this.remove()">
+          </div>
+          <p class="rd-what">Download Udemy and Hotmart courses, YouTube videos, music and books — 1,800+ sites, no terminal. Free open-source desktop app for Windows, macOS and Linux, with a built-in course player, PDF/EPUB reader and music…</p>
+
+          <div class="rd-cmd"><span class="rd-cmd-label">install</span><code>npm install pnpm</code></div>
+          <p class="rd-who"><span>who it's for</span> Topics: bilibili-downloader, course-downloader, download-manager.</p>
+          <ul class="rd-topics"><li>bilibili-downloader</li><li>course-downloader</li><li>download-manager</li><li>downloader</li></ul>
+        </article>
+        <article class="rd-card rd-repo" style="--rd-accent:#ffd93d">
+          <div class="rd-rank">04</div>
+          <div class="rd-head">
+            <svg class="rd-sigil" viewBox="0 0 5 5" width="34" height="34" aria-hidden="true" shape-rendering="crispEdges"><g fill="#ffd93d"><rect x="0" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="1" y="0" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="2" y="0" width="1" height="1"/><rect x="1" y="1" width="1" height="1"/><rect x="3" y="1" width="1" height="1"/><rect x="0" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="1" y="2" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="1" y="3" width="1" height="1"/><rect x="3" y="3" width="1" height="1"/><rect x="2" y="3" width="1" height="1"/><rect x="0" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="1" y="4" width="1" height="1"/><rect x="3" y="4" width="1" height="1"/><rect x="2" y="4" width="1" height="1"/></g></svg>
+            <div class="rd-title">
+              <h3><a href="https://github.com/asgeirtj/system_prompts_leaks" rel="noopener nofollow" target="_blank">asgeirtj<span>/</span>system_prompts_leaks</a></h3>
+              <p class="rd-meta">
+                <span class="rd-lang">JavaScript</span>
+                <span class="rd-stars">★ 66k</span>
+                <span class="rd-hot" title="stars gained today">▲ 727</span>
+                <span class="rd-lic">CC0-1.0</span>
+              </p>
+            </div>
+            <img class="rd-avatar" src="https://avatars.githubusercontent.com/u/27446620?v=4&amp;s=96" alt="" width="40" height="40" loading="lazy" decoding="async" onerror="this.remove()">
+          </div>
+          <p class="rd-what">Extracted system prompts from Anthropic - Claude Fable 5.1, Opus 5, Claude Design, Claude Code. OpenAI - ChatGPT GPT-6-Astra, Codex. Google - Gemini 3.8 Flash, 3.1 Pro, Antigravity. xAI - Grok, Grok Bot, Cursor, Kimi…</p>
+          <p class="rd-how">See the repository README for setup steps.</p>
+
+          <p class="rd-who"><span>who it's for</span> Topics: ai, ai-agents, ai-prompts.</p>
+          <ul class="rd-topics"><li>ai</li><li>ai-agents</li><li>ai-prompts</li><li>anthropic</li></ul>
+        </article>
+        <article class="rd-card rd-repo" style="--rd-accent:#9aa5b1">
+          <div class="rd-rank">05</div>
+          <div class="rd-head">
+            <svg class="rd-sigil" viewBox="0 0 5 5" width="34" height="34" aria-hidden="true" shape-rendering="crispEdges"><g fill="#9aa5b1"><rect x="0" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="1" y="0" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="2" y="0" width="1" height="1"/><rect x="0" y="1" width="1" height="1"/><rect x="4" y="1" width="1" height="1"/><rect x="1" y="1" width="1" height="1"/><rect x="3" y="1" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="0" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="1" y="3" width="1" height="1"/><rect x="3" y="3" width="1" height="1"/><rect x="2" y="3" width="1" height="1"/><rect x="1" y="4" width="1" height="1"/><rect x="3" y="4" width="1" height="1"/></g></svg>
+            <div class="rd-title">
+              <h3><a href="https://github.com/JustVugg/colibri" rel="noopener nofollow" target="_blank">JustVugg<span>/</span>colibri</a></h3>
+              <p class="rd-meta">
+                <span class="rd-lang">C</span>
+                <span class="rd-stars">★ 29k</span>
+                <span class="rd-hot" title="stars gained today">▲ 652</span>
+                <span class="rd-lic">Apache-2.0</span>
+              </p>
+            </div>
+            <img class="rd-avatar" src="https://avatars.githubusercontent.com/u/13022503?v=4&amp;s=96" alt="" width="40" height="40" loading="lazy" decoding="async" onerror="this.remove()">
+          </div>
+          <p class="rd-what">Run frontier MoE models on hardware you already own — pure C, zero deps, experts streamed from disk. Tiny engine, immense model. 🐦</p>
+
+          <div class="rd-cmd"><span class="rd-cmd-label">install</span><code>pip install -e</code></div>
+
+
+        </article>
+        <article class="rd-card rd-repo" style="--rd-accent:#41d6e8">
+          <div class="rd-rank">06</div>
+          <div class="rd-head">
+            <svg class="rd-sigil" viewBox="0 0 5 5" width="34" height="34" aria-hidden="true" shape-rendering="crispEdges"><g fill="#41d6e8"><rect x="0" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="1" y="0" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="2" y="0" width="1" height="1"/><rect x="0" y="1" width="1" height="1"/><rect x="4" y="1" width="1" height="1"/><rect x="1" y="1" width="1" height="1"/><rect x="3" y="1" width="1" height="1"/><rect x="0" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="1" y="2" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="0" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="0" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="2" y="4" width="1" height="1"/></g></svg>
+            <div class="rd-title">
+              <h3><a href="https://github.com/vxcontrol/pentagi" rel="noopener nofollow" target="_blank">vxcontrol<span>/</span>pentagi</a></h3>
+              <p class="rd-meta">
+                <span class="rd-lang">Go</span>
+                <span class="rd-stars">★ 24k</span>
+                <span class="rd-hot" title="stars gained today">▲ 613</span>
                 <span class="rd-lic">MIT</span>
               </p>
             </div>
-            <img class="rd-avatar" src="https://avatars.githubusercontent.com/u/135057108?v=4&amp;s=96" alt="" width="40" height="40" loading="lazy" decoding="async" onerror="this.remove()">
+            <img class="rd-avatar" src="https://avatars.githubusercontent.com/u/39194251?v=4&amp;s=96" alt="" width="40" height="40" loading="lazy" decoding="async" onerror="this.remove()">
           </div>
-          <p class="rd-what">Fast Rust library for PDF inspection, classification, and text extraction. Intelligently detects scanned vs text-based PDFs to enable smart routing decisions.</p>
-          
-          <div class="rd-cmd"><span class="rd-cmd-label">install</span><code>npm install @firecrawl/pdf-inspector</code></div>
-          <p class="rd-who"><span>who it's for</span> Topics: markdown, nodejs, ocr-routing.</p>
-          <ul class="rd-topics"><li>markdown</li><li>nodejs</li><li>ocr-routing</li><li>pdf</li></ul>
+          <p class="rd-what">Fully autonomous AI Agents system capable of performing complex penetration testing tasks</p>
+
+          <div class="rd-cmd"><span class="rd-cmd-label">install</span><code>npx swagger-typescript-api</code></div>
+          <p class="rd-who"><span>who it's for</span> Topics: ai-agents, ai-security-tool, anthropic.</p>
+          <ul class="rd-topics"><li>ai-agents</li><li>ai-security-tool</li><li>anthropic</li><li>autonomous-agents</li></ul>
+        </article>
+        <article class="rd-card rd-repo" style="--rd-accent:#4bc0a8">
+          <div class="rd-rank">07</div>
+          <div class="rd-head">
+            <svg class="rd-sigil" viewBox="0 0 5 5" width="34" height="34" aria-hidden="true" shape-rendering="crispEdges"><g fill="#4bc0a8"><rect x="1" y="0" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="1" y="4" width="1" height="1"/><rect x="3" y="4" width="1" height="1"/></g></svg>
+            <div class="rd-title">
+              <h3><a href="https://github.com/SnailSploit/Claude-Red" rel="noopener nofollow" target="_blank">SnailSploit<span>/</span>Claude-Red</a></h3>
+              <p class="rd-meta">
+                <span class="rd-lang">Python</span>
+                <span class="rd-stars">★ 3.9k</span>
+                <span class="rd-hot" title="stars gained today">▲ 507</span>
+                <span class="rd-lic">MIT</span>
+              </p>
+            </div>
+            <img class="rd-avatar" src="https://avatars.githubusercontent.com/u/95986478?v=4&amp;s=96" alt="" width="40" height="40" loading="lazy" decoding="async" onerror="this.remove()">
+          </div>
+          <p class="rd-what">claude-red is a curated library of offensive security skills designed for the Claude skills system. Each skill is a structured SKILL.md file that primes Claude with expert-level methodology for a specific attack surface…</p>
+          <p class="rd-how">See the repository README for setup steps.</p>
+
+          <p class="rd-who"><span>who it's for</span> Topics: claude-ai, claude-pt, claude-skills.</p>
+          <ul class="rd-topics"><li>claude-ai</li><li>claude-pt</li><li>claude-skills</li><li>redteam</li></ul>
         </article>
         <article class="rd-card rd-repo" style="--rd-accent:#4bc0a8">
           <div class="rd-rank">08</div>
           <div class="rd-head">
-            <svg class="rd-sigil" viewBox="0 0 5 5" width="34" height="34" aria-hidden="true" shape-rendering="crispEdges"><g fill="#4bc0a8"><rect x="1" y="0" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="0" y="1" width="1" height="1"/><rect x="4" y="1" width="1" height="1"/><rect x="0" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="0" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="1" y="4" width="1" height="1"/><rect x="3" y="4" width="1" height="1"/></g></svg>
+            <svg class="rd-sigil" viewBox="0 0 5 5" width="34" height="34" aria-hidden="true" shape-rendering="crispEdges"><g fill="#4bc0a8"><rect x="0" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="0" y="1" width="1" height="1"/><rect x="4" y="1" width="1" height="1"/><rect x="1" y="1" width="1" height="1"/><rect x="3" y="1" width="1" height="1"/><rect x="2" y="1" width="1" height="1"/><rect x="0" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="1" y="3" width="1" height="1"/><rect x="3" y="3" width="1" height="1"/><rect x="0" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="2" y="4" width="1" height="1"/></g></svg>
             <div class="rd-title">
-              <h3><a href="https://github.com/NousResearch/hermes-agent" rel="noopener nofollow" target="_blank">NousResearch<span>/</span>hermes-agent</a></h3>
+              <h3><a href="https://github.com/multimodal-art-projection/YuE" rel="noopener nofollow" target="_blank">multimodal-art-projection<span>/</span>YuE</a></h3>
               <p class="rd-meta">
                 <span class="rd-lang">Python</span>
-                <span class="rd-stars">★ 240k</span>
-                <span class="rd-hot" title="stars gained today">▲ 533</span>
-                <span class="rd-lic">MIT</span>
+                <span class="rd-stars">★ 7.5k</span>
+                <span class="rd-hot" title="stars gained today">▲ 500</span>
+                <span class="rd-lic">Apache-2.0</span>
               </p>
             </div>
-            <img class="rd-avatar" src="https://avatars.githubusercontent.com/u/134168893?v=4&amp;s=96" alt="" width="40" height="40" loading="lazy" decoding="async" onerror="this.remove()">
+            <img class="rd-avatar" src="https://avatars.githubusercontent.com/u/136257670?v=4&amp;s=96" alt="" width="40" height="40" loading="lazy" decoding="async" onerror="this.remove()">
           </div>
-          <p class="rd-what">The agent that grows with you</p>
-          
-          <div class="rd-cmd"><span class="rd-cmd-label">install</span><code>pip install -e</code></div>
-          <p class="rd-who"><span>who it's for</span> Topics: ai, ai-agent, ai-agents.</p>
-          <ul class="rd-topics"><li>ai</li><li>ai-agent</li><li>ai-agents</li><li>anthropic</li></ul>
+          <p class="rd-what">YuE2: frontier music generation with symbolic planning, zero-shot covers, and agentic music editing.</p>
+
+          <div class="rd-cmd"><span class="rd-cmd-label">install</span><code>pip install --upgrade</code></div>
+          <p class="rd-who"><span>who it's for</span> Topics: ai, audio-generation, deep-learning.</p>
+          <ul class="rd-topics"><li>ai</li><li>audio-generation</li><li>deep-learning</li><li>foundation-models</li></ul>
         </article></div>
       </section>
 
@@ -269,55 +268,55 @@
         <h2 id="news-h" class="rd-h">AI News</h2>
         <p class="rd-lede">Notable headlines from the last 48 hours. Clicking a headline takes you to the original article.</p>
         <div class="rd-list">
-        <article class="rd-card rd-news" style="--rd-accent:#ff3ef2">
-          <div class="rd-src"><svg class="rd-sigil" viewBox="0 0 5 5" width="34" height="34" aria-hidden="true" shape-rendering="crispEdges"><g fill="#ff3ef2"><rect x="0" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="2" y="0" width="1" height="1"/><rect x="0" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="0" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="2" y="4" width="1" height="1"/></g></svg><span>Hugging Face</span><time datetime="2026-09-03T00:00:00.000Z">10h ago</time></div>
-          <h3><a href="https://huggingface.co/blog/train-to-paint-with-code" rel="noopener nofollow" target="_blank">Training a coding model to paint watercolours with TRL and OpenEnv</a></h3>
-          
-        </article>
-        <article class="rd-card rd-news" style="--rd-accent:#00ff9c">
-          <div class="rd-src"><svg class="rd-sigil" viewBox="0 0 5 5" width="34" height="34" aria-hidden="true" shape-rendering="crispEdges"><g fill="#00ff9c"><rect x="0" y="1" width="1" height="1"/><rect x="4" y="1" width="1" height="1"/><rect x="1" y="1" width="1" height="1"/><rect x="3" y="1" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="2" y="3" width="1" height="1"/><rect x="2" y="4" width="1" height="1"/></g></svg><span>Google DeepMind</span><time datetime="2026-09-02T16:24:24.000Z">17h ago</time></div>
-          <h3><a href="https://deepmind.google/blog/proactive-cyber-defense-for-governments-and-enterprises/" rel="noopener nofollow" target="_blank">Proactive cyber defense for governments and enterprises</a></h3>
-          
-        </article>
-        <article class="rd-card rd-news" style="--rd-accent:#00ff9c">
-          <div class="rd-src"><svg class="rd-sigil" viewBox="0 0 5 5" width="34" height="34" aria-hidden="true" shape-rendering="crispEdges"><g fill="#00ff9c"><rect x="0" y="1" width="1" height="1"/><rect x="4" y="1" width="1" height="1"/><rect x="1" y="1" width="1" height="1"/><rect x="3" y="1" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="2" y="3" width="1" height="1"/><rect x="2" y="4" width="1" height="1"/></g></svg><span>Google DeepMind</span><time datetime="2026-09-02T16:18:31.000Z">17h ago</time></div>
-          <h3><a href="https://deepmind.google/blog/introducing-gemini-3-8-flash-and-38-flash-cyber/" rel="noopener nofollow" target="_blank">Introducing Gemini 3.8 Flash and 3.8 Flash Cyber</a></h3>
-          
-        </article>
-        <article class="rd-card rd-news" style="--rd-accent:#ff3ef2">
-          <div class="rd-src"><svg class="rd-sigil" viewBox="0 0 5 5" width="34" height="34" aria-hidden="true" shape-rendering="crispEdges"><g fill="#ff3ef2"><rect x="0" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="2" y="0" width="1" height="1"/><rect x="0" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="0" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="2" y="4" width="1" height="1"/></g></svg><span>Hugging Face</span><time datetime="2026-09-02T13:49:14.000Z">20h ago</time></div>
-          <h3><a href="https://huggingface.co/blog/ibm-research/real-time-intelligence" rel="noopener nofollow" target="_blank">Real-Time Intelligence with IBM Time Series Models on Confluent</a></h3>
-          
+        <article class="rd-card rd-news" style="--rd-accent:#3ea8ff">
+          <div class="rd-src"><svg class="rd-sigil" viewBox="0 0 5 5" width="34" height="34" aria-hidden="true" shape-rendering="crispEdges"><g fill="#3ea8ff"><rect x="0" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="1" y="0" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="2" y="1" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="1" y="3" width="1" height="1"/><rect x="3" y="3" width="1" height="1"/><rect x="0" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="1" y="4" width="1" height="1"/><rect x="3" y="4" width="1" height="1"/><rect x="2" y="4" width="1" height="1"/></g></svg><span>OpenAI</span><time datetime="2026-09-14T00:00:00.000Z">1 min ago</time></div>
+          <h3><a href="https://openai.com/index/perplexity-improving-accuracy-with-astra" rel="noopener nofollow" target="_blank">Perplexity trusts GPT-6 Astra with end-to-end systems</a></h3>
+          <p>Perplexity uses Astra to write communications, change software, and monitor production systems, and checks in much less frequently than with earlier models.</p>
         </article>
         <article class="rd-card rd-news" style="--rd-accent:#3ea8ff">
-          <div class="rd-src"><svg class="rd-sigil" viewBox="0 0 5 5" width="34" height="34" aria-hidden="true" shape-rendering="crispEdges"><g fill="#3ea8ff"><rect x="0" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="1" y="0" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="2" y="1" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="1" y="3" width="1" height="1"/><rect x="3" y="3" width="1" height="1"/><rect x="0" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="1" y="4" width="1" height="1"/><rect x="3" y="4" width="1" height="1"/><rect x="2" y="4" width="1" height="1"/></g></svg><span>OpenAI</span><time datetime="2026-09-02T12:00:00.000Z">22h ago</time></div>
-          <h3><a href="https://openai.com/index/atv-big-air-tour" rel="noopener nofollow" target="_blank">ATV Big Air Tour turned 3 days of work into 3 hours with ChatGPT</a></h3>
-          <p>ATV Big Air Tour uses ChatGPT Work to speed up marketing, merchandising, and more. It even turned merchandise photos into an inventory website in 15 minutes.</p>
+          <div class="rd-src"><svg class="rd-sigil" viewBox="0 0 5 5" width="34" height="34" aria-hidden="true" shape-rendering="crispEdges"><g fill="#3ea8ff"><rect x="0" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="1" y="0" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="2" y="1" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="1" y="3" width="1" height="1"/><rect x="3" y="3" width="1" height="1"/><rect x="0" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="1" y="4" width="1" height="1"/><rect x="3" y="4" width="1" height="1"/><rect x="2" y="4" width="1" height="1"/></g></svg><span>OpenAI</span><time datetime="2026-09-11T16:00:00.000Z">2d ago</time></div>
+          <h3><a href="https://openai.com/index/cognition-devin-testing-with-astra" rel="noopener nofollow" target="_blank">Cognition helps Devin test its own work with GPT‑6 Astra</a></h3>
+          <p>GPT‑6 Astra improves Devin’s ability to test software and show that it works, with the goal of helping engineers review less code and ship more.</p>
         </article>
         <article class="rd-card rd-news" style="--rd-accent:#ff3ef2">
-          <div class="rd-src"><svg class="rd-sigil" viewBox="0 0 5 5" width="34" height="34" aria-hidden="true" shape-rendering="crispEdges"><g fill="#ff3ef2"><rect x="0" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="2" y="0" width="1" height="1"/><rect x="0" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="0" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="2" y="4" width="1" height="1"/></g></svg><span>Hugging Face</span><time datetime="2026-09-01T21:39:07.000Z">2d ago</time></div>
-          <h3><a href="https://huggingface.co/blog/allenai/benchmirt" rel="noopener nofollow" target="_blank">BenchMIRT: What are LLM benchmarks actually measuring?</a></h3>
-          
+          <div class="rd-src"><svg class="rd-sigil" viewBox="0 0 5 5" width="34" height="34" aria-hidden="true" shape-rendering="crispEdges"><g fill="#ff3ef2"><rect x="0" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="2" y="0" width="1" height="1"/><rect x="2" y="1" width="1" height="1"/><rect x="0" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="0" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="2" y="3" width="1" height="1"/><rect x="0" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="2" y="4" width="1" height="1"/></g></svg><span>The Verge</span><time datetime="2026-09-12T21:41:36.000Z">15h ago</time></div>
+          <h3><a href="https://www.theverge.com/ai-artificial-intelligence/994383/openais-rogue-ai-rubygems-hack" rel="noopener nofollow" target="_blank">OpenAI’s rogue AI tried to hack another company in May</a></h3>
+          <p>In May, hundreds of malicious and spam packages were uploaded to RubyGems, causing a serious disruption for the host. Now independent researchers have said that a swarm of OpenAI agents were…</p>
+        </article>
+        <article class="rd-card rd-news" style="--rd-accent:#ff3ef2">
+          <div class="rd-src"><svg class="rd-sigil" viewBox="0 0 5 5" width="34" height="34" aria-hidden="true" shape-rendering="crispEdges"><g fill="#ff3ef2"><rect x="0" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="2" y="0" width="1" height="1"/><rect x="2" y="1" width="1" height="1"/><rect x="0" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="0" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="2" y="3" width="1" height="1"/><rect x="0" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="2" y="4" width="1" height="1"/></g></svg><span>The Verge</span><time datetime="2026-09-12T21:16:28.000Z">15h ago</time></div>
+          <h3><a href="https://www.theverge.com/ai-artificial-intelligence/994384/sam-altman-no-openai-ipo-ill-advised" rel="noopener nofollow" target="_blank">Sam Altman says OpenAI going public in 2026 would be ‘ill-advised’</a></h3>
+          <p>OpenAI CEO Sam Altman confirmed that there would be no OpenAI IPO in 2026 during an interview with Fortune. Over the course of 45 minutes, Altman discussed a variety of subjects including the Hugging…</p>
         </article>
         <article class="rd-card rd-news" style="--rd-accent:#00ff9c">
-          <div class="rd-src"><svg class="rd-sigil" viewBox="0 0 5 5" width="34" height="34" aria-hidden="true" shape-rendering="crispEdges"><g fill="#00ff9c"><rect x="1" y="2" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="0" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="2" y="3" width="1" height="1"/><rect x="0" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/></g></svg><span>Google AI</span><time datetime="2026-09-01T20:45:00.000Z">2d ago</time></div>
-          <h3><a href="https://blog.google/innovation-and-ai/technology/google-ai-updates-august-2026/" rel="noopener nofollow" target="_blank">The latest AI news we announced in August 2026</a></h3>
-          <p>Here are Google’s latest AI updates from August 2026</p>
+          <div class="rd-src"><svg class="rd-sigil" viewBox="0 0 5 5" width="34" height="34" aria-hidden="true" shape-rendering="crispEdges"><g fill="#00ff9c"><rect x="2" y="0" width="1" height="1"/><rect x="2" y="1" width="1" height="1"/><rect x="0" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="1" y="2" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="0" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="2" y="3" width="1" height="1"/><rect x="0" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="1" y="4" width="1" height="1"/><rect x="3" y="4" width="1" height="1"/></g></svg><span>TechCrunch</span><time datetime="2026-09-12T20:19:16.000Z">16h ago</time></div>
+          <h3><a href="https://techcrunch.com/2026/09/12/openais-sam-altman-says-it-would-be-ill-advised-to-go-public-in-2026/" rel="noopener nofollow" target="_blank">OpenAI’s Sam Altman says it would be ‘ill-advised’ to go public in 2026</a></h3>
+          <p>While OpenAI has filed confidentially for an IPO, the company will not be going public this year, according to CEO Sam Altman.</p>
         </article>
         <article class="rd-card rd-news" style="--rd-accent:#00ff9c">
-          <div class="rd-src"><svg class="rd-sigil" viewBox="0 0 5 5" width="34" height="34" aria-hidden="true" shape-rendering="crispEdges"><g fill="#00ff9c"><rect x="0" y="1" width="1" height="1"/><rect x="4" y="1" width="1" height="1"/><rect x="1" y="1" width="1" height="1"/><rect x="3" y="1" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="2" y="3" width="1" height="1"/><rect x="2" y="4" width="1" height="1"/></g></svg><span>Google DeepMind</span><time datetime="2026-09-01T17:08:51.000Z">2d ago</time></div>
-          <h3><a href="https://deepmind.google/blog/introducing-agentic-video-in-gemini/" rel="noopener nofollow" target="_blank">Introducing agentic video understanding with Gemini</a></h3>
-          
+          <div class="rd-src"><svg class="rd-sigil" viewBox="0 0 5 5" width="34" height="34" aria-hidden="true" shape-rendering="crispEdges"><g fill="#00ff9c"><rect x="2" y="0" width="1" height="1"/><rect x="2" y="1" width="1" height="1"/><rect x="0" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="1" y="2" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="0" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="2" y="3" width="1" height="1"/><rect x="0" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="1" y="4" width="1" height="1"/><rect x="3" y="4" width="1" height="1"/></g></svg><span>TechCrunch</span><time datetime="2026-09-12T19:34:44.000Z">17h ago</time></div>
+          <h3><a href="https://techcrunch.com/2026/09/12/anthropic-ceo-outlines-plan-to-pace-the-frontier/" rel="noopener nofollow" target="_blank">Anthropic CEO outlines plan to slow AI development</a></h3>
+          <p>Anthropic&#39;s Dario Amodei and OpenAI&#39;s Sam Altman seem to agree that it&#39;s time to &quot;pace the frontier.&quot; What would that actually look like?</p>
         </article>
-        <article class="rd-card rd-news" style="--rd-accent:#3ea8ff">
-          <div class="rd-src"><svg class="rd-sigil" viewBox="0 0 5 5" width="34" height="34" aria-hidden="true" shape-rendering="crispEdges"><g fill="#3ea8ff"><rect x="0" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="1" y="0" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="2" y="1" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="1" y="3" width="1" height="1"/><rect x="3" y="3" width="1" height="1"/><rect x="0" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="1" y="4" width="1" height="1"/><rect x="3" y="4" width="1" height="1"/><rect x="2" y="4" width="1" height="1"/></g></svg><span>OpenAI</span><time datetime="2026-09-01T17:00:00.000Z">2d ago</time></div>
-          <h3><a href="https://openai.com/index/ai-native-company-workflows" rel="noopener nofollow" target="_blank">How AI-native companies turn workflows into operating capability</a></h3>
-          <p>Basis, Clay, and Exa Labs use AI agents to improve onboarding, account management, and developer integrations. See what enterprise leaders can apply.</p>
+        <article class="rd-card rd-news" style="--rd-accent:#ff3ef2">
+          <div class="rd-src"><svg class="rd-sigil" viewBox="0 0 5 5" width="34" height="34" aria-hidden="true" shape-rendering="crispEdges"><g fill="#ff3ef2"><rect x="0" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="2" y="0" width="1" height="1"/><rect x="2" y="1" width="1" height="1"/><rect x="0" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="0" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="2" y="3" width="1" height="1"/><rect x="0" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="2" y="4" width="1" height="1"/></g></svg><span>The Verge</span><time datetime="2026-09-12T16:23:40.000Z">20h ago</time></div>
+          <h3><a href="https://www.theverge.com/ai-artificial-intelligence/994337/anthropic-ceo-slow-down-ai-development" rel="noopener nofollow" target="_blank">Anthropic CEO says it’s time to pump the brakes on AI</a></h3>
+          <p>Anthropic CEO Dario Amodei says the time has come to slow down AI development and will give third-party evaluators like METR access to its models to help ensure its &quot;adherence to safety practices and…</p>
+        </article>
+        <article class="rd-card rd-news" style="--rd-accent:#ff3ef2">
+          <div class="rd-src"><svg class="rd-sigil" viewBox="0 0 5 5" width="34" height="34" aria-hidden="true" shape-rendering="crispEdges"><g fill="#ff3ef2"><rect x="0" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="2" y="0" width="1" height="1"/><rect x="2" y="1" width="1" height="1"/><rect x="0" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="0" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="2" y="3" width="1" height="1"/><rect x="0" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="2" y="4" width="1" height="1"/></g></svg><span>The Verge</span><time datetime="2026-09-12T14:41:27.000Z">22h ago</time></div>
+          <h3><a href="https://www.theverge.com/ai-artificial-intelligence/994112/ai-data-center-pollution-health-epa" rel="noopener nofollow" target="_blank">Trump is giving data centers a pass to pollute</a></h3>
+          <p>President Donald Trump is weakening environmental regulations in the name of speeding up the construction of AI data centers, raising health risks for Americans, a cadre of former EPA officials said…</p>
         </article>
         <article class="rd-card rd-news" style="--rd-accent:#00ff9c">
-          <div class="rd-src"><svg class="rd-sigil" viewBox="0 0 5 5" width="34" height="34" aria-hidden="true" shape-rendering="crispEdges"><g fill="#00ff9c"><rect x="1" y="2" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="0" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="2" y="3" width="1" height="1"/><rect x="0" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/></g></svg><span>Google AI</span><time datetime="2026-09-01T16:00:00.000Z">2d ago</time></div>
-          <h3><a href="https://blog.google/products-and-platforms/products/workspace/google-pics/" rel="noopener nofollow" target="_blank">Try Google Pics: Easy image creation and editing in Google Workspace</a></h3>
-          <p>Built on our latest Nano Banana model, Google Pics — our image creation and editing tool — is now available.</p>
+          <div class="rd-src"><svg class="rd-sigil" viewBox="0 0 5 5" width="34" height="34" aria-hidden="true" shape-rendering="crispEdges"><g fill="#00ff9c"><rect x="0" y="1" width="1" height="1"/><rect x="4" y="1" width="1" height="1"/><rect x="1" y="1" width="1" height="1"/><rect x="3" y="1" width="1" height="1"/><rect x="2" y="1" width="1" height="1"/><rect x="1" y="2" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="1" y="3" width="1" height="1"/><rect x="3" y="3" width="1" height="1"/><rect x="2" y="3" width="1" height="1"/><rect x="2" y="4" width="1" height="1"/></g></svg><span>Ars Technica</span><time datetime="2026-09-12T11:00:53.000Z">1d ago</time></div>
+          <h3><a href="https://arstechnica.com/gadgets/2026/09/i-spent-4000-on-a-robot-dog-from-china/" rel="noopener nofollow" target="_blank">I spent $4,000 on a robot dog from China</a></h3>
+          <p>Unitree might be the world’s most important robotics company.</p>
+        </article>
+        <article class="rd-card rd-news" style="--rd-accent:#ff3ef2">
+          <div class="rd-src"><svg class="rd-sigil" viewBox="0 0 5 5" width="34" height="34" aria-hidden="true" shape-rendering="crispEdges"><g fill="#ff3ef2"><rect x="0" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="2" y="0" width="1" height="1"/><rect x="2" y="1" width="1" height="1"/><rect x="0" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="0" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="2" y="3" width="1" height="1"/><rect x="0" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="2" y="4" width="1" height="1"/></g></svg><span>The Verge</span><time datetime="2026-09-12T11:00:00.000Z">1d ago</time></div>
+          <h3><a href="https://www.theverge.com/ai-artificial-intelligence/994255/openai-millennium-prize-problem-tristan-buckmaster-competition" rel="noopener nofollow" target="_blank">OpenAI just wants to win</a></h3>
+          <p>OpenAI has spent the last few years planting flags across the increasingly difficult terrain in mathematics. This week, it claimed one of its biggest prizes yet: a solution to a legendary Millennium…</p>
         </article></div>
       </section>
       <!-- RADAR:END -->
@@ -338,7 +337,14 @@
     </aside>
   </div>
 
-  <footer class="site-footer" id="contact">
+  <footer class="site-footer command-footer" id="contact">
+    <nav class="footer-platforms" aria-label="TroyApps platforms">
+      <a data-platform="google-play" href="https://play.google.com/store/apps/developer?id=Troy+Apps" target="_blank" rel="noopener" aria-label="Open TroyApps on Google Play" title="Google Play"><img src="/assets/img/social/google-play.svg" alt="" aria-hidden="true"></a>
+      <a data-platform="youtube" href="https://www.youtube.com/channel/UC2PncaDQ9wSXYqY5IaffuJw" target="_blank" rel="noopener" aria-label="Open the TroyApps YouTube channel" title="YouTube"><img src="/assets/img/social/youtube.svg" alt="" aria-hidden="true"></a>
+      <a data-platform="instagram" href="https://www.instagram.com/troyappsofficial/" target="_blank" rel="noopener" aria-label="Open TroyApps on Instagram" title="Instagram"><img src="/assets/img/social/instagram.svg" alt="" aria-hidden="true"></a>
+      <a data-platform="tiktok" href="https://www.tiktok.com/@troyappsofficial" target="_blank" rel="noopener" aria-label="Open TroyApps on TikTok" title="TikTok"><img src="/assets/img/social/tiktok.svg" alt="" aria-hidden="true"></a>
+      <a data-platform="facebook" href="https://www.facebook.com/troyappsofficial" target="_blank" rel="noopener" aria-label="Open TroyApps on Facebook" title="Facebook"><img src="/assets/img/social/facebook.svg" alt="" aria-hidden="true"></a>
+    </nav>
     <div class="wrap">
       <p class="footer-word" aria-hidden="true">TroyApps</p>
       <div class="footer-grid">
@@ -367,9 +373,7 @@
     </div>
   </footer>
 
-  <script src="/assets/js/bg.js" defer></script>
+  <script type="module" src="/assets/js/bg.js?v=20260912-radar3"></script>
   <script src="/assets/js/site.js" defer></script>
-  <script src="/assets/js/tilt.js" defer></script>
-  <script src="/assets/js/mascot.js" defer></script>
 </body>
 </html>
