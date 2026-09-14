@@ -219,20 +219,25 @@
     return d;
   }
 
-  /* Sabit duzen: her rayda ust uste iki 300x600.
-     Sayfanin ustune yerlesir, kaydirinca icerikle birlikte akar. */
-  var HEIGHTS = [600, 600];
+  /* Sayfa ne kadar uzunsa o kadar 300x600 dizilir (en az 2).
+     Bannerlar sayfanin ustune yerlesir, kaydirinca icerikle birlikte akar. */
+  var GAP = 14;
+  var TOP = 92;
+  var BOTTOM = 16;
 
   function fill() {
+    var main = document.querySelector(".page-rails > main") || document.body;
+    var contentH = Math.max(main.scrollHeight + TOP, window.innerHeight);
+    var count = Math.max(2, Math.floor((contentH - TOP - BOTTOM + GAP) / (600 + GAP)));
     rails.forEach(function (rail) {
       if (rail.getAttribute("data-ad-plan")) return;
-      rail.setAttribute("data-ad-plan", HEIGHTS.join(","));
+      rail.setAttribute("data-ad-plan", String(count));
       rail.classList.add("ad-rail-filled");
       var side = sideOf(rail);
       rail.textContent = "";
-      HEIGHTS.forEach(function (hh, i) {
-        rail.appendChild(makeSlot(hh, slug + "-" + side + "-" + (i + 1)));
-      });
+      for (var i = 0; i < count; i++) {
+        rail.appendChild(makeSlot(600, slug + "-" + side + "-" + (i + 1)));
+      }
     });
   }
 
