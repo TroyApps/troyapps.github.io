@@ -19,7 +19,7 @@ for (const locale of locales) {
 
     assert.match(html, /<body class="home-v2 home-v3 theme-command">/);
     assert.match(html, /id="troy-stage"/);
-    assert.match(html, /\/assets\/css\/theme-v3\.css\?v=20260913-header4/);
+    assert.match(html, /\/assets\/css\/theme-v3\.css\?v=20260914-adrails1/);
     assert.match(html, /\/assets\/css\/home-v2\.css\?v=20260912-drop7/);
     assert.match(html, /\/assets\/js\/troy\/troy-three\.js\?v=20260914-lookdown1/);
     assert.match(html, /\/assets\/js\/troy\/troy-controller\.js\?v=20260914-lookdown1/);
@@ -204,4 +204,29 @@ test("Troy controller exposes deterministic animation state transitions", async 
   assert.equal(troy.finish(), "rocketFlight");
   assert.equal(troy.finish(), "pixelScattered");
   assert.equal(troy.enter("unknown"), "idle");
+});
+
+test("every public command page loads the AdSense loader with the TroyApps publisher id", async () => {
+  const pages = [
+    "index.html", "morse-flash/index.html", "radar/index.html",
+    "en/index.html", "en/morse-flash/index.html", "en/radar/index.html",
+    ...["ar", "de", "es", "fr", "hi", "id", "it", "pt-br"].flatMap((l) => [`${l}/index.html`, `${l}/morse-flash/index.html`]),
+  ];
+  for (const file of pages) {
+    const html = await page(file);
+    assert.match(html, /<script async src="https:\/\/pagead2\.googlesyndication\.com\/pagead\/js\/adsbygoogle\.js\?client=ca-pub-9329708777375659" crossorigin="anonymous"><\/script>/, `${file} is missing the AdSense loader`);
+  }
+  for (const file of ["morse-flash-policy/index.html", "airmousehand-policy/index.html"]) {
+    const html = await page(file);
+    assert.doesNotMatch(html, /adsbygoogle/, `${file} must stay ad-free`);
+  }
+});
+
+test("site.js only renders AdSense units when a unit number is configured and rails are visible", async () => {
+  const js = await page("assets/js/site.js");
+  assert.match(js, /var AD_CLIENT = "ca-pub-9329708777375659";/);
+  assert.match(js, /var AD_UNITS = \{/);
+  assert.match(js, /matchMedia\("\(min-width: 1760px\)"\)/);
+  assert.match(js, /ins\.className = "adsbygoogle";/);
+  assert.match(js, /window\.adsbygoogle = window\.adsbygoogle \|\| \[\]\)\.push\(\{\}\)/);
 });

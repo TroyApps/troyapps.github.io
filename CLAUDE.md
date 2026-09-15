@@ -44,12 +44,13 @@ tests/*.test.mjs           node --test
 - Yuva kimlikleri sayfaya özel: `data-ad-slot="<sayfa>-<left|right>-<n>"` (ör. `morse-flash-right-2`). Her sayfaya ayrı reklam birimi bağlanabilsin diye.
 - Etiket metni sayfadaki ilk `.ad-slot-tag`'den okunur (dil korunur).
 
-### AdSense bağlama (sıradaki iş)
-Enes AdSense'ten `pub-XXXXXXXXXXXXXXXX` kimliğini verecek. Sonra:
-1. 22 sayfanın `<head>`ine: `<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXX" crossorigin="anonymous"></script>` (en/ kaynaklarına ekle, dil sayfalarını üret).
-2. `site.js` `makeSlot()` içinde yer tutucu yerine `<ins class="adsbygoogle" style="display:inline-block;width:300px;height:600px" data-ad-client="ca-pub-XXXX" data-ad-slot="<birim no>"></ins>` + `(adsbygoogle=window.adsbygoogle||[]).push({})`.
-3. Onay gelene kadar yer tutucular kalsın. Reklam yoğunluğu politikasına dikkat (içerikten fazla reklam olmasın).
-Not: AdMob mobil uygulama içindir, web için AdSense kullanılır. Claude'un Chrome uzantısı google.com alan adlarına giremez; panel işleri Enes'te.
+### AdSense bağlama (15 Eyl 2026 durumu)
+Yayıncı kimliği: `ca-pub-9329708777375659` (app-ads.txt'dekiyle aynı hesap, AdSense Hesap bilgileri'nde doğrulandı).
+- YAPILDI: 22 sayfanın `<head>`inde AdSense yükleyici var (en/ kaynakları + üretilmiş diller + TR). Politika sayfaları ve 404 reklamsız; test bunu korur (`tests/site-contract.test.mjs`).
+- YAPILDI: `site.js` `makeSlot()` AdSense'e hazır. `AD_UNITS` boş olduğu sürece yer tutucu gösterir; birim numarası girilince (`"home"`, `"morse-flash"`, `"radar"` ya da hepsi için `"*"`) 300×600 `<ins class="adsbygoogle">` basar ve push eder. Yalnızca raylar görünürken (≥1760px) gerçek birim üretir, dar ekranda boş push yapmaz.
+- BEKLİYOR: AdSense hesabı şu an yalnızca AdMob ürünlü ("Etkin ürünler: AdMob"). Siteler/Reklamlar menüsü yok. Web için hesaba AdSense ürünü eklenmeli: https://www.google.com/adsense/signup → "Bu hesapla devam et" → troyapps.app eklenir → site incelemesi (günler/haftalar sürebilir). Head'deki yükleyici aynı zamanda site doğrulama kodudur.
+- Onay gelince: AdSense > Reklamlar > Reklam birimi > Görüntülü, sabit 300×600 birim(ler) oluştur, numaraları `AD_UNITS`'e yaz, yayınla. Reklam yoğunluğu politikasına dikkat (içerikten fazla reklam olmasın).
+Not: AdMob mobil uygulama içindir, web için AdSense kullanılır. Panel işleri otomasyon Chrome profiliyle (claude-tools\chrome-otomasyon, CDP 9222) yapılabiliyor; form kaydetmeden önce Enes'e sor.
 
 ## Troy (3D maskot) notları
 - `troy-controller.js` → `createTroyRenderer` (troy-three.js). Durumlar `data-troy-renderer`: loading / ready / fallback.

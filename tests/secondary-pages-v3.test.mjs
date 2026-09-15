@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 const root = new URL("../", import.meta.url); const read=(path)=>readFile(new URL(path,root),"utf8");
-for(const file of ["morse-flash/index.html","en/morse-flash/index.html"]) test(`${file} uses premium product shell`,async()=>{const html=await read(file);assert.match(html,/<body class="product-v3 theme-command">/);assert.match(html,/theme-v3\.css\?v=20260913-header4/);assert.match(html,/product-v3\.css\?v=20260913-header1/);assert.match(html,/class="[^"]*product-hero-v3[^"]*"/);assert.match(html,/class="[^"]*product-feature-grid[^"]*"/);assert.match(html,/class="[^"]*product-gallery[^"]*"/);assert.equal((html.match(/assets\/img\/shots\//g)||[]).length,4);assert.doesNotMatch(html,/data-troy-canvas|troy-controller\.js/);});
+for(const file of ["morse-flash/index.html","en/morse-flash/index.html"]) test(`${file} uses premium product shell`,async()=>{const html=await read(file);assert.match(html,/<body class="product-v3 theme-command">/);assert.match(html,/theme-v3\.css\?v=20260914-adrails1/);assert.match(html,/product-v3\.css\?v=20260913-header1/);assert.match(html,/class="[^"]*product-hero-v3[^"]*"/);assert.match(html,/class="[^"]*product-feature-grid[^"]*"/);assert.match(html,/class="[^"]*product-gallery[^"]*"/);assert.equal((html.match(/assets\/img\/shots\//g)||[]).length,4);assert.doesNotMatch(html,/data-troy-canvas|troy-controller\.js/);});
 for(const file of ["radar/index.html","en/radar/index.html"]) test(`${file} preserves Radar injection shell`,async()=>{const html=await read(file);assert.match(html,/<body class="radar-v3 theme-command">/);assert.match(html,/radar-v3\.css\?v=20260912-radar2/);assert.match(html,/class="brand command-brand"/);assert.match(html,/<summary aria-label="[^"]+"><img class="language-flag"/);assert.doesNotMatch(html,/(?:mascot|tilt)\.js/);assert.equal((html.match(/<!-- RADAR:START -->/g)||[]).length,1);assert.equal((html.match(/<!-- RADAR:END -->/g)||[]).length,1);assert.match(html,/class="rd-grid"/);});
 
 test("Radar overrides the legacy pixel shell with the premium command-center theme", async () => {
@@ -31,7 +31,7 @@ test("every public command page loads the cache-busted shared theme", async () =
     "radar/index.html", "en/radar/index.html", "morse-flash-policy/index.html", "airmousehand-policy/index.html", "404.html",
   ];
   for (const file of pages) {
-    assert.match(await read(file), /theme-v3\.css\?v=20260913-header4/, `${file} still exposes a stale shared theme URL`);
+    assert.match(await read(file), /theme-v3\.css\?v=20260914-adrails1/, `${file} still exposes a stale shared theme URL`);
   }
 });
 test("404 is lightweight branded shell",async()=>{const html=await read("404.html");assert.match(html,/<body class="not-found-v3 theme-command">/);assert.match(html,/class="[^"]*not-found-panel[^"]*"/);assert.doesNotMatch(html,/data-troy-|troy-controller|<canvas\b/);});

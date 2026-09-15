@@ -204,10 +204,37 @@
     return aside && aside.classList.contains("ad-rail-right") ? "right" : "left";
   }
 
+  /* AdSense baglantisi. Yayinci kimligi sabit; birim numarasi bos kaldigi
+     surece yuvada yer tutucu gorunur. AdSense onayi gelince AD_UNITS'e
+     sayfa bazinda 10 haneli birim numaralarini yaz ("*" hepsine uygulanir). */
+  var AD_CLIENT = "ca-pub-9329708777375659";
+  var AD_UNITS = {
+    /* "home": "1234567890", "morse-flash": "1234567890", "radar": "1234567890" */
+  };
+  var railsVisible = window.matchMedia && window.matchMedia("(min-width: 1760px)").matches;
+
+  function adUnitFor(pageSlug) {
+    var key = pageSlug.replace(/^(en|ar|de|es|fr|hi|id|it|pt-br)(-|$)/, "") || "home";
+    return AD_UNITS[key] || AD_UNITS["*"] || "";
+  }
+
   function makeSlot(h, id) {
     var d = document.createElement("div");
     d.className = "ad-slot" + (h === 600 ? " ad-slot--tall" : "");
     d.setAttribute("data-ad-slot", id);
+    var unit = railsVisible ? adUnitFor(slug) : "";
+    if (unit) {
+      var ins = document.createElement("ins");
+      ins.className = "adsbygoogle";
+      ins.style.display = "inline-block";
+      ins.style.width = "300px";
+      ins.style.height = h + "px";
+      ins.setAttribute("data-ad-client", AD_CLIENT);
+      ins.setAttribute("data-ad-slot", unit);
+      d.classList.add("ad-slot--live");
+      d.appendChild(ins);
+      return d;
+    }
     var tag = document.createElement("span");
     tag.className = "ad-slot-tag";
     tag.textContent = tagText;
@@ -239,6 +266,11 @@
         rail.appendChild(makeSlot(600, slug + "-" + side + "-" + (i + 1)));
       }
     });
+    /* Gercek birimler eklendiyse AdSense'e yukleme istegi gonder (her ins icin bir push) */
+    var live = document.querySelectorAll(".ad-rail ins.adsbygoogle:not([data-adsbygoogle-status])");
+    for (var j = 0; j < live.length; j++) {
+      try { (window.adsbygoogle = window.adsbygoogle || []).push({}); } catch (e) { /* engelleyici vb. */ }
+    }
   }
 
   fill();

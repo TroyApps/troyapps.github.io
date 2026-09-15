@@ -17,7 +17,7 @@ for (const file of ["index.html", "en/index.html"]) {
   test(`${file} exposes the shared command shell without auth`, async () => {
     const html = await read(file);
     assert.match(html, /<body class="home-v2 home-v3 theme-command">/);
-    assert.match(html, /theme-v3\.css\?v=20260913-header4/);
+    assert.match(html, /theme-v3\.css\?v=20260914-adrails1/);
     assert.match(html, /class="[^"]*command-header[^"]*"/);
     assert.match(html, /<details class="language-menu"/);
     assert.match(html, /class="[^"]*command-footer[^"]*"/);
