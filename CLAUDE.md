@@ -48,7 +48,8 @@ tests/*.test.mjs           node --test
 Yayıncı kimliği: `ca-pub-9329708777375659` (app-ads.txt'dekiyle aynı hesap, AdSense Hesap bilgileri'nde doğrulandı).
 - YAPILDI: 22 sayfanın `<head>`inde AdSense yükleyici var (en/ kaynakları + üretilmiş diller + TR). Politika sayfaları ve 404 reklamsız; test bunu korur (`tests/site-contract.test.mjs`).
 - YAPILDI: `site.js` `makeSlot()` AdSense'e hazır. `AD_UNITS` boş olduğu sürece yer tutucu gösterir; birim numarası girilince (`"home"`, `"morse-flash"`, `"radar"` ya da hepsi için `"*"`) 300×600 `<ins class="adsbygoogle">` basar ve push eder. Yalnızca raylar görünürken (≥1760px) gerçek birim üretir, dar ekranda boş push yapmaz.
-- BEKLİYOR: AdSense hesabı şu an yalnızca AdMob ürünlü ("Etkin ürünler: AdMob"). Siteler/Reklamlar menüsü yok. Web için hesaba AdSense ürünü eklenmeli: https://www.google.com/adsense/signup → "Bu hesapla devam et" → troyapps.app eklenir → site incelemesi (günler/haftalar sürebilir). Head'deki yükleyici aynı zamanda site doğrulama kodudur.
+- YAPILDI (15 Eyl 2026 04:30): Hesaba AdSense web ürünü eklendi (Siteler/Reklamlar menüsü açıldı), troyapps.app kod snippet'iyle doğrulandı, site incelemesi istendi. Durum: "Hazırlanıyor". ads.txt kök dizine eklendi (Google'ın taraması bir gün sürebilir).
+- AÇIK SORU: AEA/UK için kullanıcı rızası mesajı (CMP) formu panelde bekliyor: Google CMP 2 seçenek / 3 seçenek / harici CMP. Enes karar verecek; onaysız gönderme.
 - Onay gelince: AdSense > Reklamlar > Reklam birimi > Görüntülü, sabit 300×600 birim(ler) oluştur, numaraları `AD_UNITS`'e yaz, yayınla. Reklam yoğunluğu politikasına dikkat (içerikten fazla reklam olmasın).
 Not: AdMob mobil uygulama içindir, web için AdSense kullanılır. Panel işleri otomasyon Chrome profiliyle (claude-tools\chrome-otomasyon, CDP 9222) yapılabiliyor; form kaydetmeden önce Enes'e sor.
 
