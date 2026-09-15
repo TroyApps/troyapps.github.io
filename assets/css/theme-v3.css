@@ -91,6 +91,7 @@
     justify-content: center;
     gap: 6px;
     flex: none;
+    width: 100%;
     height: 250px;
     border: 1px dashed rgba(240, 68, 60, 0.35);
     border-radius: 10px;
@@ -115,4 +116,16 @@
   }
 
   body.theme-command .ad-slot--tall { height: 600px; }
+
+  /* Gercek AdSense birimi yer tutucunun ustune biner; dolmazsa altindaki
+     "Reklam Alani" etiketi gorunur kalir. */
+  body.theme-command .ad-slot--live { position: relative; overflow: hidden; }
+  body.theme-command .ad-slot--live ins.adsbygoogle {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+  }
+  /* Google doldurmadiysa (onay bekleniyor / envanter yok) beyaz bos iframe
+     yer tutucuyu kapatmasin */
+  body.theme-command .ad-slot--live ins.adsbygoogle[data-ad-status="unfilled"] { display: none !important; }
 }

@@ -204,12 +204,15 @@
     return aside && aside.classList.contains("ad-rail-right") ? "right" : "left";
   }
 
-  /* AdSense baglantisi. Yayinci kimligi sabit; birim numarasi bos kaldigi
-     surece yuvada yer tutucu gorunur. AdSense onayi gelince AD_UNITS'e
-     sayfa bazinda 10 haneli birim numaralarini yaz ("*" hepsine uygulanir). */
+  /* AdSense baglantisi. Yayinci kimligi sabit. Birim numarasi olan yuvaya
+     yer tutucunun USTUNE bir <ins class="adsbygoogle"> bindirilir: Google
+     reklam doldurursa yer tutucuyu kapatir, doldurmazsa (site onayi
+     beklenirken, envanter yokken) yer tutucu gorunmeye devam eder.
+     Sayfa bazinda ayri birim icin "home" / "morse-flash" / "radar" anahtari
+     kullan; "*" hepsine uygulanir. */
   var AD_CLIENT = "ca-pub-9329708777375659";
   var AD_UNITS = {
-    /* "home": "1234567890", "morse-flash": "1234567890", "radar": "1234567890" */
+    "*": "6355424230" /* troyapps-rail-300x600 (sabit 300x600), 15 Eyl 2026 */
   };
   var railsVisible = window.matchMedia && window.matchMedia("(min-width: 1760px)").matches;
 
@@ -222,6 +225,14 @@
     var d = document.createElement("div");
     d.className = "ad-slot" + (h === 600 ? " ad-slot--tall" : "");
     d.setAttribute("data-ad-slot", id);
+    var tag = document.createElement("span");
+    tag.className = "ad-slot-tag";
+    tag.textContent = tagText;
+    var dim = document.createElement("span");
+    dim.className = "ad-slot-dim";
+    dim.textContent = "300 × " + h;
+    d.appendChild(tag);
+    d.appendChild(dim);
     var unit = railsVisible ? adUnitFor(slug) : "";
     if (unit) {
       var ins = document.createElement("ins");
@@ -233,16 +244,7 @@
       ins.setAttribute("data-ad-slot", unit);
       d.classList.add("ad-slot--live");
       d.appendChild(ins);
-      return d;
     }
-    var tag = document.createElement("span");
-    tag.className = "ad-slot-tag";
-    tag.textContent = tagText;
-    var dim = document.createElement("span");
-    dim.className = "ad-slot-dim";
-    dim.textContent = "300 × " + h;
-    d.appendChild(tag);
-    d.appendChild(dim);
     return d;
   }
 
