@@ -304,9 +304,9 @@ export async function createTroyRenderer(stage) {
         sx, sy,
         base: Math.max(0.3, (5.2 - magnitude) * 0.36),
         phase: (index * 2.399963) % 6.283,
-        speed: 0.8 + ((index * 7) % 11) / 8,
+        speed: 1.1 + ((index * 7) % 11) / 6,
         phase2: (index * 1.7) % 6.283,
-        speed2: 2 + ((index * 13) % 7) / 2.5,
+        speed2: 3.2 + ((index * 13) % 7) / 1.6,
       };
       constellation.add(sprite);
       let spike = null;
@@ -360,15 +360,20 @@ export async function createTroyRenderer(stage) {
       const seconds = timestamp / 1000;
       for (const { sprite, spike } of starSprites) {
         const data = sprite.userData;
-        const flicker = 1 - 0.24 * (0.5 + 0.5 * Math.sin(seconds * data.speed + data.phase))
-          - 0.14 * (0.5 + 0.5 * Math.sin(seconds * data.speed2 + data.phase2));
-        const scale = data.base * (0.85 + 0.3 * flicker);
+        /* Gercek sintilasyon: uc farkli hizda dalga + ara sira derin sonme. */
+        const wave = 0.5 + 0.5 * (
+          0.5 * Math.sin(seconds * data.speed + data.phase)
+          + 0.32 * Math.sin(seconds * data.speed2 + data.phase2)
+          + 0.18 * Math.sin(seconds * (data.speed2 * 2.7 + 1.3) + data.phase * 1.9)
+        );
+        const flicker = wave ** 1.7;
+        const scale = data.base * (0.62 + 0.6 * flicker);
         sprite.scale.set(scale, scale, 1);
-        sprite.material.opacity = 0.55 + 0.45 * flicker;
+        sprite.material.opacity = 0.12 + 0.88 * flicker;
         if (spike) {
-          const spikeScale = data.base * (2.4 + 0.9 * flicker);
+          const spikeScale = data.base * (1.6 + 2.2 * flicker);
           spike.scale.set(spikeScale, spikeScale, 1);
-          spike.material.opacity = 0.28 + 0.4 * flicker;
+          spike.material.opacity = 0.05 + 0.75 * flicker * flicker;
         }
       }
     }
