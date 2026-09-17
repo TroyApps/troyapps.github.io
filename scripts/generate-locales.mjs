@@ -2,7 +2,7 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { SITE_LOCALES, languageFlag, languageMenu, localePath, resolveSiteLocale } from "../assets/js/locales.js";
-import { COMMON_COPY, HOME_COPY, LOCALE_META, MORSE_COPY, copyFor } from "./locale-copy.mjs";
+import { AIRMOUSE_COPY, COMMON_COPY, HOME_COPY, LOCALE_META, MORSE_COPY, copyFor } from "./locale-copy.mjs";
 
 const SITE_ORIGIN = "https://troyapps.app";
 const SCRIPT_PATH = fileURLToPath(import.meta.url);
@@ -60,6 +60,7 @@ async function writeSitemap(root) {
   const entries = [
     ...SITE_LOCALES.map((locale) => sitemapPage(locale.language, "home")),
     ...SITE_LOCALES.map((locale) => sitemapPage(locale.language, "morse")),
+    ...SITE_LOCALES.map((locale) => sitemapPage(locale.language, "airmouse")),
     radarSitemapPage("tr", radarDay),
     radarSitemapPage("en", radarDay),
     "  <url>\n    <loc>https://troyapps.app/morse-flash-policy/</loc>\n  </url>",
@@ -97,7 +98,8 @@ function replaceSeo(html, language, page) {
 }
 
 function translateKnownPhrases(html, language, page) {
-  const rows = [...COMMON_COPY, ...(page === "home" ? HOME_COPY : MORSE_COPY)];
+  const pageCopy = { home: HOME_COPY, morse: MORSE_COPY, airmouse: AIRMOUSE_COPY };
+  const rows = [...COMMON_COPY, ...pageCopy[page]];
   const translations = copyFor(rows, language);
   const entries = [...translations.entries()].sort(([a], [b]) => b.length - a.length);
   let output = html;
@@ -130,12 +132,13 @@ function replaceLocaleRoutes(html, language) {
   return html
     .replaceAll("/en/radar/", radarToken)
     .replaceAll("/en/morse-flash/", localePath(language, "morse"))
+    .replaceAll("/en/airmousehand/", localePath(language, "airmouse"))
     .replaceAll("/en/", localePath(language, "home"))
     .replaceAll(radarToken, localePath(language, "radar"));
 }
 
 export function translatePage(sourceHtml, language, page) {
-  if (!new Set(["home", "morse"]).has(page)) throw new Error(`Unsupported localized page: ${page}`);
+  if (!new Set(["home", "morse", "airmouse"]).has(page)) throw new Error(`Unsupported localized page: ${page}`);
   const locale = resolveSiteLocale(language);
   if (locale.language === "tr") throw new Error("Turkish uses its authored source page");
 
@@ -165,11 +168,13 @@ async function refreshMenuOnly(root, relativePath, language, page) {
 export async function writeLocalizedPages(root = PROJECT_ROOT) {
   const englishHome = await readFile(resolve(root, "en/index.html"), "utf8");
   const englishMorse = await readFile(resolve(root, "en/morse-flash/index.html"), "utf8");
+  const englishAirMouse = await readFile(resolve(root, "en/airmousehand/index.html"), "utf8");
 
   for (const locale of SITE_LOCALES.filter(({ language }) => !["tr", "en"].includes(language))) {
     for (const [page, source, suffix] of [
       ["home", englishHome, "index.html"],
       ["morse", englishMorse, "morse-flash/index.html"],
+      ["airmouse", englishAirMouse, "airmousehand/index.html"],
     ]) {
       const path = resolve(root, locale.folder, suffix);
       await mkdir(dirname(path), { recursive: true });
@@ -181,6 +186,8 @@ export async function writeLocalizedPages(root = PROJECT_ROOT) {
   await refreshAuthoredPage(root, "en/index.html", "en", "home");
   await refreshAuthoredPage(root, "morse-flash/index.html", "tr", "morse");
   await refreshAuthoredPage(root, "en/morse-flash/index.html", "en", "morse");
+  await refreshAuthoredPage(root, "airmousehand/index.html", "tr", "airmouse");
+  await refreshAuthoredPage(root, "en/airmousehand/index.html", "en", "airmouse");
   await refreshMenuOnly(root, "radar/index.html", "tr", "radar");
   await refreshMenuOnly(root, "en/radar/index.html", "en", "radar");
   await writeSitemap(root);

@@ -405,3 +405,14 @@
   .product-v3 .product-feature-grid .card,
   .product-v3 .product-gallery figure { animation: none !important; transition: none !important; transform: none !important; }
 }
+
+/* ---------- AirMouseHand: telefon ekran goruntusu + dikey galeri ---------- */
+.product-v3 .phone--shot .phone-screen { min-height: 0; padding: 0; gap: 0; }
+.product-v3 .phone--shot .phone-screen img { display: block; width: 100%; height: auto; }
+.product-v3 .product-gallery--portrait { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+@media (max-width: 900px) {
+  .product-v3 .product-gallery--portrait { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 700px) {
+  .product-v3 .product-gallery--portrait { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}

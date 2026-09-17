@@ -208,9 +208,9 @@ test("Troy controller exposes deterministic animation state transitions", async 
 
 test("every public command page loads the AdSense loader with the TroyApps publisher id", async () => {
   const pages = [
-    "index.html", "morse-flash/index.html", "radar/index.html",
-    "en/index.html", "en/morse-flash/index.html", "en/radar/index.html",
-    ...["ar", "de", "es", "fr", "hi", "id", "it", "pt-br"].flatMap((l) => [`${l}/index.html`, `${l}/morse-flash/index.html`]),
+    "index.html", "morse-flash/index.html", "airmousehand/index.html", "radar/index.html",
+    "en/index.html", "en/morse-flash/index.html", "en/airmousehand/index.html", "en/radar/index.html",
+    ...["ar", "de", "es", "fr", "hi", "id", "it", "pt-br"].flatMap((l) => [`${l}/index.html`, `${l}/morse-flash/index.html`, `${l}/airmousehand/index.html`]),
   ];
   for (const file of pages) {
     const html = await page(file);

@@ -15,7 +15,11 @@ const locales = [
   { language: "fr", folder: "fr", dir: "ltr", flag: "fr" },
   { language: "it", folder: "it", dir: "ltr", flag: "it" },
 ];
-const morsePlayUrl = "https://play.google.com/store/apps/details?id=com.troyapps.morseflash";
+const playUrls = {
+  morse: "https://play.google.com/store/apps/details?id=com.troyapps.morseflash",
+  airmouse: "https://play.google.com/store/apps/details?id=com.troyapps.airmousehand",
+};
+const pageDirs = { morse: "morse-flash", airmouse: "airmousehand" };
 const liveStatuses = {
   tr: "Android · Yayında",
   en: "Android · Available",
@@ -40,15 +44,15 @@ const requiredExternal = [
 
 function route(locale, page) {
   const prefix = locale.folder ? `/${locale.folder}` : "";
-  return page === "home" ? (prefix ? `${prefix}/` : "/") : `${prefix}/morse-flash/`;
+  return page === "home" ? (prefix ? `${prefix}/` : "/") : `${prefix}/${pageDirs[page]}/`;
 }
 
 function file(locale, page) {
-  return `${locale.folder ? `${locale.folder}/` : ""}${page === "home" ? "index.html" : "morse-flash/index.html"}`;
+  return `${locale.folder ? `${locale.folder}/` : ""}${page === "home" ? "index.html" : `${pageDirs[page]}/index.html`}`;
 }
 
 for (const locale of locales) {
-  for (const page of ["home", "morse"]) {
+  for (const page of ["home", "morse", "airmouse"]) {
     test(`${locale.language} ${page} page keeps the multilingual public contract`, async () => {
       const html = await readFile(new URL(file(locale, page), root), "utf8");
       const htmlTag = locale.dir === "rtl"
@@ -68,9 +72,11 @@ for (const locale of locales) {
       if (page === "home") {
         assert.ok(html.includes(locale.language === "tr" ? 'href="/radar/"' : 'href="/en/radar/"'));
         assert.ok(html.includes(`data-app-status="${liveStatuses[locale.language]}"`));
+        assert.ok(html.includes(`data-app-href="${route(locale, "airmouse")}"`));
+        assert.ok(html.includes('href="/airmousehand-policy/"'));
       } else {
         const heroCta = html.match(/<div class="hero-cta">[\s\S]*?<\/div>/)?.[0] || "";
-        assert.ok(heroCta.includes(`<a class="btn btn-primary" href="${morsePlayUrl}"`));
+        assert.ok(heroCta.includes(`<a class="btn btn-primary" href="${playUrls[page]}"`));
         assert.ok(heroCta.includes('target="_blank" rel="noopener"'));
         assert.doesNotMatch(heroCta, /btn-soon|role="status"/);
       }
@@ -83,16 +89,16 @@ for (const locale of locales) {
   }
 }
 
-test("sitemap publishes every locale home and Morse page once", async () => {
+test("sitemap publishes every locale home, Morse and AirMouseHand page once", async () => {
   const xml = await readFile(new URL("sitemap.xml", root), "utf8");
   const locations = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
-  const localized = locales.flatMap((locale) => ["home", "morse"].map((page) => `https://troyapps.app${route(locale, page)}`));
+  const localized = locales.flatMap((locale) => ["home", "morse", "airmouse"].map((page) => `https://troyapps.app${route(locale, page)}`));
   for (const url of localized) assert.equal(locations.filter((item) => item === url).length, 1, url);
   assert.ok(locations.includes("https://troyapps.app/radar/"));
   assert.ok(locations.includes("https://troyapps.app/en/radar/"));
   assert.ok(locations.includes("https://troyapps.app/morse-flash-policy/"));
   assert.ok(locations.includes("https://troyapps.app/airmousehand-policy/"));
-  assert.equal(locations.length, 24);
+  assert.equal(locations.length, 34);
 });
 
 test("shared command theme gives Arabic a deliberate RTL layout", async () => {
@@ -124,7 +130,7 @@ for (const [fileName, language] of [["radar/index.html", "tr"], ["en/radar/index
 }
 
 test("Turkish public pages expose a Turkish accessible label for the language picker", async () => {
-  for (const fileName of ["index.html", "morse-flash/index.html", "radar/index.html"]) {
+  for (const fileName of ["index.html", "morse-flash/index.html", "airmousehand/index.html", "radar/index.html"]) {
     const html = await readFile(new URL(fileName, root), "utf8");
     assert.match(html, /<summary aria-label="Dil seç">/);
   }
@@ -132,7 +138,7 @@ test("Turkish public pages expose a Turkish accessible label for the language pi
 
 test("every language selector summary shows its selected flag", async () => {
   for (const locale of locales) {
-    for (const page of ["home", "morse"]) {
+    for (const page of ["home", "morse", "airmouse"]) {
       const html = await readFile(new URL(file(locale, page), root), "utf8");
       const summary = html.match(/<summary[^>]*>[\s\S]*?<\/summary>/)?.[0] || "";
       assert.match(summary, new RegExp(`<img class="language-flag" src="/assets/img/flags/${locale.flag}\\.svg"`));

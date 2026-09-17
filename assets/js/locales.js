@@ -27,6 +27,7 @@ export function localePath(language, page = "home") {
   if (page === "radar") return locale.language === "tr" ? "/radar/" : "/en/radar/";
   const prefix = locale.folder ? `/${locale.folder}` : "";
   if (page === "morse") return `${prefix}/morse-flash/`;
+  if (page === "airmouse") return `${prefix}/airmousehand/`;
   return prefix ? `${prefix}/` : "/";
 }
 

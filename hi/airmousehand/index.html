@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="hi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AirMouseHand — बिना छुए स्क्रॉल करें | TroyApps</title>
+  <meta name="description" content="हाथ और चेहरे के हाव-भाव से Reels, Shorts और TikTok में हाथ मुक्त स्क्रॉलिंग। AirMouseHand, TroyApps का एक Android ऐप है।">
+  <link rel="canonical" href="https://troyapps.app/hi/airmousehand/">
+  <link rel="alternate" hreflang="tr" href="https://troyapps.app/airmousehand/">
+  <link rel="alternate" hreflang="en" href="https://troyapps.app/en/airmousehand/">
+  <link rel="alternate" hreflang="es-419" href="https://troyapps.app/es/airmousehand/">
+  <link rel="alternate" hreflang="pt-BR" href="https://troyapps.app/pt-br/airmousehand/">
+  <link rel="alternate" hreflang="hi" href="https://troyapps.app/hi/airmousehand/">
+  <link rel="alternate" hreflang="id" href="https://troyapps.app/id/airmousehand/">
+  <link rel="alternate" hreflang="ar" href="https://troyapps.app/ar/airmousehand/">
+  <link rel="alternate" hreflang="de" href="https://troyapps.app/de/airmousehand/">
+  <link rel="alternate" hreflang="fr" href="https://troyapps.app/fr/airmousehand/">
+  <link rel="alternate" hreflang="it" href="https://troyapps.app/it/airmousehand/">
+  <link rel="alternate" hreflang="x-default" href="https://troyapps.app/airmousehand/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="TroyApps">
+  <meta property="og:title" content="AirMouseHand — बिना छुए स्क्रॉल करें">
+  <meta property="og:description" content="स्क्रीन को छुए बिना स्क्रॉल करें, पसंद करें और रोकें।">
+  <meta property="og:url" content="https://troyapps.app/hi/airmousehand/">
+  <meta property="og:image" content="https://troyapps.app/assets/img/og-airmousehand.png">
+  <meta property="og:locale" content="hi_IN">
+  <meta property="og:locale:alternate" content="tr_TR">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:locale:alternate" content="es_MX">
+  <meta property="og:locale:alternate" content="pt_BR">
+  <meta property="og:locale:alternate" content="id_ID">
+  <meta property="og:locale:alternate" content="ar_SA">
+  <meta property="og:locale:alternate" content="de_DE">
+  <meta property="og:locale:alternate" content="fr_FR">
+  <meta property="og:locale:alternate" content="it_IT">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#0a0a12">
+  <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/assets/img/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+  <link rel="preload" href="/assets/fonts/press-start-2p-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/vt323-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/assets/css/site.css">
+  <link rel="stylesheet" href="/assets/css/theme-v3.css?v=20260914-adrails1"><link rel="stylesheet" href="/assets/css/product-v3.css?v=20260917-airmouse1">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9329708777375659" crossorigin="anonymous"></script>
+</head>
+<body class="product-v3 theme-command">
+  <canvas id="bg-signal" aria-hidden="true"></canvas>
+  <div id="stage-glow" aria-hidden="true"></div>
+  <div id="cursor-glow" aria-hidden="true"></div>
+
+  <a class="skip-link" href="#content">मुख्य सामग्री पर जाएँ</a>
+
+  <header class="site-header command-header">
+    <div class="wrap nav-bar">
+      <a class="brand command-brand" href="/hi/" aria-label="TroyApps होम">
+        <svg width="26" height="26" viewBox="0 0 64 64" aria-hidden="true">
+          <rect width="64" height="64" rx="4" fill="#0c1812"/>
+          <rect x="1.5" y="1.5" width="61" height="61" rx="3" fill="none" stroke="#1c4a36" stroke-width="3"/>
+          <rect x="13" y="15" width="38" height="9" fill="#00ff9c"/>
+          <rect x="27" y="24" width="10" height="27" fill="#00ff9c"/>
+          <rect x="44" y="24" width="8" height="8" fill="#ff3ef2"/>
+          <rect x="13" y="46" width="10" height="5" fill="#1d5f44"/>
+        </svg>
+        TroyApps
+      </a>
+
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu" aria-label="मेन्यू खोलें या बंद करें">
+        <span class="bars"></span>
+      </button>
+
+      <nav class="nav-menu command-nav" id="nav-menu" aria-label="मुख्य मेन्यू">
+        <ul class="nav-links">
+          <li><a href="/hi/">होम</a></li>
+          <li><a href="/hi/#apps" aria-current="page">ऐप्स</a></li>
+          <li><a href="#contact">संपर्क</a></li>
+        </ul>
+      </nav>
+      <details class="language-menu"><summary aria-label="भाषा चुनें"><img class="language-flag" src="/assets/img/flags/in.svg" width="20" height="14" alt="" aria-hidden="true"><span>HI</span><span aria-hidden="true">⌄</span></summary><div class="language-options"><a href="/airmousehand/" lang="tr" hreflang="tr"><img class="language-flag" src="/assets/img/flags/tr.svg" width="20" height="14" alt="" aria-hidden="true"><span>Türkçe</span></a><a href="/en/airmousehand/" lang="en" hreflang="en"><img class="language-flag" src="/assets/img/flags/us.svg" width="20" height="14" alt="" aria-hidden="true"><span>English</span></a><a href="/es/airmousehand/" lang="es-419" hreflang="es-419"><img class="language-flag" src="/assets/img/flags/mx.svg" width="20" height="14" alt="" aria-hidden="true"><span>Español</span></a><a href="/pt-br/airmousehand/" lang="pt-BR" hreflang="pt-BR"><img class="language-flag" src="/assets/img/flags/br.svg" width="20" height="14" alt="" aria-hidden="true"><span>Português (Brasil)</span></a><a href="/hi/airmousehand/" lang="hi" hreflang="hi" aria-current="page"><img class="language-flag" src="/assets/img/flags/in.svg" width="20" height="14" alt="" aria-hidden="true"><span>हिन्दी</span></a><a href="/id/airmousehand/" lang="id" hreflang="id"><img class="language-flag" src="/assets/img/flags/id.svg" width="20" height="14" alt="" aria-hidden="true"><span>Bahasa Indonesia</span></a><a href="/ar/airmousehand/" lang="ar" hreflang="ar"><img class="language-flag" src="/assets/img/flags/sa.svg" width="20" height="14" alt="" aria-hidden="true"><span>العربية</span></a><a href="/de/airmousehand/" lang="de" hreflang="de"><img class="language-flag" src="/assets/img/flags/de.svg" width="20" height="14" alt="" aria-hidden="true"><span>Deutsch</span></a><a href="/fr/airmousehand/" lang="fr" hreflang="fr"><img class="language-flag" src="/assets/img/flags/fr.svg" width="20" height="14" alt="" aria-hidden="true"><span>Français</span></a><a href="/it/airmousehand/" lang="it" hreflang="it"><img class="language-flag" src="/assets/img/flags/it.svg" width="20" height="14" alt="" aria-hidden="true"><span>Italiano</span></a></div></details>
+    </div>
+  </header>
+
+  <div class="page-rails">
+    <aside class="ad-rail ad-rail-left" aria-hidden="true">
+      <div class="ad-rail-sticky">
+        <div class="ad-slot" data-ad-slot="left-1"><span class="ad-slot-tag">विज्ञापन स्थान</span><span class="ad-slot-dim">300 × 250</span></div>
+        <div class="ad-slot" data-ad-slot="left-2"><span class="ad-slot-tag">विज्ञापन स्थान</span><span class="ad-slot-dim">300 × 250</span></div>
+      </div>
+    </aside>
+    <main id="content" class="product-main">
+    <!-- Hero -->
+    <section class="hero product-hero-v3" aria-labelledby="hero-title">
+      <div class="wrap">
+        <div class="hero-split">
+          <div>
+            <img class="hero-app-icon" src="/assets/img/airmousehand-icon-192.png" alt="AirMouseHand ऐप आइकन" width="192" height="192">
+            <p class="kicker">आइटम·02 चुना गया: AirMouseHand</p>
+            <h1 id="hero-title" class="decode" data-text="बिना छुए स्क्रॉल करें">बिना छुए स्क्रॉल करें</h1>
+            <p class="lead">स्क्रीन को छुए बिना स्क्रॉल करें, पसंद करें और रोकें।</p>
+            <div class="hero-cta">
+              <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=com.troyapps.airmousehand" target="_blank" rel="noopener" aria-label="Google Play पर AirMouseHand खोलें">
+                <span aria-hidden="true">▶</span>
+                Google Play से डाउनलोड करें
+              </a>
+            </div>
+            <p class="hero-note">AirMouseHand अब Google Play पर उपलब्ध है। इसे Android के लिए डाउनलोड करें।</p>
+          </div>
+
+          <div class="phone phone--shot" aria-hidden="true">
+            <div class="phone-screen">
+              <img src="/assets/img/shots/airmousehand/en-2.webp" alt="" width="540" height="960">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker-track">
+        <span>★ <b>AIRMOUSEHAND</b> ★ हाथ मुक्त ★ पिंच करें, स्क्रॉल करें ★ कैमरा डिवाइस पर ★ हाथ मुक्त ★ पिंच करें, स्क्रॉल करें ★</span>
+        <span>★ <b>AIRMOUSEHAND</b> ★ हाथ मुक्त ★ पिंच करें, स्क्रॉल करें ★ कैमरा डिवाइस पर ★ हाथ मुक्त ★ पिंच करें, स्क्रॉल करें ★</span>
+      </div>
+    </div>
+
+    <!-- Powers -->
+    <section id="features" aria-labelledby="features-title">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <span class="mono-label"><span class="idx">सूची</span>क्षमताएँ</span>
+          <h2 id="features-title">एक कैमरा, <span class="grad-text">पाँच क्षमताएँ</span></h2>
+        </div>
+
+      <div class="card-grid product-feature-grid">
+          <div class="card reveal">
+            <span class="code" aria-hidden="true">01</span>
+            <span class="icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 13V5a2 2 0 0 1 4 0v6"/><path d="M12 11V4a2 2 0 0 1 4 0v8"/><path d="M16 9a2 2 0 0 1 4 0v5a7 7 0 0 1-7 7h-1a7 7 0 0 1-6-3.4L4 14.5a1.8 1.8 0 0 1 3-2L8 14"/></svg>
+            </span>
+            <h3>उंगली पिंच</h3>
+            <p>स्क्रॉल करने, पसंद करने या रोकने के लिए अंगूठे को किसी उंगली से मिलाएँ। हर उंगली का कमांड आप चुन सकते हैं।</p>
+          </div>
+          <div class="card reveal">
+            <span class="code" aria-hidden="true">02</span>
+            <span class="icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><circle cx="9" cy="10" r=".8" fill="currentColor"/><circle cx="15" cy="10" r=".8" fill="currentColor"/><ellipse cx="12" cy="15.5" rx="2" ry="1.6"/></svg>
+            </span>
+            <h3>चेहरे से नियंत्रण</h3>
+            <p>हाथ व्यस्त हैं? मुँह थोड़ा खोलें, कमांड फिर भी चला जाएगा।</p>
+          </div>
+          <div class="card reveal">
+            <span class="code" aria-hidden="true">03</span>
+            <span class="icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M12 15V8"/><path d="M9 10.5 12 7.5l3 3"/></svg>
+            </span>
+            <h3>वर्टिकल फ़ीड</h3>
+            <p>TikTok, Reels, Shorts और स्वाइप व टैप पर चलने वाली हर ऐप के साथ काम करता है।</p>
+          </div>
+          <div class="card reveal">
+            <span class="code" aria-hidden="true">04</span>
+            <span class="icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 5 6v5c0 4.5 3 8 7 10 4-2 7-5.5 7-10V6z"/><path d="m9 12 2 2 4-4"/></svg>
+            </span>
+            <h3>डिज़ाइन से निजी</h3>
+            <p>कैमरा फ्रेम आपके डिवाइस पर ही प्रोसेस होते हैं। कुछ भी रिकॉर्ड, अपलोड या शेयर नहीं होता।</p>
+          </div>
+          <div class="card card-wide reveal">
+            <span class="code" aria-hidden="true">05</span>
+            <span class="icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2"/><path d="M10 2h4"/></svg>
+            </span>
+            <h3>सेशन और प्रीमियम</h3>
+            <p>एक छोटे विज्ञापन से 15 मिनट का सेशन खोलें, या एक बार की प्रीमियम खरीद से विज्ञापन और सीमा हमेशा के लिए हटाएँ।</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery -->
+    <section id="gallery" aria-labelledby="gallery-title">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <span class="mono-label"><span class="idx">Records</span>गैलरी</span>
+          <h2 id="gallery-title">ऐप की <span class="grad-text">झलकियाँ</span></h2>
+          <p>असली ऐप, असली काम। चुनी हुई स्टोर तस्वीरें।</p>
+        </div>
+
+      <div class="gallery-grid product-gallery product-gallery--portrait">
+          <figure class="reveal"><img src="/assets/img/shots/airmousehand/en-1.webp" alt="आटे से सने हाथ: हवा में पिंच करें और फ़ीड स्क्रॉल हो जाए" width="540" height="960" loading="lazy"></figure>
+          <figure class="reveal"><img src="/assets/img/shots/airmousehand/en-2.webp" alt="स्क्रीन छुए बिना स्क्रॉल करें" width="540" height="960" loading="lazy"></figure>
+          <figure class="reveal"><img src="/assets/img/shots/airmousehand/en-3.webp" alt="किसी भी उंगली को कोई भी कमांड दें" width="540" height="960" loading="lazy"></figure>
+          <figure class="reveal"><img src="/assets/img/shots/airmousehand/en-4.webp" alt="दोनों हाथ व्यस्त: मुँह का इस्तेमाल करें" width="540" height="960" loading="lazy"></figure>
+          <figure class="reveal"><img src="/assets/img/shots/airmousehand/en-5.webp" alt="चेहरा नियंत्रण स्क्रीन: मुँह खोलते ही कमांड चलता है" width="540" height="960" loading="lazy"></figure>
+          <figure class="reveal"><img src="/assets/img/shots/airmousehand/en-6.webp" alt="आराम से लेटें और बस देखें" width="540" height="960" loading="lazy"></figure>
+          <figure class="reveal"><img src="/assets/img/shots/airmousehand/en-7.webp" alt="शुरू करें और सेशन चलते समय आराम करें" width="540" height="960" loading="lazy"></figure>
+          <figure class="reveal"><img src="/assets/img/shots/airmousehand/en-8.webp" alt="भाषा सेटिंग: आठ भाषाएँ" width="540" height="960" loading="lazy"></figure>
+        </div>
+      </div>
+    </section>
+    </main>
+    <aside class="ad-rail ad-rail-right" aria-hidden="true">
+      <div class="ad-rail-sticky">
+        <div class="ad-slot" data-ad-slot="right-1"><span class="ad-slot-tag">विज्ञापन स्थान</span><span class="ad-slot-dim">300 × 250</span></div>
+        <div class="ad-slot" data-ad-slot="right-2"><span class="ad-slot-tag">विज्ञापन स्थान</span><span class="ad-slot-dim">300 × 250</span></div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer command-footer" id="contact">
+    <nav class="footer-platforms" aria-label="TroyApps प्लेटफ़ॉर्म">
+      <a data-platform="google-play" href="https://play.google.com/store/apps/developer?id=Troy+Apps" target="_blank" rel="noopener" aria-label="Google Play पर TroyApps खोलें" title="Google Play"><img src="/assets/img/social/google-play.svg" alt="" aria-hidden="true"></a>
+      <a data-platform="youtube" href="https://www.youtube.com/channel/UC2PncaDQ9wSXYqY5IaffuJw" target="_blank" rel="noopener" aria-label="TroyApps का YouTube चैनल खोलें" title="YouTube"><img src="/assets/img/social/youtube.svg" alt="" aria-hidden="true"></a>
+      <a data-platform="instagram" href="https://www.instagram.com/troyappsofficial/" target="_blank" rel="noopener" aria-label="Instagram पर TroyApps खोलें" title="Instagram"><img src="/assets/img/social/instagram.svg" alt="" aria-hidden="true"></a>
+      <a data-platform="tiktok" href="https://www.tiktok.com/@troyappsofficial" target="_blank" rel="noopener" aria-label="TikTok पर TroyApps खोलें" title="TikTok"><img src="/assets/img/social/tiktok.svg" alt="" aria-hidden="true"></a>
+      <a data-platform="facebook" href="https://www.facebook.com/troyappsofficial" target="_blank" rel="noopener" aria-label="Facebook पर TroyApps खोलें" title="Facebook"><img src="/assets/img/social/facebook.svg" alt="" aria-hidden="true"></a>
+    </nav>
+    <div class="wrap">
+      <p class="footer-word" aria-hidden="true">AirMouseHand</p>
+      <div class="footer-grid">
+        <div>
+          <a class="brand" href="/hi/">TroyApps</a>
+          <p class="muted" style="margin-top:14px; max-width:300px;">एक स्वतंत्र सॉफ़्टवेयर स्टूडियो जो रोज़मर्रा की ज़िंदगी आसान बनाने वाले मोबाइल टूल बनाता है।</p>
+        </div>
+        <div>
+          <h3>संपर्क</h3>
+          <ul>
+            <li><a href="mailto:info@troyapps.app">info@troyapps.app</a></li>
+            <li><a href="mailto:support@troyapps.app">support@troyapps.app</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>लिंक</h3>
+          <ul>
+            <li><a href="/hi/">मुख्य पृष्ठ</a></li>
+            <li><a href="/airmousehand-policy/">गोपनीयता नीति</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 TroyApps · सर्वाधिकार सुरक्षित</span>
+        <span>••• troyapps.app ——— गेम सहेजा गया •••</span>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/assets/js/bg.js?v=20260910-product1"></script>
+  <script src="/assets/js/site.js" defer></script>
+  <script src="/assets/js/tilt.js" defer></script>
+</body>
+</html>
