@@ -57,6 +57,8 @@ Not: AdMob mobil uygulama içindir, web için AdSense kullanılır. Panel işler
 - `troy-controller.js` → `createTroyRenderer` (troy-three.js). Durumlar `data-troy-renderer`: loading / ready / fallback.
 - F5'te beyaz kare sorunu çözüldü: `beforeunload`/`pagehide`'da tuval gizlenir (Chrome GPU tuvali boşaltıyordu). Yükleme sırasında poster gösterilmiyor, bilinçli tercih.
 - Sekme arka plandayken render durur (document.hidden) — testte "ready" olmuyorsa sebebi bu.
+- 17 Eyl 2026: Troy'un arkasında hep duran **Orion + Sirius yıldız fonu** var (`troy-three.js`: CONSTELLATION_STARS, `layoutConstellation`, `updateConstellation`; sahnede `scene` altında, Troy'un 0.9 boy arkasında, kamera yerleşince ölçeklenir). Titreme, ışık çubukları, silik çizgiler, yıldız tozu.
+- Bazuka dağılması artık **lego küpleri** (`InstancedMesh`, 150 / mobil 96): `seedCubesFromParticles` → `updateCubes` (yerçekimi, sekme, `pileSurface` tepeciğine yığılma, `FLOOR_Y` panel hizası) → tıklayınca `reformPixels` küpleri eve uçurur. Eski nokta bulutu (`pixelGhost`) kodda duruyor ama görünmez; olay/dataset isimleri (`troy:pixel-scattered`, `troyPixelState`) aynı kaldı, controller değişmedi.
 
 ## Radar notları
 - Kaynaklar `scripts/radar-sources.mjs`; LIMITS.repos=8, news=10 (haber özelliği kaldırılacak, plan aşamasında).
