@@ -142,13 +142,11 @@ function createSpikeTexture() {
   return texture;
 }
 
-/* Orion + Sirius: [RA, Dec, kadir] (J2000). Ilk 11'i ana figur, gerisi kalkan/sopa. */
+/* Orion + Sirius: [RA, Dec, kadir] (J2000). Sadece ana figur; arka plan tozu yok (Enes istedi). */
 const CONSTELLATION_STARS = [
   [88.793, 7.407, 0.42], [81.283, 6.350, 1.64], [83.784, 9.934, 3.39], [83.002, -0.299, 2.25],
   [84.053, -1.202, 1.69], [85.190, -1.943, 1.74], [86.939, -9.670, 2.07], [78.634, -8.202, 0.13],
   [83.858, -5.910, 2.77], [83.819, -5.390, 4.0], [101.287, -16.716, -1.46],
-  [76.63, 2.44, 3.19], [76.37, 3.54, 3.69], [75.49, 5.60, 4.47], [77.29, 1.71, 4.36], [78.31, 8.90, 4.41],
-  [90.60, 9.65, 4.12], [88.60, 20.28, 4.64], [92.98, 14.21, 4.42], [89.93, 7.24, 4.65],
 ];
 const CONSTELLATION_LINES = [[2, 0], [2, 1], [0, 5], [1, 3], [3, 4], [4, 5], [5, 6], [3, 7], [4, 9], [9, 8]];
 const CONSTELLATION_RA0 = 90;
@@ -325,30 +323,6 @@ export async function createTroyRenderer(stage) {
       }
       return { sprite, spike };
     });
-    const dustCount = mobile ? 140 : 260;
-    const dustPositions = new Float32Array(dustCount * 3);
-    const dustSeed = { value: 4242 };
-    const dustRandom = () => (dustSeed.value = (dustSeed.value * 16807) % 2147483647) / 2147483647;
-    for (let index = 0; index < dustCount; index += 1) {
-      dustPositions[index * 3] = (dustRandom() - 0.5) * 34;
-      dustPositions[index * 3 + 1] = (dustRandom() - 0.5) * 34;
-      dustPositions[index * 3 + 2] = 0;
-    }
-    const dustGeometry = new THREE.BufferGeometry();
-    dustGeometry.setAttribute("position", new THREE.BufferAttribute(dustPositions, 3));
-    const dustMaterial = new THREE.PointsMaterial({
-      map: starGlowTexture,
-      color: 0xf05a50,
-      size: 0.11,
-      sizeAttenuation: true,
-      transparent: true,
-      opacity: 0.28,
-      depthWrite: false,
-      blending: THREE.AdditiveBlending,
-    });
-    const dust = new THREE.Points(dustGeometry, dustMaterial);
-    dust.frustumCulled = false;
-    constellation.add(dust);
     const linePositions = new Float32Array(CONSTELLATION_LINES.length * 6);
     CONSTELLATION_LINES.forEach(([a, b], index) => {
       const [ax, ay] = constellationXY(CONSTELLATION_STARS[a][0], CONSTELLATION_STARS[a][1]);
@@ -397,7 +371,6 @@ export async function createTroyRenderer(stage) {
           spike.material.opacity = 0.28 + 0.4 * flicker;
         }
       }
-      dustMaterial.opacity = 0.22 + 0.08 * Math.sin(seconds * 0.7);
     }
 
     /* ---------- Lego molozu: bazuka vurunca Troy kup kup dagilir, panele yigilir ---------- */
@@ -1757,8 +1730,6 @@ export async function createTroyRenderer(stage) {
         particleMaterial.dispose();
         cubeGeometry.dispose();
         cubeMaterial.dispose();
-        dustGeometry.dispose();
-        dustMaterial.dispose();
         lineGeometry.dispose();
         lineMaterial.dispose();
         starGlowTexture.dispose();
