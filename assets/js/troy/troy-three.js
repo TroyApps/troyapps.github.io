@@ -117,6 +117,49 @@ function prefersPosterFallback() {
   return shouldUsePosterFallback({ reducedMotion, saveData });
 }
 
+/* Parlak yildizlar icin kirinim cubugu (arti seklinde isik) dokusu. */
+function createSpikeTexture() {
+  const canvas = document.createElement("canvas");
+  canvas.width = 128;
+  canvas.height = 128;
+  const context = canvas.getContext("2d");
+  for (let pass = 0; pass < 2; pass += 1) {
+    const gradient = pass === 0
+      ? context.createLinearGradient(0, 64, 128, 64)
+      : context.createLinearGradient(64, 0, 64, 128);
+    gradient.addColorStop(0, "rgba(255,150,140,0)");
+    gradient.addColorStop(0.5, "rgba(255,190,180,0.9)");
+    gradient.addColorStop(1, "rgba(255,150,140,0)");
+    context.strokeStyle = gradient;
+    context.lineWidth = 2.2;
+    context.beginPath();
+    if (pass === 0) { context.moveTo(0, 64); context.lineTo(128, 64); }
+    else { context.moveTo(64, 0); context.lineTo(64, 128); }
+    context.stroke();
+  }
+  const texture = new THREE.CanvasTexture(canvas);
+  texture.colorSpace = THREE.SRGBColorSpace;
+  return texture;
+}
+
+/* Orion + Sirius: [RA, Dec, kadir] (J2000). Ilk 11'i ana figur, gerisi kalkan/sopa. */
+const CONSTELLATION_STARS = [
+  [88.793, 7.407, 0.42], [81.283, 6.350, 1.64], [83.784, 9.934, 3.39], [83.002, -0.299, 2.25],
+  [84.053, -1.202, 1.69], [85.190, -1.943, 1.74], [86.939, -9.670, 2.07], [78.634, -8.202, 0.13],
+  [83.858, -5.910, 2.77], [83.819, -5.390, 4.0], [101.287, -16.716, -1.46],
+  [76.63, 2.44, 3.19], [76.37, 3.54, 3.69], [75.49, 5.60, 4.47], [77.29, 1.71, 4.36], [78.31, 8.90, 4.41],
+  [90.60, 9.65, 4.12], [88.60, 20.28, 4.64], [92.98, 14.21, 4.42], [89.93, 7.24, 4.65],
+];
+const CONSTELLATION_LINES = [[2, 0], [2, 1], [0, 5], [1, 3], [3, 4], [4, 5], [5, 6], [3, 7], [4, 9], [9, 8]];
+const CONSTELLATION_RA0 = 90;
+const CONSTELLATION_DEC0 = -3.5;
+function constellationXY(ra, dec) {
+  return [
+    -(ra - CONSTELLATION_RA0) * Math.cos(CONSTELLATION_DEC0 * Math.PI / 180),
+    dec - CONSTELLATION_DEC0,
+  ];
+}
+
 function cappedPixelRatio(width, height) {
   const mobile = window.matchMedia?.("(max-width: 760px)").matches;
   const pixelBudget = mobile ? 900_000 : 1_800_000;
@@ -242,6 +285,275 @@ export async function createTroyRenderer(stage) {
     pixelGhost.frustumCulled = false;
     pixelGhost.visible = false;
     modelPivot.add(pixelGhost);
+
+    /* ---------- Yildiz fonu: Troy'un arkasinda hep duran Orion + Sirius ---------- */
+    const constellation = new THREE.Group();
+    constellation.name = "TroyConstellation";
+    scene.add(constellation);
+    const starGlowTexture = createRadialTexture("rgba(255,214,206,1)", "rgba(240,68,60,0)");
+    const starSpikeTexture = createSpikeTexture();
+    const starSprites = CONSTELLATION_STARS.map(([ra, dec, magnitude], index) => {
+      const material = new THREE.SpriteMaterial({
+        map: starGlowTexture,
+        color: 0xf0443c,
+        transparent: true,
+        depthWrite: false,
+        blending: THREE.AdditiveBlending,
+      });
+      const sprite = new THREE.Sprite(material);
+      const [sx, sy] = constellationXY(ra, dec);
+      sprite.userData = {
+        sx, sy,
+        base: Math.max(0.3, (5.2 - magnitude) * 0.36),
+        phase: (index * 2.399963) % 6.283,
+        speed: 0.8 + ((index * 7) % 11) / 8,
+        phase2: (index * 1.7) % 6.283,
+        speed2: 2 + ((index * 13) % 7) / 2.5,
+      };
+      constellation.add(sprite);
+      let spike = null;
+      if (magnitude < 2.1) {
+        const spikeMaterial = new THREE.SpriteMaterial({
+          map: starSpikeTexture,
+          color: 0xff9a90,
+          transparent: true,
+          depthWrite: false,
+          blending: THREE.AdditiveBlending,
+        });
+        spike = new THREE.Sprite(spikeMaterial);
+        constellation.add(spike);
+      }
+      return { sprite, spike };
+    });
+    const dustCount = mobile ? 140 : 260;
+    const dustPositions = new Float32Array(dustCount * 3);
+    const dustSeed = { value: 4242 };
+    const dustRandom = () => (dustSeed.value = (dustSeed.value * 16807) % 2147483647) / 2147483647;
+    for (let index = 0; index < dustCount; index += 1) {
+      dustPositions[index * 3] = (dustRandom() - 0.5) * 34;
+      dustPositions[index * 3 + 1] = (dustRandom() - 0.5) * 34;
+      dustPositions[index * 3 + 2] = 0;
+    }
+    const dustGeometry = new THREE.BufferGeometry();
+    dustGeometry.setAttribute("position", new THREE.BufferAttribute(dustPositions, 3));
+    const dustMaterial = new THREE.PointsMaterial({
+      map: starGlowTexture,
+      color: 0xf05a50,
+      size: 0.11,
+      sizeAttenuation: true,
+      transparent: true,
+      opacity: 0.28,
+      depthWrite: false,
+      blending: THREE.AdditiveBlending,
+    });
+    const dust = new THREE.Points(dustGeometry, dustMaterial);
+    dust.frustumCulled = false;
+    constellation.add(dust);
+    const linePositions = new Float32Array(CONSTELLATION_LINES.length * 6);
+    CONSTELLATION_LINES.forEach(([a, b], index) => {
+      const [ax, ay] = constellationXY(CONSTELLATION_STARS[a][0], CONSTELLATION_STARS[a][1]);
+      const [bx, by] = constellationXY(CONSTELLATION_STARS[b][0], CONSTELLATION_STARS[b][1]);
+      linePositions.set([ax, ay, 0, bx, by, 0], index * 6);
+    });
+    const lineGeometry = new THREE.BufferGeometry();
+    lineGeometry.setAttribute("position", new THREE.BufferAttribute(linePositions, 3));
+    const lineMaterial = new THREE.LineBasicMaterial({
+      color: 0xf0443c,
+      transparent: true,
+      opacity: 0.13,
+      depthWrite: false,
+    });
+    const constellationLines = new THREE.LineSegments(lineGeometry, lineMaterial);
+    constellation.add(constellationLines);
+    let constellationUnit = 1;
+
+    /* Kamera yerlesince cagrilir: fonu Troy'un arkasina, gorunumu dolduracak olcekte koy. */
+    function layoutConstellation() {
+      const depthBehind = size.y * 0.9;
+      const targetHeight = cameraTargetHeight(size.y);
+      const distance = camera.position.z + depthBehind;
+      const viewHeight = 2 * Math.tan(THREE.MathUtils.degToRad(camera.fov) / 2) * distance;
+      constellationUnit = (viewHeight * 0.92) / 26.7;
+      constellation.position.set(0, targetHeight + constellationUnit * 1.5, -depthBehind);
+      constellation.scale.setScalar(constellationUnit);
+      for (const { sprite, spike } of starSprites) {
+        sprite.position.set(sprite.userData.sx, sprite.userData.sy, 0);
+        if (spike) spike.position.copy(sprite.position);
+      }
+    }
+
+    function updateConstellation(timestamp) {
+      const seconds = timestamp / 1000;
+      for (const { sprite, spike } of starSprites) {
+        const data = sprite.userData;
+        const flicker = 1 - 0.24 * (0.5 + 0.5 * Math.sin(seconds * data.speed + data.phase))
+          - 0.14 * (0.5 + 0.5 * Math.sin(seconds * data.speed2 + data.phase2));
+        const scale = data.base * (0.85 + 0.3 * flicker);
+        sprite.scale.set(scale, scale, 1);
+        sprite.material.opacity = 0.55 + 0.45 * flicker;
+        if (spike) {
+          const spikeScale = data.base * (2.4 + 0.9 * flicker);
+          spike.scale.set(spikeScale, spikeScale, 1);
+          spike.material.opacity = 0.28 + 0.4 * flicker;
+        }
+      }
+      dustMaterial.opacity = 0.22 + 0.08 * Math.sin(seconds * 0.7);
+    }
+
+    /* ---------- Lego molozu: bazuka vurunca Troy kup kup dagilir, panele yigilir ---------- */
+    const cubeCount = mobile ? 96 : 150;
+    const cubeSize = size.y * 0.052;
+    const cubeGeometry = new THREE.BoxGeometry(cubeSize, cubeSize, cubeSize);
+    const cubeMaterial = new THREE.MeshStandardMaterial({
+      color: 0xe8392f,
+      emissive: 0x3a0806,
+      roughness: 0.5,
+      metalness: 0.08,
+      transparent: true,
+      opacity: 1,
+    });
+    const cubes = new THREE.InstancedMesh(cubeGeometry, cubeMaterial, cubeCount);
+    cubes.name = "TroyLegoDebris";
+    cubes.frustumCulled = false;
+    cubes.visible = false;
+    modelPivot.add(cubes);
+    const cubeHomes = new Float32Array(cubeCount * 3);
+    const cubePositions = new Float32Array(cubeCount * 3);
+    const cubeStarts = new Float32Array(cubeCount * 3);
+    const cubeVelocities = new Float32Array(cubeCount * 3);
+    const cubeSpin = new Float32Array(cubeCount * 3);
+    const cubeRotations = Array.from({ length: cubeCount }, () => new THREE.Euler());
+    const cubeStartRotations = Array.from({ length: cubeCount }, () => new THREE.Euler());
+    const cubeSettled = new Uint8Array(cubeCount);
+    const cubeRest = new Float32Array(cubeCount);
+    const cubeMatrix = new THREE.Matrix4();
+    const cubeQuaternion = new THREE.Quaternion();
+    const cubeScale = new THREE.Vector3(1, 1, 1);
+    const cubeVector = new THREE.Vector3();
+    const FLOOR_Y = -size.y * 0.06;
+    const PILE_HEIGHT = size.y * 0.15;
+    const PILE_SPREAD = size.y * 0.62;
+    const CUBE_GRAVITY = size.y * 2.4;
+
+    function pileSurface(x, z) {
+      const mound = Math.max(0, 1 - Math.abs(x) / PILE_SPREAD - Math.abs(z) / (size.y * 0.5));
+      return FLOOR_Y + PILE_HEIGHT * mound;
+    }
+
+    function writeCube(index) {
+      const offset = index * 3;
+      cubeVector.set(cubePositions[offset], cubePositions[offset + 1], cubePositions[offset + 2]);
+      cubeQuaternion.setFromEuler(cubeRotations[index]);
+      cubeMatrix.compose(cubeVector, cubeQuaternion, cubeScale);
+      cubes.setMatrixAt(index, cubeMatrix);
+    }
+
+    function seedCubesFromParticles() {
+      const stride = Math.max(1, Math.floor(particleCount / cubeCount));
+      for (let index = 0; index < cubeCount; index += 1) {
+        const source = ((index * stride) + (index % 3)) % particleCount;
+        const so = source * 3;
+        const offset = index * 3;
+        cubeHomes[offset] = particleHomes[so];
+        cubeHomes[offset + 1] = particleHomes[so + 1];
+        cubeHomes[offset + 2] = particleHomes[so + 2];
+        cubePositions[offset] = cubeHomes[offset];
+        cubePositions[offset + 1] = cubeHomes[offset + 1];
+        cubePositions[offset + 2] = cubeHomes[offset + 2];
+        const angle = ((index * 2.399963) + Math.sin(index * 19.17)) % (Math.PI * 2);
+        const centerY = size.y * 0.52;
+        const dx = cubeHomes[offset];
+        const dy = cubeHomes[offset + 1] - centerY;
+        const dz = cubeHomes[offset + 2];
+        const length = Math.hypot(dx, dy, dz) || 1;
+        const speed = size.y * (0.9 + ((index * 29) % 17) / 20);
+        cubeVelocities[offset] = (dx / length + Math.cos(angle) * 0.8) * speed;
+        cubeVelocities[offset + 1] = Math.abs(dy / length) * speed * 0.6 + size.y * (0.7 + ((index * 11) % 9) / 12);
+        cubeVelocities[offset + 2] = (dz / length + Math.sin(angle * 1.7) * 0.5) * speed * 0.55;
+        cubeSpin[offset] = (((index * 37) % 13) - 6) * 1.1;
+        cubeSpin[offset + 1] = (((index * 53) % 11) - 5) * 1.1;
+        cubeSpin[offset + 2] = (((index * 71) % 9) - 4) * 1.1;
+        cubeRotations[index].set(0, 0, 0);
+        cubeSettled[index] = 0;
+        cubeRest[index] = 0;
+        writeCube(index);
+      }
+      cubes.instanceMatrix.needsUpdate = true;
+    }
+
+    function updateCubes(timestamp, delta) {
+      const ghostMode = ghostState.current();
+      if (ghostMode === "pixelScattered") {
+        if (delta <= 0) return;
+        for (let index = 0; index < cubeCount; index += 1) {
+          const offset = index * 3;
+          if (cubeSettled[index]) continue;
+          cubeVelocities[offset + 1] -= CUBE_GRAVITY * delta;
+          cubeVelocities[offset] *= Math.exp(-0.35 * delta);
+          cubeVelocities[offset + 2] *= Math.exp(-0.35 * delta);
+          cubePositions[offset] += cubeVelocities[offset] * delta;
+          cubePositions[offset + 1] += cubeVelocities[offset + 1] * delta;
+          cubePositions[offset + 2] += cubeVelocities[offset + 2] * delta;
+          const limitX = size.y * 0.78;
+          if (Math.abs(cubePositions[offset]) > limitX) {
+            cubePositions[offset] = Math.sign(cubePositions[offset]) * limitX;
+            cubeVelocities[offset] *= -0.45;
+          }
+          const rest = pileSurface(cubePositions[offset], cubePositions[offset + 2]) + cubeSize * (0.5 + (index % 3) * 0.55);
+          if (cubePositions[offset + 1] <= rest) {
+            cubePositions[offset + 1] = rest;
+            if (Math.abs(cubeVelocities[offset + 1]) < size.y * 0.25) {
+              cubeVelocities[offset + 1] = 0;
+              cubeVelocities[offset] *= 0.5;
+              cubeVelocities[offset + 2] *= 0.5;
+              cubeSpin[offset] *= 0.4;
+              cubeSpin[offset + 1] *= 0.4;
+              cubeSpin[offset + 2] *= 0.4;
+              if (Math.hypot(cubeVelocities[offset], cubeVelocities[offset + 2]) < size.y * 0.05) {
+                cubeSettled[index] = 1;
+                cubeRest[index] = rest;
+              }
+            } else {
+              cubeVelocities[offset + 1] = -cubeVelocities[offset + 1] * 0.32;
+              cubeVelocities[offset] *= 0.72;
+              cubeVelocities[offset + 2] *= 0.72;
+            }
+          }
+          cubeRotations[index].x += cubeSpin[offset] * delta;
+          cubeRotations[index].y += cubeSpin[offset + 1] * delta;
+          cubeRotations[index].z += cubeSpin[offset + 2] * delta;
+          writeCube(index);
+        }
+        cubes.instanceMatrix.needsUpdate = true;
+        return;
+      }
+
+      if (ghostMode !== "reforming") return;
+      const progress = THREE.MathUtils.clamp((timestamp - reformStartedAt) / 1000, 0, 1);
+      const eased = 1 - ((1 - progress) ** 3);
+      for (let index = 0; index < cubeCount; index += 1) {
+        const offset = index * 3;
+        for (let axis = 0; axis < 3; axis += 1) {
+          cubePositions[offset + axis] = THREE.MathUtils.lerp(cubeStarts[offset + axis], cubeHomes[offset + axis], eased);
+        }
+        cubeRotations[index].set(
+          cubeStartRotations[index].x * (1 - eased),
+          cubeStartRotations[index].y * (1 - eased),
+          cubeStartRotations[index].z * (1 - eased),
+        );
+        writeCube(index);
+      }
+      cubes.instanceMatrix.needsUpdate = true;
+      cubeMaterial.opacity = 1 - Math.max(0, (progress - 0.7) / 0.3);
+      if (progress >= 0.7) model.visible = true;
+      if (progress < 1) return;
+
+      cubes.visible = false;
+      cubeMaterial.opacity = 1;
+      ghostState.finishReform();
+      delete stage.dataset.troyPixelState;
+      stage.dispatchEvent(new CustomEvent("troy:reformed"));
+    }
 
     let bazooka = null;
     let rocket = null;
@@ -538,6 +850,7 @@ export async function createTroyRenderer(stage) {
       window.clearTimeout(ghostFallbackTimer);
       model.visible = true;
       pixelGhost.visible = false;
+      cubes.visible = false;
       ghostState.click();
       ghostState.finishReform();
       stage.dispatchEvent(new CustomEvent("troy:reformed"));
@@ -550,8 +863,10 @@ export async function createTroyRenderer(stage) {
       stage.dataset.troyPixelState = "scattered";
       try {
         sampleSkinnedMesh();
-        pixelGhost.visible = true;
-        particleMaterial.opacity = 0.95;
+        seedCubesFromParticles();
+        pixelGhost.visible = false;
+        cubes.visible = true;
+        cubeMaterial.opacity = 1;
         if (hideModel) model.visible = false;
         stage.dispatchEvent(new CustomEvent("troy:pixel-scattered"));
         return true;
@@ -570,6 +885,8 @@ export async function createTroyRenderer(stage) {
       ghostState.click();
       reformStartedAt = performance.now();
       particleStarts.set(particlePositions);
+      cubeStarts.set(cubePositions);
+      for (let index = 0; index < cubeCount; index += 1) cubeStartRotations[index].copy(cubeRotations[index]);
       stage.dataset.troyPixelState = "reforming";
       return true;
     }
@@ -1228,7 +1545,8 @@ export async function createTroyRenderer(stage) {
       updateTail(timestamp, delta);
       updateEffect(timestamp);
       updateBazooka(timestamp, delta);
-      updatePixelGhost(timestamp, delta);
+      updateCubes(timestamp, delta);
+      updateConstellation(timestamp);
       const expressionBlend = 1 - Math.exp(-EXPRESSION_BLEND_SPEED * delta);
       for (const { mesh, indices } of expressionBindings) {
         for (const [name, index] of indices) {
@@ -1291,6 +1609,7 @@ export async function createTroyRenderer(stage) {
       camera.position.set(0, targetHeight, Math.max(1.7, distance));
       camera.lookAt(0, targetHeight, 0);
       camera.updateProjectionMatrix();
+      layoutConstellation();
     }
 
     function onPointerMove(event) {
@@ -1436,6 +1755,15 @@ export async function createTroyRenderer(stage) {
         smokeTexture.dispose();
         particleGeometry.dispose();
         particleMaterial.dispose();
+        cubeGeometry.dispose();
+        cubeMaterial.dispose();
+        dustGeometry.dispose();
+        dustMaterial.dispose();
+        lineGeometry.dispose();
+        lineMaterial.dispose();
+        starGlowTexture.dispose();
+        starSpikeTexture.dispose();
+        for (const { sprite, spike } of starSprites) { sprite.material.dispose(); spike?.material.dispose(); }
         renderer.dispose();
       },
     };
