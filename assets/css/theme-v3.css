@@ -129,3 +129,21 @@
      yer tutucuyu kapatmasin */
   body.theme-command .ad-slot--live ins.adsbygoogle[data-ad-status="unfilled"] { display: none !important; }
 }
+
+/* Troy sahnesi: tarayicinin kendi tiklama geri bildirimi (mavi kare),
+   metin/eleman secimi ve fare odak halkasi kapali. Klavye odagi
+   (:focus-visible) home-v2.css'teki kirmizi halkayla devam eder. */
+.theme-command .troy-stage,
+.theme-command .troy-stage * {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+.theme-command .troy-stage .troy-target,
+.theme-command .troy-stage .troy-pixel-target { touch-action: manipulation; }
+.theme-command .troy-stage .troy-target:focus:not(:focus-visible),
+.theme-command .troy-stage .troy-pixel-target:focus:not(:focus-visible),
+.theme-command .troy-stage .troy-tool:focus:not(:focus-visible) { outline: none; }
+.theme-command .troy-stage .troy-poster,
+.theme-command .troy-stage .troy-canvas { -webkit-user-drag: none; }
