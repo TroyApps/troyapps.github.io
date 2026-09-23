@@ -457,7 +457,8 @@ if (stage) {
     const bounds = stage.getBoundingClientRect();
     const pointerX = ((event.clientX - bounds.left) / bounds.width) * 2 - 1;
     const pointerY = ((event.clientY - bounds.top) / bounds.height) * 2 - 1;
-    const aim = clampBazookaAim(pointerX, pointerY);
+    /* Ekran Y'si asagi dogru artar; nisan pitch'i ise yukari pozitif. Normal bakisla ayni yon. */
+    const aim = clampBazookaAim(pointerX, -pointerY);
     rendererPromise.then((renderer) => renderer.setAim?.(aim.yaw, aim.pitch));
   });
 
