@@ -230,3 +230,17 @@ test("site.js only renders AdSense units when a unit number is configured and ra
   assert.match(js, /ins\.className = "adsbygoogle";/);
   assert.match(js, /window\.adsbygoogle = window\.adsbygoogle \|\| \[\]\)\.push\(\{\}\)/);
 });
+
+test("website privacy policy exists, stays ad-free and is linked from every home page and the Radar footer", async () => {
+  const html = await page("privacy/index.html");
+  assert.match(html, /<body class="policy-v3 theme-command">/);
+  assert.doesNotMatch(html, /adsbygoogle/, "privacy page must stay ad-free");
+  for (const needle of ["Google AdSense", "adssettings.google.com", "policies.google.com/technologies/ads", "GitHub Pages", "info@troyapps.app"]) {
+    assert.ok(html.includes(needle), `privacy page should mention ${needle}`);
+  }
+  const homes = ["index.html", "en/index.html", ...["ar", "de", "es", "fr", "hi", "id", "it", "pt-br"].map((l) => `${l}/index.html`)];
+  for (const file of [...homes, "radar/index.html", "en/radar/index.html"]) {
+    assert.ok((await page(file)).includes('href="/privacy/"'), `${file} should link the website privacy policy`);
+  }
+  assert.ok((await page("sitemap.xml")).includes("<loc>https://troyapps.app/privacy/</loc>"));
+});

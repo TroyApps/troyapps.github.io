@@ -366,6 +366,8 @@
 .policy-v3 .policy-main { width: min(820px, calc(100% - 32px)); margin-inline: auto; padding: clamp(2rem, 6vw, 5rem) 0; }
 .policy-v3 .policy-document { padding: clamp(1.25rem, 4vw, 3rem); border: 1px solid var(--cmd-line); border-radius: var(--cmd-radius); background: var(--cmd-surface); line-height: 1.75; }
 .policy-v3 .policy-document h2 { margin-top: 2.5rem; color: var(--cmd-red-bright); }
+.policy-v3 .policy-document h3 { margin-top: 1.75rem; color: var(--cmd-red-bright); }
+.policy-v3 .policy-document a { color: var(--cmd-red-bright); text-underline-offset: 3px; }
 .not-found-v3 .page-404 { min-height: 75vh; display: grid; place-items: center; padding: 2rem 1rem; }
 .not-found-v3 .not-found-panel { width: min(680px, 100%); padding: clamp(1.5rem, 5vw, 3.5rem); text-align: center; }
 .not-found-v3 .not-found-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: .8rem; }

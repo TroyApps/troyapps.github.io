@@ -98,7 +98,8 @@ test("sitemap publishes every locale home, Morse and AirMouseHand page once", as
   assert.ok(locations.includes("https://troyapps.app/en/radar/"));
   assert.ok(locations.includes("https://troyapps.app/morse-flash-policy/"));
   assert.ok(locations.includes("https://troyapps.app/airmousehand-policy/"));
-  assert.equal(locations.length, 34);
+  assert.ok(locations.includes("https://troyapps.app/privacy/"));
+  assert.equal(locations.length, 35);
 });
 
 test("shared command theme gives Arabic a deliberate RTL layout", async () => {

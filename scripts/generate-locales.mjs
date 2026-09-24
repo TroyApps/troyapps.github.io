@@ -65,6 +65,7 @@ async function writeSitemap(root) {
     radarSitemapPage("en", radarDay),
     "  <url>\n    <loc>https://troyapps.app/morse-flash-policy/</loc>\n  </url>",
     "  <url>\n    <loc>https://troyapps.app/airmousehand-policy/</loc>\n  </url>",
+    "  <url>\n    <loc>https://troyapps.app/privacy/</loc>\n  </url>",
   ];
   const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"\n        xmlns:xhtml="http://www.w3.org/1999/xhtml">\n${entries.join("\n")}\n</urlset>\n`;
   await writeFile(path, xml, "utf8");

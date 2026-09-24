@@ -87,6 +87,7 @@ export const HOME_COPY = Object.freeze([
   row("Designed so anyone can use it with ease.", "Diseñado para que cualquiera pueda usarlo con facilidad.", "Feito para qualquer pessoa usar com facilidade.", "इस तरह बनाया गया है कि हर कोई आसानी से इस्तेमाल कर सके।", "Dirancang agar siapa pun mudah menggunakannya.", "مصمم ليستخدمه الجميع بسهولة.", "So gestaltet, dass es jeder einfach nutzen kann."),
   row("Scroll Reels and Shorts hands-free with hand and face gestures.", "Desliza Reels y Shorts con las manos libres usando gestos de mano y cara.", "Navegue por Reels e Shorts com as mãos livres usando gestos de mão e rosto.", "हाथ और चेहरे के हाव-भाव से Reels और Shorts बिना हाथ लगाए स्क्रॉल करें।", "Gulir Reels dan Shorts tanpa menyentuh layar dengan gerakan tangan dan wajah.", "تصفّح Reels وShorts دون استخدام يديك عبر إيماءات اليد والوجه.", "Reels und Shorts freihändig scrollen, mit Hand- und Gesichtsgesten."),
   row("Morse Flash Privacy Policy", "Política de privacidad de Morse Flash", "Política de Privacidade do Morse Flash", "Morse Flash गोपनीयता नीति", "Kebijakan Privasi Morse Flash", "سياسة خصوصية Morse Flash", "Datenschutzerklärung von Morse Flash"),
+  row("Website Privacy Policy", "Política de privacidad del sitio web", "Política de Privacidade do site", "वेबसाइट गोपनीयता नीति", "Kebijakan Privasi Situs Web", "سياسة خصوصية الموقع", "Datenschutzerklärung der Website"),
   row("AirMouseHand Privacy Policy", "Política de privacidad de AirMouseHand", "Política de Privacidade do AirMouseHand", "AirMouseHand गोपनीयता नीति", "Kebijakan Privasi AirMouseHand", "سياسة خصوصية AirMouseHand", "Datenschutzerklärung von AirMouseHand"),
 ]);
 
@@ -285,6 +286,7 @@ const EUROPE_COPY = new Map([
   translated("Home Base", "Base principale", "Base principale"),
   translated("Scroll Reels and Shorts hands-free with hand and face gestures.", "Faites défiler Reels et Shorts mains libres avec des gestes de la main et du visage.", "Scorri Reels e Shorts a mani libere con i gesti della mano e del viso."),
   translated("Morse Flash Privacy Policy", "Politique de confidentialité de Morse Flash", "Informativa sulla privacy di Morse Flash"),
+  translated("Website Privacy Policy", "Politique de confidentialité du site", "Informativa sulla privacy del sito"),
   translated("AirMouseHand Privacy Policy", "Politique de confidentialité d’AirMouseHand", "Informativa sulla privacy di AirMouseHand"),
   translated("AirMouseHand — Scroll Without Touching | TroyApps", "AirMouseHand — Défilez sans toucher | TroyApps", "AirMouseHand — Scorri senza toccare | TroyApps"),
   translated("Hands-free scrolling for Reels, Shorts and TikTok with hand and face gestures. AirMouseHand is an Android app by TroyApps.", "Défilement mains libres sur Reels, Shorts et TikTok avec des gestes de la main et du visage. AirMouseHand est une application Android de TroyApps.", "Scorrimento a mani libere su Reels, Shorts e TikTok con i gesti della mano e del viso. AirMouseHand è un’app Android di TroyApps."),
