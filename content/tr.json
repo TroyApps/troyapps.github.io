@@ -1,0 +1,51 @@
+{
+  "lang": "tr",
+  "path": "/",
+  "og_locale": "tr_TR",
+  "title": "TroyApps — Kullanışlı Mobil Araçlar",
+  "description": "TroyApps: Türkiye'den bağımsız bir geliştiricinin kullanışlı mobil araçları. Morse Flash ve AirMouseHand Google Play'de.",
+  "skip": "İçeriğe geç",
+  "nav": { "top": "Ana sayfa", "apps": "Uygulamalar", "contact": "İletişim", "menu_label": "Ana menü" },
+  "lang_switch_label": "Dil",
+  "ids": { "apps": "uygulamalar", "contact": "iletisim" },
+  "hero": {
+    "struck": "şirket?",
+    "tag": "bağımsız ✓",
+    "row": ["kullanışlı", "mobil araçlar", "yapan", "Türkiye'den"],
+    "scroll": "Aşağı kaydır"
+  },
+  "apps_title": "UYGULAMALAR",
+  "fig": "Fig.",
+  "android": "Android",
+  "live": "Yayında",
+  "tap_closed": "tıkla → görseller",
+  "tap_open": "açık · kapatmak için tıkla",
+  "dev_link": "Google Play'de TroyApps",
+  "get": "{name}'i indir",
+  "apps": {
+    "morse-flash": {
+      "get": "Morse Flash'ı indir",
+      "lead": "Fener & SOS, LED yazı, Morse gönder-oku, bildirim flaşı ve ritim flaşı — tek uygulamada.",
+      "feats": ["Fener & SOS", "LED yazı — ekranı LED tabelaya dönüştür", "13 stil · 12 renk", "Morse gönder & oku", "Bildirim flaşı — arama & bildirimde ışık", "Ritim flaşı + strobe"],
+      "caps": ["Ekranını LED tabelaya dönüştür", "13 stil · 12 renk · animasyonlu zeminler", "LED yazıyı istediğin gibi tasarla", "Mesajın neonlarda", "Bildirim flaşı — sessizde bile", "Işıkla mesajlaş: Morse gönder & oku", "Müziğin ritminde flaş + strobe", "Fener & SOS — her an hazır"]
+    },
+    "airmousehand": {
+      "get": "AirMouseHand'i indir",
+      "lead": "Reels, Shorts ve TikTok'ta el ve yüz hareketleriyle eller serbest gezinme.",
+      "feats": ["Dokunmadan kaydır", "Her parmağa bir komut", "Yüz kontrolü", "Ağızla komut"],
+      "caps": ["Ellerin unlu mu? Dert değil", "Ekrana dokunmadan kaydır", "Her parmağa istediğin komutu ata", "İki elin de doluysa ağzınla komut ver", "Ellerin doluysa ağzını hafif aç", "Uzan ve izlemeye bak", "Başlat ve rahatına bak", "Sekiz dilde"]
+    }
+  },
+  "lightbox": { "label": "Büyük görünüm", "prev": "Önceki", "next": "Sonraki", "close": "Kapat" },
+  "index_label": "Şekil dizini",
+  "contact": {
+    "tag": "yeni araç? hazırlanıyor ✎",
+    "copy": "e-postayı kopyala",
+    "copied": "kopyalandı ✓",
+    "play": "Google Play"
+  },
+  "footer": "© TroyApps {year} · Bağımsız geliştirici · Türkiye'den dünyaya",
+  "legal": { "privacy": "Gizlilik", "morse-flash": "Morse Flash politikası", "airmousehand": "AirMouseHand politikası" },
+  "policy_back": "← Ana sayfa",
+  "notfound": { "title": "Sayfa bulunamadı — TroyApps", "h": "Sayfa bulunamadı", "p": "Bu adres artık yok ya da hiç olmadı.", "home": "Ana sayfaya dön" }
+}

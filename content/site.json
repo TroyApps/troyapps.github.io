@@ -1,0 +1,53 @@
+{
+  "domain": "https://troyapps.app",
+  "mail": "info@troyapps.app",
+  "year": 2026,
+  "google_site_verification": "FTEX1Hb7f3gicHKeckMLK80aBYBT4Xz1sT4ixUD5_pk",
+  "adsense_client": "ca-pub-9329708777375659",
+  "og_image": "/assets/img/og-home.png",
+  "play_developer": "https://play.google.com/store/apps/developer?id=Troy+Apps",
+  "socials": [
+    { "id": "instagram", "label": "Instagram", "url": "https://www.instagram.com/troyappsofficial/", "top": true },
+    { "id": "tiktok", "label": "TikTok", "url": "https://www.tiktok.com/@troyappsofficial", "top": true },
+    { "id": "youtube", "label": "YouTube", "url": "https://www.youtube.com/channel/UC2PncaDQ9wSXYqY5IaffuJw", "top": true },
+    { "id": "facebook", "label": "Facebook", "url": "https://www.facebook.com/troyappsofficial", "top": false }
+  ],
+  "apps": [
+    {
+      "id": "morse-flash",
+      "name": "Morse Flash",
+      "icon": "/assets/img/morse-flash-icon-192.png",
+      "play": "https://play.google.com/store/apps/details?id=com.troyapps.morseflash",
+      "policy": "/morse-flash-policy/",
+      "shots_dir": "assets/img/shots/morse-flash",
+      "shots": 8,
+      "rot": -6
+    },
+    {
+      "id": "airmousehand",
+      "name": "AirMouseHand",
+      "icon": "/assets/img/airmousehand-icon-192.png",
+      "play": "https://play.google.com/store/apps/details?id=com.troyapps.airmousehand",
+      "policy": "/airmousehand-policy/",
+      "shots_dir": "assets/img/shots/airmousehand",
+      "shots": 8,
+      "rot": 5
+    }
+  ],
+  "redirects": {
+    "morse-flash/index.html": "/#morse-flash",
+    "airmousehand/index.html": "/#airmousehand",
+    "radar/index.html": "/",
+    "en/morse-flash/index.html": "/en/#morse-flash",
+    "en/airmousehand/index.html": "/en/#airmousehand",
+    "en/radar/index.html": "/en/",
+    "ar/index.html": "/en/",
+    "de/index.html": "/en/",
+    "es/index.html": "/en/",
+    "fr/index.html": "/en/",
+    "hi/index.html": "/en/",
+    "id/index.html": "/en/",
+    "it/index.html": "/en/",
+    "pt-br/index.html": "/en/"
+  }
+}

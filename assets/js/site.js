@@ -1,279 +1,111 @@
-/* TroyApps — site.js : menü + görünüm animasyonları */
+/* TroyApps — site.js
+   Ust menu vurgusu, ikon -> acilir gorsel seridi, buyume yonu,
+   buyuk gorunum (lightbox), e-posta kopyala. Kutuphane yok. */
 (function () {
   "use strict";
 
-  document.documentElement.classList.add("js");
+  /* Ust logo + menu vurgusu */
+  var pills = [].slice.call(document.querySelectorAll(".pill a[data-nav]"));
+  var indexLinks = [].slice.call(document.querySelectorAll(".index a[data-for]"));
 
-  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  /* Mobil menü */
-  var toggle = document.querySelector(".nav-toggle");
-  var menu = document.getElementById("nav-menu");
-
-  if (toggle && menu) {
-    toggle.addEventListener("click", function () {
-      var open = menu.classList.toggle("open");
-      toggle.setAttribute("aria-expanded", open ? "true" : "false");
-    });
-
-    document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape" && menu.classList.contains("open")) {
-        menu.classList.remove("open");
-        toggle.setAttribute("aria-expanded", "false");
-        toggle.focus();
-      }
-    });
-
-    menu.addEventListener("click", function (e) {
-      if (e.target.closest("a")) {
-        menu.classList.remove("open");
-        toggle.setAttribute("aria-expanded", "false");
-      }
-    });
+  function setNav(id) {
+    pills.forEach(function (a) { a.classList.toggle("on", a.dataset.nav === id); });
+    indexLinks.forEach(function (a) { a.classList.toggle("on", a.dataset.for === id); });
   }
 
-  function bindLanguageMenus(root) {
-    var menus = root.querySelectorAll(".language-menu");
-    if (!menus.length) return;
-    root.addEventListener("click", function (event) { menus.forEach(function (menu) { if (!menu.contains(event.target)) menu.removeAttribute("open"); }); });
-    root.addEventListener("keydown", function (event) { if (event.key !== "Escape") return; menus.forEach(function (menu) { if (!menu.open) return; menu.removeAttribute("open"); var summary = menu.querySelector("summary"); if (summary) summary.focus(); }); });
+  addEventListener("scroll", function () {
+    document.body.classList.toggle("scrolled", scrollY > innerHeight * 0.6);
+    if (scrollY < innerHeight * 0.5) setNav("top");
+  }, { passive: true });
+
+  if ("IntersectionObserver" in window) {
+    var so = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) setNav(e.target.dataset.index); });
+    }, { threshold: 0.4 });
+    document.querySelectorAll("[data-index]").forEach(function (s) { so.observe(s); });
   }
-  bindLanguageMenus(document);
 
-  /* Başlık decode efekti: harfler Morse sembollerinden çözülür */
-  var SYMS = ["•", "—", "•", "—", "·"];
+  /* Ikona tikla -> altinda gorseller acilir; tekrar tikla kapanir */
+  var btns = [].slice.call(document.querySelectorAll(".app-btn"));
+  var panels = [].slice.call(document.querySelectorAll(".panel"));
 
-  function buildDecode(el) {
-    var text = el.getAttribute("data-text") || el.textContent;
-    el.setAttribute("aria-label", text);
-    el.textContent = "";
-    var inner = document.createElement("span");
-    inner.setAttribute("aria-hidden", "true");
-    el.appendChild(inner);
-
-    var spans = [];
-    text.split(" ").forEach(function (word, wi, arr) {
-      var w = document.createElement("span");
-      w.className = "word";
-      word.split("").forEach(function (ch) {
-        var s = document.createElement("span");
-        s.className = "ch";
-        s.textContent = ch;
-        w.appendChild(s);
-        spans.push(s);
-      });
-      inner.appendChild(w);
-      if (wi < arr.length - 1) inner.appendChild(document.createTextNode(" "));
+  function setApp(id) {
+    btns.forEach(function (b) {
+      var on = b.dataset.app === id;
+      b.classList.toggle("on", on);
+      b.setAttribute("aria-selected", String(on));
+      var tap = b.querySelector(".tap");
+      if (tap) tap.textContent = on ? (b.dataset.openText || "") : (b.dataset.closedText || "");
     });
-    el.__spans = spans;
+    panels.forEach(function (p) { p.classList.toggle("open", p.dataset.panel === id); });
+    if (id) {
+      var p = document.querySelector('.panel[data-panel="' + id + '"]');
+      if (p) setTimeout(function () { p.scrollIntoView({ behavior: "smooth", block: "nearest" }); }, 320);
+    }
   }
+  btns.forEach(function (b) {
+    b.addEventListener("click", function () { setApp(b.classList.contains("on") ? null : b.dataset.app); });
+  });
+  /* /#morse-flash veya /#airmousehand ile gelen dogrudan acar */
+  var hashApp = (location.hash || "").replace("#", "");
+  if (hashApp && document.querySelector('.app-btn[data-app="' + hashApp + '"]')) setApp(hashApp);
 
-  function runDecode(el) {
-    if (reduceMotion || !el.__spans) return;
-    el.__spans.forEach(function (s, i) {
-      if (s.__iv) clearInterval(s.__iv);
-      var finalCh = s.getAttribute("data-final") || s.textContent;
-      s.setAttribute("data-final", finalCh);
-      var ticks = 0;
-      var maxTicks = 3 + Math.floor(i * 0.9);
-      s.textContent = SYMS[i % SYMS.length];
-      s.classList.add("raw");
-      s.__iv = setInterval(function () {
-        ticks++;
-        if (ticks >= maxTicks) {
-          clearInterval(s.__iv);
-          s.__iv = null;
-          s.textContent = finalCh;
-          s.classList.remove("raw");
-        } else {
-          s.textContent = SYMS[(Math.random() * SYMS.length) | 0];
-        }
-      }, 70);
+  /* Buyume ekran disina tasmasin: kenardakiler kenardan buyur */
+  var thumbs = [].slice.call(document.querySelectorAll(".thumb"));
+  thumbs.forEach(function (t) {
+    t.tabIndex = 0;
+    t.addEventListener("mouseenter", function () {
+      var r = t.getBoundingClientRect(), vw = innerWidth, vh = innerHeight;
+      var ox = r.left < vw * 0.22 ? "left" : (r.right > vw * 0.78 ? "right" : "center");
+      var oy = r.top < vh * 0.3 ? "top" : (r.bottom > vh * 0.78 ? "bottom" : "center");
+      t.style.transformOrigin = ox + " " + oy;
     });
-  }
-
-  document.querySelectorAll(".decode").forEach(function (el) {
-    buildDecode(el);
-    runDecode(el);
   });
 
-  /* PRESS START: sinyal patlaması + başlığı yeniden çöz */
-  var pressStart = document.querySelector(".press-start");
-  if (pressStart) {
-    pressStart.addEventListener("click", function () {
-      var h1 = document.querySelector("h1.decode");
-      if (h1) runDecode(h1);
-      if (!reduceMotion) {
-        document.body.classList.add("burst");
-        if (window.__signalBurst) window.__signalBurst();
-        setTimeout(function () { document.body.classList.remove("burst"); }, 1800);
-      }
+  /* Tiklayinca buyuk gorunum + ok tuslari */
+  var lb = document.getElementById("lb");
+  if (lb) {
+    var lbImg = lb.querySelector("img"), lbCap = lb.querySelector(".cap");
+    var group = [], at = 0;
+    function show(i) {
+      at = (i + group.length) % group.length;
+      var t = group[at], img = t.querySelector("img");
+      lbImg.src = img.currentSrc || img.src;
+      lbImg.alt = img.alt;
+      lbCap.textContent = t.dataset.cap || "";
+    }
+    function open(t) {
+      group = [].slice.call(t.parentElement.querySelectorAll(".thumb"));
+      show(group.indexOf(t));
+      lb.classList.add("open");
+      document.body.style.overflow = "hidden";
+      lb.querySelector(".close").focus();
+    }
+    function close() { lb.classList.remove("open"); document.body.style.overflow = ""; }
+    thumbs.forEach(function (t) {
+      t.addEventListener("click", function () { open(t); });
+      t.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(t); } });
+    });
+    lb.querySelector(".prev").addEventListener("click", function () { show(at - 1); });
+    lb.querySelector(".next").addEventListener("click", function () { show(at + 1); });
+    lb.querySelector(".close").addEventListener("click", close);
+    lb.addEventListener("click", function (e) { if (e.target === lb) close(); });
+    addEventListener("keydown", function (e) {
+      if (!lb.classList.contains("open")) return;
+      if (e.key === "Escape") close();
+      if (e.key === "ArrowLeft") show(at - 1);
+      if (e.key === "ArrowRight") show(at + 1);
     });
   }
 
-  /* ??? kartı easter egg: şifre çözme denemesi -> ERİŞİM REDDEDİLDİ */
-  var eggCard = document.querySelector(".app-card.future");
-  if (eggCard) {
-    var eggTitle = eggCard.querySelector("h3");
-    var eggBusy = false;
-    eggCard.setAttribute("role", "button");
-    eggCard.setAttribute("tabindex", "0");
-    if (eggCard.getAttribute("data-egg-hint")) {
-      eggCard.setAttribute("aria-label", eggCard.getAttribute("data-egg-hint"));
-    }
-
-    function tryDecrypt() {
-      if (eggBusy || !eggTitle) return;
-      eggBusy = true;
-      var original = "???";
-      var denied = eggCard.getAttribute("data-egg-fail") || "ERİŞİM REDDEDİLDİ";
-      eggCard.classList.add("denied");
-
-      if (reduceMotion) {
-        eggTitle.textContent = denied;
-        setTimeout(function () {
-          eggTitle.textContent = original;
-          eggCard.classList.remove("denied");
-          eggBusy = false;
-        }, 1600);
-        return;
-      }
-
-      var ticks = 0;
-      var iv = setInterval(function () {
-        ticks++;
-        var scramble = "";
-        for (var i = 0; i < denied.length; i++) {
-          scramble += SYMS[(Math.random() * SYMS.length) | 0];
-        }
-        eggTitle.textContent = scramble;
-        if (ticks >= 12) {
-          clearInterval(iv);
-          eggTitle.textContent = denied;
-          setTimeout(function () {
-            eggTitle.textContent = original;
-            eggCard.classList.remove("denied");
-            eggBusy = false;
-          }, 1800);
-        }
-      }, 80);
-    }
-
-    eggCard.addEventListener("click", tryDecrypt);
-    eggCard.addEventListener("keydown", function (e) {
-      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); tryDecrypt(); }
+  /* E-posta kopyala */
+  var copyBtn = document.querySelector(".copy");
+  if (copyBtn) {
+    copyBtn.addEventListener("click", function () {
+      var text = copyBtn.dataset.copy, old = copyBtn.textContent;
+      var p = navigator.clipboard ? navigator.clipboard.writeText(text) : Promise.reject();
+      p.then(function () { copyBtn.textContent = copyBtn.dataset.done || "✓"; }, function () { copyBtn.textContent = text; });
+      setTimeout(function () { copyBtn.textContent = old; }, 1600);
     });
   }
-
-  /* Kaydırınca beliren bölümler */
-  var revealEls = document.querySelectorAll(".reveal");
-  if (revealEls.length) {
-    if (reduceMotion || !("IntersectionObserver" in window)) {
-      revealEls.forEach(function (el) { el.classList.add("in"); });
-    } else {
-      var io = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("in");
-            io.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.12 });
-      revealEls.forEach(function (el) { io.observe(el); });
-    }
-  }
-})();
-
-/* --- Reklam raylari ---------------------------------------------------
-   Genis ekranlarda (>=1760px) sag ve sol raya, ekran yuksekligine gore
-   sigabildigi kadar yuva dizer. Ustte 300x600 (uzun), alti 300x250.
-   Her yuvanin kimligi sayfaya ozel: "<sayfa>-<taraf>-<sira>".
-   Boylece her sayfaya ve her yuvaya ayri reklam baglanabilir. */
-(function () {
-  var rails = document.querySelectorAll(".ad-rail .ad-rail-sticky");
-  if (!rails.length) return;
-
-  var slug = location.pathname.replace(/^\/+|\/+$/g, "").replace(/\//g, "-") || "home";
-
-  /* Sayfadaki mevcut etiket metnini koru (TR/EN/AR... hangisiyse) */
-  var firstTag = document.querySelector(".ad-slot .ad-slot-tag");
-  var tagText = firstTag ? firstTag.textContent : "Reklam Alanı";
-
-  function sideOf(rail) {
-    var aside = rail.closest(".ad-rail");
-    return aside && aside.classList.contains("ad-rail-right") ? "right" : "left";
-  }
-
-  /* AdSense baglantisi. Yayinci kimligi sabit. Birim numarasi olan yuvaya
-     yer tutucunun USTUNE bir <ins class="adsbygoogle"> bindirilir: Google
-     reklam doldurursa yer tutucuyu kapatir, doldurmazsa (site onayi
-     beklenirken, envanter yokken) yer tutucu gorunmeye devam eder.
-     Sayfa bazinda ayri birim icin "home" / "morse-flash" / "radar" anahtari
-     kullan; "*" hepsine uygulanir. */
-  var AD_CLIENT = "ca-pub-9329708777375659";
-  var AD_UNITS = {
-    "*": "6355424230" /* troyapps-rail-300x600 (sabit 300x600), 15 Eyl 2026 */
-  };
-  var railsVisible = window.matchMedia && window.matchMedia("(min-width: 1760px)").matches;
-
-  function adUnitFor(pageSlug) {
-    var key = pageSlug.replace(/^(en|ar|de|es|fr|hi|id|it|pt-br)(-|$)/, "") || "home";
-    return AD_UNITS[key] || AD_UNITS["*"] || "";
-  }
-
-  function makeSlot(h, id) {
-    var d = document.createElement("div");
-    d.className = "ad-slot" + (h === 600 ? " ad-slot--tall" : "");
-    d.setAttribute("data-ad-slot", id);
-    var tag = document.createElement("span");
-    tag.className = "ad-slot-tag";
-    tag.textContent = tagText;
-    var dim = document.createElement("span");
-    dim.className = "ad-slot-dim";
-    dim.textContent = "300 × " + h;
-    d.appendChild(tag);
-    d.appendChild(dim);
-    var unit = railsVisible ? adUnitFor(slug) : "";
-    if (unit) {
-      var ins = document.createElement("ins");
-      ins.className = "adsbygoogle";
-      ins.style.display = "inline-block";
-      ins.style.width = "300px";
-      ins.style.height = h + "px";
-      ins.setAttribute("data-ad-client", AD_CLIENT);
-      ins.setAttribute("data-ad-slot", unit);
-      d.classList.add("ad-slot--live");
-      d.appendChild(ins);
-    }
-    return d;
-  }
-
-  /* Sayfa ne kadar uzunsa o kadar 300x600 dizilir (en az 2).
-     Bannerlar sayfanin ustune yerlesir, kaydirinca icerikle birlikte akar. */
-  var GAP = 14;
-  var TOP = 92;
-  var BOTTOM = 16;
-
-  function fill() {
-    var main = document.querySelector(".page-rails > main") || document.body;
-    var contentH = Math.max(main.scrollHeight + TOP, window.innerHeight);
-    var count = Math.max(2, Math.floor((contentH - TOP - BOTTOM + GAP) / (600 + GAP)));
-    rails.forEach(function (rail) {
-      if (rail.getAttribute("data-ad-plan")) return;
-      rail.setAttribute("data-ad-plan", String(count));
-      rail.classList.add("ad-rail-filled");
-      var side = sideOf(rail);
-      rail.textContent = "";
-      for (var i = 0; i < count; i++) {
-        rail.appendChild(makeSlot(600, slug + "-" + side + "-" + (i + 1)));
-      }
-    });
-    /* Gercek birimler eklendiyse AdSense'e yukleme istegi gonder (her ins icin bir push) */
-    var live = document.querySelectorAll(".ad-rail ins.adsbygoogle:not([data-adsbygoogle-status])");
-    for (var j = 0; j < live.length; j++) {
-      try { (window.adsbygoogle = window.adsbygoogle || []).push({}); } catch (e) { /* engelleyici vb. */ }
-    }
-  }
-
-  fill();
 })();

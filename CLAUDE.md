@@ -6,75 +6,58 @@ Sahibi: Enes (TroyApps). Konuşma dili Türkçe, samimi. Kod yorumları Türkçe
 
 ## Altın kurallar
 1. **Önce sor, sonra dokun.** Enes "plan yapıyoruz" dediyse dosya değiştirme, push etme. Onay verince yap.
-2. **Mobil/tablet tasarımına dokunma.** Tüm reklam/geniş ekran işleri `@media (min-width: 1760px)` içinde kalır.
-3. **RADAR işaretçi bölgeleri robotundur, elle düzenlenmez:** `<!-- RADAR:START/END -->` (radar sayfaları) ve `<!-- RADARBOX:START/END -->` (ana sayfalar). Aralarını `scripts/radar.mjs` yazar.
-4. **Dil sayfalarını elle düzenleme.** `ar/ de/ es/ fr/ hi/ id/ it/ pt-br/` altındaki sayfalar `en/index.html` ve `en/morse-flash/index.html`'den üretilir:
-   `node scripts/generate-locales.mjs` (önce `en/` kaynağını düzenle, sonra üret, sonra hepsini commit'le).
-5. **Şifre / API anahtarı / ödeme bilgisi asla sohbete veya koda girmez.** Anahtarlar GitHub Secrets'ta (OPENROUTER_API_KEY, GROQ_API_KEY). Giriş işlemlerini Enes kendisi yapar.
-6. Haber sitelerinin görsellerini hotlink'leme (telif). Radar'daki armalar kendi ürettiğimiz SVG.
-7. Commit mesajları İngilizce, kısa. Cloud oturumundan push 403 verirse GitHub web upload ile yayınlanır (tek klasör = tek commit).
+2. **Sayfaları elle düzenleme, üret.** `index.html`, `en/index.html`, `404.html`, politika sayfaları, yönlendirme sayfaları ve `sitemap.xml` üretilir.
+   Metin/link değişikliği → `content/*.json` veya `content/policy/*.html` → `node scripts/build-pages.mjs` → hepsini commit'le. Test bunu denetler.
+3. **Şifre / API anahtarı / ödeme bilgisi asla sohbete veya koda girmez.** Giriş işlemlerini Enes kendisi yapar.
+4. **Kalıcı adreslere dokunma:** `/privacy/`, `/morse-flash-policy/`, `/airmousehand-policy/`, `app-ads.txt`, `ads.txt`, `CNAME`. Play Store ve AdMob bunlara bakıyor.
+5. Commit mesajları İngilizce, kısa. Cloud oturumundan push 403 verirse GitHub web upload ile yayınlanır (tek klasör = tek commit) ya da zip terminal Claude'a verilir.
+6. Haber/başkasının görselini hotlink'leme (telif). Uygulama görselleri kendi Play Store listemizden.
+
+## Tasarım (28 Eyl 2026 — "karalama" teması)
+İlham: karolortyl.com. Koyu degrade zemin, mürekkep (SVG feTurbulence + feDisplacementMap) filtreli `TROYAPPS` çizgi logosu,
+sarı/kırmızı/gri yapışkan not etiketleri, "Fig. N" indeks dili, Space Mono + Archivo Black (self-host, `assets/fonts/`).
+Sayfa tek ekranlık üç bölüm: **hero** → **uygulamalar** (iki ikon yan yana; ikona tıklayınca altında o uygulamanın görsel şeridi açılır,
+üzerine gelince büyür, tıklayınca büyük görünüm) → **iletişim** (e-posta, sosyal linkler, "yeni araç? hazırlanıyor" etiketi — Enes istedi, kalsın).
+Troy maskotu, Radar, 7 ek dil ve reklam rayları **kaldırıldı** (Enes kararı). Diller: TR (`/`) + EN (`/en/`).
 
 ## Yapı
 ```
-index.html                 TR ana sayfa (body: home-v2 home-v3 theme-command)
-morse-flash/index.html     TR ürün sayfası (product-v3 theme-command)
-radar/index.html           TR Radar (radar-v3 theme-command)
-en/…                       EN karşılıkları (ana + morse-flash + radar)
-ar/ de/ es/ fr/ hi/ id/ it/ pt-br/   üretilmiş diller (ana + morse-flash)
-*-policy/                  gizlilik politikaları (reklam rayı yok)
-assets/css/theme-v3.css    "command center" tema + REKLAM RAYLARI bloğu (en altta)
-assets/css/home-v2.css home-v3.css product-v3.css radar-v3.css   sayfa düzenleri (.ad-rail{display:none} burada; theme-v3 daha yüksek özgünlükle açar)
-assets/js/site.js          menü, decode efekti, reveal + REKLAM RAYI DOLDURUCU (en altta)
-assets/js/troy/            3D maskot Troy (three.js, GLB) — troy-controller.js giriş noktası
-assets/js/locales.js       dil listesi, radarHomeTargets()
-assets/models/troy/*.glb   Troy modeli ve aksesuarlar
-assets/img/favicon.svg, favicon-32.png, apple-touch-icon.png, icon-192/512.png   kırmızı T (yeşil eski tema kaldırıldı)
-scripts/radar*.mjs         günlük Radar taraması (trending scrape + Search API yedeği; OpenRouter→Groq→mekanik özet)
-scripts/generate-locales.mjs  dil sayfası üretici
-.github/workflows/radar.yml   her gün 05:13 UTC; workflow_dispatch ile elle
-tests/*.test.mjs           node --test
+content/site.json          ortak veri: uygulamalar (Play linki, ikon, görsel klasörü, adet), sosyal linkler, yönlendirmeler
+content/tr.json, en.json   sayfa metinleri (nav, hero etiketleri, özellik çipleri, görsel altyazıları, footer, 404)
+content/policy/*.html      politika metinleri (<article> gövdesi; ilk satır title|description yorumu)
+scripts/build-pages.mjs    üretici → index.html, en/index.html, 404.html, */index.html (politika + yönlendirme), sitemap.xml
+assets/css/site.css        tek CSS (font-face'ler dahil). ?v= hash'i üretici hesaplar, elle etiket gerekmez
+assets/js/site.js          menü vurgusu, ikon→panel, büyüme yönü, lightbox, e-posta kopyala (kütüphane yok)
+assets/img/shots/morse-flash/tr-1..8.webp     Play Store dikey görselleri (720×1562). en-N.webp varsa EN sayfa onu kullanır, yoksa tr-N
+assets/img/shots/airmousehand/{tr,en}-1..8.webp
+assets/img/*-icon-192.png, favicon.svg, favicon-32.png, apple-touch-icon.png, icon-192/512.png, og-home.png
+assets/fonts/*.woff2       Space Mono 400/700, Archivo Black 400 (latin + latin-ext; Türkçe karakterler ext'te)
+tests/site.test.mjs        node --test tests/site.test.mjs  (üretim güncel mi, kırık link, eski tema sızıntısı, politika/ads dosyaları)
+docs/superpowers/          eski plan notları (arşiv, dokunma)
 ```
-Önbellek: GitHub Pages ~10 dk. CSS/JS linklerinde `?v=YYYYMMDD-etiket` var; HTML'e dokunmadan JS/CSS güncellersen aynı URL 10 dk içinde tazelenir.
+Yönlendirmeler (`content/site.json` → `redirects`): eski `/morse-flash/`, `/airmousehand/`, `/radar/`, `/en/...` ve 7 dil kökü
+meta-refresh ile `/`, `/#morse-flash`, `/en/` vb. adreslere gider (noindex). Silme; dışarıdan gelen eski linkler için.
 
-## Reklam rayları (yayında, AdSense bekliyor)
-- Sadece ≥1760px ekranlarda görünür. Sol/sağ `aside.ad-rail` → `.ad-rail-sticky` içinde `.ad-slot`'lar.
-- `site.js` sondaki IIFE sayfa yüklenince rayları **sayfa uzunluğuna göre** 300×600 yuvalarla doldurur (en az 2/yan). Ana sayfa 2+2, Morse 4+4, Radar 5+5 civarı.
-- Yuvalar sayfayla kayar (`position:absolute; top:92px`), ekranı takip etmez — Enes böyle istedi.
-- İçerik `body.theme-command .page-rails { padding-inline: 288px }` ile daraltılır. Ana sayfayı daha da genişletme isteği geldi; 300×600 ile fiziksel sınır bu (1920 − 600 = 1320px). Değiştirmeden önce sor.
-- Yuva kimlikleri sayfaya özel: `data-ad-slot="<sayfa>-<left|right>-<n>"` (ör. `morse-flash-right-2`). Her sayfaya ayrı reklam birimi bağlanabilsin diye.
-- Etiket metni sayfadaki ilk `.ad-slot-tag`'den okunur (dil korunur).
+## Yeni uygulama eklemek
+1. `content/site.json` → `apps` dizisine yeni giriş (id, name, icon, play, policy, shots_dir, shots, rot).
+2. Görseller `assets/img/shots/<id>/tr-1..N.webp` (dikey, ~720px genişlik yeter; EN için en-N.webp isteğe bağlı).
+3. `content/tr.json` ve `en.json` → `apps.<id>` (get, lead, feats, caps) ve `legal.<id>`.
+4. Politika sayfası: `content/policy/<id>-policy.html`.
+5. `node scripts/build-pages.mjs` + `node --test tests/site.test.mjs`. Fig numaraları kendiliğinden kayar.
 
-### AdSense bağlama (15 Eyl 2026 durumu)
-Yayıncı kimliği: `ca-pub-9329708777375659` (app-ads.txt'dekiyle aynı hesap, AdSense Hesap bilgileri'nde doğrulandı).
-- YAPILDI: 22 sayfanın `<head>`inde AdSense yükleyici var (en/ kaynakları + üretilmiş diller + TR). Politika sayfaları ve 404 reklamsız; test bunu korur (`tests/site-contract.test.mjs`).
-- YAPILDI: Reklam birimi oluşturuldu: `troyapps-rail-300x600`, sabit 300×600, numara `6355424230`. `site.js` `AD_UNITS["*"]` bu numarayla dolu; her yuvada yer tutucunun ÜSTÜNE `<ins class="adsbygoogle">` biner. Google doldurursa reklam görünür, doldurmazsa (onay beklenirken) yer tutucu görünür. Onay sonrası kodda yapılacak iş YOK. Sayfa başına ayrı birim istenirse `"home"` / `"morse-flash"` / `"radar"` anahtarlarıyla eklenir. Yalnızca raylar görünürken (≥1760px) ins üretilir.
-- YAPILDI (15 Eyl 2026 04:30): Hesaba AdSense web ürünü eklendi (Siteler/Reklamlar menüsü açıldı), troyapps.app kod snippet'iyle doğrulandı, site incelemesi istendi. Durum: "Hazırlanıyor". ads.txt kök dizine eklendi (Google'ın taraması bir gün sürebilir).
-- YAPILDI (15 Eyl 2026): AEA/UK çerez rızası mesajı Google CMP, 2 seçenekli ("İzin ver" + "Seçenekleri yönet") olarak seçildi. Mesaj AdSense yükleyicisiyle otomatik gelir, koda ek gerekmez; ayarı AdSense > Gizlilik ve mesajlaşma'dan değişir. Üç kurulum adımı da yeşil; sırada yalnızca Google'ın site incelemesi var.
-- Otomatik reklamlar KAPALI bırakıldı (tasarımı bozmasın). Reklam yoğunluğu politikasına dikkat (içerikten fazla reklam olmasın).
-Not: AdMob mobil uygulama içindir, web için AdSense kullanılır. Panel işleri otomasyon Chrome profiliyle (claude-tools\chrome-otomasyon, CDP 9222) yapılabiliyor; form kaydetmeden önce Enes'e sor.
-
-## Troy (3D maskot) notları
-- `troy-controller.js` → `createTroyRenderer` (troy-three.js). Durumlar `data-troy-renderer`: loading / ready / fallback.
-- F5'te beyaz kare sorunu çözüldü: `beforeunload`/`pagehide`'da tuval gizlenir (Chrome GPU tuvali boşaltıyordu). Yükleme sırasında poster gösterilmiyor, bilinçli tercih.
-- Sekme arka plandayken render durur (document.hidden) — testte "ready" olmuyorsa sebebi bu.
-- 17 Eyl 2026: Troy'un arkasında hep duran **Orion + Sirius yıldız fonu** var (`troy-three.js`: CONSTELLATION_STARS, `layoutConstellation`, `updateConstellation`; sahnede `scene` altında, Troy'un 0.9 boy arkasında, kamera yerleşince ölçeklenir). Titreme, ışık çubukları, silik çizgiler, yıldız tozu.
-- Bazuka dağılması artık **lego küpleri** (`InstancedMesh`, 150 / mobil 96): `seedCubesFromParticles` → `updateCubes` (yerçekimi, sekme, `pileSurface` tepeciğine yığılma, `FLOOR_Y` panel hizası) → tıklayınca `reformPixels` küpleri eve uçurur. Eski nokta bulutu (`pixelGhost`) kodda duruyor ama görünmez; olay/dataset isimleri (`troy:pixel-scattered`, `troyPixelState`) aynı kaldı, controller değişmedi.
-
-## Radar notları
-- Kaynaklar `scripts/radar-sources.mjs`; LIMITS.repos=8, news=10 (haber özelliği kaldırılacak, plan aşamasında).
-- Planlanan (ONAY YOK, yapma): 25 repo, radar sayfasında ilk 3 + "tümünü gör" sayfası, salağın anlayacağı TR özetler, haber bölümünü kaldırma.
-- Actions 60 gün hareketsizlikte kapanır; cron gecikebilir.
+## AdSense durumu
+- Yayıncı: `ca-pub-9329708777375659`. Ana sayfaların `<head>`inde yalnızca **yükleyici betik** var (Google'ın site incelemesi için; görünmez).
+- Reklam birimi / panel / ray **yok**. Onay gelince ve Enes isterse eklenir; test şu an `<ins class="adsbygoogle">` görürse kırılır (bilinçli).
+- Otomatik reklamlar kapalı kalsın (tasarımı bozar). Site incelemesi AdSense panelinden takip edilir; Enes kendisi girer.
 
 ## Bekleyen fikirler (hepsi plan, onaysız başlama)
-- Yeni tema (Enes şablon sitelerinden ilham topluyor).
-- Site içi sohbet botu: Cloudflare Worker + ücretsiz model merdiveni, site verisine dayalı.
-- Ziyaretçi için "repo analiz et" aracı.
-- WhatsApp/Instagram'daki tasarım kayıtlarını ayıklama (sohbet adları + WhatsApp Web eşleşmesi bekleniyor).
-- Bağış/destek seçeneği (yasal tarafı sonra).
+- Yeni araç (Enes hazırlıyor; iletişimdeki etiket bunun için).
+- Morse Flash EN görselleri: Play Store `hl=en` listesinden `assets/img/shots/morse-flash/en-1..8.webp` (yoksa TR görselleri kullanılır).
+- Site içi sohbet botu, "repo analiz et" aracı, bağış seçeneği — hepsi fikir aşamasında.
 
 ## Yerel test
 ```
-node --test tests/            # birim testler
-python3 -m http.server 8123   # sonra http://localhost:8123
-node scripts/radar.mjs --dry  # radar kuru çalışma
+node scripts/build-pages.mjs          # sayfaları üret (--check: sadece kontrol)
+node --test tests/site.test.mjs       # sözleşme testleri
+python3 -m http.server 8123           # http://localhost:8123
 ```

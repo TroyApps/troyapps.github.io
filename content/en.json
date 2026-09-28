@@ -1,0 +1,51 @@
+{
+  "lang": "en",
+  "path": "/en/",
+  "og_locale": "en_US",
+  "title": "TroyApps — Handy Mobile Tools",
+  "description": "TroyApps: handy mobile tools by an independent developer from Türkiye. Morse Flash and AirMouseHand are on Google Play.",
+  "skip": "Skip to content",
+  "nav": { "top": "Home", "apps": "Apps", "contact": "Contact", "menu_label": "Main menu" },
+  "lang_switch_label": "Language",
+  "ids": { "apps": "apps", "contact": "contact" },
+  "hero": {
+    "struck": "company?",
+    "tag": "indie ✓",
+    "row": ["handy", "mobile tools", "made", "in Türkiye"],
+    "scroll": "Scroll down"
+  },
+  "apps_title": "APPS",
+  "fig": "Fig.",
+  "android": "Android",
+  "live": "Live",
+  "tap_closed": "tap → screenshots",
+  "tap_open": "open · tap to close",
+  "dev_link": "TroyApps on Google Play",
+  "get": "Get {name}",
+  "apps": {
+    "morse-flash": {
+      "get": "Get Morse Flash",
+      "lead": "Flashlight & SOS, LED text, Morse send-read, notification flash and rhythm flash — in one app.",
+      "feats": ["Flashlight & SOS", "LED text — turn the screen into an LED sign", "13 styles · 12 colors", "Send & read Morse", "Notification flash — light on calls & alerts", "Rhythm flash + strobe"],
+      "caps": ["Turn your screen into an LED sign", "13 styles · 12 colors · animated backgrounds", "Design the LED text your way", "Your message in neon", "Notification flash — even on silent", "Message with light: send & read Morse", "Flash to the beat + strobe", "Flashlight & SOS — always ready"]
+    },
+    "airmousehand": {
+      "get": "Get AirMouseHand",
+      "lead": "Hands-free browsing on Reels, Shorts and TikTok with hand and face gestures.",
+      "feats": ["Scroll without touching", "A command for every finger", "Face control", "Mouth commands"],
+      "caps": ["Hands covered in flour? Pinch in the air", "Scroll without touching the screen", "Assign any command to any finger", "Both hands busy? Use your mouth", "Hands full? Just open your mouth", "Lie back and just watch", "Start it and lean back", "Eight languages"]
+    }
+  },
+  "lightbox": { "label": "Large view", "prev": "Previous", "next": "Next", "close": "Close" },
+  "index_label": "Figure index",
+  "contact": {
+    "tag": "new tool? in the works ✎",
+    "copy": "copy email",
+    "copied": "copied ✓",
+    "play": "Google Play"
+  },
+  "footer": "© TroyApps {year} · Indie developer · From Türkiye to the world",
+  "legal": { "privacy": "Privacy", "morse-flash": "Morse Flash policy", "airmousehand": "AirMouseHand policy" },
+  "policy_back": "← Home",
+  "notfound": { "title": "Page not found — TroyApps", "h": "Page not found", "p": "This address no longer exists — or never did.", "home": "Back to home" }
+}
