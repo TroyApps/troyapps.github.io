@@ -80,9 +80,9 @@ ${noindex ? "" : alt + `\n  <link rel="alternate" hreflang="x-default" href="${s
   <meta property="og:locale" content="${t.og_locale}">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="theme-color" content="#050506">
-  <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
-  <link rel="icon" href="/assets/img/favicon-32.png" sizes="32x32" type="image/png">
-  <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+  <link rel="icon" href="/assets/img/favicon.svg?v=${ver("assets/img/favicon.svg")}" type="image/svg+xml">
+  <link rel="icon" href="/assets/img/favicon-32.png?v=${ver("assets/img/favicon-32.png")}" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png?v=${ver("assets/img/apple-touch-icon.png")}">
   <link rel="preload" href="/assets/fonts/archivo-black-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/space-mono-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="${CSS}">
