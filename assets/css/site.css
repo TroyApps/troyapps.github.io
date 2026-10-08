@@ -53,6 +53,7 @@ body.scrolled .brand-mini{opacity:1;transform:none}
 .hero{min-height:100vh;display:grid;place-items:center;text-align:center;padding:120px 20px 80px;position:relative}
 .hero-in{display:grid;gap:34px;justify-items:center;position:relative}
 .wordmark.fx-on>text{visibility:hidden}
+.hero .wordmark{-webkit-user-select:none;user-select:none}
 .wordmark-fx{position:absolute;pointer-events:none;display:block}
 .tags{display:grid;justify-items:center}
 .tag{display:inline-block;padding:6px 12px;font-size:.92rem;font-weight:700;border-radius:3px;line-height:1.2}
