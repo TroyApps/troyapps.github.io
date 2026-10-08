@@ -133,20 +133,24 @@
   var seeds = turb.map(function (t) { return t.getAttribute("seed"); });
 
   /* ---- 1) giris titremesi ---- */
-  function boil(ms, done) {
+  var boiling = false;
+  function boil(ms, done, amp) {
     var t0 = performance.now(), last = 0;
+    amp = amp || 1.8;
+    boiling = true;
     function step(now) {
       var k = (now - t0) / ms;
       if (k >= 1) {
         turb.forEach(function (t, i) { t.setAttribute("seed", seeds[i]); });
         svg.style.transform = "";
+        boiling = false;
         if (done) done();
         return;
       }
       if (now - last > 85) {           /* ~12 kare/sn: el cizimi animasyon hissi */
         last = now;
         turb.forEach(function (t) { t.setAttribute("seed", String(1 + (Math.random() * 97 | 0))); });
-        var a = 1.8 * (1 - k);          /* sarsinti giderek sonumlenir */
+        var a = amp * (1 - k);          /* sarsinti giderek sonumlenir */
         svg.style.transform = "translate(" + ((Math.random() - .5) * 2 * a).toFixed(2) + "px," + ((Math.random() - .5) * 2 * a).toFixed(2) + "px) rotate(" + ((Math.random() - .5) * .6 * (1 - k)).toFixed(2) + "deg)";
       }
       requestAnimationFrame(step);
@@ -156,7 +160,19 @@
 
   var fine = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
   var ready = document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve();
+  var fx = null; /* imlec efekti kurulunca: { busy, hide, show } */
   ready.then(function () { boil(1500, fine ? setupScatter : null); });
+
+  /* Her 10 saniyede bir kisa kipirdama. Sekme arka plandaysa ya da
+     imlec logonun uzerindeyse atlanir. Tuval acikken titreme SVG'de
+     oynatilir, bitince tuval geri gelir (tohumlar eski haline doner,
+     tuvaldeki resim yine birebir ayni). */
+  setInterval(function () {
+    if (document.hidden || boiling) return;
+    if (fx && fx.busy()) return;
+    if (fx) fx.hide();
+    boil(700, function () { if (fx) fx.show(); }, 1.1);
+  }, 10000);
 
   /* ---- 2) imlecle dagilma ---- */
   function setupScatter() {
@@ -172,6 +188,9 @@
     if (!ctx || !bctx) return;
 
     var parts = [], W = 0, H = 0, dpr = 1, C = 2, R = 64, pointer = null, raf = null, building = false;
+    /* SVG overflow:visible; harfler viewBox'tan tasiyor (S'nin sag kenari, golge,
+       murekkep kaymasi). Tuvali her yandan pay birakarak buyut, yoksa kesilir. */
+    var PADX = 70, PADY = 45, padX = 0, padY = 0;
     var fontData = null;
 
     function fetchFont() {
@@ -188,9 +207,11 @@
        tek basina bir SVG resmine cevir: tuvalde birebir ayni gorunsun */
     function svgImage(font) {
       var r = svg.getBoundingClientRect();
-      W = Math.round(r.width); H = Math.round(r.height);
       dpr = Math.min(2, window.devicePixelRatio || 1);
-      var vb = svg.getAttribute("viewBox");
+      var v = svg.viewBox.baseVal, k = r.width / v.width;
+      padX = PADX * k; padY = PADY * k;
+      W = Math.round((v.width + 2 * PADX) * k); H = Math.round((v.height + 2 * PADY) * k);
+      var vb = (v.x - PADX) + " " + (v.y - PADY) + " " + (v.width + 2 * PADX) + " " + (v.height + 2 * PADY);
       var defs = ["ink", "ink2"].map(function (id) { var f = document.getElementById(id); return f ? f.outerHTML : ""; }).join("");
       var body = texts.map(function (t) {
         var cs = getComputedStyle(t);
@@ -231,16 +252,19 @@
         }
         canvas.width = w; canvas.height = h;
         canvas.style.width = W + "px"; canvas.style.height = H + "px";
-        place();
         if (!canvas.parentNode) svg.parentNode.insertBefore(canvas, svg.nextSibling);
+        place();
         svg.classList.add("fx-on");
         draw();
       }, function () { building = false; });
     }
 
     function place() {
-      canvas.style.left = svg.offsetLeft + "px";
-      canvas.style.top = svg.offsetTop + "px";
+      /* <svg> HTMLElement degil, offsetLeft/Top yok: konumu kutulardan hesapla */
+      var host = canvas.offsetParent || svg.parentNode;
+      var sr = svg.getBoundingClientRect(), hr = host.getBoundingClientRect();
+      canvas.style.left = (sr.left - hr.left - (host.clientLeft || 0) - padX) + "px";
+      canvas.style.top = (sr.top - hr.top - (host.clientTop || 0) - padY) + "px";
     }
 
     function draw() {
@@ -285,6 +309,12 @@
       raf = (active || pointer) ? requestAnimationFrame(tick) : null;
     }
     function kick() { if (!raf && parts.length) raf = requestAnimationFrame(tick); }
+
+    fx = {
+      busy: function () { return !!pointer || !!raf; },
+      hide: function () { svg.classList.remove("fx-on"); canvas.style.visibility = "hidden"; },
+      show: function () { if (parts.length) { svg.classList.add("fx-on"); canvas.style.visibility = ""; } }
+    };
 
     var hero = svg.closest(".hero") || svg;
     hero.addEventListener("pointermove", function (e) {
