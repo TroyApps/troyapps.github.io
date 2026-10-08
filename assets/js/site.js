@@ -115,7 +115,7 @@
 })();
 
 /* --- Hero logo: giriste titreme + imlecin degdigi yerin dagilmasi --------
-   1) Giris: murekkep filtresinin (feTurbulence) tohumu ~1.5 sn boyunca
+   1) Giris: murekkep filtresinin (feTurbulence) tohumu ~2 sn boyunca
       hizla degisir, cizgi el cizimi gibi "kaynar" ve hafif sarsilir, sonra
       orijinal haline oturur. Telefonda da calisir.
    2) Fare: logo SVG'si birebir ayni gorunumle tuvale cizilir. Imlecin
@@ -161,7 +161,7 @@
   var fine = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
   var ready = document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve();
   var fx = null; /* imlec efekti kurulunca: { busy, hide, show } */
-  ready.then(function () { boil(1500, fine ? setupScatter : null); });
+  ready.then(function () { boil(2000, fine ? setupScatter : null); });
 
   /* Her 10 saniyede bir kisa kipirdama. Sekme arka plandaysa ya da
      imlec logonun uzerindeyse atlanir. Tuval acikken titreme SVG'de
@@ -171,7 +171,7 @@
     if (document.hidden || boiling) return;
     if (fx && fx.busy()) return;
     if (fx) fx.hide();
-    boil(700, function () { if (fx) fx.show(); }, 1.1);
+    boil(2000, function () { if (fx) fx.show(); }, 1.2);
   }, 10000);
 
   /* ---- 2) imlecle dagilma ---- */
