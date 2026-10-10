@@ -20,6 +20,10 @@ Sayfa tek ekranlık üç bölüm: **hero** → **uygulamalar** (iki ikon yan yan
 üzerine gelince büyür, tıklayınca büyük görünüm) → **iletişim** (e-posta, sosyal linkler, "yeni araç? hazırlanıyor" etiketi — Enes istedi, kalsın).
 Troy maskotu, Radar, 7 ek dil ve reklam rayları **kaldırıldı** (Enes kararı). Diller: TR (`/`) + EN (`/en/`).
 
+**Dil yönlendirmesi (10 Eki 2026):** `/` açılınca tarayıcının ilk dili Türkçe değilse `/en/`'e gider (`build-pages.mjs` → `langScript`, `<head>`'de CSS'ten önce).
+TR/EN düğmeleri `?lang=tr|en` ile gider; seçim `localStorage["troyapps-lang"]`'e yazılır ve bir daha yönlendirilmez. Botlar yönlendirilmez (TR sayfası dizinlensin).
+`/en/` hiç yönlendirmez. `hreflang="x-default"` = `/en/`. Ülke/IP'ye bakılmıyor (statik site), dile bakılıyor. Test: `tests/site.test.mjs`.
+
 ## Yapı
 ```
 content/site.json          ortak veri: uygulamalar (Play linki, ikon, görsel klasörü, adet), sosyal linkler, yönlendirmeler
