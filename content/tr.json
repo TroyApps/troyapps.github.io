@@ -3,14 +3,14 @@
   "path": "/",
   "og_locale": "tr_TR",
   "title": "TroyApps — Kullanışlı Mobil Araçlar",
-  "description": "TroyApps: Türkiye'den kullanışlı mobil araçlar geliştiren yazılım şirketi. Morse Flash ve AirMouseHand Google Play'de.",
+  "description": "TroyApps: Türkiye'den bağımsız bir geliştiricinin kullanışlı mobil araçları. Morse Flash ve AirMouseHand Google Play'de.",
   "skip": "İçeriğe geç",
   "nav": { "top": "Ana sayfa", "apps": "Uygulamalar", "contact": "İletişim", "menu_label": "Ana menü" },
   "lang_switch_label": "Dil",
   "ids": { "apps": "uygulamalar", "contact": "iletisim" },
   "hero": {
-    "struck": "hobi?",
-    "tag": "şirket ✓",
+    "struck": "şirket?",
+    "tag": "bağımsız ✓",
     "row": ["kullanışlı", "mobil araçlar", "yapan", "Türkiye'den"],
     "scroll": "Aşağı kaydır"
   },
@@ -44,7 +44,7 @@
     "copied": "kopyalandı ✓",
     "play": "Google Play"
   },
-  "footer": "© TroyApps {year} · Yazılım şirketi · Enes Nurullah Taşdelen şahıs işletmesi, Gerede, Bolu, Türkiye · D-U-N-S 751176162",
+  "footer": "© TroyApps {year} · Bağımsız geliştirici · Türkiye'den dünyaya",
   "legal": { "privacy": "Gizlilik", "morse-flash": "Morse Flash politikası", "airmousehand": "AirMouseHand politikası" },
   "policy_back": "← Ana sayfa",
   "notfound": { "title": "Sayfa bulunamadı — TroyApps", "h": "Sayfa bulunamadı", "p": "Bu adres artık yok ya da hiç olmadı.", "home": "Ana sayfaya dön" }

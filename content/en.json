@@ -3,14 +3,14 @@
   "path": "/en/",
   "og_locale": "en_US",
   "title": "TroyApps — Handy Mobile Tools",
-  "description": "TroyApps: a software company from Türkiye building handy mobile tools. Morse Flash and AirMouseHand are on Google Play.",
+  "description": "TroyApps: handy mobile tools by an independent developer from Türkiye. Morse Flash and AirMouseHand are on Google Play.",
   "skip": "Skip to content",
   "nav": { "top": "Home", "apps": "Apps", "contact": "Contact", "menu_label": "Main menu" },
   "lang_switch_label": "Language",
   "ids": { "apps": "apps", "contact": "contact" },
   "hero": {
-    "struck": "hobby?",
-    "tag": "company ✓",
+    "struck": "company?",
+    "tag": "indie ✓",
     "row": ["handy", "mobile tools", "made", "in Türkiye"],
     "scroll": "Scroll down"
   },
@@ -44,7 +44,7 @@
     "copied": "copied ✓",
     "play": "Google Play"
   },
-  "footer": "© TroyApps {year} · Software company · Sole proprietorship of Enes Nurullah Taşdelen, Gerede, Bolu, Türkiye · D-U-N-S 751176162",
+  "footer": "© TroyApps {year} · Indie developer · From Türkiye to the world",
   "legal": { "privacy": "Privacy", "morse-flash": "Morse Flash policy", "airmousehand": "AirMouseHand policy" },
   "policy_back": "← Home",
   "notfound": { "title": "Page not found — TroyApps", "h": "Page not found", "p": "This address no longer exists — or never did.", "home": "Back to home" }
