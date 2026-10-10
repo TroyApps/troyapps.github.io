@@ -130,7 +130,7 @@ function topbar(t, { home, alwaysBrand = false, path = t.path }) {
   </a>
   ${nav}
   <div class="right">
-    <div class="socials">
+    <div class="socials" translate="no">
       ${socials}
     </div>
 ${home ? `    <nav class="lang" aria-label="${esc(t.lang_switch_label)}">${langs}</nav>\n` : ""}  </div>
@@ -224,9 +224,9 @@ ${site.apps.map((app, i) => appPanel(t, app, ranges[i][0], ranges[i][1], i)).joi
 <section class="contact" id="${t.ids.contact}" data-index="contact">
   <div class="contact-in">
     <span class="tag y" style="transform:rotate(-2deg)">${c.tag}</span>
-    <a class="mail" href="mailto:${site.mail}">${site.mail.toUpperCase()}</a>
+    <a class="mail" href="mailto:${site.mail}" translate="no">${site.mail.toUpperCase()}</a>
     <button class="copy" type="button" data-copy="${site.mail}" data-done="${esc(c.copied)}">${c.copy}</button>
-    <div class="links">
+    <div class="links" translate="no">
       ${links}
     </div>
   </div>
@@ -341,11 +341,21 @@ function sitemap() {
   return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n${items.join("\n")}\n</urlset>\n`;
 }
 
+/* Tarayici cevirisi (Google Ceviri) marka ve uygulama adlarini cevirmesin:
+   govdedeki metin dugumlerinde bu adlari <span translate="no"> ile sar.
+   Etiketlere/niteliklere ve <script> icine dokunulmaz. */
+const BRANDS = ["Morse Flash", "AirMouseHand", "TroyMacro", "TroyApps", "Google Play"];
+const BRAND_RE = new RegExp(BRANDS.map((b) => b.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|"), "g");
+function noTranslate(html) {
+  return html.replace(/(<body[^>]*>)([\s\S]*)(<\/body>)/, (m, open, body, close) =>
+    open + body.split(/(<script[\s\S]*?<\/script>|<[^>]+>)/).map((part, i) => (i % 2 ? part : part.replace(BRAND_RE, (b) => `<span translate="no">${b}</span>`))).join("") + close);
+}
+
 /* ---- yaz ---- */
 const out = new Map();
-for (const t of LANGS) out.set(t.path === "/" ? "index.html" : `${t.path.replace(/^\/|\/$/g, "")}/index.html`, homePage(t));
-for (const f of readdirSync(join(ROOT, "content/policy"))) if (f.endsWith(".html")) out.set(`${f.replace(/\.html$/, "")}/index.html`, policyPage(f.replace(/\.html$/, "")));
-out.set("404.html", notFoundPage());
+for (const t of LANGS) out.set(t.path === "/" ? "index.html" : `${t.path.replace(/^\/|\/$/g, "")}/index.html`, noTranslate(homePage(t)));
+for (const f of readdirSync(join(ROOT, "content/policy"))) if (f.endsWith(".html")) out.set(`${f.replace(/\.html$/, "")}/index.html`, noTranslate(policyPage(f.replace(/\.html$/, ""))));
+out.set("404.html", noTranslate(notFoundPage()));
 for (const [file, to] of Object.entries(site.redirects)) out.set(file, redirectPage(to));
 out.set("sitemap.xml", sitemap());
 
