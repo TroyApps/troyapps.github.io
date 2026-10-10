@@ -58,19 +58,35 @@ function shotPath(app, lang, i) {
   return `/${app.shots_dir}/${file}`;
 }
 
+/* Ana sayfa dil yonlendirmesi. Statik sitede ulke bilgisi yok; tarayicinin
+   ilk dili kullanilir: Turkce ise "/", degilse "/en/". Ziyaretci TR/EN
+   dugmesiyle secim yaparsa (?lang=tr|en) bu tercih saklanir ve bir daha
+   yonlendirilmez. Arama motoru botlari yonlendirilmez (TR sayfasi da
+   dizinlensin). Depolama kapaliysa ?lang yine o anki gecis icin calisir. */
+function langScript(t) {
+  return `<script>(function(){var K="troyapps-lang",q=/[?&]lang=(tr|en)(?:&|$)/.exec(location.search),p=null;
+try{if(q){localStorage.setItem(K,q[1]);}p=localStorage.getItem(K);}catch(e){}
+if(q){p=q[1];try{history.replaceState(null,"",location.pathname+location.hash);}catch(e){}}
+if(${JSON.stringify(t.lang)}!=="tr")return;
+if(/bot|crawl|spider|slurp|lighthouse|preview|facebookexternalhit|embedly|whatsapp|telegram/i.test(navigator.userAgent))return;
+if(!p){var l=((navigator.languages&&navigator.languages[0])||navigator.language||"").toLowerCase();p=l.indexOf("tr")===0?"tr":"en";}
+if(p==="en")location.replace("/en/"+location.hash);})();</script>`;
+}
+
 function head(t, { title, description, path, noindex = false, ogImage = site.og_image }) {
   const url = site.domain + path;
+  const isHome = path === "/" || path === "/en/";
   const alt = LANGS.map((l) => `  <link rel="alternate" hreflang="${l.lang}" href="${site.domain}${samePath(l, path)}">`).join("\n");
   return `<!doctype html>
 <html lang="${t.lang}">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="google-site-verification" content="${site.google_site_verification}">
+  <meta name="google-site-verification" content="${site.google_site_verification}">${isHome ? "\n  " + langScript(t) : ""}
   <title>${esc(title)}</title>
   <meta name="description" content="${esc(description)}">
   ${noindex ? '<meta name="robots" content="noindex">' : `<link rel="canonical" href="${url}">`}
-${noindex ? "" : alt + `\n  <link rel="alternate" hreflang="x-default" href="${site.domain}${samePath(LANGS[0], path)}">`}
+${noindex ? "" : alt + `\n  <link rel="alternate" hreflang="x-default" href="${site.domain}${samePath(LANGS.find((l) => l.lang === "en") || LANGS[0], path)}">`}
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="TroyApps">
   <meta property="og:title" content="${esc(title)}">
@@ -98,7 +114,7 @@ function samePath(l, path) {
 
 function topbar(t, { home, alwaysBrand = false, path = t.path }) {
   const socials = site.socials.filter((s) => s.top).map((s) => `<a href="${s.url}" target="_blank" rel="noopener">${s.label}</a>`).join("\n      ");
-  const langs = LANGS.map((l) => `<a href="${samePath(l, path)}${home ? "" : ""}" hreflang="${l.lang}" lang="${l.lang}"${l.lang === t.lang ? ' class="on" aria-current="page"' : ""}>${l.lang.toUpperCase()}</a>`).join("");
+  const langs = LANGS.map((l) => `<a href="${samePath(l, path)}${home ? `?lang=${l.lang}` : ""}" hreflang="${l.lang}" lang="${l.lang}"${l.lang === t.lang ? ' class="on" aria-current="page"' : ""}>${l.lang.toUpperCase()}</a>`).join("");
   const nav = home
     ? `<nav class="pill" aria-label="${esc(t.nav.menu_label)}">
     <a href="#top" class="on" data-nav="top">${t.nav.top}</a>
