@@ -76,3 +76,15 @@ test("yonlendirme sayfalari eski adresleri ana sayfaya tasir", () => {
     assert.ok(html.includes(`url=${to}`) && html.includes('name="robots" content="noindex"'), `${file} -> ${to}`);
   }
 });
+
+test("dil secimi: kok sayfa Turkce olmayan tarayicilari /en/'e yollar, secim saklanir", () => {
+  const tr = read("index.html"), en = read("en/index.html");
+  assert.ok(/location\.replace\("\/en\/"/.test(tr), "TR ana sayfada yonlendirme yok");
+  assert.ok(tr.indexOf("troyapps-lang") < tr.indexOf("site.css"), "betik CSS'ten once olmali");
+  assert.ok(en.includes('!=="tr")return;') && en.includes('"en"!=="tr"'), "EN sayfa yonlendirmemeli");
+  for (const h of [tr, en]) {
+    assert.ok(h.includes('href="/?lang=tr"') && h.includes('href="/en/?lang=en"'), "dil dugmeleri tercihi kaydetmeli");
+    assert.ok(h.includes('hreflang="x-default" href="https://troyapps.app/en/"'), "x-default Ingilizce olmali");
+  }
+  for (const page of ["privacy/index.html", "404.html"]) assert.ok(!read(page).includes("troyapps-lang"), `${page}: dil betigi olmamali`);
+});
