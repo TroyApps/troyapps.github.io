@@ -23,6 +23,9 @@ Troy maskotu, Radar, 7 ek dil ve reklam rayları **kaldırıldı** (Enes kararı
 **Dil yönlendirmesi (10 Eki 2026):** `/` açılınca tarayıcının ilk dili Türkçe değilse `/en/`'e gider (`build-pages.mjs` → `langScript`, `<head>`'de CSS'ten önce).
 TR/EN düğmeleri `?lang=tr|en` ile gider; seçim `localStorage["troyapps-lang"]`'e yazılır ve bir daha yönlendirilmez. Botlar yönlendirilmez (TR sayfası dizinlensin).
 `/en/` hiç yönlendirmez. `hreflang="x-default"` = `/en/`. Ülke/IP'ye bakılmıyor (statik site), dile bakılıyor. Test: `tests/site.test.mjs`.
+**Çeviri:** Chrome/Google Çeviri için marka adları (`BRANDS` listesi: Morse Flash, AirMouseHand, TroyMacro, TroyApps, Google Play) üretimde
+`<span translate="no">` ile sarılır (`noTranslate()`); sosyal link listeleri ve e-posta da `translate="no"`. Yeni uygulama adı gelince `BRANDS`'e ekle.
+Play'deki İngilizce başlık: "Morse Flash: Code, LED Sign" (TR: "Mors Flash: Fener ve LED Yazı").
 
 ## Yapı
 ```
@@ -32,7 +35,7 @@ content/policy/*.html      politika metinleri (<article> gövdesi; ilk satır ti
 scripts/build-pages.mjs    üretici → index.html, en/index.html, 404.html, */index.html (politika + yönlendirme), sitemap.xml
 assets/css/site.css        tek CSS (font-face'ler dahil). ?v= hash'i üretici hesaplar, elle etiket gerekmez
 assets/js/site.js          menü vurgusu, ikon→panel, büyüme yönü, lightbox, e-posta kopyala (kütüphane yok)
-assets/img/shots/morse-flash/tr-1..8.webp     Play Store dikey görselleri (720×1562). en-N.webp varsa EN sayfa onu kullanır, yoksa tr-N
+assets/img/shots/morse-flash/{tr,en}-1..8.webp   Play Store dikey görselleri (TR + EN listesi, 720 px). en-N.webp varsa EN sayfa onu kullanır, yoksa tr-N
 assets/img/shots/airmousehand/{tr,en}-1..8.webp
 assets/img/*-icon-192.png, favicon.svg, favicon-32.png, apple-touch-icon.png, icon-192/512.png, og-home.png
 assets/fonts/*.woff2       Space Mono 400/700, Archivo Black 400 (latin + latin-ext; Türkçe karakterler ext'te)
@@ -56,7 +59,6 @@ meta-refresh ile `/`, `/#morse-flash`, `/en/` vb. adreslere gider (noindex). Sil
 
 ## Bekleyen fikirler (hepsi plan, onaysız başlama)
 - Yeni araç (Enes hazırlıyor; iletişimdeki etiket bunun için).
-- Morse Flash EN görselleri: Play Store `hl=en` listesinden `assets/img/shots/morse-flash/en-1..8.webp` (yoksa TR görselleri kullanılır).
 - Site içi sohbet botu, "repo analiz et" aracı, bağış seçeneği — hepsi fikir aşamasında.
 
 ## Yerel test
