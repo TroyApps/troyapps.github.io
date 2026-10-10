@@ -77,6 +77,16 @@ test("yonlendirme sayfalari eski adresleri ana sayfaya tasir", () => {
   }
 });
 
+test("ceviri: marka/uygulama adlari Google Ceviri'ye kapali, EN sayfada Ingilizce Morse gorselleri", () => {
+  for (const page of ["index.html", "en/index.html"]) {
+    const h = read(page);
+    for (const b of ["Morse Flash", "AirMouseHand", "TroyApps"]) assert.ok(h.includes(`<span translate="no">${b}</span>`), `${page}: ${b} korunmuyor`);
+    assert.ok(!/<svg[^>]*>[^]*?<span translate/.test(h.split("</svg>")[0].slice(-400)), `${page}: SVG icine span girmemeli`);
+  }
+  assert.ok(read("en/index.html").includes("/assets/img/shots/morse-flash/en-1.webp"), "EN sayfa Ingilizce Morse gorsellerini kullanmali");
+  assert.ok(read("index.html").includes("/assets/img/shots/morse-flash/tr-1.webp"), "TR sayfa Turkce Morse gorsellerini kullanmali");
+});
+
 test("dil secimi: kok sayfa Turkce olmayan tarayicilari /en/'e yollar, secim saklanir", () => {
   const tr = read("index.html"), en = read("en/index.html");
   assert.ok(/location\.replace\("\/en\/"/.test(tr), "TR ana sayfada yonlendirme yok");
