@@ -164,7 +164,7 @@ ${feats}
       </ul>
       <div class="meta">
         <span class="figrange">${t.fig} ${figFrom}–${figTo} · ${t.live}</span>
-        <a class="play" href="${app.play}" target="_blank" rel="noopener">${PLAY_SVG}${esc(ta.get)}</a>
+        <a class="play" href="${app.play}" target="_blank" rel="noopener">${PLAY_SVG}<span>${esc(ta.get)}</span></a>
       </div>
       <div class="strip" data-group="${app.id}">
 ${thumbs.join("\n")}
@@ -215,7 +215,7 @@ ${topbar(t, { home: true })}
 ${site.apps.map((app, i) => appButton(t, app, ranges[i][0], ranges[i][1])).join("\n")}
   </div>
 
-  <a class="dev-link" href="${site.play_developer}" target="_blank" rel="noopener">${PLAY_SVG}${t.dev_link}</a>
+  <a class="dev-link" href="${site.play_developer}" target="_blank" rel="noopener">${PLAY_SVG}<span>${esc(t.dev_link)}</span></a>
 
 ${site.apps.map((app, i) => appPanel(t, app, ranges[i][0], ranges[i][1], i)).join("\n\n")}
 </section>
