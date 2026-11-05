@@ -58,6 +58,20 @@
       "shots_dir": "assets/img/shots/airmousehand",
       "shots": 8,
       "rot": 5
+    },
+    {
+      "id": "troymacro",
+      "name": "TroyMacro",
+      "icon": "/assets/img/troymacro-icon-192.png",
+      "play": "https://play.google.com/store/apps/details?id=com.troyapps.troymacro",
+      "policy": "/troymacro-policy/",
+      "shots_dir": "assets/img/shots/troymacro",
+      "shots": 7,
+      "shot_size": [
+        720,
+        1280
+      ],
+      "rot": -3
     }
   ],
   "redirects": {

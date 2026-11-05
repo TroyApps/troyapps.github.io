@@ -3,15 +3,28 @@
   "path": "/",
   "og_locale": "tr_TR",
   "title": "TroyApps — Kullanışlı Mobil Araçlar",
-  "description": "TroyApps: Türkiye'den bağımsız bir geliştiricinin kullanışlı mobil araçları. Morse Flash ve AirMouseHand Google Play'de.",
+  "description": "TroyApps: Türkiye'den bağımsız bir geliştiricinin kullanışlı mobil araçları. Morse Flash, AirMouseHand ve TroyMacro Google Play'de.",
   "skip": "İçeriğe geç",
-  "nav": { "top": "Ana sayfa", "apps": "Uygulamalar", "contact": "İletişim", "menu_label": "Ana menü" },
+  "nav": {
+    "top": "Ana sayfa",
+    "apps": "Uygulamalar",
+    "contact": "İletişim",
+    "menu_label": "Ana menü"
+  },
   "lang_switch_label": "Dil",
-  "ids": { "apps": "uygulamalar", "contact": "iletisim" },
+  "ids": {
+    "apps": "uygulamalar",
+    "contact": "iletisim"
+  },
   "hero": {
     "struck": "şirket?",
     "tag": "bağımsız ✓",
-    "row": ["kullanışlı", "mobil araçlar", "yapan", "Türkiye'den"],
+    "row": [
+      "kullanışlı",
+      "mobil araçlar",
+      "yapan",
+      "Türkiye'den"
+    ],
     "scroll": "Aşağı kaydır"
   },
   "apps_title": "UYGULAMALAR",
@@ -26,17 +39,75 @@
     "morse-flash": {
       "get": "Morse Flash'ı indir",
       "lead": "Fener & SOS, LED yazı, Morse gönder-oku, bildirim flaşı ve ritim flaşı — tek uygulamada.",
-      "feats": ["Fener & SOS", "LED yazı — ekranı LED tabelaya dönüştür", "13 stil · 12 renk", "Morse gönder & oku", "Bildirim flaşı — arama & bildirimde ışık", "Ritim flaşı + strobe"],
-      "caps": ["Ekranını LED tabelaya dönüştür", "13 stil · 12 renk · animasyonlu zeminler", "LED yazıyı istediğin gibi tasarla", "Mesajın neonlarda", "Bildirim flaşı — sessizde bile", "Işıkla mesajlaş: Morse gönder & oku", "Müziğin ritminde flaş + strobe", "Fener & SOS — her an hazır"]
+      "feats": [
+        "Fener & SOS",
+        "LED yazı — ekranı LED tabelaya dönüştür",
+        "13 stil · 12 renk",
+        "Morse gönder & oku",
+        "Bildirim flaşı — arama & bildirimde ışık",
+        "Ritim flaşı + strobe"
+      ],
+      "caps": [
+        "Ekranını LED tabelaya dönüştür",
+        "13 stil · 12 renk · animasyonlu zeminler",
+        "LED yazıyı istediğin gibi tasarla",
+        "Mesajın neonlarda",
+        "Bildirim flaşı — sessizde bile",
+        "Işıkla mesajlaş: Morse gönder & oku",
+        "Müziğin ritminde flaş + strobe",
+        "Fener & SOS — her an hazır"
+      ]
     },
     "airmousehand": {
       "get": "AirMouseHand'i indir",
       "lead": "Reels, Shorts ve TikTok'ta el ve yüz hareketleriyle eller serbest gezinme.",
-      "feats": ["Dokunmadan kaydır", "Her parmağa bir komut", "Yüz kontrolü", "Ağızla komut"],
-      "caps": ["Ellerin unlu mu? Dert değil", "Ekrana dokunmadan kaydır", "Her parmağa istediğin komutu ata", "İki elin de doluysa ağzınla komut ver", "Ellerin doluysa ağzını hafif aç", "Uzan ve izlemeye bak", "Başlat ve rahatına bak", "Sekiz dilde"]
+      "feats": [
+        "Dokunmadan kaydır",
+        "Her parmağa bir komut",
+        "Yüz kontrolü",
+        "Ağızla komut"
+      ],
+      "caps": [
+        "Ellerin unlu mu? Dert değil",
+        "Ekrana dokunmadan kaydır",
+        "Her parmağa istediğin komutu ata",
+        "İki elin de doluysa ağzınla komut ver",
+        "Ellerin doluysa ağzını hafif aç",
+        "Uzan ve izlemeye bak",
+        "Başlat ve rahatına bak",
+        "Sekiz dilde"
+      ]
+    },
+    "troymacro": {
+      "name": "Otomatik Tıklama: Görsel Makro",
+      "get": "Otomatik Tıklama'yı indir",
+      "lead": "TroyMacro, seçtiğin yere seçtiğin aralıkla dokunur. Görüntü algılar, hareket kaydeder. Root gerekmez.",
+      "feats": [
+        "Çoklu imleç: dokun, çift dokun, basılı tut, kaydır",
+        "Görüntü algılama",
+        "Hareket kaydı + oynatma listesi",
+        "Şablonlar",
+        "Her uygulamaya ayrı profil",
+        "14 ders · 20 dil",
+        "Root gerekmez"
+      ],
+      "caps": [
+        "Parmakların dinlensin",
+        "Görüntü gelince belirlediğin yere dokunur",
+        "Hareketi kaydet, tekrar oynat",
+        "Ekrana göre ne yapacağını seç",
+        "Sanal asistan her adımda yanında",
+        "Her uygulamaya ayrı kurulum",
+        "Plus ile daha fazlası"
+      ]
     }
   },
-  "lightbox": { "label": "Büyük görünüm", "prev": "Önceki", "next": "Sonraki", "close": "Kapat" },
+  "lightbox": {
+    "label": "Büyük görünüm",
+    "prev": "Önceki",
+    "next": "Sonraki",
+    "close": "Kapat"
+  },
   "index_label": "Şekil dizini",
   "contact": {
     "tag": "yeni araç? hazırlanıyor ✎",
@@ -45,7 +116,17 @@
     "play": "Google Play"
   },
   "footer": "© TroyApps {year} · Bağımsız geliştirici · Türkiye'den dünyaya",
-  "legal": { "privacy": "Gizlilik", "morse-flash": "Morse Flash politikası", "airmousehand": "AirMouseHand politikası" },
+  "legal": {
+    "privacy": "Gizlilik",
+    "morse-flash": "Morse Flash politikası",
+    "airmousehand": "AirMouseHand politikası",
+    "troymacro": "TroyMacro politikası"
+  },
   "policy_back": "← Ana sayfa",
-  "notfound": { "title": "Sayfa bulunamadı — TroyApps", "h": "Sayfa bulunamadı", "p": "Bu adres artık yok ya da hiç olmadı.", "home": "Ana sayfaya dön" }
+  "notfound": {
+    "title": "Sayfa bulunamadı — TroyApps",
+    "h": "Sayfa bulunamadı",
+    "p": "Bu adres artık yok ya da hiç olmadı.",
+    "home": "Ana sayfaya dön"
+  }
 }

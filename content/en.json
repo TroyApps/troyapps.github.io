@@ -3,7 +3,7 @@
   "path": "/en/",
   "og_locale": "en_US",
   "title": "TroyApps — Handy Mobile Tools",
-  "description": "TroyApps: handy mobile tools by an independent developer from Türkiye. Morse Flash and AirMouseHand are on Google Play.",
+  "description": "TroyApps: handy mobile tools by an independent developer from Türkiye. Morse Flash, AirMouseHand and TroyMacro are on Google Play.",
   "skip": "Skip to content",
   "nav": {
     "top": "Home",
@@ -77,6 +77,29 @@
         "Start it and lean back",
         "Eight languages"
       ]
+    },
+    "troymacro": {
+      "name": "Auto Clicker: Image Tap Macro",
+      "get": "Get Auto Clicker",
+      "lead": "TroyMacro taps where you choose, as often as you choose. Image detection, move recording, no root needed.",
+      "feats": [
+        "Multiple cursors: tap, double tap, hold, swipe",
+        "Image detection",
+        "Move recording + playlists",
+        "Templates",
+        "A profile for every app",
+        "14 lessons · 20 languages",
+        "No root"
+      ],
+      "caps": [
+        "Let your fingers rest",
+        "Taps the spot you choose when an image appears",
+        "Record a move, replay it",
+        "Choose what to do for each screen",
+        "A virtual assistant at every step",
+        "A separate setup for every app",
+        "More with Plus"
+      ]
     }
   },
   "lightbox": {
@@ -96,7 +119,8 @@
   "legal": {
     "privacy": "Privacy",
     "morse-flash": "Morse Flash policy",
-    "airmousehand": "AirMouseHand policy"
+    "airmousehand": "AirMouseHand policy",
+    "troymacro": "TroyMacro policy"
   },
   "policy_back": "← Home",
   "notfound": {
