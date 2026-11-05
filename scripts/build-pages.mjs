@@ -141,7 +141,7 @@ function appButton(t, app, figFrom, figTo) {
   const ta = t.apps[app.id];
   return `    <button class="app-btn" type="button" role="tab" aria-selected="false" aria-controls="p-${app.id}" data-app="${app.id}" data-open-text="${esc(t.tap_open)}" data-closed-text="${esc(t.tap_closed)}" style="--r:${app.rot}deg">
       <span class="sticker"><img src="${app.icon}" alt="" width="192" height="192"></span>
-      <span class="name">${app.name}</span>
+      <span class="name">${esc(ta.name || app.name).replace(": ", ":<br>")}</span>
       <span class="fig">${t.fig} ${figFrom}–${figTo} · ${t.android}</span>
       <span class="tap">${t.tap_closed}</span>
     </button>`;
@@ -153,7 +153,7 @@ function appPanel(t, app, figFrom, figTo, idx) {
   for (let i = 0; i < app.shots; i++) {
     const n = figFrom + 1 + i;
     const cap = ta.caps[i] || "";
-    thumbs.push(`        <figure class="thumb" style="--r:${ROTS[i % ROTS.length]}deg" data-cap="${esc(`${t.fig} ${n} · ${cap}`)}"><img src="${shotPath(app, t.lang, i + 1)}" alt="${esc(cap)}" loading="lazy" width="720" height="1562"><figcaption>${t.fig} ${n}</figcaption></figure>`);
+    thumbs.push(`        <figure class="thumb" style="--r:${ROTS[i % ROTS.length]}deg" data-cap="${esc(`${t.fig} ${n} · ${cap}`)}"><img src="${shotPath(app, t.lang, i + 1)}" alt="${esc(cap)}" loading="lazy" width="${(app.shot_size || [720, 1562])[0]}" height="${(app.shot_size || [720, 1562])[1]}"><figcaption>${t.fig} ${n}</figcaption></figure>`);
   }
   const feats = ta.feats.map((f) => `        <li>${esc(f)}</li>`).join("\n");
   return `  <div class="panel" id="p-${app.id}" role="tabpanel" data-panel="${app.id}">
