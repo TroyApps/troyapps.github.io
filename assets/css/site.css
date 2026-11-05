@@ -78,7 +78,7 @@ body.scrolled .brand-mini{opacity:1;transform:none}
 .sticker img{display:block;width:clamp(96px,11vw,150px);height:auto;border-radius:18px}
 .app-btn:hover .sticker{transform:rotate(0) scale(1.05)}
 .app-btn.on .sticker{transform:rotate(0) scale(1.08);box-shadow:0 0 0 4px var(--yellow),0 24px 50px rgba(0,0,0,.6)}
-.app-btn .name{font-family:var(--display);font-size:clamp(1.1rem,2.2vw,1.7rem);letter-spacing:-.02em;color:#fff}
+.app-btn .name{font-family:var(--display);font-size:clamp(1.1rem,2.2vw,1.7rem);letter-spacing:-.02em;color:#fff;text-align:center;line-height:1.08}
 .app-btn .fig{font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:#8d8b86}
 .app-btn .tap{font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;color:#66645f;transition:color .2s}
 .app-btn:hover .tap{color:#cfcdc7}
@@ -170,7 +170,12 @@ body.scrolled .brand-mini{opacity:1;transform:none}
   .tag.y{transform:rotate(-3deg) translate(-24px,2px)}
   .apps{min-height:auto;padding:90px 0 60px}
   .apps-bg{display:none}
-  .dock{gap:26px}
+  .dock{gap:12px;padding:0 10px}
+  .app-btn{max-width:32vw;gap:10px}
+  .sticker{padding:7px;border-radius:20px}
+  .sticker img{width:clamp(62px,19vw,96px);border-radius:14px}
+  .app-btn .name{font-size:.92rem}
+  .app-btn .fig,.app-btn .tap{font-size:.48rem;letter-spacing:.1em}
   .panel-in{padding:20px 18px 0}
   .strip{justify-content:flex-start;overflow-x:auto;overflow-y:visible;scroll-snap-type:x mandatory;padding:20px 18px 44px;gap:16px;-webkit-overflow-scrolling:touch;flex-wrap:nowrap;width:100vw}
   .thumb{scroll-snap-align:center;transform:rotate(var(--r,0deg));width:32vw}
